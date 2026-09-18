@@ -1,0 +1,57 @@
+{
+  "date": "2026-09-12",
+  "documents": [
+    {
+      "file": "sections/04-context-and-repository-knowledge.md",
+      "words": 3447,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "demo/section-04-context-and-handoff.md",
+      "words": 1472,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "README.md",
+      "words": 374,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "OUTLINE.md",
+      "words": 342,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "PROJECT.md",
+      "words": 440,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "demo/README.md",
+      "words": 292,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "_build/README.md",
+      "words": 192,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    },
+    {
+      "file": "_build/section-04/review.md",
+      "words": 602,
+      "local_links_and_fragments_exist": true,
+      "fences_balanced": true
+    }
+  ],
+  "other_sections_and_retained_app_unchanged": true,
+  "resources_at_bottom": true,
+  "unique_external_resource_urls": 12,
+  "python_syntax": "passed"
+}

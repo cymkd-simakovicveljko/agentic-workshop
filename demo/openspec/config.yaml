@@ -1,0 +1,5 @@
+schema: spec-driven
+context: |
+  Local Node.js application with four synthetic projects. No application dependencies.
+  Public behavior lives in specifications; tests provide independent evidence.
+  Use npm test from demo/. Do not add network requests or change accepted tests.

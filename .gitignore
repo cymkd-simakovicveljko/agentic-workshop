@@ -1,0 +1,32 @@
+# Operating-system metadata.
+.DS_Store
+Thumbs.db
+
+# Dependencies and Python tooling.
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Generated application builds, caches, and test artifacts.
+dist/
+.next/
+.cache/
+coverage/
+test-results/
+playwright-report/
+
+# Local agent runs and disposable working copies.
+.runs/
+.work/
+
+# Local environment values; keep reusable examples.
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Runtime logs. Keep _build/ source scripts and verification receipts tracked.
+*.log

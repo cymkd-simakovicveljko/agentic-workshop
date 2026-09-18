@@ -1,0 +1,8 @@
+{
+  "name": "spec-coach",
+  "version": "1.0.0",
+  "description": "Small behavior-specification review skill for engineering training",
+  "author": {
+    "name": "Engineering Enablement"
+  }
+}

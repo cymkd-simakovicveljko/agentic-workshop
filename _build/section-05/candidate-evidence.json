@@ -1,0 +1,25 @@
+{
+  "recorded_at_utc": "2026-09-12T17:09:52.054720+00:00",
+  "working_directory": "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-v0-4verry6t",
+  "command": "npm test",
+  "exit_code": 0,
+  "baseline_commit": "137489da99d563739300826deb233495755358f0",
+  "candidate_diff": "review/change.diff",
+  "test_output": "review/test-output.txt",
+  "browser_checks_run": false,
+  "model_run": false,
+  "sha256": {
+    "contract.md": "023acc83ed35d55990222d20df4074a9854840839816aa60b1042dfb613bb36e",
+    "package.json": "9a0baf8db86cd8cc0c867673ef287c658570ae476fad24d15c417e8376ae1263",
+    "public/app.mjs": "5bb42e0d5f0ab46fd1414a5a127f048bea4da7c55e1487610bc5c1852b8c2e87",
+    "public/filter.mjs": "0bb9ff0e715c8a7e1a8762d7c37885c3426a00146a63077ea18aec69148c98da",
+    "public/index.html": "429b3359d0f69635442b40db20a2be7fc44a111d691af032724e72c244da7135",
+    "public/projects.mjs": "c2dc440b8f1f19fd5fc19a6e9eb981b7393bb65794b92aad40635b28fdb25231",
+    "public/style.css": "3429393dbee6589012457fb932cc7451058fe9dd04b7383c81dd9f9fab86b089",
+    "review/acceptance.md": "c0412bdd91c8ff7d7b6365294501078bbc1556f677f272ed190852c785cad452",
+    "review/change.diff": "719f0590b4227f6f520993068603de521b1403cfc7bc807122a1afe7957ee6fe",
+    "server.mjs": "d389e0cb3db7b1ec2e2e223c54aa0912eb89f8cc981de638123d040c3ba244d4",
+    "tests/baseline.test.mjs": "9eae696f9bb81629792edaeb6f87d1ed5cad8f1787e3a67655f3666d7bb36eaa",
+    "tests/filter.test.mjs": "b81910f60209f27ecfd6c0f68096468629e7b2848a9fc301a0a591f437ebde99"
+  }
+}

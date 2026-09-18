@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "id": "include-project-owners",
+      "type": "change",
+      "valid": true,
+      "issues": [],
+      "durationMs": 11
+    },
+    {
+      "id": "project-filter",
+      "type": "spec",
+      "valid": true,
+      "issues": [],
+      "durationMs": 3
+    }
+  ],
+  "summary": {
+    "totals": {
+      "items": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    "byType": {
+      "change": {
+        "items": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "spec": {
+        "items": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    }
+  },
+  "version": "1.0",
+  "root": {
+    "path": "/private/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-v0-p9n7nqgl",
+    "source": "nearest"
+  }
+}

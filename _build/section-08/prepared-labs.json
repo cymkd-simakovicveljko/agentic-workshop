@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "lab": "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-section08-baseline-ugpozwcr",
+    "test_exit": 0
+  },
+  "seam": {
+    "lab": "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-section08-seam-w8bwcwcq",
+    "test_exit": 0
+  },
+  "completed": {
+    "lab": "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-section08-completed-_x7m1y9f",
+    "test_exit": 0
+  },
+  "feature_before_implementation": {
+    "lab": "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-section08-red-yp24vag4/lab",
+    "test_exit": 1
+  }
+}

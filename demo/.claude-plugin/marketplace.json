@@ -1,0 +1,14 @@
+{
+  "name": "engineering-course",
+  "owner": {
+    "name": "Engineering Enablement"
+  },
+  "plugins": [
+    {
+      "name": "spec-coach",
+      "source": "./plugins/spec-coach",
+      "description": "Specification review workshop skill",
+      "version": "1.0.0"
+    }
+  ]
+}

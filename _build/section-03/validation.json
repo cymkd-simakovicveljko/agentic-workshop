@@ -1,0 +1,76 @@
+{
+  "date": "2026-09-12",
+  "lab": "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-v0-qdjkaiqg",
+  "model_run": false,
+  "setup_output": "Loaded prepared solution implementation. Previous file saved to .runs/backups/filter-1789217759003.mjs. Specs and harness evidence unchanged.\nInitialized empty Git repository in /private/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-v0-qdjkaiqg/.git/\n[codex/section-03 (root-commit) 6d7af06] Section 3 working filter baseline\n 17 files changed, 223 insertions(+)\n create mode 100644 .gitignore\n create mode 100644 AGENTS.md\n create mode 100644 baseline-hashes.json\n create mode 100644 checkpoints/broken/filter.mjs\n create mode 100644 checkpoints/solution/filter.mjs\n create mode 100644 checkpoints/starter/filter.mjs\n create mode 100644 contract.md\n create mode 100644 package.json\n create mode 100644 public/app.mjs\n create mode 100644 public/filter.mjs\n create mode 100644 public/index.html\n create mode 100644 public/projects.mjs\n create mode 100644 public/style.css\n create mode 100644 scripts/checkpoint.mjs\n create mode 100644 server.mjs\n create mode 100644 tests/baseline.test.mjs\n create mode 100644 tests/filter.test.mjs\n\n> test\n> node --test tests/*.test.mjs\n\nTAP version 13\n# Subtest: empty query preserves all IDs and order\nok 1 - empty query preserves all IDs and order\n  ---\n  duration_ms: 0.4985\n  type: 'test'\n  ...\n# Subtest: HTTP serves application and modules, rejects unknown paths\nok 2 - HTTP serves application and modules, rejects unknown paths\n  ---\n  duration_ms: 17.834625\n  type: 'test'\n  ...\n# Subtest: R1: case-insensitive name substring\nok 3 - R1: case-insensitive name substring\n  ---\n  duration_ms: 0.792292\n  type: 'test'\n  ...\n# Subtest: R2: trims surrounding spaces\nok 4 - R2: trims surrounding spaces\n  ---\n  duration_ms: 0.081958\n  type: 'test'\n  ...\n# Subtest: R2: whitespace-only input restores the list\nok 5 - R2: whitespace-only input restores the list\n  ---\n  duration_ms: 0.09375\n  type: 'test'\n  ...\n# Subtest: R1: owner field is excluded\nok 6 - R1: owner field is excluded\n  ---\n  duration_ms: 0.042417\n  type: 'test'\n  ...\n# Subtest: R1: literal input, no regex interpretation\nok 7 - R1: literal input, no regex interpretation\n  ---\n  duration_ms: 0.158709\n  type: 'test'\n  ...\n# Subtest: R1: order and duplicate names preserved\nok 8 - R1: order and duplicate names preserved\n  ---\n  duration_ms: 0.068583\n  type: 'test'\n  ...\n# Subtest: R3: no match gives an empty result\nok 9 - R3: no match gives an empty result\n  ---\n  duration_ms: 0.067833\n  type: 'test'\n  ...\n# Subtest: R1: accent folding is outside scope\nok 10 - R1: accent folding is outside scope\n  ---\n  duration_ms: 0.032292\n  type: 'test'\n  ...\n# Subtest: R1: input array is not modified\nok 11 - R1: input array is not modified\n  ---\n  duration_ms: 0.236708\n  type: 'test'\n  ...\n1..11\n# tests 11\n# suites 0\n# pass 11\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 89.775916\n/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-v0-qdjkaiqg\n",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--version"
+      ],
+      "exit_code": 0,
+      "output": "v22.22.2\n"
+    },
+    {
+      "command": [
+        "omp",
+        "--version"
+      ],
+      "exit_code": 0,
+      "output": "omp/18.0.6\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "public/app.mjs"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit_code": 0,
+      "output": "\n> test\n> node --test tests/*.test.mjs\n\nTAP version 13\n# Subtest: empty query preserves all IDs and order\nok 1 - empty query preserves all IDs and order\n  ---\n  duration_ms: 0.500958\n  type: 'test'\n  ...\n# Subtest: HTTP serves application and modules, rejects unknown paths\nok 2 - HTTP serves application and modules, rejects unknown paths\n  ---\n  duration_ms: 15.531208\n  type: 'test'\n  ...\n# Subtest: R1: case-insensitive name substring\nok 3 - R1: case-insensitive name substring\n  ---\n  duration_ms: 0.643667\n  type: 'test'\n  ...\n# Subtest: R2: trims surrounding spaces\nok 4 - R2: trims surrounding spaces\n  ---\n  duration_ms: 0.085125\n  type: 'test'\n  ...\n# Subtest: R2: whitespace-only input restores the list\nok 5 - R2: whitespace-only input restores the list\n  ---\n  duration_ms: 0.080667\n  type: 'test'\n  ...\n# Subtest: R1: owner field is excluded\nok 6 - R1: owner field is excluded\n  ---\n  duration_ms: 0.04075\n  type: 'test'\n  ...\n# Subtest: R1: literal input, no regex interpretation\nok 7 - R1: literal input, no regex interpretation\n  ---\n  duration_ms: 0.0405\n  type: 'test'\n  ...\n# Subtest: R1: order and duplicate names preserved\nok 8 - R1: order and duplicate names preserved\n  ---\n  duration_ms: 0.05375\n  type: 'test'\n  ...\n# Subtest: R3: no match gives an empty result\nok 9 - R3: no match gives an empty result\n  ---\n  duration_ms: 0.0745\n  type: 'test'\n  ...\n# Subtest: R1: accent folding is outside scope\nok 10 - R1: accent folding is outside scope\n  ---\n  duration_ms: 0.030334\n  type: 'test'\n  ...\n# Subtest: R1: input array is not modified\nok 11 - R1: input array is not modified\n  ---\n  duration_ms: 0.278959\n  type: 'test'\n  ...\n1..11\n# tests 11\n# suites 0\n# pass 11\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 78.837375\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--name-only"
+      ],
+      "exit_code": 0,
+      "output": "public/app.mjs\npublic/index.html\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/section-03-source-check-1850_kga/example.mjs"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "reference_changes": [
+    "public/app.mjs",
+    "public/index.html"
+  ],
+  "failed_preparation_creates_no_git": true,
+  "browser_test_status": "Syntax checked; Playwright test not executed."
+}

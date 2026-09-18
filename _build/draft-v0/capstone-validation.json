@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "output": "Capstone reference satisfies identity, falsey-ID, type, order, null/missing and empty-input checks\n",
+  "scope": "Facilitator reference only; not learner or live-agent validation"
+}

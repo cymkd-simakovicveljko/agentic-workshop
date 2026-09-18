@@ -1,0 +1,11 @@
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');process.chdir(root);
+const name=process.argv[2];
+if(!['starter','broken','solution'].includes(name)) throw Error('Use: node scripts/checkpoint.mjs starter|broken|solution');
+await mkdir('.runs/backups',{recursive:true});
+const current=await readFile('public/filter.mjs','utf8');
+const backup=`.runs/backups/filter-${Date.now()}.mjs`;await writeFile(backup,current);
+await copyFile(`checkpoints/${name}/filter.mjs`,'public/filter.mjs');
+console.log(`Loaded prepared ${name} implementation. Previous file saved to ${backup}. Specs and harness evidence unchanged.`);

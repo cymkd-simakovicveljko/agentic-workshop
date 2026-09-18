@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-09-12T17:26:21.489205+00:00",
+  "lab": "/private/var/folders/lq/qp0znr596kscv3_w079n7tpc0000gn/T/agentic-course-v0-4jp8ha2m",
+  "baseline_commit": "599fa299d73d81b8123b252aee5305ce4db2923a",
+  "prepared_results": [
+    {
+      "stage": "baseline",
+      "passed": 12,
+      "failed": 0,
+      "exit_code": 0,
+      "evidence": "baseline/evidence.json"
+    },
+    {
+      "stage": "attempt-1-in-place-sort",
+      "passed": 1,
+      "failed": 11,
+      "exit_code": 1,
+      "evidence": "attempt-1-in-place-sort/evidence.json"
+    },
+    {
+      "stage": "attempt-2-copy-and-sort",
+      "passed": 11,
+      "failed": 1,
+      "exit_code": 1,
+      "evidence": "attempt-2-copy-and-sort/evidence.json"
+    }
+  ],
+  "documented_diagnosis_capture": "1 failed, nonzero exit retained",
+  "documented_snapshot_and_selected_file_restore": "passed",
+  "final_tests": {
+    "passed": 12,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "untracked_note_preserved": true,
+  "untracked_note_sha256": "328e6b5d9857ff369c6c2f88a55b9e537a384f87f7b4b4125746aaf274bb7412",
+  "accepted_tests_data_and_contract_preserved": true,
+  "prepared_history_preserved": true,
+  "other_course_assets_preserved": true,
+  "example_frontmatter_parse": "passed with Bun.YAML.parse",
+  "learner_shell_blocks_syntax_checked": 10,
+  "local_links_checked": 97,
+  "node": "v22.22.2",
+  "omp": "omp/18.0.6",
+  "live_model_run": false,
+  "live_interrupt_test": false,
+  "live_subagent_run": false,
+  "browser_test": false
+}

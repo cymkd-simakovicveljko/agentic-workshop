@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "preserved_files": 63,
+  "prepared_manifest_files": {
+    "plain": 18,
+    "openspec": 25
+  },
+  "baseline_tests": {
+    "plain": {
+      "pass": 11,
+      "fail": 0
+    },
+    "openspec": {
+      "pass": 11,
+      "fail": 0
+    }
+  },
+  "openspec_cli_version": "1.13.0",
+  "openspec_items_valid": 2,
+  "markdown_files": 15,
+  "local_links": 126,
+  "shell_blocks_syntax_checked": 4,
+  "word_counts": {
+    "README.md": 515,
+    "OUTLINE.md": 349,
+    "PROJECT.md": 614,
+    "demo/README.md": 432,
+    "_build/README.md": 346,
+    "sections/07-optional-flavors.md": 3360,
+    "demo/section-07-flavor-lab.md": 1525,
+    "_build/section-07/review.md": 887,
+    "demo/section-07-examples/README.md": 197,
+    "demo/section-07-examples/fsad-session.md": 705,
+    "demo/section-07-examples/openspec/changes/include-project-owners/design.md": 327,
+    "demo/section-07-examples/openspec/changes/include-project-owners/proposal.md": 143,
+    "demo/section-07-examples/openspec/changes/include-project-owners/specs/project-filter/spec.md": 777,
+    "demo/section-07-examples/openspec/changes/include-project-owners/tasks.md": 250,
+    "demo/section-07-examples/shared-brief.md": 515
+  },
+  "provider_backed_run": false,
+  "owner_search_implemented": false,
+  "errors": []
+}

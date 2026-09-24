@@ -1,39 +1,26 @@
-# Agentic engineering course — agreed outline
+# Agentic engineering course — outline
 
-**Status:** The eight-section structure remains agreed. The active teaching route
-uses the small [todo app](demo/todo-app/README.md). Teaching depth is restored across
-the understand → watch or try → use at work → go deeper path, with decision criteria,
-failure cases, executable ordinary commands and source/adaptation notes.
-Section 3 is the practical core. Section 8 remains a separate harness and
-enterprise example. See the [implemented restoration plan](2026-09-18-content-restoration-plan.md)
-and [verification receipt](_build/todo-demo/2026-09-18-content-restoration-verification.md).
+The course follows a change from intent to evidence-backed acceptance, then tests that workflow under harder conditions. Sections 1–4 form the essential route. Sections 5–7 develop steering, recovery and coordination; section 8 offers two independent advanced routes.
+
+This is the active structure from the [course revision](2026-09-22-course-review-and-action-plan.md), not the numbering in historical drafts.
 
 ## Sections
 
-1. **[Getting started with OMP](sections/01-getting-started-with-omp.md)** — Add a remaining-task count and inspect the result.
-2. **[Agentic engineering foundations](sections/02-agentic-engineering-foundations.md)** — Models, agents, tools, context and harnesses through that observed run.
-3. **[The everyday workflow](sections/03-the-everyday-workflow.md)** — Specify, implement, verify and review an unfinished-task filter.
-4. **[Context and repository knowledge](sections/04-context-and-repository-knowledge.md)** — Repair a stale handoff about the same app.
-5. **[Skills](sections/05-skills.md)** — Compare ordinary review with an inline candidate and focused procedure, not an installed course skill.
-6. **[Reliable execution](sections/06-reliable-execution.md)** — Reproduce and repair a deliberate blank-task defect.
-7. **[Optional flavors](sections/07-optional-flavors.md)** — Compare inline plain OMP, FSAD-style and OpenSpec-shaped artifacts for one requirement; no framework installation required.
-8. **[Advanced harness design and enterprise-scale work](sections/08-advanced-harness-design-and-enterprise-scale-work.md)** — Harness engineering plus enterprise change work informed by Michael Feathers.
+1. **[Getting started with OMP](sections/01-getting-started-with-omp.md)** — Establish safe permissions, make a remaining-task count and judge the result.
+2. **[How agents work](sections/02-agentic-engineering-foundations.md)** — Explain requests, tools and supplied context; interpret usage and model/effort trade-offs.
+3. **[Working with OMP](sections/03-working-with-omp.md)** — Choose session and context controls without mistaking them for file or process recovery.
+4. **[The everyday workflow](sections/04-the-everyday-workflow.md)** — Explore, specify, plan, implement, verify and review an unfinished-task filter. This is the practical core.
+5. **[Steering agents](sections/05-steering-agents.md)** — Maintain useful context, prune stale guidance, package a skill and distinguish loading from useful judgment.
+6. **[Verification, diagnosis and recovery](sections/06-reliable-execution.md)** — Repair the shared cause of a blank-task defect, enforce a check and reconcile interrupted work.
+7. **[Planning and coordinating larger changes](sections/07-planning-and-coordinating-larger-changes.md)** — Sequence dependent work, then reconcile decisions, code and evidence when a requirement changes. Framework adoption is optional.
+8. **[Advanced routes](sections/08-advanced-harness-design-and-enterprise-scale-work.md)** — Choose Part A, harness engineering, or Part B, existing-system change and compatibility. Each has its own prerequisites and assessment; neither certifies the other.
 
-## Current route
+## Starting points and limits
 
-Run `npm install`, `npm run dev`, `npm test`, and `npm run test:e2e` from
-`demo/todo-app`. Install Playwright's browser once with `npx playwright install`.
-The app is a standalone nested Git repository with `main`, `exercise/<topic>`,
-and `solution/<topic>` branches. Learners never need an earlier exercise to begin
-the next one. Section 8 instead uses its [separate exporter lab](demo/section-08-harness-and-enterprise-lab.md)
-with direct POSIX `mktemp`/`cp` and Node commands, not a course helper or Python.
+The todo exercises require the canonical React + Vite repository and its documented exercise/solution branches. **That repository is missing from this checkout.** Recover it before attempting the app commands; do not substitute the historical project-directory app or infer missing source from lesson prose. The [project guide](PROJECT.md) records the required starting states.
 
-Use OMP only with an authorized provider, keep credentials out of course material,
-and review requested edits and commands. A prepared trace is labelled as prepared;
-automated tests are not proof of a provider-backed teaching run.
+Prepared traces and inline exercises remain usable where labelled. They can teach reasoning without proving live agent behavior. Section 7 and section 8's compatibility route can use the existing [exporter](demo/section-08-legacy/README.md), each from its own starting state. No learner needs another participant's modified working tree.
 
-Resources, source/adaptation notes and optional depth remain in each section.
-The [earlier full draft](sections_old/) is historical source, not an active route;
-earlier project-directory assets and their receipts also remain historical.
-This restoration includes no provider-backed teaching or classroom timing
-rehearsal and does not establish whole-course classroom readiness.
+Use OMP only with an authorized provider and keep credentials out of prompts and course files. Product-command references target OMP `v18.2.9`; availability still depends on configuration and provider support. A source reference, a local command result, a provider-backed interaction and a classroom rehearsal are different kinds of evidence.
+
+The [demo guide](demo/README.md) lists active companions. [Earlier drafts](sections_old/), project-directory assets and their receipts remain historical. The material migration does not establish whole-course classroom readiness: todo-app execution, live provider exercises and classroom timing remain unverified.

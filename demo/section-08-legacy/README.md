@@ -1,10 +1,11 @@
-# Section 8 — legacy ticket exporter
+# Legacy ticket exporter — sections 7 and 8
 
-**Original synthetic teaching example, retained for the current section 8.**
-This exporter is separate from the sections 1–7 todo app and the historical
-project-directory app. Follow the
-[direct POSIX-shell/Node lab](../section-08-harness-and-enterprise-lab.md#part-b--prepare-fresh-copies-with-ordinary-tools)
-to prepare and run it.
+**Original synthetic teaching example, separate from the todo and historical
+project-directory apps.** The [coordination lab](../section-07-coordination-lab.md)
+uses it to practice dependencies and replanning. The
+[compatibility lab](../section-08-harness-and-enterprise-lab.md#part-b--prepare-fresh-copies-with-ordinary-tools)
+uses it to practice characterization, seams and consumer contracts.
+Start each lab independently; neither needs the other lab's modified files.
 
 The producer loads a local fixture, stamps an export and maps internal states to
 consumer-facing statuses. Its real enterprise analogue might use a database;

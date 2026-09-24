@@ -1,8 +1,15 @@
-# Section 3 — unfinished-task filter lab
+# Section 4 — unfinished-task filter lab
 
 Build one reversible view of the existing todo collection. Use this companion
-beside [the workflow lesson](../sections/03-the-everyday-workflow.md); the lesson
+beside [the workflow lesson](../sections/04-the-everyday-workflow.md); the lesson
 explains the decisions, while this lab gives you concrete actions and evidence.
+
+**App route blocked in this distribution:** `demo/todo-app` is missing its canonical
+source and branches. Recover it through [setup](section-01-setup.md) before using
+the commands below, then confirm its brief and scripts. App-specific descriptions
+are prepared exercise assumptions until checked there. The written sequence can
+be studied now; neither it nor the reference description is execution evidence.
+Do not recreate the app from prose or use the historical public app.
 
 ## Understand
 
@@ -75,7 +82,7 @@ localStorage, and changing browser origin changes which stored tasks you see.
 In a third terminal at **`demo/todo-app`**, if OMP is available:
 
 ```sh
-omp
+omp --approval-mode always-ask
 ```
 
 Without provider access, perform the same investigation and implementation by
@@ -259,20 +266,16 @@ copy. Stop/restart the relevant app server when changing code states.
 
 ## Use at work
 
-### Produce a factual evidence record
+### Produce a factual handoff
 
-Fill this from the actual run; these are prompts for your note, not prefilled
-success claims:
-
-| Field | Record |
-| --- | --- |
-| Code state | Repository, work branch, starting revision and final revision/uncommitted changes |
-| Baseline | Command, cwd, actual result and any pre-existing failure |
-| Final automated checks | Command, cwd, actual output/result and code state |
-| Direct browser work | Browser/app URL and which sequences A–E were actually observed |
-| Acceptance gaps | Verified, failed or not checked for each required behavior |
-| Review decision | Accept, correct a named defect, or wait for a specified missing check |
-| Continuation | Current running server, remaining limitation and next reproducible action |
+Use the [single handoff template](section-05-context-and-handoff.md#handoff-template).
+For this lab, attach the actual baseline and final command outputs, identify the
+working copy and browser URL, and mark sequences A–E verified, failed or not checked.
+Explain whether each result is source reasoning, an automated assertion or direct
+browser observation. Record the decision to accept, correct or wait, and leave the
+server and synthetic browser data in a stated condition. The template is shared
+with later recovery and coordination exercises; there is no second evidence format
+to keep synchronized.
 
 Someone continuing the work should not need your chat history to know whether
 “tested” means source inspection, unit assertions or direct browser interaction.
@@ -295,14 +298,14 @@ existing test would miss the defect.
 ### Sources and adaptation
 
 This is a course-authored todo-app lab, not a live agent transcript. OMP's
-[`omp` interactive entry point](https://github.com/can1357/oh-my-pi/blob/main/README.md#four-entry-points-interactive-one-shot-rpc-and-acp)
-and [approval boundaries](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
+[`omp` interactive entry point](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#four-entry-points-interactive-one-shot-rpc-and-acp)
+and [approval boundaries](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
 are documented by the official project; ordinary prompts are not security controls.
 The first end-to-end slice adapts the workflow idea from
 [Matt Pocock's Full Walkthrough: Workflow for AI Coding](https://www.youtube.com/watch?v=-QFHIoCo-Ko),
 not its tools or full process. [Playwright locators](https://playwright.dev/docs/locators)
 and [assertions](https://playwright.dev/docs/test-assertions) describe the existing
 browser-testing approach. The complete source/adaptation context is in the
-[main lesson](../sections/03-the-everyday-workflow.md#sources-and-adaptation).
+[main lesson](../sections/04-the-everyday-workflow.md#sources-and-adaptation).
 
-[Back to section 3](../sections/03-the-everyday-workflow.md)
+[Back to section 4](../sections/04-the-everyday-workflow.md)

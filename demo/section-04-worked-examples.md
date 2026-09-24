@@ -1,10 +1,17 @@
-# Section 3 — worked examples on the same todo app
+# Section 4 — worked examples on the same todo app
 
 The workflow transfers because the decisions recur, not because every task needs
 six prompts. These examples stay in `demo/todo-app`: no fictional API, second demo,
 new test harness or invented package script is required. Feature and bug cases use
-the supplied exercise branches; optional investigation cases describe a situation
-to investigate, not a claim that the current app has that defect.
+the canonical exercise branches once recovered; optional investigation cases
+describe a situation to investigate, not a claim that the current app has that defect.
+
+**Availability:** the canonical app source and branches are missing from this
+distribution. [Setup](section-01-setup.md) records the recovery prerequisite.
+All paths, scripts and app details below are prepared descriptions to confirm
+against that recovered source, not current-checkout observations. Until then,
+reason through the examples without edits or runtime claims; do not reconstruct
+the app or substitute the historical public app.
 
 ## Understand
 
@@ -33,7 +40,7 @@ suite manages its own server according to `playwright.config.js`. Use the URL
 printed by the development server for manual checks, keep other working copies
 off the test server's configured port, and use synthetic localStorage data.
 
-If you use an already configured OMP installation, run `omp` from that same app
+If you use an already configured OMP installation, run `omp --approval-mode always-ask` from that same app
 directory and enter the prompts as ordinary requests. Otherwise do the reasoning
 and edits yourself and label the route accordingly. The examples do not require
 provider setup, publication or dependency installation beyond normal app setup.
@@ -352,11 +359,11 @@ plausible causes. Do not create ceremony merely because the table has six stages
 
 ### Handoff with enough state to continue
 
-For any example, record repository and branch, starting revision, changed files,
-actual commands with cwd and results, direct browser observations, unverified
-cases, and the next action. Explain any intentional unchanged behavior. Review
-tracked changes against the recorded base, not only `HEAD`, and inspect untracked
-files listed by status.
+Use the [shared handoff template](section-05-context-and-handoff.md#handoff-template)
+for whichever example you choose. Include the actual evidence and explain any
+intentional unchanged behavior. Review tracked changes against the recorded base,
+not only `HEAD`, and inspect untracked files listed by status. Later sections reuse
+this note rather than adding a new reporting format.
 
 The acceptance decision is yours. “The agent says done” is not a state of the
 product; “the requested mutation preserves the hidden record after reload, and the
@@ -368,7 +375,7 @@ missing, name the gap without pretending the feature has failed or passed.
 Try rewriting one example into a single small request and another into an
 inspection-only first turn. Explain the uncertainty that justifies the difference.
 For each, name the cheapest observation that could prove your first hypothesis
-wrong. Use [the main filter lab](section-03-workflow-lab.md) when you want the full
+wrong. Use [the main filter lab](section-04-workflow-lab.md) when you want the full
 browser sequence rather than an additional feature.
 
 ### Sources and adaptation
@@ -376,10 +383,10 @@ browser sequence rather than an additional feature.
 All situations, prompts, acceptance decisions and counterexamples here are
 course-authored. Conditional scenarios are not claims of current repository bugs,
 and none of the examples is a live OMP transcript. The official
-[OMP README entry-point reference](https://github.com/can1357/oh-my-pi/blob/main/README.md#four-entry-points-interactive-one-shot-rpc-and-acp)
+[OMP 18.2.9 README entry-point reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#four-entry-points-interactive-one-shot-rpc-and-acp)
 supports the `omp` interactive launch used here; ordinary prompts do not create a
 special workflow mode. See the official
-[approval documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
+[approval documentation](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
 for the distinction between instructions, approval and actual containment.
 
 The main lesson's thin end-to-end slice adapts
@@ -390,4 +397,4 @@ as workflow inspiration, not as authority for OMP controls or a mandatory proces
 and [Playwright best practices](https://playwright.dev/docs/best-practices)
 provide further reading on distinguishing cases and observable verification.
 
-[Back to section 3](../sections/03-the-everyday-workflow.md)
+[Back to section 4](../sections/04-the-everyday-workflow.md)

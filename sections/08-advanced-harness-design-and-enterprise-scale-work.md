@@ -1,9 +1,22 @@
 # 8. Advanced harness design and enterprise-scale work
 
-**Main path:** first design the responsibilities around an agent run; then change
-an unfamiliar component without breaking its consumers. This section uses the
-separate [legacy ticket exporter](../demo/section-08-legacy/README.md). The todo app
-is not expanded into an enterprise simulator.
+**Choose one advanced route, or take both independently.** Part A examines a
+harness for a named workload. Part B changes an existing component while preserving
+its consumers' contracts. Neither route certifies the other. Both use the separate
+[legacy ticket exporter](../demo/section-08-legacy/README.md), not an expanded todo
+app or a production system.
+
+| Route | Audience and prerequisites | Attempt and exit condition |
+| --- | --- | --- |
+| **Part A — harness engineering** | Engineers responsible for agent execution. Understand tool/session boundaries from [section 3](03-working-with-omp.md), context and authority from [section 5](05-steering-agents.md), and evidence/recovery from [section 6](06-reliable-execution.md). | Review the named exporter workload against authority, stale-evidence and cancellation cases. Exit with a reasoned worksheet that names owners, observable evidence and unimplemented controls—not a working controller. |
+| **Part B — existing-system change and compatibility** | Engineers changing code with existing consumers. Be comfortable with bounded delivery, diagnosis and dependencies from [sections 4](04-the-everyday-workflow.md), [6](06-reliable-execution.md) and [7](07-planning-and-coordinating-larger-changes.md). | Start a fresh exporter copy, characterize behavior, add a seam, implement opt-in v2 and check the consumer matrix. Exit with local evidence and explicit untested operational boundaries—not deployment approval. |
+
+Read your route's **Understand**, **Watch or try** and **Use at work** subsections;
+the shared source notes support both. Part A needs neither Node execution nor a
+completed Part B implementation. Part B needs Node and a POSIX shell, but no
+Part A worksheet, provider access or previous learner edits. Section 7 may use the
+same exporter for coordination; start again here. This route owns characterization,
+seam and compatibility reasoning, not another general planning process.
 
 Imagine two failures. An agent tests a patch, edits it again, and presents the old
 passing result as evidence. Another agent correctly implements a new export status,
@@ -53,7 +66,7 @@ production credential from its environment. A separate Git worktree separates
 working files; it is not a security boundary for the network, secrets or shared
 services. Execution restrictions need an enforcing mechanism and an owner.
 
-Current [OMP approval documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
+[OMP 18.2.9 approval documentation](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
 distinguishes `read`, `write` and `exec` tool tiers. Its documented default is
 `yolo`, which auto-approves the tiers unless an applicable explicit policy changes
 the decision. `always-ask` prompts for write and execution tiers; `write` prompts
@@ -81,18 +94,13 @@ uncommitted changes. Include the patch and relevant new files, or identify an
 immutable artifact. Preserve the starting dirty state so pre-existing work is not
 mistaken for the agent's contribution.
 
-A useful record has these fields; this is a **template, not a recorded run**:
-
-```text
-Task and exclusions: opt-in exporter v2; no delivery infrastructure changes
-Base: source revision and initial working-tree state
-Candidate: exact patch plus relevant new files, or immutable artifact identity
-Environment: runtime/dependencies and relevant host/model/configuration versions
-Checks: command, tested candidate, completion/exit status and output location
-Outstanding: consumer ownership and routing/replay evidence
-Operations: active identifiers, known outcomes and unknown outcomes
-Next action and owner: who can resolve the remaining acceptance decision
-```
+Use the maintained [section 5 handoff format](../demo/section-05-context-and-handoff.md)
+to record this workload rather than inventing a second template. For the exporter,
+the candidate entry must identify the exact patch and relevant new files; the
+evidence entry must include commands, runtime, completion/exit status and output
+locations. Record active operations and unknown outcomes under current state, and
+name the person responsible for resolving them. These are requirements for a
+record, not facts from an executed run.
 
 If the candidate changes after checks, affected evidence becomes stale. Do not
 silently reuse it. A summary should point to execution facts, not replace them.
@@ -114,7 +122,7 @@ must account for children and delegated workers. Marking a record “cancelled�
 does not stop a process or reverse a write that already happened.
 
 OMP exposes agent observation and control through
-[Agent Hub](https://github.com/can1357/oh-my-pi/blob/main/docs/agent-hub.md): `Alt+A`
+[Agent Hub](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/agent-hub.md): `Alt+A`
 opens the roster, and the selected agent can be inspected or steered. Its documented
 `x` action aborts a running turn if needed and kills/releases that agent instance.
 While focused on a subagent, `Esc` returns to the main session; it does **not**
@@ -136,6 +144,13 @@ a missing tool, hostile instructions inside source data, cancellation during wor
 and a failing consumer contract. A tabletop answer establishes design intent.
 Only executed fault cases can establish that an implemented controller behaves
 as intended. We do not implement that controller in this lesson.
+
+For example, suppose a test result names candidate A, then a worker edits the
+mapping to produce candidate B. A still has a passing result; B has no corresponding
+evidence. The review owner must hold acceptance until the affected checks run
+against B. Relabelling the old output or trusting “only a small edit” does not close
+that gap. This reasoning is useful before a controller exists, but it proves no
+enforcement. The companion works through authority and unknown-outcome cases too.
 
 Platform owners can maintain execution environments and evidence capture.
 Repository owners still own behavior and acceptance criteria. Name who handles
@@ -256,11 +271,11 @@ stored artifacts require their own checks where those mechanisms exist.
 
 ### Part A — review a proposed harness
 
-Use the [companion worksheet](../demo/section-08-harness-and-enterprise-lab.md)
+Use the [Part A companion worksheet](../demo/section-08-harness-and-enterprise-lab.md#part-a--complete-the-harness-worksheet)
 to name scope, candidate identity, enforcement mechanisms, evidence, cancellation
-and acceptance ownership. Work through the six failure cases before adding any
-infrastructure. For each proposed guarantee ask: “What would I execute to falsify
-this, and what artifact would prove the outcome?”
+and acceptance ownership. Work through all six cases before reading the worked
+reasoning. For each proposed guarantee ask: “What would I execute to falsify this,
+and what artifact would prove the outcome?” No controller implementation is required.
 
 A short discussion prompt is enough:
 
@@ -268,17 +283,24 @@ A short discussion prompt is enough:
 > cancellation gaps. Name the responsible component and an observable failure case
 > for each gap. Do not implement a controller or treat the worksheet as enforcement.
 
-Your output is a design with explicitly unimplemented controls, not a claimed
-sandbox or production-ready harness.
+**Part A exit:** another engineer can trace each case from its observed or
+hypothetical event to the responsible component, next action and required evidence.
+The design explicitly separates authorization from access, old-candidate results
+from current evidence, and a cancellation request from a known outcome. Missing
+controls remain named proposals. That completes a tabletop assessment, not an
+executed fault suite, sandbox certification or production-ready harness.
 
 ### Part B — inspect and run the separate exporter
 
-The companion supplies a direct local Node route using fresh copies of the existing
-sources and prepared references. No course helper, Python, dependency installation
-or todo-app branch is involved. It shows the baseline, behavior-preserving seam,
-feature expectations before implementation, and completed reference in order.
+The [Part B companion](../demo/section-08-harness-and-enterprise-lab.md#part-b--prepare-fresh-copies-with-ordinary-tools)
+supplies a direct local Node route using fresh copies of the existing sources and
+prepared references. No course helper, Python, dependency installation or todo-app
+branch is involved. It shows the baseline, behavior-preserving seam, feature
+expectations before implementation, and completed reference in order.
 
-For an agent-assisted attempt, use a separate learner copy and begin with:
+That prepared route is a worked example, not an implementation assessment. To
+demonstrate the route's full outcome, use a fresh learner copy and make the seam
+and v2 changes yourself, with or without an authorized agent. Begin with:
 
 > Inspect the exporter, adapter, fixture and consumers. Explain the status change
 > point, current behavior and the smallest useful seam. Separate observations from
@@ -295,6 +317,14 @@ against which candidate, and what the exercise cannot establish. The historical
 checks; it is not evidence that you ran the new route, that OMP completed the
 change, or that a real enterprise integration is ready.
 
+**Part B exit:** show the baseline observations, a reviewed behavior-preserving
+seam, focused characterization, feature checks that failed for the intended reason
+before your implementation, and the completed consumer matrix against your exact
+candidate. Explain one surprising preserved behavior and why the old reader's v2
+rejection is expected. Name unknown consumers and missing routing, stored-artifact,
+replay and recovery evidence. A prepared-reference run demonstrates those local
+checks only; it is not your implementation or proof of agent execution.
+
 ## Use at work
 
 ### Part A — put evidence and operation ownership into the workflow
@@ -305,10 +335,11 @@ missing tools, stale evidence, test failures and unknown operation outcomes as
 different states with different next actions. Do not retry a consequential action
 until its previous outcome is reconciled.
 
-Before delegating, define non-overlapping ownership, shared interfaces, required
-checks and a handoff format. One integration owner evaluates the combined result.
-Parallel work is helpful when tasks are independent; extra workers cannot remove
-a dependency between a producer contract and its consumers.
+Use the ownership and dependency decisions from
+[section 7](07-planning-and-coordinating-larger-changes.md), and the
+[section 5 handoff](../demo/section-05-context-and-handoff.md), when delegation is
+justified. One integration owner evaluates the combined result. Extra workers
+cannot remove a dependency between a producer contract and its consumers.
 
 ### Part B — deliver through compatible states
 
@@ -334,11 +365,13 @@ than hiding them behind “all tests pass.”
 
 ### Sources and adaptation
 
-- **Official OMP sources:** [README tool inventory](https://github.com/can1357/oh-my-pi/blob/main/README.md),
-  [Tool approval mode](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md),
-  and [Agent Hub](https://github.com/can1357/oh-my-pi/blob/main/docs/agent-hub.md).
-  These ground the host, approval and agent-control statements above. Capabilities
-  depend on the installed version/configuration; none implements this worksheet
+- **OMP 18.2.9 sources:** [README tool inventory](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md),
+  [Tool approval mode](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md),
+  and [Agent Hub](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/agent-hub.md).
+  These ground the host, approval and agent-control statements above at the
+  [reviewed release](../research/2026-09-22-omp-course-source-review.md).
+  Effective configuration and bindings still require local inspection. Source
+  review is not an interactive runtime check; none implements this worksheet
   merely because it is written down.
 - **Feathers:** [recommended book](https://www.informit.com/store/working-effectively-with-legacy-code-9780131177055),
   [Characterization Testing](https://michaelfeathers.silvrback.com/characterization-testing),
@@ -367,4 +400,4 @@ than hiding them behind “all tests pass.”
 No recording is required for the lab. Resource inclusion is not a claim that full
 playback or a classroom rehearsal has been completed.
 
-[Companion lab](../demo/section-08-harness-and-enterprise-lab.md) · [Back to outline](../OUTLINE.md)
+[Previous: planning and coordinating larger changes](07-planning-and-coordinating-larger-changes.md) · [Companion lab](../demo/section-08-harness-and-enterprise-lab.md) · [Back to outline](../OUTLINE.md)

@@ -5,6 +5,7 @@ receipts, prepared examples and retained historical helpers.
 
 | Material | Purpose and evidence boundary |
 | --- | --- |
+| [Curriculum migration receipt](curriculum-migration-verification.json) | Active-route links, shell syntax, synthetic ledger and executed section 6/7/8 prepared routes; no todo-app, provider-backed or classroom rehearsal |
 | [Original todo-app receipt](todo-demo/verification.md) | Canonical todo-app behavior and fresh-checkout rehearsal; retained unchanged |
 | [Content-restoration receipt](todo-demo/2026-09-18-content-restoration-verification.md) | Restoration source review, route verification and explicitly recorded rehearsal limits |
 | `section-01` through `section-07` | Historical pre-simplification lesson and project-directory preparation evidence; not validation of the active todo-app route |
@@ -12,12 +13,14 @@ receipts, prepared examples and retained historical helpers.
 | `draft-v0` | Historical foundation-lab helper and older source inventory |
 
 The old core helpers and checkpoints are superseded; they are not part of the
-active learner route and do not validate `demo/todo-app`. Section 8's separate
-legacy exporter remains current teaching material, but its old preparation
-helper is not required. The [current enterprise lab](../demo/section-08-harness-and-enterprise-lab.md)
-uses direct POSIX-shell copying and Node commands. Its historical receipts retain
-their original scope and date; they are not evidence that those newer commands
-were run. Consult the content-restoration receipt for the newer verification.
+active learner route and do not validate `demo/todo-app`. Historical section numbers
+and paths in receipts identify their original snapshot; do not run retained helpers
+against renamed lessons and treat their output as current evidence.
+
+The exporter now supports independent section 7 coordination and section 8
+compatibility routes. The current labs use ordinary POSIX-shell copying and Node,
+not the historical preparation helper. Consult the migration receipt for the
+newest executed commands and source hashes; earlier receipts keep their original scope.
 
 A verification receipt records only the command or interaction actually performed.
 Provider-backed OMP runs and classroom timing require their own rehearsals; passing

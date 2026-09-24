@@ -7,10 +7,17 @@ actually does, then decide whether to accept it. This is not a React lesson.
 
 ### One small change, three things to distinguish
 
-The [todo app](../demo/todo-app/README.md) already adds, completes and deletes
-tasks, and saves them in the browser with `localStorage`. Our change is a visible
-count of **unfinished** tasks. On `exercise/remaining-count`, the count is a
-requirement to implement, not a feature you should already see.
+The course's canonical `demo/todo-app` exercise is a small app that adds, completes
+and deletes tasks, saving them with `localStorage`. Our change is a visible count
+of **unfinished** tasks. On `exercise/remaining-count`, that count is a requirement
+to implement, not a feature you should already see.
+
+**App prerequisite is currently missing.** This checkout records a Git link, but
+does not supply the standalone repository or a recoverable source URL. Obtain the
+canonical repository or bundle with its exercise and solution branches before
+running the app route. Do not reconstruct it from this prose or substitute the
+historical app. The [setup companion](../demo/section-01-setup.md) separates this
+blocker from provider access and supplies a no-app reasoning route.
 
 By the end, distinguish **what you requested**, **what happened on the computer**
 and **what evidence supports accepting the result**. Those can disagree. An
@@ -36,7 +43,7 @@ acceptance decision; choosing a capable model does not transfer those duties.
 count” limits the requested work. Neither instruction removes filesystem or
 network permissions from a tool.
 
-Current OMP documentation says the default approval mode is `yolo`: ordinary
+OMP 18.2.9 documentation says the default approval mode is `yolo`: ordinary
 read, write and execution calls are allowed without a tier-based prompt. This
 lesson instead launches with `--approval-mode always-ask`, which normally allows
 reads and prompts for write/exec calls. Explicit tool and user policies also
@@ -54,8 +61,10 @@ approve an unexplained action merely to keep the demonstration moving.
 ### 1. Start in the right repository
 
 Complete the [setup companion](../demo/section-01-setup.md) for prerequisites,
-provider setup and the no-provider route. The app is a **standalone nested Git
-repository**: run its Git commands inside `demo/todo-app`, not the course root.
+provider setup, safe restart and the no-provider route. After obtaining the
+canonical app, run its Git commands inside its **standalone nested repository**
+at `demo/todo-app`, not the course root. Start independently from the exercise
+branch; this lesson requires no earlier learner edits.
 
 **Terminal A — from the course root:**
 
@@ -122,22 +131,17 @@ you prescribe where that calculation belongs.
 omp --approval-mode always-ask
 ```
 
-**OMP input, not shell commands — enter each separately:**
+**OMP input, not a shell command:**
 
 ```text
 /model
 ```
 
-```text
-/hotkeys
-```
-
 Choose an available authorized model and note its provider/model identity. The
-setup companion explains `/login` if access is not configured. `/hotkeys` shows
-your actual bindings; `Ctrl+O` normally expands tool output. The documented
-app-level interrupt is `Escape`; menus and Vim editing mode can consume Escape
-first, so learn the active behavior before sending work. An interrupt does not
-undo changes already made.
+setup companion covers `/login` if needed and the minimum controls to interrupt.
+Check active bindings before sending work. Section 3 is the teaching home for
+[host and context controls](03-working-with-omp.md); an interrupt does not undo
+changes already made.
 
 **OMP input — first request:**
 
@@ -252,8 +256,10 @@ git diff exercise/remaining-count solution/remaining-count
 ```
 
 That is a reference diff, not evidence that your worktree passes. If provider
-access fails, the [setup companion](../demo/section-01-setup.md#prepared-example-when-provider-access-is-unavailable)
-provides a runnable fallback. Label it **prepared example**, not live agent output.
+access fails but the canonical app is available, the
+[prepared route](../demo/section-01-setup.md#prepared-example-when-provider-access-is-unavailable)
+lets you inspect and run the reference. If the app itself is absent, only the
+labelled reasoning route is available. Neither is live agent output.
 
 ## Use at work
 
@@ -293,24 +299,29 @@ course-authored. They adapt the earlier lesson's inspect–change–observe–re
 teaching pattern, not its old application or custom setup machinery. No transcript
 or expected result above claims that a provider-backed run happened.
 
-OMP product facts were checked against current official documentation:
+OMP product facts are grounded in the reviewed **18.2.9** source revision, not a
+claim about every installation:
 
-- [Introduction and installation](https://github.com/can1357/oh-my-pi#install) —
+- [Introduction and installation](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#install) —
   terminal entry point, models and tool capabilities. Use the official installer
   appropriate to your platform; the app itself does not require OMP.
-- [CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md)
+- [CLI reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/cli-reference.md)
   — the interactive launch and `--approval-mode always-ask` override.
-- [Providers](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md) —
+- [Providers](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/providers.md) —
   provider/model distinction, availability and `/login`. Credentials belong in
   the supported authentication flow, not prompts, screenshots or course files.
-- [Tool approval mode](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
+- [Tool approval mode](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
   — mode defaults, explicit policies and the limits of approval as protection.
-- [Keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md) —
-  `/hotkeys`, output expansion and Escape behavior, including the Vim-mode caveat.
+- [Keybindings](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/keybindings.md) —
+  active bindings and Escape behavior, including the Vim-mode caveat.
+- [Course source review](../research/2026-09-22-omp-course-source-review.md)
+  records version/help evidence separately from unperformed provider and classroom
+  checks. Check `omp --version` and `omp --help` against the teaching version.
 
 Read the [setup companion](../demo/section-01-setup.md) for the executable route
 and [Vitest guide](https://vitest.dev/guide/) if the unit-test structure is new to
-you. Section 2 gives names to the loop you have just observed; section 3 develops
-the fuller workflow without making every small change a planning project.
+you. Section 2 explains the run; section 3 teaches host operation; section 4
+develops the full bounded workflow without making every small change a planning
+project.
 
-[Next: foundations](02-agentic-engineering-foundations.md) · [Back to outline](../OUTLINE.md)
+[Next: How agents work](02-agentic-engineering-foundations.md) · [Back to outline](../OUTLINE.md)

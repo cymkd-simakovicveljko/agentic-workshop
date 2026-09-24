@@ -1,0 +1,566 @@
+{
+  "scope": "Written curriculum migration and prepared local lab rehearsal; not provider-backed implementation or classroom evaluation.",
+  "documents": {
+    "documents": 23,
+    "local_links": 224,
+    "errors": []
+  },
+  "posix_shell_syntax": {
+    "blocks": 69,
+    "results": [
+      {
+        "source": "sections/01-getting-started-with-omp.md",
+        "line": 71,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/01-getting-started-with-omp.md",
+        "line": 86,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/01-getting-started-with-omp.md",
+        "line": 130,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/01-getting-started-with-omp.md",
+        "line": 206,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/01-getting-started-with-omp.md",
+        "line": 254,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 85,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 100,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 118,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 130,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 317,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 357,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/04-the-everyday-workflow.md",
+        "line": 398,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/06-reliable-execution.md",
+        "line": 132,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/06-reliable-execution.md",
+        "line": 145,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "sections/06-reliable-execution.md",
+        "line": 194,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 38,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 54,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 69,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 87,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 108,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 118,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 129,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 182,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 189,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-01-setup.md",
+        "line": 236,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-03-working-with-omp.md",
+        "line": 69,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-03-working-with-omp.md",
+        "line": 94,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-03-working-with-omp.md",
+        "line": 104,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-worked-examples.md",
+        "line": 24,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-worked-examples.md",
+        "line": 55,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-worked-examples.md",
+        "line": 99,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-worked-examples.md",
+        "line": 221,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 41,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 55,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 72,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 84,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 225,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 238,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-04-workflow-lab.md",
+        "line": 258,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-context-and-handoff.md",
+        "line": 43,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-context-and-handoff.md",
+        "line": 69,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-context-and-handoff.md",
+        "line": 83,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-context-and-handoff.md",
+        "line": 107,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-context-and-handoff.md",
+        "line": 139,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-skill-lab.md",
+        "line": 239,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-05-skill-lab.md",
+        "line": 286,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 47,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 67,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 105,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 130,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 168,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 185,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 205,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 218,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 267,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 295,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-06-recovery-lab.md",
+        "line": 317,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-07-coordination-lab.md",
+        "line": 57,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-07-coordination-lab.md",
+        "line": 149,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-07-coordination-lab.md",
+        "line": 174,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-07-coordination-lab.md",
+        "line": 207,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-07-coordination-lab.md",
+        "line": 300,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-07-coordination-lab.md",
+        "line": 312,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-08-harness-and-enterprise-lab.md",
+        "line": 153,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-08-harness-and-enterprise-lab.md",
+        "line": 174,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-08-harness-and-enterprise-lab.md",
+        "line": 190,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-08-harness-and-enterprise-lab.md",
+        "line": 214,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-08-harness-and-enterprise-lab.md",
+        "line": 229,
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "source": "demo/section-08-harness-and-enterprise-lab.md",
+        "line": 261,
+        "exit": 0,
+        "stderr": ""
+      }
+    ]
+  },
+  "synthetic_ledger": {
+    "uncached_input": 4100,
+    "cached_input": 4400,
+    "output": 600,
+    "illustrative_cost_usd": "0.0152",
+    "is_observed_provider_usage": false
+  },
+  "command_surface": {
+    "omp_version": "18.2.9",
+    "commands": [
+      "omp --version",
+      "omp --help"
+    ],
+    "result": "Both exited 0; version and advertised surface only. No interactive session or account query."
+  },
+  "node_version": "v24.16.0",
+  "rehearsals": [
+    {
+      "source": "demo/section-06-recovery-lab.md",
+      "sha256": "5ab7002cf34ccf9253de4a6402347d462e3a1c105b2675c79cf02eb963970790",
+      "blocks_zero_indexed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "expected_exit_codes": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "exit_code": 0,
+      "stdout": "\nCOURSE_BLOCK_0_BEGIN\nMechanical-check directory: /var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uMOPM8VnqW\n\u2714 outer baseline: actual local adapter output preserves known rows (7.721125ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.642333ms)\n\u2714 outer baseline: old consumer can count the default export (0.308458ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 59.093584\n\nCOURSE_BLOCK_0_EXIT=0\n\nCOURSE_BLOCK_1_BEGIN\nsrc/exporter.mjs:8: leftover conflict marker\nsrc/exporter.mjs:10: leftover conflict marker\nsrc/exporter.mjs:12: leftover conflict marker\nGit check exit: 2\nNode syntax exit: 1\n\nCOURSE_BLOCK_1_EXIT=0\n\nCOURSE_BLOCK_2_BEGIN\n\u2716 outer baseline: actual local adapter output preserves known rows (3.218042ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.883583ms)\n\u2716 outer baseline: old consumer can count the default export (0.484208ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 2\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 46.237792\n\n\u2716 failing tests:\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uMOPM8VnqW/tests/baseline.test.mjs:6:1\n\u2716 outer baseline: actual local adapter output preserves known rows (3.218042ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n      {\n        id: 'T-03',\n        owner: 'Mira',\n  +     status: 'open'\n  -     status: 'closed'\n      },\n      {\n        id: 'T-09',\n        owner: 'unassigned',\n        status: 'open'\n  \n      at TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uMOPM8VnqW/tests/baseline.test.mjs:8:10)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ { id: 'T-03', status: 'open', owner: 'Mira' }, { id: 'T-09', status: 'open', owner: 'unassigned' }, { id: 'T-20', status: 'open', owner: 'unassigned' } ],\n    expected: [ { id: 'T-03', status: 'closed', owner: 'Mira' }, { id: 'T-09', status: 'open', owner: 'unassigned' }, { id: 'T-20', status: 'open', owner: 'unassigned' } ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uMOPM8VnqW/tests/baseline.test.mjs:22:1\n\u2716 outer baseline: old consumer can count the default export (0.484208ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    {\n  +   closed: 0,\n  +   open: 3\n  -   closed: 1,\n  -   open: 2\n    }\n  \n      at TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uMOPM8VnqW/tests/baseline.test.mjs:23:10)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: { open: 3, closed: 0 },\n    expected: { open: 2, closed: 1 },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\nCOURSE_BLOCK_2_EXIT=1\n\nCOURSE_BLOCK_3_BEGIN\n\u2714 outer baseline: actual local adapter output preserves known rows (2.950791ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.506209ms)\n\u2714 outer baseline: old consumer can count the default export (0.627583ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 44.39775\n\nCOURSE_BLOCK_3_EXIT=0\n",
+      "stderr": "/private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uMOPM8VnqW/src/exporter.mjs:8\n<<<<<<< accepted-contract\n^^\n\nSyntaxError: Unexpected token '<<'\n    at checkSyntax (node:internal/main/check_syntax:72:5)\n\nNode.js v24.16.0\n"
+    },
+    {
+      "source": "demo/section-07-coordination-lab.md",
+      "sha256": "bd8a81d8cdbb7ade09c1519fad84a14aaf9ef612c3c12d0031864b6a9e111729",
+      "blocks_zero_indexed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "expected_exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_code": 0,
+      "stdout": "\nCOURSE_BLOCK_0_BEGIN\nv24.16.0\nCoordination directory: /var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x\n\u2714 outer baseline: actual local adapter output preserves known rows (3.023875ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.579417ms)\n\u2714 outer baseline: old consumer can count the default export (0.459042ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 44.880209\n\nCOURSE_BLOCK_0_EXIT=0\n\nCOURSE_BLOCK_1_BEGIN\n\nCOURSE_BLOCK_1_EXIT=0\n\nCOURSE_BLOCK_2_BEGIN\nIncrement 1: default v2; upgraded reader accepts; old reader rejects.\n\nCOURSE_BLOCK_2_EXIT=0\n\nCOURSE_BLOCK_3_BEGIN\n\u2716 outer baseline: actual local adapter output preserves known rows (3.640625ms)\n\u2716 outer baseline: ordinary call produces v1 and a parseable timestamp (0.7375ms)\n\u2716 outer baseline: old consumer can count the default export (0.821458ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 0\n\u2139 fail 3\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 42.663458\n\n\u2716 failing tests:\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/tests/baseline.test.mjs:6:1\n\u2716 outer baseline: actual local adapter output preserves known rows (3.640625ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  ... Skipped lines\n  \n    [\n      {\n        id: 'T-03',\n        owner: 'Mira',\n        status: 'closed'\n  ...\n        owner: 'unassigned',\n  +     status: 'paused'\n  -     status: 'open'\n      }\n    ]\n  \n      at TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/tests/baseline.test.mjs:8:10)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ { id: 'T-03', status: 'closed', owner: 'Mira' }, { id: 'T-09', status: 'open', owner: 'unassigned' }, { id: 'T-20', status: 'paused', owner: 'unassigned' } ],\n    expected: [ { id: 'T-03', status: 'closed', owner: 'Mira' }, { id: 'T-09', status: 'open', owner: 'unassigned' }, { id: 'T-20', status: 'open', owner: 'unassigned' } ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/tests/baseline.test.mjs:15:1\n\u2716 outer baseline: ordinary call produces v1 and a parseable timestamp (0.7375ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  2 !== 1\n  \n      at TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/tests/baseline.test.mjs:17:10)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 2,\n    expected: 1,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/tests/baseline.test.mjs:22:1\n\u2716 outer baseline: old consumer can count the default export (0.821458ms)\n  Error: Unsupported format for v1 consumer\n      at readV1 (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/src/consumer-v1.mjs:2:41)\n      at TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.uVSDuOOj2x/increment-1/tests/baseline.test.mjs:23:20)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7)\nDisplaced-baseline exit: 1\n\nCOURSE_BLOCK_3_EXIT=0\n\nCOURSE_BLOCK_4_BEGIN\n\u2714 outer baseline: actual local adapter output preserves known rows (2.987083ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.659958ms)\n\u2714 outer baseline: old consumer can count the default export (0.524458ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 44.653458\n\nCOURSE_BLOCK_4_EXIT=0\n\nCOURSE_BLOCK_5_BEGIN\nRevised integration: old default-v1 path and explicit-v2 path accepted locally.\n\nCOURSE_BLOCK_5_EXIT=0\n",
+      "stderr": ""
+    },
+    {
+      "source": "demo/section-08-harness-and-enterprise-lab.md",
+      "sha256": "ba58b883095af12a773113c62de74971c7bac978d5662dd7d3d6e4619b3da0f2",
+      "blocks_zero_indexed": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected_exit_codes": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "exit_code": 0,
+      "stdout": "\nCOURSE_BLOCK_0_BEGIN\nv24.16.0\nLab directory: /var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.2HwT0A7INj\n\nCOURSE_BLOCK_0_EXIT=0\n\nCOURSE_BLOCK_1_BEGIN\n\u2714 outer baseline: actual local adapter output preserves known rows (2.770208ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.520584ms)\n\u2714 outer baseline: old consumer can count the default export (0.431666ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 39.1625\n\nCOURSE_BLOCK_1_EXIT=0\n\nCOURSE_BLOCK_2_BEGIN\n\u2714 outer baseline: actual local adapter output preserves known rows (3.228ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (0.646792ms)\n\u2714 outer baseline: old consumer can count the default export (0.75425ms)\n\u2714 characterization: only exact CLOSED is closed in default format (1.642333ms)\n\u2714 characterization: empty and null owners fall back; whitespace is preserved (0.106125ms)\n\u2714 characterization: empty input produces empty rows (0.396833ms)\n\u2714 characterization: sorting retains duplicate occurrences and input data (0.464209ms)\n\u2714 characterization: the substituted clock controls the recorded timestamp (0.071875ms)\n\u2714 characterization: a data-source failure propagates without a fabricated report (0.233167ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 46.404834\n\nCOURSE_BLOCK_2_EXIT=0\n\nCOURSE_BLOCK_3_BEGIN\n\u2716 new requirement: v2 distinguishes HOLD and preserves unrelated mapping (1.515917ms)\n\u2714 new requirement: omitted and explicit v1 retain old HOLD behavior (0.126292ms)\n\u2716 new requirement: unsupported versions fail before reading the source (0.187458ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 2\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 41.432875\n\n\u2716 failing tests:\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.2HwT0A7INj/seam/tests/feature.test.mjs:11:1\n\u2716 new requirement: v2 distinguishes HOLD and preserves unrelated mapping (1.515917ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  1 !== 2\n  \n      at TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.2HwT0A7INj/seam/tests/feature.test.mjs:13:10)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 1,\n    expected: 2,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at ../../../../private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.2HwT0A7INj/seam/tests/feature.test.mjs:29:1\n\u2716 new requirement: unsupported versions fail before reading the source (0.187458ms)\n  AssertionError [ERR_ASSERTION]: Missing expected rejection.\n      at async TestContext.<anonymous> (file:///private/var/folders/pm/l8slpy_x14x3pptth4wklxkm0000gn/T/tmp.2HwT0A7INj/seam/tests/feature.test.mjs:31:3)\n      at async Test.run (node:internal/test_runner/test:1313:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: undefined,\n    expected: /Unsupported export format/,\n    operator: 'rejects',\n    diff: 'simple'\n  }\n\nCOURSE_BLOCK_3_EXIT=1\n\nCOURSE_BLOCK_4_BEGIN\n\u2714 outer baseline: actual local adapter output preserves known rows (5.990833ms)\n\u2714 outer baseline: ordinary call produces v1 and a parseable timestamp (1.963541ms)\n\u2714 outer baseline: old consumer can count the default export (1.325375ms)\n\u2714 characterization: only exact CLOSED is closed in default format (2.450416ms)\n\u2714 characterization: empty and null owners fall back; whitespace is preserved (0.1355ms)\n\u2714 characterization: empty input produces empty rows (0.782375ms)\n\u2714 characterization: sorting retains duplicate occurrences and input data (0.5265ms)\n\u2714 characterization: the substituted clock controls the recorded timestamp (0.326417ms)\n\u2714 characterization: a data-source failure propagates without a fabricated report (0.340208ms)\n\u2714 consumer compatibility: upgraded reader handles v1 and v2 (6.279ms)\n\u2714 consumer compatibility: old reader rejects v2 instead of silently miscounting (2.023125ms)\n\u2714 consumer compatibility: a new status cannot masquerade as v1 (0.144083ms)\n\u2714 new requirement: v2 distinguishes HOLD and preserves unrelated mapping (2.762ms)\n\u2714 new requirement: omitted and explicit v1 retain old HOLD behavior (0.231584ms)\n\u2714 new requirement: unsupported versions fail before reading the source (1.113834ms)\n\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 64.283209\n\nCOURSE_BLOCK_4_EXIT=0\n",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": {
+    "README.md": "e8506c21ff0ace27caf02fa6dfaf0cf7e04fde3815c5abd7a5c2b3f4c47caf70",
+    "OUTLINE.md": "baf137a88d29caed924ef4eff2e901e7db792add913f791f8f16623496da12f7",
+    "PROJECT.md": "d2dd029b2244fe0e3a893188c9896b4b794638b3b0e02302645f701322b6d472",
+    "demo/README.md": "6d2d034dd32e9d5fe1b89812b14a799061df228386bbf1f7a0e762049affd6f5",
+    "demo/section-08-legacy/README.md": "3fde1b2661db167a55a58104db76f379711672be86f5126f4eaee830b4c49521",
+    "sections/01-getting-started-with-omp.md": "40d557d311a8ad850df2b3fa6967eb309225b83463a2594b221c4190e4513f2d",
+    "sections/02-agentic-engineering-foundations.md": "b7dce61090723dc5e12638c1785e064eccef2f36ef6a86b7f1bdd020d024e2ed",
+    "sections/03-working-with-omp.md": "573036612c20bc12da948f2f23b0f9f69831c886114852f9f8dc2082a29ef24c",
+    "sections/04-the-everyday-workflow.md": "307333c621489215ab1239f9fd2b5a1635543be26c91ec5e4d3fabb5336182d5",
+    "sections/05-steering-agents.md": "7250ac90842b508af7eb57709ab09e77671da99078688dc37bb8eba7ca19e3fd",
+    "sections/06-reliable-execution.md": "c3b0ab1f204537bc5187ec271f4d30c07ad0dc90a2226f865876c148a56f2bbe",
+    "sections/07-planning-and-coordinating-larger-changes.md": "57302900d0f1a748183a52b0cdb98014f57660e4328e4a49ef70fc35ce9a3ff2",
+    "sections/08-advanced-harness-design-and-enterprise-scale-work.md": "1cc130bc96f754e44bbb663f40772e403151098d701e2675e5a56596bfc919b2",
+    "demo/section-01-setup.md": "609cad71d433d79675351e63e5758c1d018e7994d1a9bfd50198dbe4c327fd7e",
+    "demo/section-02-agent-loop.md": "6581f2251f9cbcc877f454a04be077e0ac52f577362a8bec19463d463bbe6c8c",
+    "demo/section-03-working-with-omp.md": "8c3413c7e9775ccc98236625dade2e20cc676da50c7a66c336f32dc0b5a561ca",
+    "demo/section-04-worked-examples.md": "28250520d729155a6d7c7a935ae04a66e6056a15fe2796e7ae0129d2c2c10b3d",
+    "demo/section-04-workflow-lab.md": "687a57c9ab585e7bbf81ea141578f751a8250f0c1a58173c3bf02685948159a5",
+    "demo/section-05-context-and-handoff.md": "abb16ccf617c57cc125ff33a5de174d95809d3743d035101c9ae992a417e0eb6",
+    "demo/section-05-skill-lab.md": "d9de3644e52161cc055c1f863eb0f85208cbca99286884b48ec5749cc63a3248",
+    "demo/section-06-recovery-lab.md": "5ab7002cf34ccf9253de4a6402347d462e3a1c105b2675c79cf02eb963970790",
+    "demo/section-07-coordination-lab.md": "bd8a81d8cdbb7ade09c1519fad84a14aaf9ef612c3c12d0031864b6a9e111729",
+    "demo/section-08-harness-and-enterprise-lab.md": "ba58b883095af12a773113c62de74971c7bac978d5662dd7d3d6e4619b3da0f2",
+    "demo/section-08-legacy/src/consumer-v1.mjs": "5c19920aaa5e11606ddc23a8ea2915484a52078760969e02f1bae9d1bfcfd206",
+    "demo/section-08-legacy/src/consumer-v2.mjs": "79032ae10d6dff195fc9b9e2ea71f72fcd6d1cd3a8c04842de57e3f7f1febca2",
+    "demo/section-08-legacy/src/data-adapter.mjs": "c8dd779d20d458b6ca6fcef62abc9256739efb68e656a59a8e06d14fb3a87c53",
+    "demo/section-08-legacy/src/exporter.mjs": "a4965ab435423c75e4d52eae808c5b008ababa826d57b2b1d19a8d5317dc05b7",
+    "demo/section-08-legacy/src/tickets.json": "3d8cf2e35e10173cdaed0bb4bb3a608c01bea2495c07626d992b7dfdeb5315de",
+    "demo/section-08-legacy/reference/completed-exporter.mjs": "c7bfd14658bad324a366cb7ca4ee5c1711372c7293caec79f21b12714c19efdd",
+    "demo/section-08-legacy/reference/seam-exporter.mjs": "ab6f8ac5d5497f9b1b8afa9544a3e967e8b5061202844a2a772fa2258a20ece4",
+    "demo/section-08-legacy/reference-tests/baseline.test.mjs": "c91ecdceec1f52d791104d9b7b63a7032c74b409026a7e78a2d5538b660d3af6",
+    "demo/section-08-legacy/reference-tests/characterization.test.mjs": "1dedee73313dc48287d47881b132c4e8c39535a96b54b9b26c0902ea8c9b73c7",
+    "demo/section-08-legacy/reference-tests/compatibility.test.mjs": "b33f981f2db2ce92d6bd45ae15abc1cb9cd20e020f3fd932d9d4292537664cea",
+    "demo/section-08-legacy/reference-tests/feature.test.mjs": "abac773f2407f49524aee3f691c9e6bc26e26acb0c74c01860a2c32b55c51257"
+  },
+  "cleanup": "All three newly created execution directories removed; preserved course sources and references unchanged by execution.",
+  "limits": [
+    "Canonical todo source and branches missing; no todo-app execution or browser verification.",
+    "No provider-backed session, native skill loading/selection/usefulness trial, interactive reset/compaction trial or account-usage query.",
+    "No fresh-human-reader continuity trial or timed classroom rehearsal.",
+    "Prepared exporter reference runs do not establish independent learner implementation, production consumers, deployment, queue or replay behavior.",
+    "Local Markdown references and shell syntax checked; not an exhaustive external-URL or all-code-example execution audit."
+  ],
+  "supporting_document_links": {
+    "documents": 30,
+    "local_links": 258,
+    "errors": []
+  },
+  "supporting_source_sha256": {
+    "_build/README.md": "8b30f9606a4d7ebea741db52af4f45e8c03afa9418001b9b45bedad14ff4bd43",
+    "2026-09-22-course-review-and-action-plan.md": "e8d2f72bbade591c99c1c626cd66c5db6a8486adbfa182d5f43186cc74c7c753",
+    "research/2026-09-22-omp-course-source-review.md": "044bc27c1408e0dabedcf9d5d06b6b5f03799697413dd257fa06cca48ba37e8e",
+    "research/2026-09-22-teach-skill-assessment.md": "544e31ec32763fa2196e92897a980726803040e5224e8bbee7a764b7f98087e0",
+    "research/2026-09-23-adversarial-course-scope-review.md": "ec2be5c163f83c2e3f734b43454e1d5d01a6f014df98682c8a4a87d35121d1e2",
+    "research/2026-09-23-agent-engineering-course-comparison.md": "295f1133b18b1a500a266e6e683feb01ba539b85670dc3b8cc24371cb2332900",
+    "research/2026-09-23-coding-course-comparison.md": "0ce85d08233e1d6d8e2a0c0eba19f45d45ba8b0a6f03bf8384c50a605d776a10"
+  }
+}

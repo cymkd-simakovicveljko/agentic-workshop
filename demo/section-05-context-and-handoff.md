@@ -1,8 +1,16 @@
-# Section 4 — context and factual handoffs
+# Section 5 — context, pruning and factual handoffs
 
-Recover the state of the [todo app](todo-app/README.md) from an unreliable note.
-This is a context exercise, not another feature implementation. No custom setup,
-helper, instruction profile or deliberately introduced defect is needed.
+Recover the state behind an unreliable note, then remove stale or redundant
+guidance without losing the information a fresh reader needs. This is a context
+exercise, not another feature implementation.
+
+**Choose your evidence route.** The canonical `demo/todo-app` source and branches
+are missing from this distribution. The live inspection in steps 1–3 requires
+[recovery through setup](section-01-setup.md); all app file, script and branch
+descriptions below are prepared assumptions until confirmed there. Do not
+reconstruct the app or use the historical public app. Without that checkout, use
+the prepared note and pruning packet below. Label the result prepared analysis,
+not observed source, app execution or a provider-backed run.
 
 ## Understand
 
@@ -15,9 +23,10 @@ remaining count. Run npm run check if you need confirmation.
 
 That note mixes four different things: a completion claim, a historical test claim,
 a proposed next task and a command. None supplies the branch, revision or dirty
-changes it describes. The command is intentionally wrong: this app has no `check`
-script. The correct response is to inspect and repair the record, not add a script
-or change application code to make the old note look accurate.
+changes it describes. In this prepared exercise the command is intentionally wrong:
+the described app has no `check` script. Confirm the real scripts after recovery.
+Inspect and repair the record, rather than adding a script or changing app code
+to make an old note accurate.
 
 The source of truth depends on the question. Git identifies the checkout; source
 shows implementation; the accepted exercise brief establishes intended behavior;
@@ -197,6 +206,36 @@ commands, working directory, outcome and any saved output location. If you did n
 write “not run.” Do not replace missing evidence with invented passing test counts.
 Link to the accepted brief instead of copying a partial version of its requirements.
 
+### Handoff template
+
+This is the course's single maintained format. Use it in an existing issue or one
+task note for a delivered change, an interrupted investigation or a coordinated
+increment. Fill only relevant detail, but keep an explicit “unknown” or “not run”
+where silence would imply a result. Link to the authoritative requirement instead
+of maintaining a second copy.
+
+```text
+Task and status:
+Goal, authorized scope and non-goals:
+Accepted requirement/decision links, source and status:
+Repository/cwd, branch, starting revision and current revision:
+Relevant dirty/staged/untracked work; where it is preserved:
+Current implementation or investigation findings, with source locations:
+Evidence: exact command/action, cwd, tested revision plus dirty state,
+          actual result and output location; source inference kept separate:
+Unrun/blocked checks and the prerequisite each needs:
+Active processes, working copies, browser data or external effects to reconcile:
+Open decisions and hypotheses, provenance/owner, what would resolve them:
+Review/acceptance decision and remaining limitation:
+Next authorized action and its owner:
+Supersedes or updates which earlier note:
+```
+
+A commit alone does not identify tested state when relevant edits were dirty.
+An interrupted action can have an unknown outcome; record what needs inspecting
+before a retry. Keep secrets and unrelated private content out of the note. The
+template stores enough state to resume, not every line of the old conversation.
+
 Try this short prompt after supplying the note and real checkout:
 
 ```text
@@ -210,6 +249,75 @@ If OMP is available, inspect `/extensions` without toggling settings to see the
 reported sources and states of discovered context files. Ask which guidance was
 already provided and which files it explicitly read. A loaded instruction is not
 a test result or proof that the instruction was followed.
+
+### 5. Prune a deliberately messy guidance packet
+
+This independent **prepared exercise** needs no todo checkout. Work in your notes;
+do not install the packet as `AGENTS.md`. Its labelled sources supply the facts
+for this exercise only, so you can practice provenance without inventing a run.
+
+**Authoritative source packet**
+
+- **R — accepted exercise brief, revision R1:** the filter is a reversible view.
+  Completed records and their IDs must remain intact. A fresh page starts with
+  the filter off. Adding a remaining count is outside this task.
+- **U — current user request:** inspect the proposal and correct its handoff.
+  No app edits, installs or check execution are authorized in this inspection.
+  Existing learner work must remain untouched.
+- **P — prepared package-source excerpt:** scripts are `test`, `test:e2e` and
+  `dev`. This is a provided source fact, not a command result or a recovered file.
+- **S — prepared candidate summary:** the proposal calls `changeTasks` with only
+  unfinished tasks when filtering is enabled. Its supplied array-selection test
+  has no execution output. The full review packet is in the skill companion.
+- **Q — unaccepted product question:** someone proposed remembering the filter
+  after reload. No owner has approved it; the next product decision would need to
+  supersede R1 explicitly. Source: proposed follow-up Q, not an accepted brief.
+
+**Messy note to prune**
+
+```text
+1. Write excellent code and be thorough.
+2. Filter must keep completed records and stable IDs. Source: accepted R1.
+3. Do not lose hidden tasks; preserve their identity. Source: accepted R1.
+4. Run npm run check. Source: old teammate note, no revision.
+5. Tests passed and filter is complete. Source: old note, no output or tested state.
+6. Next add a remaining count. Source: old teammate suggestion.
+7. Inspect only: no edits, installs or checks; preserve learner work. Source: U.
+8. Use package.json for command definitions. Source: repository navigation.
+9. Remember filter after reload. Source: Q, proposed, not accepted.
+10. Fresh load starts with filter off. Source: accepted R1.
+11. All future instructions must repeat every test command. Source: personal idea.
+12. Current evidence: candidate source plus test source; no run output. Source: S.
+```
+
+First give each numbered line one disposition: retain, remove, relocate or
+reconcile. Explain the decision in terms of its source and lifetime. Then draft
+a smaller guidance fragment and a corrected handoff using the template above.
+Keep durable navigation in guidance, current status in the handoff, and accepted
+behavior behind a precise pointer to R1. You need not create three files to
+demonstrate those distinctions: labelled sections in your notes are enough.
+
+Now give a fresh reader only U, the authoritative packet and your revised material.
+Ask them to identify the accepted behavior, supported commands, action boundary,
+preserved work, evidence gap and unresolved product question. They must be able to
+trace each answer to R, U, P, S or Q without seeing the messy note. Ask one close
+negative question: “May we persist the filter now because Q is newer?” The answer
+is no: Q is unaccepted, while R1 still controls the current behavior.
+
+**Expected reasoning, not a saved learner result:** merge lines 2–3 into one
+constraint or a clear R1 pointer; remove the generic praise in 1 and invented
+repetition rule in 11. Correct line 4 using P without adding an alias. Reconcile
+5 against S as an unsupported historical claim rather than rewriting it as a
+passing result. Exclude the count suggestion from authorized next work. Preserve
+U's restrictions and work-preservation rule. Keep Q visible as an open decision,
+not an instruction; retain R1's current off-on-load behavior. Command definitions
+remain in their source, reached through line 8's pointer.
+
+A short result that drops U or Q's unaccepted status fails this exercise. A long
+result that copies all the contradictions also fails. Success is a fresh reader
+making the right next decision with less irrelevant material, not hitting a word
+count. If the reader misses a constraint, repair its pointer and repeat that
+question before calling the pruning successful.
 
 ## Use at work
 
@@ -246,14 +354,16 @@ neither a historical test-result question nor a product-authority question.
 
 ### Sources and adaptation
 
-- [Official OMP context-file documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/context-files.md)
+- [OMP 18.2.9 context-file documentation](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/context-files.md)
   documents automatic discovery, shadowing and `/extensions`. This exercise does
-  not require creating an instruction file or modifying discovery settings.
+  not require installing an instruction file or modifying discovery settings;
+  documentation is source evidence, not a local loading observation.
 - [Matt Pocock's Full Walkthrough: Workflow for AI Coding, AI Engineer, 2026-04-24](https://www.youtube.com/watch?v=-QFHIoCo-Ko)
   informs the stale-document discussion. The adaptation is to reconcile and maintain
   useful records, not delete documentation indiscriminately or adopt his framework.
-- The stale note, corrected-note example and exercise are **course-authored teaching
-  material**, not captured execution. App command definitions come from the current
-  todo repository's `package.json`; actual outcomes must come from the learner's run.
+- The stale note, corrected-note example and pruning packet are **course-authored
+  teaching material**, not captured execution. App command descriptions must be
+  confirmed against the recovered canonical repository before use. Actual outcomes
+  must come from the learner's run, not the prepared answers.
 
-[Back to section 4](../sections/04-context-and-repository-knowledge.md)
+[Back to section 5](../sections/05-steering-agents.md)

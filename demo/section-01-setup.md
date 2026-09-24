@@ -2,9 +2,21 @@
 
 ## Understand
 
-The [todo app](todo-app/README.md) runs without OMP. It needs Node.js 22.12 or
-later, npm and Git; browser checks also need Playwright's browser installation.
-OMP plus an authorized provider are needed only for the live agent route.
+The intended `demo/todo-app` runs without OMP. Its recorded prerequisites are
+Node.js 22.12 or later, npm and Git; browser checks also need Playwright's browser
+installation. OMP plus an authorized provider are needed only for a live agent.
+
+**Distribution blocker:** the canonical app is absent from this checkout. The
+course records gitlink `6f79e772c11d2dd3431b445282f180e212d138f4`, but has no
+recoverable app remote or `.gitmodules` entry. Obtain the original repository or
+Git bundle containing `main`, `exercise/remaining-count` and
+`solution/remaining-count` from the course maintainer. No download command can
+honestly be supplied until that source exists. Do not initialize a replacement,
+invent its history, or use the historical public app.
+
+All app commands below are **conditional learner procedures**, not rehearsed
+results. If the app is missing, skip to the no-app route. If only the provider is
+missing, the prepared implementation route remains usable once the app is supplied.
 
 `demo/todo-app` is a **standalone nested Git repository**. Its `main` branch is the
 working add/complete/delete/localStorage baseline. `exercise/remaining-count`
@@ -85,7 +97,7 @@ until the server stops. Use a second terminal for OMP and another for review.
 
 ### Prepare OMP access
 
-Install OMP using the [official platform instructions](https://github.com/can1357/oh-my-pi#install).
+Install OMP using the [18.2.9 installation reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#install).
 There is no custom course profile, helper or configuration file to install.
 Follow your organization's provider policy; repository content and tool results
 can become model context, so use only material permitted for that provider.
@@ -100,6 +112,17 @@ omp setup
 This is separate from installing the todo app. You do not need optional OMP
 features for this lesson. Do not put API keys, login callbacks or credentials in
 a task prompt, repository file, classroom screenshot or completion note.
+
+Before launch, compare your local surface with the teaching reference:
+
+```sh
+omp --version
+omp --help
+```
+
+The source review observed `omp/18.2.9` and help text, not working authentication
+or interactive controls. A different version needs its matching documentation;
+do not update a managed installation just to match the course.
 
 **Terminal B — inside `demo/todo-app`:**
 
@@ -136,27 +159,14 @@ output. `Escape` is the app-level interrupt, but a menu or Vim editing state can
 consume it first; familiarize yourself with your active controls. Interrupting
 is not an undo operation. Inspect files and still-running processes afterward.
 
-### Know what the approval setting does
+### Keep minimum authority before the first edit
 
-The official approval modes are:
-
-| Mode | Ordinary tier-based behavior, before explicit policies |
-| --- | --- |
-| `always-ask` | Reads allowed; writes and execution prompt. |
-| `write` | Reads and writes allowed; execution prompts. |
-| `yolo` (default) | Reads, writes and execution allowed without tier-based prompts. |
-
-Our launch flag overrides the mode for this session without creating a custom
-profile. Explicit user/tool policies affect individual calls, so it is not a
-promise that every edit or command waits for your confirmation. Review the exact
-operation whenever an approval appears; reject unexplained scope expansion.
-
-This is **not process or filesystem containment**. An approved shell command has
-ambient filesystem, network and subprocess access. The official docs also warn
-that shell-pattern restrictions do not cover the same command executed through
-`eval`. A request to “only read” is an instruction, not a technical permission
-boundary. Keep production secrets and unrelated data out of the exercise, and do
-not approve broader access to solve a classroom setup problem.
+The launch flag uses `always-ask`, which normally permits reads and prompts for
+writes/execution. Explicit policies still participate. Review each approval;
+neither it nor an “only read” prompt is a sandbox. Keep production credentials
+and unrelated private data out of the exercise. Section 1 explains the
+[permission boundary](../sections/01-getting-started-with-omp.md#a-narrow-prompt-is-not-a-security-boundary);
+section 3 owns the [control reference](../sections/03-working-with-omp.md).
 
 Return to [section 1](../sections/01-getting-started-with-omp.md#3-start-omp-and-ask-it-to-look-first)
 for the inspect-first prompt, implementation request and observation steps. You
@@ -195,6 +205,53 @@ agent performed this run. If provider access failed halfway through a live
 attempt, preserve its partial changes and distinguish that attempt from the
 prepared result. Do not narrate a saved solution as a successful live recovery.
 
+### No-app route: predict and reject an incorrect count
+
+This is a **prepared reasoning exercise**, not app execution. On paper, start with
+`Read the brief` unfinished and `Review the diff` completed. Predict the count,
+delete the completed task, complete the remaining task, then reload.
+
+The expected counts are **1, 1, 0, 0**, assuming the saved state matches each
+preceding action. A count derived from total rows would start at 2 and decrease
+when the completed row is deleted; that is the plausible wrong implementation
+your sequence rejects. Explain why a separate stored counter could drift from
+restored tasks. Then annotate the prepared tool sequence in
+[section 2's worksheet](section-02-agent-loop.md).
+
+Record “reasoning completed; app and browser behavior unverified.” Do not copy
+predicted values into a browser-result column. The live exit condition in section
+1 remains blocked until the canonical app is available.
+
+### Restart safely from the exercise branch
+
+Restarting the conversation is not restarting the exercise. First interrupt the
+agent and confirm the turn stopped; identify any remaining writers and wait or
+stop only those you own. Stop the Vite server with `Ctrl+C` in its terminal.
+Review staged, unstaged and untracked work using the commands at the top of this
+companion. Preserve it with an intentional commit on your own branch or the
+recorded stash route; keep ignored material separately if needed.
+
+Only with a clean worktree, use a new personal branch:
+
+```sh
+git switch -c my-remaining-count-retry exercise/remaining-count
+npm test
+npm run test:e2e
+npm run dev
+```
+
+This assumes dependencies and browsers were installed earlier; setup failures
+still need diagnosis. Open the newly printed URL, not an old tab's guessed port.
+Use a disposable browser profile or remove only course sample tasks through the
+UI. A branch switch does not clear `localStorage`; record the starting tasks
+before predicting counts. Start a new OMP conversation in the app directory
+using [section 3's controls](../sections/03-working-with-omp.md), then supply the
+accepted brief again. Do not apply an old stash over the clean retry unless you
+intentionally want those changes back.
+
+Success is a known starting branch, preserved prior work, one identified server
+and understood browser data—not an empty conversation alone.
+
 ## Use at work
 
 Before asking an agent to edit, establish the repository, preserve existing work,
@@ -218,16 +275,19 @@ rehearsal receipt.
 
 Official OMP references for the controls and safety statements above:
 
-- [Installation](https://github.com/can1357/oh-my-pi#install)
-- [CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md)
-  — `omp`, `omp setup` and `--approval-mode`.
-- [Providers](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md)
+- [Installation](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#install)
+- [CLI reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/cli-reference.md)
+  — `omp`, `omp setup`, version/help and `--approval-mode`.
+- [Providers](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/providers.md)
   — provider-specific availability and `/login`.
-- [README model selection](https://github.com/can1357/oh-my-pi)
+- [README model selection](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md)
   — `/model`.
-- [Approval mode](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
+- [Approval mode](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
   — defaults, policy precedence and containment limits.
-- [Keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md)
+- [Keybindings](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/keybindings.md)
   — `/hotkeys`, output expansion and interrupt behavior.
+
+These references use the reviewed 18.2.9 commit. Source review, your local app
+checks, a provider-backed run and a classroom rehearsal are separate evidence.
 
 [Back to section 1](../sections/01-getting-started-with-omp.md)

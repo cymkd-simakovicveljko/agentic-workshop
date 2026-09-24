@@ -1,10 +1,19 @@
-# 3. The everyday workflow
+# 4. The everyday workflow
 
 **Practical core.** Take an ordinary request through to a change you can explain
 and accept. The example is small enough to understand end to end: add a checkbox
 that shows only unfinished tasks in the todo app. The difficulty is not producing
 a checkbox. It is preserving the tasks, acting on the right row, and knowing what
 the evidence actually establishes.
+
+**Starting-state boundary:** the canonical `demo/todo-app` checkout is currently
+missing from this course distribution. The app paths, branch names and implementation
+details below describe the prepared course exercise, not inspected source in this
+checkout. Follow [setup](../demo/section-01-setup.md) to recover the canonical app
+before running them, then confirm the brief, files and scripts. Do not reconstruct
+it from the excerpts or substitute the historical `demo/public` app. You can study
+the acceptance examples and review packet now; that is prepared practice, not an
+app, provider or classroom rehearsal.
 
 ## Understand
 
@@ -24,6 +33,14 @@ familiar correction can fit in one request. An unfamiliar feature benefits from
 an inspection-only turn before implementation. If verification contradicts your
 assumption, return to exploration; if the requirement was incomplete, return to
 specification. Repeating a failed command is not a substitute for either decision.
+
+Together these decisions form a small **software development lifecycle (SDLC)**:
+intent and design lead to implementation, verification, review, delivery and
+maintenance. The arrows are not one-way. A wrong-row browser result sends us back
+to the state and identity path; a request to remember the filter changes the
+specification and the checks before more implementation. Delivery here means an
+accepted local change with a factual handoff. The lab does not deploy a service,
+publish a package or prove production readiness.
 
 “Show only unfinished tasks” sounds precise until you ask what happens to completed
 tasks. Are they hidden or deleted? Can you still add tasks? Does completing a
@@ -57,7 +74,7 @@ a prescribed document framework or permission to stop after the happy path.
 
 ## Watch or try
 
-Use the [lab companion](../demo/section-03-workflow-lab.md) for the complete browser
+Use the [lab companion](../demo/section-04-workflow-lab.md) for the complete browser
 sequence and evidence sheet. You can start independently of section 1.
 
 ### Prepare the right repository without losing work
@@ -111,16 +128,16 @@ configured port so you do not test a different working copy.
 If OMP is already set up, open a third terminal in **`demo/todo-app`** and run:
 
 ```sh
-omp
+omp --approval-mode always-ask
 ```
 
-`omp` starts the interactive TUI. The prompts below are ordinary requests, not
-special commands. Asking “do not edit yet” communicates scope; it does not create
-a sandbox. Current OMP documentation lists `yolo` as the default approval mode,
-so do not assume every write will wait for a confirmation. Use the environment
-and controls established in [section 1](01-getting-started-with-omp.md), and keep this work
-local. No credentials, remote publication or new tool installation is needed for
-the feature itself.
+`omp` starts the interactive TUI; the explicit launch flag requests the course's
+approval mode. Check the effective controls from
+[section 3](03-working-with-omp.md), because configuration and rules still matter.
+The prompts below are ordinary requests, not special commands or a sandbox.
+Keep this exercise local in the environment established in
+[section 1](01-getting-started-with-omp.md). The feature needs no credentials,
+remote publication or additional tool installation.
 
 ### Explore: find the path, not every file
 
@@ -422,37 +439,39 @@ belongs in this change.
 If the owner has already clearly authorized the new behavior, use that decision;
 do not ask them to repeat it. Still make its effect on the evidence explicit.
 
-### Leave a handoff another engineer can use
+### Deliver a factual handoff, then maintain the right things
 
-Use the existing issue or one short work note, not competing copies of the spec.
-A useful final description gives enough context to accept or continue the work
-without replaying the conversation:
-
-```text
-Outcome: reversible unfinished-task view; completed tasks remain stored.
-Code state: repository, work branch, starting revision and current revision/diff.
-Changes: relevant files and the reason each changed.
-Decisions: checkbox is local view state; task IDs and task persistence preserved.
-Evidence: exact commands/cwd/results; browser URL and sequences actually observed.
-Not checked: explicit gaps, including any unavailable browser or model access.
-Review: findings resolved, remaining concerns, acceptance decision or next action.
-```
+Use the [shared handoff template](../demo/section-05-context-and-handoff.md#handoff-template)
+in the existing issue or one short work note. It preserves the accepted scope,
+code state and evidence without creating a competing specification. Link to the
+current brief and fill the note from your actual work; section 5 explains how to
+keep that information useful across readers and sessions.
 
 Fill this with your actual run, not a copied “all passed.” A narrow observation
 such as “the hidden completed task returned after deleting the other row and
 reloading” helps a reviewer more than “everything works.” Drafting a change
 description does not authorize pushing, publishing or merging it.
 
-Choose a [companion worked example](../demo/section-03-worked-examples.md) to
+Before calling the local change delivered, decide whether to accept it, correct a
+named defect, or wait for specific evidence. Leave the tree and active server in
+a stated condition, and stop the server you started when it is no longer needed.
+Keep a regression when it rejects a plausible failure such as deleting the wrong
+hidden-row ID. Update affected user guidance if behavior changed; do not retain
+temporary debug code or stale “tests not run” notes after collecting the result.
+If a later report contradicts acceptance, preserve the report and return to the
+relevant stage. Maintenance continues the same loop rather than starting a second
+process.
+
+Choose a [companion worked example](../demo/section-04-worked-examples.md) to
 practice proportionate prompting on the same app. You are ready to move on when
 you can explain one plausible wrong implementation, the check that rejects it,
 and why the final change is acceptable—or exactly what evidence is still missing.
 
 ## Go deeper
 
-- [Unfinished-filter lab](../demo/section-03-workflow-lab.md): runnable sequence,
-  identity challenge, all-completed case and evidence record.
-- [Worked examples](../demo/section-03-worked-examples.md): remaining count,
+- [Unfinished-filter lab](../demo/section-04-workflow-lab.md): executable route once
+  the canonical app is recovered, identity challenge and all-completed case.
+- [Worked examples](../demo/section-04-worked-examples.md): remaining count,
   whitespace defect, focused refactoring, documentation, test diagnosis and
   dependency work without changing apps.
 - [Focus on key examples — Gojko Adzic](https://gojko.net/2014/05/05/focus-on-key-examples/):
@@ -469,11 +488,13 @@ and why the final change is acceptable—or exactly what evidence is still missi
 
 ### Sources and adaptation
 
-OMP facts here are checked against the official
-[README's entry-point reference](https://github.com/can1357/oh-my-pi/blob/main/README.md#four-entry-points-interactive-one-shot-rpc-and-acp)
+OMP facts here are source-reviewed against the **18.2.9** teaching release:
+[README's entry-point reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#four-entry-points-interactive-one-shot-rpc-and-acp)
 (`omp` starts the TUI) and
-[tool approval documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
-(default approval mode and the distinction between approval and containment).
+[tool approval documentation](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
+(approval mode and the distinction between approval and containment).
+These sources do not establish local interactive behavior; see the
+[source review](../research/2026-09-22-omp-course-source-review.md).
 The stage names and prompts are ordinary course guidance, not OMP workflow
 commands or a claim that a prompt enforces a read-only boundary.
 
@@ -485,4 +506,4 @@ optional. The app examples, acceptance decisions, failure cases and prompts in
 this section and its companions are course-authored. They are not live OMP
 transcripts or measured performance claims.
 
-[Next: context and repository knowledge](04-context-and-repository-knowledge.md) · [Back to outline](../OUTLINE.md)
+[Previous: working with OMP](03-working-with-omp.md) · [Next: steering agents](05-steering-agents.md) · [Back to outline](../OUTLINE.md)

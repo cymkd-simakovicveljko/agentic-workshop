@@ -1,11 +1,22 @@
-# Section 6 — blank-task recovery lab
+# Section 6 — evidence, mechanical checks and recovery
 
-Repair the deliberate defect in the familiar todo app. The goal is not merely a
-passing command: preserve useful work, explain the failure mechanism, and show
-what the unit and browser evidence actually establishes. This is a course-authored
-exercise, not a transcript of a previous agent run.
+Run a mechanical standards check on a disposable copy, then distinguish its
+success from correct behavior. The blank-task route preserves the deeper
+shared-cause repair exercise, but needs the unavailable canonical todo checkout.
+Both routes ask you to preserve work and tie evidence to the checked candidate.
+These are authored exercises, not transcripts of previous agent runs.
 
 ## Understand
+
+**Available now:** the Git/Node exercise below uses existing exporter source and
+baseline assertions; no app, package installation, provider or network service is
+needed. **Blocked:** blank-task implementation and browser verification require
+the canonical app repository and its `exercise/blank-task-bug` branch. Follow
+[section 1's prerequisite](section-01-setup.md); do not reconstruct the app or use
+the historical project-directory example as a substitute.
+
+The following blank-task description is its recorded teaching contract, awaiting
+inspection against the recovered source.
 
 On `exercise/blank-task-bug`, task creation accepts raw input. Empty and
 whitespace-only submissions can create blank rows, and meaningful titles retain
@@ -21,6 +32,134 @@ The existing end-to-end test covers the normal task lifecycle, not the blank-inp
 cases, so a green browser suite alone is insufficient evidence.
 
 ## Watch or try
+
+### Run a mechanical standard without the todo app
+
+Use a POSIX shell, Git and a Node version with the built-in test runner. Start at
+the course root. The supplied exporter maps exact `CLOSED` to `closed`, other
+states to `open`, and supplies the old consumer with two open tickets and one
+closed ticket in the fixture. This route copies the **baseline**, not section 8's
+seam or completed answer.
+
+Run each command block in the same terminal. If setup fails, stop rather than
+continuing with an empty path variable:
+
+```sh
+STANDARD=$(mktemp -d)
+printf 'Mechanical-check directory: %s\n' "$STANDARD"
+cp -R demo/section-08-legacy/src "$STANDARD/src"
+mkdir "$STANDARD/tests"
+cp demo/section-08-legacy/reference-tests/baseline.test.mjs "$STANDARD/tests/"
+git -C "$STANDARD" init -q
+git -C "$STANDARD" add src tests
+node --test "$STANDARD/tests/baseline.test.mjs"
+```
+
+The source supplies three baseline assertions. Expect them to pass before
+injecting a fault; record your actual outcome. The staged files provide Git's
+comparison baseline without requiring a commit or author identity. Nothing here
+changes the course repository or an existing learner branch.
+
+Now introduce an unresolved merge in the copied status mapping. One side keeps
+the accepted mapping; the other would label every ticket open. This Node command
+only prepares the deliberate failure in your copy:
+
+```sh
+node --input-type=module - "$STANDARD/src/exporter.mjs" <<'NODE'
+import assert from 'node:assert/strict';
+import {readFileSync, writeFileSync} from 'node:fs';
+const path = process.argv[2];
+const source = readFileSync(path, 'utf8');
+const mapping = "    status: ticket.state === 'CLOSED' ? 'closed' : 'open',";
+assert.ok(source.includes(mapping), 'Expected untouched baseline status mapping');
+writeFileSync(path, source.replace(mapping, [
+  '<<<<<<< accepted-contract',
+  mapping,
+  '=======',
+  "    status: 'open',",
+  '>>>>>>> all-open-proposal',
+].join('\n')));
+NODE
+git -C "$STANDARD" diff --check
+printf 'Git check exit: %s\n' "$?"
+node --check "$STANDARD/src/exporter.mjs"
+printf 'Node syntax exit: %s\n' "$?"
+```
+
+Run this in an ordinary interactive shell, not a script configured to stop at
+the first nonzero exit. Both check commands are **intended to fail**. Git should
+identify leftover conflict markers; Node should report a syntax error. A missing
+file, unavailable executable or failed preparation assertion is not that result.
+Save the actual diagnostics before changing anything.
+
+The standard “do not submit unresolved merges” now has an executable check.
+Git inspects the changed lines, not a model's promise to resolve them. Node checks
+JavaScript parsing without running the module. Neither knows which side of the
+merge expresses the accepted ticket behavior.
+
+#### A mechanically clean but incorrect resolution
+
+Try the tempting wrong resolution in this disposable copy. Start again from the
+known source and choose the all-open mapping:
+
+```sh
+cp demo/section-08-legacy/src/exporter.mjs "$STANDARD/src/exporter.mjs"
+node --input-type=module - "$STANDARD/src/exporter.mjs" <<'NODE'
+import assert from 'node:assert/strict';
+import {readFileSync, writeFileSync} from 'node:fs';
+const path = process.argv[2];
+const source = readFileSync(path, 'utf8');
+const mapping = "    status: ticket.state === 'CLOSED' ? 'closed' : 'open',";
+assert.ok(source.includes(mapping), 'Expected baseline status mapping');
+writeFileSync(path, source.replace(mapping, "    status: 'open',"));
+NODE
+git -C "$STANDARD" diff --check
+node --check "$STANDARD/src/exporter.mjs"
+node --test "$STANDARD/tests/baseline.test.mjs"
+```
+
+The mechanical checks should now succeed. The baseline should not: `T-03` is
+closed, and the old reader must count one closed ticket. A syntactically valid
+all-open export violates those assertions. The timestamp check can still pass.
+Explain the failure from expected versus actual values; do not change the fixture
+or expectations to make the count green.
+
+Resolve to the existing contract, then check the same candidate through all three
+surfaces:
+
+```sh
+cp demo/section-08-legacy/src/exporter.mjs "$STANDARD/src/exporter.mjs"
+git -C "$STANDARD" diff --check
+node --check "$STANDARD/src/exporter.mjs"
+node --test "$STANDARD/tests/baseline.test.mjs"
+```
+
+All should now succeed, with three baseline assertions passing. These are
+expected outcomes, not a receipt for your run. The explicit copy is safe here
+because this is your new disposable fixture and the exercise deliberately
+replaces only its exporter; it is not a general recovery command for a dirty
+repository.
+
+In your existing notes, connect each result to its claim: marker detection,
+syntax validity, and preserved fixture behavior. Include the exact path and
+candidate. Running checks manually does not install a pre-commit or CI gate;
+do not claim ongoing enforcement. You also have not checked unknown inputs,
+production consumers or provider behavior.
+
+**Recovery extension:** pause after the wrong-resolution failure, before the last
+block. Preserve the copy and actual diagnostics using the
+[section 5 handoff](section-05-context-and-handoff.md). Record these Node/Git
+commands as completed only after their exits are observed, and account separately
+for any editor, OMP turn or other writer you started. Ask a fresh reader to
+identify the next repair from that record, inspect the files and then continue.
+This can be done without a provider; reading the worked resolution alone does not
+prove the fresh-reader exercise.
+
+### Blank-task route: prerequisite and starting point
+
+The rest of this lab is runnable only after the canonical app and exercise
+branches are recovered. Expected assertions and UI behavior below come from the
+recorded contract, not a current app run.
 
 ### Prepare without losing previous work
 
@@ -164,18 +303,13 @@ receive its expected rejection signal? Were unrelated files or dependency change
 introduced? Explain them or remove only the changes you deliberately made and no
 longer need, preserving all other work.
 
-Use this result format without inventing values:
-
-```text
-Reproduction: exact input, expected behavior, observed failure.
-Code state: app branch + base revision + relevant current diff/new files.
-Cause and repair: mechanism, changed paths, reason partial alternatives fail.
-Unit result: actual command outcome and relevant assertions.
-Browser suite: actual outcome; normal task lifecycle coverage only.
-Manual UI: empty/spaces, valid task, reload and delete observations.
-Review: contract/caller preserved; unrelated work preserved.
-Limits: checks not run, setup failures, uncertainty or active processes.
-```
+Record your outcome using the maintained
+[handoff format in section 5](section-05-context-and-handoff.md), rather than
+creating another template. Its evidence must distinguish the reproduction,
+shared-cause repair, unit results, normal browser-suite coverage and manual
+blank-input observations. Include the actual candidate, preserved unrelated
+work, active operations and unperformed checks; a “fixed” summary cannot replace
+any of those facts.
 
 After your own attempt, inspect the reference without switching branches or
 replacing files:
@@ -200,11 +334,11 @@ Pause implementation. Record the failure, current code state, hypothesis, next
 useful action, and observed state of active commands/workers. Do not change files.
 ```
 
-For an active-turn interruption, consult `/hotkeys`; Escape is the usual app
-interrupt but editing modes/menus can consume it. Confirm the turn stopped, then
-account separately for commands and workers. In the terminal you own, stop the
-foreground dev server with Ctrl+C if you no longer need it, and observe that it
-exits. Do not claim cancellation for an operation whose outcome is unknown.
+For an active-turn interruption, use the
+[section 3 host reference](../sections/03-working-with-omp.md) and confirm the turn
+stopped. Account separately for commands and workers. In the terminal you own,
+stop the foreground dev server with Ctrl+C if it is no longer needed and observe
+its exit. Do not claim cancellation for an operation whose outcome is unknown.
 
 Save the exact failure output locally, both staged and unstaged diffs, useful
 untracked files, and the next action. Copying a diff does not preserve new files;
@@ -212,25 +346,15 @@ a branch name does not save a dirty working tree. Use a reviewed local commit or
 a separate local backup as appropriate, without publishing logs or secrets.
 Wait for relevant writers to stop before treating the snapshot as consistent.
 
-Write a short factual handoff in your existing notes, for example:
+Use the single [section 5 handoff](section-05-context-and-handoff.md#handoff-template)
+in your existing notes. Put the remaining hypothesis under open decisions, record
+operation states under active processes, and link the actual diagnostics under
+evidence rather than copying the whole transcript.
 
-```text
-Goal: reject blank input, trim valid titles, retain existing task behavior.
-Code: [actual app branch/revision; current tracked and untracked changes].
-Evidence: [actual assertion output and browser observations, with locations].
-Hypothesis: [cause supported by the read code and failed cases].
-Process state: [dev server/OMP work: observed stopped, running or unknown].
-Next: [specific distinguishing check or authorized repair].
-Preserve: [unrelated edits/new files and where they were saved].
-```
-
-Choose `/resume` inside OMP or `omp --resume` at startup to select a saved session.
-For a genuinely fresh reasoning context, use `/new` and supply the handoff.
-`/fresh` keeps the conversation and resets provider stream state; `/restart`
-relaunches OMP and resumes the same session. Neither is a code rollback. Check
-OMP's working directory after selecting a session, especially one from another
-project. Before further edits, reconcile the handoff with the live files, diffs,
-browser state and running processes. Old test output is not proof for new code.
+Choose a session action from [Working with OMP](../sections/03-working-with-omp.md).
+Before further edits, reconcile the handoff with live files, diffs, browser state
+and running processes. Check the working directory. Old test output is not proof
+for new code, and a fresh conversation is not a code rollback.
 
 Recovery is complete when the behavior is verified **and** useful unrelated work
 survives. The lab has no repository-wide reset or cleanup step.
@@ -257,20 +381,22 @@ differs from the interactive parent's, as described in the linked approval docs.
 The parent must inspect the returned findings and own final acceptance. A useful
 finding here is that the normal browser lifecycle test does not cover blank
 submission; that calls for the manual checks above, not a claim that nothing is
-tested. If you later delegate edits, establish ownership and interfaces first,
-then review and verify the integrated state after workers finish. A child's
-success report is an input to integration, not a substitute for it.
+tested. Larger-change dependencies and integration are practiced in
+[section 7](section-07-coordination-lab.md), not by dividing this small repair
+among concurrent writers.
 
 ### Sources and adaptation
 
-This companion applies the course-authored todo example and recovery prompts in
-[section 6](../sections/06-reliable-execution.md). Its product-specific controls
-come from the official [OMP keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md),
-[session operations](https://github.com/can1357/oh-my-pi/blob/main/docs/session-operations-export-share-fork-resume.md),
-[approval modes](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
-and [task-tool reference](https://github.com/can1357/oh-my-pi/blob/main/docs/tools/task.md).
-The [README](https://github.com/can1357/oh-my-pi/blob/main/README.md) documents
-launching the `omp` TUI. Commands and expected outcomes above are a learner route,
-not a claim that a provider-backed or classroom rehearsal has taken place.
+The blank-task case and recovery prompts are authored teaching material from
+[section 6](../sections/06-reliable-execution.md). Product controls are pinned to
+the reviewed [OMP 18.2.9 keybindings](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/keybindings.md),
+[session operations](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/session-operations-export-share-fork-resume.md),
+[approval modes](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
+and [task-tool reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/tools/task.md).
+The mechanical exercise uses the real supplied exporter baseline with deliberate
+copy-local faults; [Git's diff reference](https://git-scm.com/docs/git-diff) and
+[Node's syntax-check reference](https://nodejs.org/api/cli.html#-c---check) explain
+the two narrow checks. Commands and expected outcomes are a learner route,
+not a claim of an app, provider-backed or classroom rehearsal.
 
 [Back to section 6](../sections/06-reliable-execution.md)

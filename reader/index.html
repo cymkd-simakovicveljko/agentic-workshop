@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#151515" />
+    <title>Agentic engineering — Course reader</title>
+    <link rel="stylesheet" href="/reader.css" />
+    <script type="module" src="/reader.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#article">Skip to lesson</a>
+    <header class="topbar">
+      <a
+        class="brand"
+        href="/?doc=OUTLINE.md"
+        aria-label="Agentic engineering course overview"
+        ><svg viewBox="0 0 40 40" aria-hidden="true">
+          <path
+            d="m5 10 15-8 15 8v20l-15 8-15-8Zm0 0 15 9 15-9M20 19v19M5 30l15-11 15 11"
+          /></svg
+        ><span><strong>agentic</strong> engineering</span></a
+      >
+      <nav class="topnav" aria-label="Course resources">
+        <a href="/?doc=OUTLINE.md" data-nav="outline">Lessons</a
+        ><a href="/?doc=PROJECT.md" data-nav="project"
+          >The project <span class="tag">GUIDE</span></a
+        ><a
+          href="/?doc=alternatives/everyday-workflow.md"
+          data-nav="alternative"
+          >Alternative draft</a
+        >
+      </nav>
+      <span class="local-label"><span></span> Markdown edition</span>
+      <button
+        class="menu-toggle"
+        aria-controls="sidebar"
+        aria-expanded="false"
+        aria-label="Open course outline"
+      >
+        ☰
+      </button>
+    </header>
+    <div class="backdrop" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="Course outline">
+      <div class="course-card">
+        <div class="eyebrow">THE COURSE <span>OMP</span></div>
+        <h2>Agentic engineering</h2>
+        <p>
+          <span id="lesson-count">8 lessons</span
+          ><span class="dot">·</span> Read. Build. Verify.
+        </p>
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path
+            d="M10 20 50 0 90 20v60L50 100 10 80Zm0 0 40 25 40-25M50 45v55M10 80l40-35 40 35"
+          />
+        </svg>
+      </div>
+      <div class="outline-tools">
+        <span>COURSE CONTENT</span
+        ><button
+          id="collapse"
+          aria-label="Collapse lesson headings"
+          title="Collapse lesson headings"
+        >
+          −
+        </button>
+      </div>
+      <label class="search"
+        ><svg viewBox="0 0 20 20" aria-hidden="true">
+          <circle cx="8" cy="8" r="5.5" />
+          <path d="m12 12 5 5" /></svg
+        ><input
+          id="lesson-search"
+          type="search"
+          placeholder="Find a lesson…"
+          aria-label="Find a lesson"
+      /></label>
+      <nav id="lessons" aria-label="Lessons">
+        <p class="sidebar-message">Loading outline…</p>
+      </nav>
+      <p id="no-results" class="sidebar-message" hidden>No matching lessons.</p>
+      <a class="alternative-link" href="/?doc=alternatives/everyday-workflow.md"
+        ><span>ANOTHER WAY TO READ</span>The everyday workflow <b>↗</b
+        ><small>A more conversational draft</small></a
+      >
+      <div class="sidebar-footer">
+        <span class="tiny-mark">&lt;/&gt;</span> Written in Markdown.<br />Made
+        for actual engineering.
+      </div>
+    </aside>
+    <main id="main">
+      <div class="reader-toolbar">
+        <div class="breadcrumb">
+          <span>THE WORKSHOP</span><span>/</span><span id="crumb">Lesson</span>
+        </div>
+        <div class="reader-actions">
+          <button
+            id="type-size"
+            title="Change reading text size"
+            aria-label="Increase reading text size"
+          >
+            Aa <span>+</span></button
+          ><a
+            id="source-link"
+            href="/content/OUTLINE.md"
+            target="_blank"
+            rel="noopener"
+            >Markdown <span>↗</span></a
+          >
+        </div>
+      </div>
+      <div class="reading-progress" aria-hidden="true">
+        <div id="progress-bar"></div>
+      </div>
+      <div id="document-shell">
+        <section class="lesson-header">
+          <div class="lesson-kicker">
+            <span id="chapter">THE EVERYDAY WORKFLOW</span
+            ><span class="format-pill">TEXT LESSON</span>
+          </div>
+          <h1 id="title">Loading your lesson…</h1>
+          <div class="lesson-meta">
+            <span id="lesson-position">Course reader</span><i></i
+            ><span id="read-time"></span><i></i
+            ><span class="source-status">From the source, not a copy</span>
+          </div>
+          <div class="header-orbit" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </section>
+        <div class="reading-layout">
+          <article
+            id="article"
+            class="prose"
+            tabindex="-1"
+            aria-busy="true"
+          ></article>
+          <aside class="page-index" aria-label="On this page">
+            <p>IN THIS LESSON</p>
+            <nav id="page-headings"></nav>
+            <div class="reading-position">
+              <span id="read-percent">0%</span> through this page
+            </div>
+          </aside>
+        </div>
+        <nav
+          class="lesson-pagination"
+          id="pagination"
+          aria-label="Previous and next lessons"
+        ></nav>
+        <footer class="page-footer">
+          <span>agentic engineering</span
+          ><span>Less ceremony. Better decisions.</span
+          ><a href="#main">Back to top ↑</a>
+        </footer>
+      </div>
+      <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

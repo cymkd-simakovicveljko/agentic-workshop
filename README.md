@@ -14,6 +14,29 @@ OMP setup and an authorized provider are required only for live agent exercises.
 Keep credentials out of prompts and course files. Written lessons, local checks,
 provider-backed interaction and classroom rehearsal are separate evidence.
 
+## Read in the browser
+
+From the course root, with Node 22.12 or newer:
+
+```sh
+npm install
+npm start
+```
+
+Open **http://127.0.0.1:4173**. The local HTML reader takes its left-hand outline
+from `OUTLINE.md` and renders the original Markdown files, including companion
+links and the alternative workflow draft. Refresh after editing a document.
+There is no build step, account, database or copied content. Marked parses Markdown;
+DOMPurify sanitizes the resulting HTML. Both are installed locally, not loaded from a CDN.
+
+The reader is a local preview, inspired by the dark Three.js Journey lesson layout,
+with course-specific branding and no copied media. It binds only to loopback and
+serves a restricted set of course files; it is not a public hosting configuration.
+Stop it with Ctrl+C. If port 4173 is occupied, use `PORT=4174 npm start`.
+Run `node --test reader/server.test.mjs` for its read-only file-serving boundary check.
+
+## Course material
+
 | Material | Purpose |
 | --- | --- |
 | [Outline](OUTLINE.md) | Eight-section route and current status |

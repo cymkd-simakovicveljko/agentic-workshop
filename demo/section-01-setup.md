@@ -168,7 +168,7 @@ and unrelated private data out of the exercise. Section 1 explains the
 [permission boundary](../sections/01-getting-started-with-omp.md#a-narrow-prompt-is-not-a-security-boundary);
 section 3 owns the [control reference](../sections/03-working-with-omp.md).
 
-Return to [section 1](../sections/01-getting-started-with-omp.md#3-start-omp-and-ask-it-to-look-first)
+Return to [section 1](../sections/01-getting-started-with-omp.md#6-ask-it-to-look-first)
 for the inspect-first prompt, implementation request and observation steps. You
 should now have the app visible, OMP in the correct repository, a selected model
 and a way to interrupt work.

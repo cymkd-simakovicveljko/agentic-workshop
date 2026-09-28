@@ -150,4 +150,4 @@ recovery lessons. Its practice cases are course-authored. Editor integration is
 optional and outside this exercise; a documented integration is not a verified
 local editor setup. Source-backed controls are not provider or classroom receipts.
 
-[Next: The everyday workflow](04-the-everyday-workflow.md) · [Back to outline](../OUTLINE.md)
+[Next: The everyday workflow](04-the-everyday-workflow.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

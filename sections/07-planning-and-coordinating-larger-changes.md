@@ -292,4 +292,4 @@ executing a prepared local route, an independent implementation, provider-backed
 work and a classroom rehearsal are separate kinds of evidence. The lab tells you
 what to run; it does not claim you already ran it.
 
-[Previous: verification, diagnosis and recovery](06-reliable-execution.md) · [Next: advanced routes](08-advanced-harness-design-and-enterprise-scale-work.md) · [Back to outline](../OUTLINE.md)
+[Previous: verification, diagnosis and recovery](06-reliable-execution.md) · [Next: advanced routes](08-advanced-harness-design-and-enterprise-scale-work.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

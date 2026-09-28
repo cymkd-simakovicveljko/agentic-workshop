@@ -1,8 +1,18 @@
 # Guided projects and starting states
 
-The course uses a small todo app for bounded changes and a separate ticket exporter when dependencies and compatibility matter. Section 4 is the everyday workflow. The examples teach engineering decisions, not React or framework adoption.
+Start with the [main outline](OUTLINE.md), [Introduction](sections/introduction.md), and [Get Ready](sections/01-get-ready.md). The main course follows the first commit's eight-section progression with a website health checker as the shared project.
 
-## Todo app prerequisite
+## Main course: bring a familiar language
+
+Learners build a website health checker: request a URL, check its HTTP status and expected body text, measure elapsed time, and report success or failure. The [local fixture guide](demo/health-checker/README.md) defines the shared endpoints and acceptance rules. Keep that fixture unchanged and separate from the learner's checker repository.
+
+Everyone follows the same brief and checks the same behavior. Each learner chooses a language they can review and uses its normal run and test tools. There are no separate language tracks or supplied starter implementations. Later exercises build on the program they created.
+
+The shared setup is Git, Bun for OMP and the fixture server, OMP itself, and approved model access. A working compiler or runtime for the learner's chosen language is also needed. Section 1 creates the single-target checker; section 3 extends it to several configured targets. Later practical exercises use that reviewed program. Complete those core sections before skipping ahead; there are no supplied language-specific solution branches. Live model runs and classroom pacing still need rehearsal.
+
+## Older alternative: todo app prerequisite
+
+The section numbers and exercise branches below belong only to the [retained eight-section alternative](alternatives/eight-section-outline.md). Its missing app does not block the new main route.
 
 The canonical app belongs at `demo/todo-app`. Its intended baseline adds, completes and deletes tasks, then persists them in browser `localStorage`. It has no accounts, backend, routing, UI library or state-management layer.
 
@@ -21,8 +31,12 @@ The canonical app belongs at `demo/todo-app`. Its intended baseline adds, comple
 
 Branch names stay tied to behaviors, not section numbers. Once the app is recovered, use its own setup guide, preserve unfinished work before switching, and create a learner work branch from the stated exercise branch. The documented app commands are `npm install`, `npm run dev`, `npm test` and `npm run test:e2e`; their availability must be checked against the recovered source. They have not been exercised here during this revision.
 
-## Exporter and evidence
+## Retained eight-section alternative: exporter and evidence
 
-The [legacy exporter](demo/section-08-legacy/README.md) is present. Section 7 uses a larger-change coordination case; section 8 Part B teaches characterization, seams and consumer compatibility. Start each lab independently. Part A of section 8 is a harness design assessment, not an implemented orchestrator.
+The [legacy exporter](demo/section-08-legacy/README.md) is present. In this
+alternative, section 7 uses a larger-change coordination case; section 8 Part B
+teaches characterization, seams and consumer compatibility. Start each lab
+independently. Part A of section 8 is a harness design assessment, not an
+implemented orchestrator.
 
 The [revision plan](2026-09-22-course-review-and-action-plan.md) records scope and verification limits. Historical [restoration evidence](_build/todo-demo/2026-09-18-content-restoration-verification.md) does not prove that the missing app or revised exercises run in this checkout. Local tests prove only the behavior they exercise, not provider-backed teaching, deployment readiness or classroom timing.

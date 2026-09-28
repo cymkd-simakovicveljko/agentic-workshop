@@ -1,19 +1,27 @@
 # Demo material
 
-## Current learner route
+## Main route
 
-The todo app is the intended source for the remaining-count, unfinished-filter and blank-task exercises. **Its canonical repository is missing from this checkout.** Recover it at `demo/todo-app` before following those app commands; the [project guide](../PROJECT.md) records the prerequisite. The historical `demo/public` app is not a substitute.
+The active course follows the [original eight-section progression](../OUTLINE.md), after [Introduction](../sections/introduction.md) and [Get Ready](../sections/01-get-ready.md).
 
-The required todo branches remain behavior-based:
+Learners build a website health checker in a familiar language. The [health-checker fixture guide](health-checker/README.md) provides controlled local endpoints, startup instructions, and shared acceptance rules. It uses Bun, already installed for OMP; the learner's checker does not have to use Bun.
+
+Run the fixture from the course repository and create the checker in a separate learner workspace. The lessons are sequential and reuse the learner's reviewed program. The older numbered companions below are not prerequisites for this route.
+
+## Retained eight-section alternative
+
+The numbered companions and branches below follow the [eight-section alternative](../alternatives/eight-section-outline.md). Its canonical todo repository is missing; the [project guide](../PROJECT.md) records what must be recovered before running those exercises. Do not substitute the historical `demo/public` app.
 
 - `main`: add, complete, delete and persist tasks.
 - `exercise/remaining-count` and `solution/remaining-count`: section 1.
 - `exercise/unfinished-filter` and `solution/unfinished-filter`: section 4.
 - `exercise/blank-task-bug` and `solution/blank-task-bug`: section 6.
 
-Every lab states its own starting point. Prepared traces, inline examples and disposable fixtures are labelled; working through them does not demonstrate that the missing app or a live agent ran.
+Every lab states its own starting point. Prepared traces, inline examples and
+disposable fixtures are labelled; working through them does not demonstrate that
+the missing app or a live agent ran.
 
-## Current lesson companions
+## Numbered companions
 
 | Section | Companion |
 | --- | --- |
@@ -26,11 +34,18 @@ Every lab states its own starting point. Prepared traces, inline examples and di
 | 7. Planning and coordinating larger changes | [Coordination lab](section-07-coordination-lab.md) |
 | 8. Advanced routes | [Harness design and existing-system compatibility](section-08-harness-and-enterprise-lab.md) |
 
-## Separate exporter example
+## Retained alternative: exporter example
 
-The [legacy ticket exporter](section-08-legacy/README.md) is present and independent of the todo app. The coordination and compatibility labs may reuse its domain, but each begins from its own copy. Section 7 assesses sequencing and replanning; section 8 Part B assesses characterization, seams and supported producer/consumer combinations.
+The [legacy ticket exporter](section-08-legacy/README.md) is present for the
+alternative route and independent of the todo app. The coordination and
+compatibility labs may reuse its domain, but each begins from its own copy.
+Section 7 assesses sequencing and replanning; section 8 Part B assesses
+characterization, seams and supported producer/consumer combinations.
 
-Section 8 Part A is a separate harness-design route. Its worksheet can expose a missing control, but it cannot demonstrate enforcement by a working harness. The exporter route uses ordinary POSIX tools and Node; it needs neither Python preparation helpers nor an earlier learner's edits.
+Section 8 Part A is a separate harness-design route. Its worksheet can expose a
+missing control, but it cannot demonstrate enforcement by a working harness. The
+exporter route uses ordinary POSIX tools and Node; it needs neither Python
+preparation helpers nor an earlier learner's edits.
 
 ## Historical project-directory material
 

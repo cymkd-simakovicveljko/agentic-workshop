@@ -1,6 +1,6 @@
 # Draft v0 review and source decisions
 
-> **Earlier full-draft reference.** Current development follows the [agreed eight-section outline](OUTLINE.md), one section at a time. This document’s detailed content and timing are not the agreed curriculum.
+> **Earlier full-draft reference.** At the time of this draft, development followed the [agreed eight-section outline](alternatives/eight-section-outline.md), one section at a time. This document’s detailed content and timing are not the agreed curriculum. The five-part route is now the main course at [OUTLINE.md](OUTLINE.md).
 
 Reviewed and consolidated on **12 September 2026**. The user requested a first Markdown course draft, OMP first, foundations before optional approaches, engaging delivery, and archival of superseded WIP material.
 

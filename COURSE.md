@@ -8,7 +8,7 @@ reference_environment: Oh My Pi (OMP)
 
 # Agentic Engineering — Draft v0
 
-> **Earlier full-draft reference.** Current development follows the [agreed eight-section outline](OUTLINE.md), one section at a time. This document’s detailed content and timing are not the agreed curriculum.
+> **Earlier full-draft reference.** This document's detailed content and timing are historical, not the active curriculum. The current website-health-checker course follows the original eight-section progression at [OUTLINE.md](OUTLINE.md). The [later eight-section revision](alternatives/eight-section-outline.md) is also retained as an alternative.
 
 ## A small change you can defend
 

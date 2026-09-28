@@ -353,4 +353,4 @@ fabricated run results. The optional [Google SRE troubleshooting chapter](https:
 provides broader background on hypotheses and useful evidence; it is not
 required to run this lab.
 
-[Previous: steering agents](05-steering-agents.md) · [Next: planning and coordinating larger changes](07-planning-and-coordinating-larger-changes.md) · [Back to outline](../OUTLINE.md)
+[Previous: steering agents](05-steering-agents.md) · [Next: planning and coordinating larger changes](07-planning-and-coordinating-larger-changes.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 3,
+  "diagram": "context",
+  "diagramType": "dataflow",
+  "candidate": "context.json",
+  "deliveredHtml": "context.html",
+  "showcaseValidation": {
+    "status": "pass",
+    "scope": "Archify candidate and delivered HTML",
+    "profile": "showcase",
+    "checks": "9/9",
+    "errors": 0,
+    "warnings": 0
+  },
+  "delivery": {
+    "status": "pass",
+    "specification": {
+      "sha256": "a02f738f46ab74ed3b03de663e0e076dca4128e420146ed49a3e4a3d558a3e3c",
+      "bytes": 3433
+    },
+    "artifact": {
+      "sha256": "41e845057beed679732f87c0c518a3e766193f76ac43d100446cccefc364fa16",
+      "bytes": 808646
+    }
+  },
+  "canonicalExportSource": {
+    "status": "pass",
+    "method": "Archify viewer canonical SVG export (exportMenu.run('svg'))",
+    "sourceArtifactSha256": "41e845057beed679732f87c0c518a3e766193f76ac43d100446cccefc364fa16",
+    "derivation": "reader/diagrams/derive-course-svg.mjs compact context layout",
+    "changes": [
+      "compact 440px viewBox",
+      "18px node labels and 15px edge labels",
+      "shortened redundant secondary labels",
+      "hidden semantic-category legend"
+    ],
+    "topologyPreserved": true
+  },
+  "asset": {
+    "status": "pass",
+    "path": "context.svg",
+    "sha256": "d979ce75638e1f272074b1227238c8edf65ace775ee640945911d28dea9b0602",
+    "bytes": 6690,
+    "width": 440,
+    "height": 760,
+    "viewBox": "0 0 440 760",
+    "theme": "dark",
+    "courseExport": "compact-readable",
+    "passiveImg": true,
+    "scripts": 0,
+    "externalResourceReferences": 0,
+    "styleEmbedded": true,
+    "rendererShowcaseReceiptApplies": false
+  },
+  "automatedBrowserEvidence": {
+    "status": "pass",
+    "evidenceKind": "automated-browser",
+    "receipt": "context.visual-check.json",
+    "scope": "delivered HTML, not derivative SVG",
+    "artifactSha256": "41e845057beed679732f87c0c518a3e766193f76ac43d100446cccefc364fa16",
+    "visualReview": "pending",
+    "coverage": "1440x900, 1600x1000, 1920x1080, and 2048x1320 light containment; 1440x900 and 2048x1320 light/dark captures"
+  },
+  "derivativeBrowserEvidence": {
+    "status": "pass",
+    "evidenceKind": "manual-browser",
+    "scope": "final derivative SVG served in the actual course reader",
+    "method": "Chrome inspection at 1440px and 390px; SVG getBBox and sampled path checks",
+    "measured": {
+      "desktop": {
+        "viewport": 1440,
+        "imageWidth": 500,
+        "imageHeight": 864,
+        "scrollWidth": 1440
+      },
+      "mobile": {
+        "viewport": 390,
+        "imageWidth": 344,
+        "imageHeight": 594,
+        "scrollWidth": 390
+      },
+      "geometry": {
+        "viewBox": [
+          440,
+          760
+        ],
+        "nodes": 8,
+        "edges": 9,
+        "issues": []
+      }
+    },
+    "checks": [
+      "dark passive image renders",
+      "readable labels on desktop and mobile",
+      "node text stays inside nodes",
+      "edges stay inside canvas",
+      "edges do not cross unrelated node interiors",
+      "no page-level horizontal overflow",
+      "no scripts or external resource references"
+    ],
+    "visualReview": "passed",
+    "artifactSha256": "d979ce75638e1f272074b1227238c8edf65ace775ee640945911d28dea9b0602"
+  }
+}

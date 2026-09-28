@@ -17,10 +17,12 @@ active learner route and do not validate `demo/todo-app`. Historical section num
 and paths in receipts identify their original snapshot; do not run retained helpers
 against renamed lessons and treat their output as current evidence.
 
-The exporter now supports independent section 7 coordination and section 8
-compatibility routes. The current labs use ordinary POSIX-shell copying and Node,
-not the historical preparation helper. Consult the migration receipt for the
-newest executed commands and source hashes; earlier receipts keep their original scope.
+The retained labs cover independent section 7 coordination and section 8
+compatibility routes. They are historical alternative-route material, not part
+of the website-health-checker main route in [the root outline](../OUTLINE.md).
+These labs use ordinary POSIX-shell copying and Node, not the historical
+preparation helper. Consult the migration receipt for the newest executed
+commands and source hashes; earlier receipts keep their original scope.
 
 A verification receipt records only the command or interaction actually performed.
 Provider-backed OMP runs and classroom timing require their own rehearsals; passing

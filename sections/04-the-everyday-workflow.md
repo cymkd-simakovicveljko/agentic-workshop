@@ -506,4 +506,4 @@ optional. The app examples, acceptance decisions, failure cases and prompts in
 this section and its companions are course-authored. They are not live OMP
 transcripts or measured performance claims.
 
-[Previous: working with OMP](03-working-with-omp.md) · [Next: steering agents](05-steering-agents.md) · [Back to outline](../OUTLINE.md)
+[Previous: working with OMP](03-working-with-omp.md) · [Next: steering agents](05-steering-agents.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

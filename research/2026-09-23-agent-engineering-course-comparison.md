@@ -1,6 +1,6 @@
 # First-party agent-engineering course comparison
 
-**Retrieved 2026-09-23.** This is a contrast sample, not a ranking or a claim about teaching effectiveness. It uses public, first-party course pages only. The proposed structure is in [the course review](../2026-09-22-course-review-and-action-plan.md#learning-progression-and-material-map); the active course remains different ([OUTLINE.md](../OUTLINE.md#sections)).
+**Retrieved 2026-09-23.** This is a contrast sample, not a ranking or a claim about teaching effectiveness. It uses public, first-party course pages only. The proposed structure is in [the course review](../2026-09-22-course-review-and-action-plan.md#learning-progression-and-material-map); at the time, the active course was different ([preserved eight-section outline](../alternatives/eight-section-outline.md#sections)). The five-part route is now main at [OUTLINE.md](../OUTLINE.md).
 
 ## Scope first: these courses solve a different problem
 

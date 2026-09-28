@@ -146,4 +146,4 @@ course-authored adaptations, not captured provider output or official OMP exampl
 The [source review](../research/2026-09-22-omp-course-source-review.md) records local
 version/help evidence separately from provider, app and classroom verification.
 
-[Next: Working with OMP](03-working-with-omp.md) · [Back to outline](../OUTLINE.md)
+[Next: Working with OMP](03-working-with-omp.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

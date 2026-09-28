@@ -31,11 +31,18 @@ test(
       await response.text(),
       await readFile(new URL("../OUTLINE.md", import.meta.url), "utf8"),
     );
+    const diagram = await fetch(`${base}/diagrams/context.svg`);
+    assert.equal(diagram.status, 200);
+    assert.match(diagram.headers.get("content-type"), /^image\/svg\+xml/);
+    assert.match(diagram.headers.get("content-security-policy"), /default-src 'none'/);
+    assert.match(diagram.headers.get("content-security-policy"), /sandbox/);
     for (const path of [
       "/content/.git/config",
       "/content/demo/.env",
       "/content/demo/%2e%2e%2f.git/config",
       "/package.json",
+      "/diagrams/%2e%2e%2fserver.mjs",
+      "/diagrams/context.html",
     ]) {
       assert.equal((await fetch(base + path)).status, 404, path);
     }

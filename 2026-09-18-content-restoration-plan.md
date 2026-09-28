@@ -3,6 +3,7 @@
 **Status:** Implemented. The agreed decisions and sequence below are retained as
 the restoration record. See the [restoration verification receipt](_build/todo-demo/2026-09-18-content-restoration-verification.md)
 for author-side evidence and its limits.
+**Promotion note (2026-09-27):** The five-part route is now the main course at [OUTLINE.md](OUTLINE.md). This record preserves the earlier eight-section implementation; its route is retained in [the alternative outline](alternatives/eight-section-outline.md).
 
 **Goal:** Restore the strongest teaching substance from `sections_old/` without
 restoring its synthetic project-directory app, custom profiles, checkpoint

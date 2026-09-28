@@ -3,12 +3,15 @@ import DOMPurify from "/vendor/purify.js";
 
 const $ = (selector) => document.querySelector(selector);
 const article = $("#article");
-const defaultDocument = "sections/04-the-everyday-workflow.md";
+const defaultDocument = "sections/introduction.md";
 let lessons = [];
 let currentDocument = "";
 let controller;
 let headings = [];
 let headingsExpanded = true;
+const isAlternativeDocument = (path) =>
+  path.startsWith("alternatives/") ||
+  (path.startsWith("sections/") && !lessons.some((lesson) => lesson.path === path));
 const markdown = (source) =>
   DOMPurify.sanitize(marked.parse(source), {
     USE_PROFILES: { html: true },
@@ -103,11 +106,10 @@ function buildOutline() {
   const nav = $("#lessons");
   nav.replaceChildren();
   lessons.forEach((lesson, index) => {
-    if (index === 0 || index === 4) {
+    if (index === 0 || index === 2) {
       const label = document.createElement("p");
       label.className = "chapter-label";
-      label.textContent =
-        index === 0 ? "01 / THE EVERYDAY PRACTICE" : "02 / GOING FURTHER";
+      label.textContent = index === 0 ? "START HERE" : "THE EIGHT SECTIONS";
       nav.append(label);
     }
     const item = document.createElement("div");
@@ -118,7 +120,7 @@ function buildOutline() {
     anchor.href = readerUrl(lesson.path);
     const number = document.createElement("span");
     number.className = "lesson-number";
-    number.textContent = String(index + 1).padStart(2, "0");
+    number.textContent = index < 2 ? "—" : String(index - 1).padStart(2, "0");
     const name = document.createElement("span");
     name.className = "lesson-name";
     name.textContent = lesson.title;
@@ -130,7 +132,7 @@ function buildOutline() {
     item.append(anchor);
     nav.append(item);
   });
-  $("#lesson-count").textContent = `${lessons.length} lessons`;
+  $("#lesson-count").textContent = `${lessons.length - 2} sections · introduction + setup`;
 }
 
 function headingLinks(target, selectedHeadings) {
@@ -145,6 +147,30 @@ function headingLinks(target, selectedHeadings) {
 }
 
 function decorateDocument(path) {
+  const courseMap = article.querySelector(".course-map");
+  if (courseMap) {
+    const parts = [...courseMap.querySelectorAll("details")];
+    const toggle = document.createElement("button");
+    toggle.className = "course-map-toggle";
+    toggle.type = "button";
+    toggle.textContent = "Expand all parts";
+    let expandAll = false;
+    toggle.addEventListener("click", () => {
+      expandAll = !expandAll;
+      parts.forEach((part) => { part.open = expandAll; });
+      toggle.textContent = expandAll ? "Collapse all parts" : "Expand all parts";
+    });
+    parts.forEach((part) => {
+      part.addEventListener("toggle", () => {
+        if (part.open && !expandAll) {
+          parts.forEach((other) => {
+            if (other !== part) other.open = false;
+          });
+        }
+      });
+    });
+    courseMap.before(toggle);
+  }
   const ids = new Map();
   article.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((heading) => {
     const title = heading.textContent;
@@ -264,8 +290,8 @@ function selectOutline(path) {
       anchor.dataset.nav === "project"
         ? path === "PROJECT.md"
         : anchor.dataset.nav === "alternative"
-          ? path.startsWith("alternatives/")
-          : path !== "PROJECT.md" && !path.startsWith("alternatives/");
+          ? isAlternativeDocument(path)
+          : path !== "PROJECT.md" && !isAlternativeDocument(path);
     anchor.classList.toggle("active", selected);
   });
 }
@@ -322,29 +348,21 @@ async function loadDocument({ focus = false } = {}) {
     );
     h1?.remove();
     const index = lessons.findIndex((lesson) => lesson.path === path);
-    const alternative = path.startsWith("alternatives/");
+    const alternative = isAlternativeDocument(path);
     $("#title").textContent = title;
     document.title = `${title} — Agentic engineering`;
     $("#chapter").textContent =
-      index < 0
-        ? alternative
-          ? "AN ALTERNATIVE PERSPECTIVE"
-          : "COURSE RESOURCES"
-        : index < 4
-          ? "CHAPTER 01 / THE EVERYDAY PRACTICE"
-          : "CHAPTER 02 / GOING FURTHER";
+      index >= 0 ? "MAIN COURSE" : alternative ? "ALTERNATIVE COURSE" : "COURSE RESOURCES";
     $("#crumb").textContent =
-      index < 0
-        ? alternative
-          ? "ALTERNATIVE DRAFT"
-          : "RESOURCE"
-        : `LESSON ${String(index + 1).padStart(2, "0")}`;
+      index >= 0
+        ? index === 0 ? "INTRODUCTION" : index === 1 ? "SETUP" : `SECTION ${String(index - 1).padStart(2, "0")}`
+        : path === "OUTLINE.md" ? "OUTLINE" : alternative ? "ALTERNATIVE" : "RESOURCE";
     $("#lesson-position").textContent =
-      index < 0
-        ? alternative
-          ? "Conversational draft"
-          : "Reference document"
-        : `Lesson ${String(index + 1).padStart(2, "0")} of ${lessons.length}`;
+      index >= 0
+        ? index === 0 ? "Introduction" : index === 1 ? "Setup" : `Section ${index - 1}`
+        : path === "OUTLINE.md"
+          ? "Eight-section course outline"
+          : alternative ? "Alternative material" : "Reference document";
     $("#read-time").textContent =
       `~${Math.max(1, Math.ceil(source.split(/\s+/).length / 220))} min read`;
     $("#read-time").title =
@@ -391,9 +409,12 @@ async function loadDocument({ focus = false } = {}) {
 }
 function scrollToHash() {
   try {
-    document
-      .getElementById(decodeURIComponent(location.hash.slice(1)))
-      ?.scrollIntoView({ behavior: "instant" });
+    const target = document.getElementById(
+      decodeURIComponent(location.hash.slice(1)),
+    );
+    const part = target?.closest("details");
+    if (part) part.open = true;
+    target?.scrollIntoView({ behavior: "instant" });
   } catch {
     /* Invalid fragments do not prevent reading the document. */
   }
@@ -477,7 +498,7 @@ try {
     markdown(outline),
     "text/html",
   );
-  lessons = [...parsed.querySelectorAll('ol a[href^="sections/"]')].map(
+  lessons = [...parsed.querySelectorAll('.course-lessons ol a[href^="sections/"]')].map(
     (anchor) => ({
       title: anchor.textContent,
       path: anchor.getAttribute("href"),

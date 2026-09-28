@@ -400,4 +400,4 @@ than hiding them behind “all tests pass.”
 No recording is required for the lab. Resource inclusion is not a claim that full
 playback or a classroom rehearsal has been completed.
 
-[Previous: planning and coordinating larger changes](07-planning-and-coordinating-larger-changes.md) · [Companion lab](../demo/section-08-harness-and-enterprise-lab.md) · [Back to outline](../OUTLINE.md)
+[Previous: planning and coordinating larger changes](07-planning-and-coordinating-larger-changes.md) · [Companion lab](../demo/section-08-harness-and-enterprise-lab.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

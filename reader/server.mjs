@@ -8,6 +8,9 @@ const assets = new Map([
   ["/", ["reader/index.html", "text/html"]],
   ["/reader.css", ["reader/reader.css", "text/css"]],
   ["/reader.js", ["reader/reader.js", "text/javascript"]],
+  ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
+  ["/diagrams/workflow.svg", ["reader/diagrams/workflow.svg", "image/svg+xml"]],
+  ["/diagrams/context.svg", ["reader/diagrams/context.svg", "image/svg+xml"]],
   [
     "/fonts/dm-sans.woff2",
     [
@@ -35,6 +38,8 @@ const rootDocuments = new Set([
   "README.md",
   "OUTLINE.md",
   "PROJECT.md",
+  "2026-09-17-simplification-plan.md",
+  "2026-09-18-content-restoration-plan.md",
   "2026-09-22-course-review-and-action-plan.md",
 ]);
 const sourceExtensions = new Set([
@@ -55,7 +60,9 @@ const server = createServer(async (request, response) => {
       "Cache-Control": "no-store",
       "X-Content-Type-Options": "nosniff",
       "Content-Security-Policy":
-        "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+        type === "image/svg+xml"
+          ? "default-src 'none'; style-src 'unsafe-inline'; font-src data:; sandbox"
+          : "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
     });
     response.end(request.method === "HEAD" ? undefined : body);
   };

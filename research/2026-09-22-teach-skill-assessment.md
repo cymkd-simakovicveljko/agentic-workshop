@@ -1,6 +1,6 @@
 # Matt Pocock `teach` skill: course-fit assessment
 
-**Migration note:** this assessment describes the pre-migration course. The workflow is now section 4, and the skill comparison is part of section 5, Steering agents. Links below lead to their maintained successors; the original placement recommendation is retained as review history. The optional case study is now included, but no `teach` installation or trial is claimed.
+**Migration note:** this assessment describes the pre-migration course and retains its then-current mapping: the workflow was section 4, and the skill comparison was part of section 5, Steering agents. The five-part course is now main at [OUTLINE.md](../OUTLINE.md); links below lead to maintained successors in [the preserved eight-section route](../alternatives/eight-section-outline.md). The original placement recommendation is retained as review history. The optional case study is now included, but no `teach` installation or trial is claimed.
 
 ## Recommendation
 

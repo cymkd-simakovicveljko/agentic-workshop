@@ -1,6 +1,6 @@
 # OMP lab guide — Draft v0
 
-> **Earlier full-draft reference.** Current development follows the [agreed eight-section outline](OUTLINE.md), one section at a time. This document’s detailed content and timing are not the agreed curriculum.
+> **Earlier full-draft reference.** This document's detailed content and timing are historical, not the active curriculum. Use [Get Ready](sections/01-get-ready.md) for the current setup and [OUTLINE.md](OUTLINE.md) for the website-health-checker course.
 
 Use this adapter with [the course](COURSE.md). Commands are preparation details; learning outcomes live in the curriculum.
 

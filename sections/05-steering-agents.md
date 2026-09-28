@@ -315,4 +315,4 @@ practice does not close a provider-backed runtime claim.
   are course-authored examples. They are not captured app observations, official
   OMP examples or measured skill improvements.
 
-[Previous: the everyday workflow](04-the-everyday-workflow.md) · [Next: verification, diagnosis and recovery](06-reliable-execution.md) · [Back to outline](../OUTLINE.md)
+[Previous: the everyday workflow](04-the-everyday-workflow.md) · [Next: verification, diagnosis and recovery](06-reliable-execution.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

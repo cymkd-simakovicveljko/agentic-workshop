@@ -324,4 +324,4 @@ you. Section 2 explains the run; section 3 teaches host operation; section 4
 develops the full bounded workflow without making every small change a planning
 project.
 
-[Next: How agents work](02-agentic-engineering-foundations.md) · [Back to outline](../OUTLINE.md)
+[Next: How agents work](02-agentic-engineering-foundations.md) · [Back to alternative outline](../alternatives/eight-section-outline.md)

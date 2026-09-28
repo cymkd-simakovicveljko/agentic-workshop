@@ -2,7 +2,8 @@
 
 **Status:** Agreed direction from Petar's Q1–Q12 interview; implementation not started. Petar requested this plan before changes to the demo or lessons.
 
-**Goal:** Help engineers start using OMP in daily work. Preserve the [eight-section outline](OUTLINE.md); distil the teaching and make the examples concrete, not redesign the curriculum. Section 3 remains the practical core.
+**Goal:** Help engineers start using OMP in daily work. Preserve the [eight-section outline](alternatives/eight-section-outline.md); distil the teaching and make the examples concrete, not redesign the curriculum. Section 3 remains the practical core.
+**Promotion note (2026-09-27):** The five-part route is now the main course at [OUTLINE.md](OUTLINE.md). This plan records the earlier eight-section direction.
 
 ## Agreed boundaries
 

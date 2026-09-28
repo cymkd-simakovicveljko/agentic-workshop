@@ -27,21 +27,8 @@ const assets = new Map([
     ["node_modules/dompurify/dist/purify.es.mjs", "text/javascript"],
   ],
 ]);
-const contentRoots = new Set([
-  "sections",
-  "alternatives",
-  "demo",
-  "research",
-  "_build",
-]);
-const rootDocuments = new Set([
-  "README.md",
-  "OUTLINE.md",
-  "PROJECT.md",
-  "2026-09-17-simplification-plan.md",
-  "2026-09-18-content-restoration-plan.md",
-  "2026-09-22-course-review-and-action-plan.md",
-]);
+const contentRoots = new Set(["sections", "demo", "research"]);
+const rootDocuments = new Set(["README.md", "OUTLINE.md", "PROJECT.md"]);
 const sourceExtensions = new Set([
   ".md",
   ".mjs",

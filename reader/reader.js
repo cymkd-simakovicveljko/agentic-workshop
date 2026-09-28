@@ -9,9 +9,6 @@ let currentDocument = "";
 let controller;
 let headings = [];
 let headingsExpanded = true;
-const isAlternativeDocument = (path) =>
-  path.startsWith("alternatives/") ||
-  (path.startsWith("sections/") && !lessons.some((lesson) => lesson.path === path));
 const markdown = (source) =>
   DOMPurify.sanitize(marked.parse(source), {
     USE_PROFILES: { html: true },
@@ -289,9 +286,7 @@ function selectOutline(path) {
     const selected =
       anchor.dataset.nav === "project"
         ? path === "PROJECT.md"
-        : anchor.dataset.nav === "alternative"
-          ? isAlternativeDocument(path)
-          : path !== "PROJECT.md" && !isAlternativeDocument(path);
+        : path !== "PROJECT.md";
     anchor.classList.toggle("active", selected);
   });
 }
@@ -348,21 +343,20 @@ async function loadDocument({ focus = false } = {}) {
     );
     h1?.remove();
     const index = lessons.findIndex((lesson) => lesson.path === path);
-    const alternative = isAlternativeDocument(path);
     $("#title").textContent = title;
     document.title = `${title} — Agentic engineering`;
     $("#chapter").textContent =
-      index >= 0 ? "MAIN COURSE" : alternative ? "ALTERNATIVE COURSE" : "COURSE RESOURCES";
+      index >= 0 ? "MAIN COURSE" : "COURSE RESOURCES";
     $("#crumb").textContent =
       index >= 0
         ? index === 0 ? "INTRODUCTION" : index === 1 ? "SETUP" : `SECTION ${String(index - 1).padStart(2, "0")}`
-        : path === "OUTLINE.md" ? "OUTLINE" : alternative ? "ALTERNATIVE" : "RESOURCE";
+        : path === "OUTLINE.md" ? "OUTLINE" : "RESOURCE";
     $("#lesson-position").textContent =
       index >= 0
         ? index === 0 ? "Introduction" : index === 1 ? "Setup" : `Section ${index - 1}`
         : path === "OUTLINE.md"
           ? "Eight-section course outline"
-          : alternative ? "Alternative material" : "Reference document";
+          : "Reference document";
     $("#read-time").textContent =
       `~${Math.max(1, Math.ceil(source.split(/\s+/).length / 220))} min read`;
     $("#read-time").title =

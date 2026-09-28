@@ -250,7 +250,7 @@ Before the first exercise, confirm:
 <details>
 <summary><strong>Sources and what has been checked</strong></summary>
 
-OMP instructions use the [18.2.9 source reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#install), its [provider guide](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/providers.md), and [approval rules](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md). The [project guide](../PROJECT.md) separates the main course from the older prebuilt-app exercises.
+OMP instructions use the [18.2.9 source reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#install), its [provider guide](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/providers.md), and [approval rules](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md). The [project guide](../PROJECT.md) explains the exercise workspace and starting states.
 
 The pinned package exists in the [npm registry](https://registry.npmjs.org/@oh-my-pi%2Fpi-coding-agent/18.2.9) and requires Bun >=1.3.14. The `v18.2.9` GitHub release lookup returned 404, so this lesson does not use its missing binary downloads. The [Bun installation guide](https://bun.sh/docs/installation) supplies the OS install and PATH steps.
 

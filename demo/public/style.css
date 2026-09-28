@@ -1,7 +1,0 @@
-body {font: 18px/1.5 system-ui,sans-serif;color:#20252b;background:#f5f6f8;margin:0}
-main {max-width:680px;margin:60px auto;padding:32px;background:white}
-h1 {font-size:36px;margin-top:0} label {display:block;font-weight:600}
-input {box-sizing:border-box;width:100%;padding:12px;font:inherit;border:1px solid #777}
-input:focus {outline:3px solid #2868af;outline-offset:2px}
-ul {padding:0;list-style:none} li {padding:16px 0;border-bottom:1px solid #ddd}
-.owner {display:block;color:#59616b;font-size:15px}.note {color:#59616b;font-size:14px}

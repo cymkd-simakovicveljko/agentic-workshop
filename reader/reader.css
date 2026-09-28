@@ -536,7 +536,7 @@ button:hover {
   padding: 12px;
   color: var(--muted);
 }
-.alternative-link {
+.outline-link {
   display: block;
   margin: 26px 9px 0;
   padding: 17px 15px;
@@ -547,23 +547,23 @@ button:hover {
   line-height: 1.6;
   background: linear-gradient(120deg, #1b222b, #121417);
 }
-.alternative-link > span {
+.outline-link > span {
   display: block;
   font-size: 11px;
   letter-spacing: 0.8px;
   color: #96bae9;
   margin-bottom: 8px;
 }
-.alternative-link b {
+.outline-link b {
   float: right;
 }
-.alternative-link small {
+.outline-link small {
   display: block;
   color: #929aa5;
   font-size: 13px;
   margin-top: 3px;
 }
-.alternative-link:hover {
+.outline-link:hover {
   border-color: #738eb2;
 }
 .sidebar-footer {

@@ -1,6 +1,6 @@
 # Who is using coding agents—and where they draw the line
 
-Research checked on 27 September 2026. This is a source shortlist for the introduction, not an endorsement wall. The [main introduction](../sections/introduction.md) now shows nine short quotations with portraits and roles; the five-part course is now the promoted main route at [OUTLINE.md](../OUTLINE.md).
+Research checked on 27 September 2026. This is a source shortlist for the introduction, not an endorsement wall. The [main introduction](../sections/introduction.md) shows nine short quotations with portraits and roles; the course outline is at [OUTLINE.md](../OUTLINE.md).
 
 ## Recommendation
 

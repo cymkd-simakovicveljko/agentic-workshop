@@ -4,7 +4,7 @@
 
 For engineers who are new to AI or mainly use autocomplete. We use OMP in a terminal alongside your usual editor. Use a programming language you already know; the shared exercise defines behavior, not a required implementation.
 
-This course follows the eight-section order from the repository's first commit (`f8790a6`). The introduction and setup are prerequisites. The exercise is now a **website health checker**, not the old todo app.
+The introduction and setup are prerequisites for the eight sections. The shared exercise is a **website health checker**.
 
 ## Start here
 
@@ -52,4 +52,4 @@ Use the amount of planning the change needs. A small, clear request does not nee
 
 The lessons and local fixture are course material, not a hosted monitoring service. Prepared traces and expected results are labelled. They are not recordings of a provider-backed run. Model access, fresh OS installation, learner-generated implementations, and classroom pacing still need rehearsal with the intended audience.
 
-The [project guide](PROJECT.md) explains starting states. The [previous revised eight-section route](alternatives/eight-section-outline.md) remains historical alternative material; its missing todo repository is not a prerequisite for this course.
+The [project guide](PROJECT.md) explains starting states.

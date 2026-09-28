@@ -28,5 +28,5 @@ playwright-report/
 !.env.sample
 !.env.template
 
-# Runtime logs. Keep _build/ source scripts and verification receipts tracked.
+# Runtime logs.
 *.log

@@ -1022,6 +1022,9 @@ main {
   max-width: 500px;
   margin: 28px auto;
 }
+.course-diagram-wide {
+  max-width: 100%;
+}
 .course-diagram a,
 .course-diagram img {
   display: block;

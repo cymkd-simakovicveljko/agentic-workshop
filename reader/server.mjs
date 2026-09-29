@@ -13,6 +13,7 @@ const assets = new Map([
   ["/diagrams/context.svg", ["reader/diagrams/context.svg", "image/svg+xml"]],
   ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],
   ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
+  ["/diagrams/context-harness.webp", ["reader/diagrams/context-harness.webp", "image/webp"]],
   [
     "/fonts/dm-sans.woff2",
     [

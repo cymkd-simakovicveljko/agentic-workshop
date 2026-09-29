@@ -1,10 +1,10 @@
 # Agentic engineering course
 
-This repository contains the current HTML course reader and Markdown lessons for
-using OMP to build and review a website health checker. It is course source, not
-the learner's exercise workspace.
+This repository contains an HTML course reader and Markdown lessons for practical
+agentic engineering with OMP. Each lesson uses focused examples rather than one
+mandatory course-wide project.
 
-Start with the [Introduction](sections/introduction.md), then [Get Ready](sections/01-get-ready.md),
+Start with the [Introduction](sections/introduction.md), then [Getting started with OMP](sections/01-getting-started-with-omp.md),
 and follow the [outline](OUTLINE.md). The course is language-agnostic: use a
 language and normal run/test tools you can review confidently. The
 [health-checker fixture](demo/health-checker/README.md) provides predictable
@@ -36,8 +36,12 @@ with **Ctrl+C**; if port 4173 is occupied, use `PORT=4174 npm start`.
 | --- | --- |
 | [Outline](OUTLINE.md) | Course route and lesson sequence |
 | [Introduction](sections/introduction.md) | Course framing and agentic engineering basics |
-| [Get Ready](sections/01-get-ready.md) | OMP setup, model access, language tools, and a separate workspace |
-| `sections/health-checker/` | Eight lessons using the shared health-checker project |
+| [Getting started with OMP](sections/01-getting-started-with-omp.md) | Harness introduction, terminal choice, installation, and model connection |
+| [Health-checker build example](sections/health-checker/01-getting-started.md) | Optional source material for lessons using the checker |
+| [Foundations](sections/health-checker/02-foundations.md) | Eight topics: models and roles, context, prompting, tools, sessions, artifacts, skills, and extensions |
+| [Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, phone access, and managing agents |
+| `sections/health-checker/` | Guided exercises, foundations overview, and the later engineering lessons |
+| [Skill-building workshop](sections/health-checker/05-skills.md) | Create and evaluate a reusable review procedure after learning the foundations |
 | [Health-checker fixture](demo/health-checker/README.md) | Local endpoints, startup instructions, and acceptance rules |
 | [Project guide](PROJECT.md) | Checker contract, workspace guidance, safety, and verification limits |
 

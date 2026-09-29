@@ -1,8 +1,8 @@
-# Course project and starting state
+# Health-checker example guide
 
-Start with the [outline](OUTLINE.md), [Introduction](sections/introduction.md),
-and [Get Ready](sections/01-get-ready.md). The course uses one shared project:
-a website health checker.
+The course uses focused examples rather than one mandatory project. This guide
+defines the website health checker used in some of the retained examples.
+Start the course with [Getting started with OMP](sections/01-getting-started-with-omp.md); use this guide only when working through a checker example.
 
 ## Build the health checker
 

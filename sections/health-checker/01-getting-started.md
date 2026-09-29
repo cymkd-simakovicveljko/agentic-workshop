@@ -1,21 +1,16 @@
-# 1. Getting started: one small health checker
+# Example: build a health checker
 
-**Main path:** make one bounded checker, watch OMP work, then decide whether the result is acceptable.
+**Your first mission: “It returns 200. Is it actually working?”**
 
-This is a first-value exercise, not an advanced networking course. You will use a local HTTP fixture so that the request, response, timeout, and review are visible. You bring a language and runtime you already know. Everyone shares the behavior contract; nobody needs the same implementation.
+You have just shipped a change. The website responds, but does it show what users expect? Let’s ask OMP to build a small tool that can tell the difference.
 
-By the end you can:
+Before we unpack how agentic engineering works, let’s experience one part of it: turning a plain-language request into a working tool. You will watch OMP work, try what it builds, and ask for a change. You do not need to understand everything on screen yet—we will return to what happened in [section 2](02-foundations.md).
 
-- identify the selected, authorized model before sending work;
-- distinguish your prompt from the context available to the model;
-- launch the local fixture and run a real checker against it;
-- judge status, body, timeout, exit code, changed files, and untracked files yourself.
+Your job is to stay involved: read what OMP asks permission to do, try the result, and tell it what needs changing. The commands and outputs in your run may differ from someone else’s. Follow the outcome, not an exact transcript.
 
-## Before you ask for code
+## 1. Take the controls
 
-### 1. Confirm the model and the place you are working
-
-Open the empty exercise repository created in **Get Ready**. Confirm that you can still run a tiny program with your usual language tools. The checker does not exist yet. Bun is installed for OMP and for the shared fixture; it does not choose your implementation language.
+For this optional example, use [Git](https://git-scm.com/downloads), [Bun](https://bun.sh/docs/installation) for the local fixture, and a language/runtime you already know. Create a new empty folder outside the course checkout and your other repositories, open it in your terminal, and run `git init` there. Install and connect OMP using [Getting started with OMP](../01-getting-started-with-omp.md) if needed. We are building a normal program with OMP, not putting an AI model inside the checker.
 
 Start OMP from the exercise repository:
 
@@ -23,37 +18,43 @@ Start OMP from the exercise repository:
 omp --approval-mode always-ask
 ```
 
-Inside OMP, use `/model` and record the exact provider/model identity you selected. Choose a model your organization authorizes and that your account can use. This lesson does not rank models. A model name is not evidence that a request was made or that a result is correct.
+**Choose the model.** Inside OMP, enter:
 
-Also use `/hotkeys` so you know how to interrupt the current turn. `always-ask` is a supervised setting, not a sandbox: a prompt may ask permission for an operation, but an approved process still has the access its environment grants it. Read the proposed command and path before allowing it. Do not place credentials or private repositories in this exercise.
+```text
+/model
+```
 
-### 2. Start the fixture from the course root
+Select the provider and model you connected during setup. Note their names. This is the model OMP will ask to work on your request.
 
-Use a second terminal. Change to the **course root**, not the empty learner repository, and start the fixture there:
+**Find the stop control before you need it.** Enter:
+
+```text
+/hotkeys
+```
+
+Find how to interrupt the current turn in your installed version. You do not need to memorize the other shortcuts.
+
+**Read before approving.** `always-ask` is a supervised setting, not a sandbox. Inspect the command and path before allowing an operation; an approved process still has the access its environment grants it. Keep credentials and private repositories out of this exercise. Interrupting a turn does not undo edits or guarantee that a child process ended.
+
+### Give the checker somewhere safe to test
+
+We supply a tiny local website with predictable responses. This is the **fixture**: a teaching aid, not another app you need to build.
+
+Use a second terminal. Change to the **course root**, not your empty learner repository, and start it:
 
 ```sh
 bun demo/health-checker/server.mjs
 ```
 
-Keep this terminal running. The fixture listens on `127.0.0.1:4175`; it is a separate process from OMP and from your checker. Its route contract is in the [health-checker fixture README](../../demo/health-checker/README.md). Open `http://127.0.0.1:4175/` in a browser if you want to see the route index.
+Keep this terminal running. The fixture listens on `127.0.0.1:4175`, separately from OMP and your checker. Its [guide](../../demo/health-checker/README.md) defines the route behavior. Bun runs the fixture; your checker can use your familiar language.
 
-Run the checker only against the local fixture for this lesson. Keep the fixture unchanged. The checker needs no provider API, cookies, authentication, retries, concurrency, or redirect following.
+**Check:** the terminal should report `Health-checker fixture ready at http://127.0.0.1:4175`. If it cannot start, expand the troubleshooting section below before continuing. Keep the fixture unchanged and use only its local endpoints during this exercise.
 
-### 3. Notice the three inputs to the first run
+## 2. Give OMP the mission
 
-Before you send the task, write one sentence for each:
+**Make a prediction:** will OMP explain how to build the tool, or actually create and run it?
 
-- **Model:** the selected system that generates a response or requests an operation.
-- **Prompt:** the bounded request you are about to send.
-- **Context:** the instructions, tool descriptions, files, command results, and conversation material that actually reach the model for this interaction.
-
-In simple terms, the model generates the next response from the information in its context. That response may be prose, code, or a structured request for a tool. It cannot inspect your files by magic; OMP must run a read or command and return the result. A fluent response can still be wrong, which is why the fixture and your independent checks matter.
-
-An empty repository does not mean an empty context. User and applicable ancestor instructions still matter. Conversely, a file existing somewhere does not prove the model read it. In this first exercise, make the contract explicit instead of asking the model to infer it from a large directory.
-
-## The first checker request
-
-Replace `<your language>` with your familiar language before sending this request. Prefer its standard HTTP library or an already-installed client. If neither is available, agree on a small HTTP dependency with the host before proceeding; do not turn the exercise into implementing an HTTP client.
+Replace `<your language>` below, then send the request in OMP. The detailed rules give everyone the same result to check. You do not need to memorize them; the [fixture guide](../../demo/health-checker/README.md#canonical-checker-contract) remains the reference.
 
 ```text
 Build the smallest runnable website health checker in <your language> in this empty Git repository.
@@ -82,35 +83,83 @@ The checker must not call provider APIs or other hosts. Report changed files, ac
 commands and results, and anything I still need to verify. Never claim an unrun case passed.
 ```
 
-The request states behavior without dictating function names or file layout. You should be able to review the implementation because you chose the language. If it needs a package you have not agreed to, follows redirects, or grows into a broad refactor, stop and bring it back to this contract.
+## 3. Watch it work
 
-Notice four parts: **the goal, relevant context, constraints, and evidence of completion**. This is a starting example, not a magic formula to memorize. In [section 3's prompting practice](03-everyday-workflow.md#practical-prompting-techniques), you will write your own request, resolve ambiguity, use contrasting examples, and give useful feedback when a run goes wrong.
+Look for three things in your actual run:
 
-Watch the run, not just its final paragraph:
+- **Files changing.** Which source or project files did OMP create?
+- **Commands running.** Did it execute the checker, or only suggest a command?
+- **Evidence coming back.** What did those commands report?
 
-| Event | What you inspect | What it establishes |
-| --- | --- | --- |
-| Read or search | The path and returned content | What the model actually obtained |
-| Edit or write | The proposed path and resulting file | What changed on disk |
-| Shell run | Command, working directory, output, exit status | What really executed |
-| Final report | Claims compared with those records | Whether the report is supported |
+This is the difference from asking a chatbot for a code sample: OMP can use tools to act in your workspace. A file on disk is not proof that the model read it, and a successful write is not proof that the program works.
 
-A displayed plan is a proposal. A successful write proves that a file was written, not that its checker is correct. Do not manufacture a failure for the lesson; your run may take a different route from the examples below.
+If OMP asks a question, answer it. If it asks for an unagreed package, edits outside the exercise, or expands into a bigger project, interrupt and restate the boundary. Prefer an available HTTP client rather than implementing one; agree any necessary dependency with the host before proceeding.
 
-## Run the six cases yourself
+Your run may succeed immediately or need a correction. Do not manufacture a failure. Compare the final report with the actual commands and results, and note anything not checked.
 
-Use a separate terminal or your normal shell after the model stops. Replace only `<your run command>`; keep the URLs exactly as shown.
+## 4. Try what you built
+
+Use a separate terminal in your **learner repository** after OMP finishes. Replace `<your run command>` with the command for the generated checker—not the fixture command.
+
+### First, the healthy page
 
 ```sh
 <your run command> http://127.0.0.1:4175/healthy
+```
+
+**Check:** the result should be a pass, with status 200, matching text, elapsed milliseconds, and exit code 0. Run it yourself even if OMP already ran it.
+
+### Now, the misleading page
+
+```sh
 <your run command> http://127.0.0.1:4175/wrong-body
+```
+
+This page also returns HTTP 200. **Should your checker pass it?** Read its output and make your decision before opening the answer.
+
+<details>
+<summary><strong>Reveal the expected result</strong></summary>
+
+It should **fail**, with exit code 1. The page responds, but its body says `Maintenance in progress`, not the expected `Workshop service ready`.
+
+That is why we built the checker: a successful HTTP status alone does not establish that the page contains what users need. If your checker passes this case, give OMP the command, actual result, and expected result. Ask it to fix the cause, then rerun both cases.
+
+</details>
+
+<details>
+<summary><strong>How do I see the exit code?</strong></summary>
+
+Immediately after each checker command, use `echo $?` in Bash or Zsh, or `$LASTEXITCODE` in PowerShell for a native program. Record it before running another command. Use the checker command directly, without a pipeline that could hide its exit status.
+
+</details>
+
+## 5. Make it yours
+
+Open the generated source files in your editor. Then write **one follow-up request of your own**:
+
+> Make the result easier for a teammate to understand. What would you change about the report?
+
+Choose a concrete improvement—a clearer failure reason or a more readable arrangement of the existing fields. Tell OMP what you want. Keep the same checks, required information, exit codes, and one-URL interface; do not add a dashboard or another feature.
+
+Run `/healthy` and `/wrong-body` again. **Did the output improve, and did the checker still make the right decisions?** If the report was already clear, choose a small wording or layout preference rather than inventing a bug.
+
+You have now directed a build, used the result, and steered a revision. Next, decide whether it is ready to keep.
+
+## 6. Decide whether it is ready
+
+Two cases are a start, not the whole contract. Check the remaining routes:
+
+```sh
 <your run command> http://127.0.0.1:4175/missing
 <your run command> http://127.0.0.1:4175/error
 <your run command> http://127.0.0.1:4175/redirect
 <your run command> http://127.0.0.1:4175/slow
 ```
 
-Write down each observed status, body-match result, elapsed milliseconds, reason, and exit code before reading the answer table.
+Write down each observed status, body-match result, elapsed milliseconds, reason, and exit code. Compare all six results—including the two you reran after your improvement—with this table.
+
+<details>
+<summary><strong>Check the six expected results</strong></summary>
 
 | Route | Expected observation | Acceptance |
 | --- | --- | --- |
@@ -125,9 +174,11 @@ The only pass in this shared contract is `/healthy`. Elapsed time describes the 
 
 The fixture also serves an index at `/`. Unknown paths return 404. Those are useful exploratory checks, but the six routes above are the first acceptance set.
 
-## Review the files, including files Git does not show in a diff
+</details>
 
-After the six checks, review the work independently. Run these from the learner repository:
+### Inspect what you are keeping
+
+Review the files independently. Run these from the learner repository:
 
 ```sh
 git status --short
@@ -149,7 +200,8 @@ Check the implementation against the contract:
 
 Run your language's normal compile, type, or syntax check if you already use one. Do not install a new checker just to make the lesson look complete. Stop and fix the implementation when observed behavior contradicts the contract; do not accept a green-looking summary over your own evidence.
 
-## If the run goes wrong
+<details>
+<summary><strong>Something did not work?</strong></summary>
 
 - **No response from OMP:** check the selected authorized provider/model and the OMP session directory. Do not paste credentials into the prompt.
 - **Fixture connection refused:** check that the fixture is still running from the course root and that the URL uses `127.0.0.1:4175`.
@@ -160,39 +212,35 @@ Run your language's normal compile, type, or syntax check if you already use one
 
 An interrupt stops a turn; it does not undo edits or guarantee that a child process ended. Check the fixture terminal and Git status after stopping.
 
-## Use the pattern at work
+</details>
 
-A health check is a compact version of a wider engineering task: state the observable contract, give the agent a bounded change, watch the evidence, and decide what remains unverified. For an internal service, you would confirm that the endpoint and expected body are authorized and current before asking for code. You would not treat a successful file write or a model's confidence as an uptime signal.
+## What just happened?
 
-Keep a short note outside the source files:
+You described an outcome, watched OMP act through tools, ran the product yourself, and gave a follow-up request. You also checked a case where a successful HTTP response was not enough.
+
+The useful part is not just that code appeared. You could direct the work and compare the result with what you asked for. The same pattern applies to a feature, a bug fix, or a small automation at work.
+
+**Would you accept this tool?** Name one thing you verified and one thing you still would not claim about it. Keep a short note outside the source files:
 
 ```text
 Selected provider/model:
 My checker command:
-Prompt boundary:
-Six observed results:
+My follow-up request:
+Six observed results after the change:
 Files I reviewed, including untracked files:
 Decision: accept / needs another change / unable to verify
-Reason:
+What I have not verified:
 ```
 
-If you could not make a provider-backed run, use this lesson's request and acceptance table as a prepared walkthrough, clearly labelled as prepared. Do not describe it as a captured model run or claim that a provider executed it.
+Keep the checker in your learner repository—we will build on it later. Stop the fixture with **Ctrl+C** in its terminal when you are finished.
 
-## Before moving on
+If you could not make a provider-backed run, use the request and expected results as a prepared walkthrough. Label it as prepared, not executed.
 
-Answer these without looking back:
-
-1. Why is `/wrong-body` a failed check even though its HTTP status is 200?
-2. Why is `/redirect` a failure instead of a second successful request to `/healthy`?
-3. What evidence would you need before claiming `/slow` timed out?
-4. Which command finds generated files that `git diff` does not display?
-5. What would you do if the model's final report disagreed with your six command outputs?
-
-A strong answer names the body mismatch, the no-redirect boundary, a real elapsed/error result, `git ls-files --others --exclude-standard`, and the actual output as the source of truth. Section 2 names the system parts behind that run.
+In [Foundations](02-foundations.md), we unpack the model, prompt, context, and tools behind a run. [Prompting](../foundations/prompting.md) gives you more practice writing your own requests.
 
 ## Sources and adaptation
 
-This exercise adapts the original first lesson's inspect → change → observe → review pattern to a local health checker. The fixture, routes, and expected results are course-authored. They are not evidence of a provider-backed rehearsal.
+The fixture, routes, and expected results are course-authored. This guided mission uses a real learner run; the expected results above are not a recorded provider-backed demonstration.
 
 OMP command details are tied to the course's pinned **18.2.9** references:
 
@@ -204,4 +252,4 @@ OMP command details are tied to the course's pinned **18.2.9** references:
 
 Read the official pages for the pinned release when a command matters. Other agents and providers may expose different commands; do not silently transfer OMP controls to them.
 
-[Back to Get Ready](../01-get-ready.md) · [Next: Foundations](02-foundations.md) · [Back to the outline](../../OUTLINE.md)
+[Back to Getting started with OMP](../01-getting-started-with-omp.md) · [Next: Foundations](02-foundations.md) · [Back to the outline](../../OUTLINE.md)

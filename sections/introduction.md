@@ -117,7 +117,7 @@ You can ask it to investigate a bug, implement a feature, or compare two approac
 <p class="judgment-lead">Less typing does not mean less engineering.</p>
 <p>An agent can handle the steps without you writing every line. You still need to understand the important decisions and know how to check the result.</p>
 <p><strong>You are responsible for the code you ship and the systems you build—not the LLM.</strong></p>
-<p>We will work through this in <a href="health-checker/03-everyday-workflow.md">The everyday workflow</a>.</p>
+<p>This is the focus of <a href="health-checker/03-everyday-workflow.md">SDLC: the everyday workflow</a>.</p>
 </section>
 
-[Next: Get Ready](01-get-ready.md)
+[Next: Getting started with OMP](01-getting-started-with-omp.md)

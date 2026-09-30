@@ -1,8 +1,10 @@
-# 5. Skills
+# Skill workshop: build and evaluate a review skill
 
-**Main outcome:** decide when a repeatable review deserves a skill, then compare an ordinary request with a small procedure by the quality of their findings. You will save a focused health-check review package, but you will not pretend that a file was discovered or invoked when you did not observe that.
+**Outcome:** create a focused health-check review package, compare an ordinary request with a procedure-guided request, and verify what OMP actually discovered or loaded. You will not pretend that a file was discovered or invoked when you did not observe that.
 
-**Prerequisites:** complete sections 1–4 and keep the health-checker program you built. It should already support the single-URL contract and, if you completed section 3, the array-config contract. Start the shared fixture from the **course root**, in a separate terminal:
+This is a companion workshop, not a numbered main-route section. Read [Skills](../foundations/skills.md) first for what skills are, when to use them, current OMP loading behavior, and recommendations. This page keeps the bounded create-and-evaluate exercise, including its loader warnings and source evidence.
+
+**For this example:** use a health-checker program implementing the [fixture guide's single-URL and multi-target contracts](../../demo/health-checker/README.md). The [guided checker example](01-getting-started.md) covers the single-URL starting point. Read [Skills](../foundations/skills.md) before creating the review procedure. Start the local fixture from the **course root**, in a separate terminal:
 
 ```sh
 bun demo/health-checker/server.mjs
@@ -10,85 +12,7 @@ bun demo/health-checker/server.mjs
 
 The fixture listens on `127.0.0.1:4175`. It is not part of your learner repository and is not changed by this exercise. Use only this loopback fixture or an endpoint you own and have permission to test.
 
-## Understand
-
-### A skill packages a repeatable way of working
-
-A skill can shape communication, guide an investigation, or define a review procedure. A one-off prompt is often best when the task is new or unlikely to recur. The useful question is not “Can I put this in a `SKILL.md`?” It is “Will these instructions solve a recurring problem without making unrelated work heavier?”
-
-For this project, the recurring judgment is:
-
-> Does the checker’s source and recorded evidence support its claimed health-check behavior?
-
-That is narrower than “review the code well.” It has recognizable inputs and an inspectable result. A reviewer needs the accepted contract, the current checker, and actual run evidence. The procedure should not bake in one prepared defect or silently repair the program.
-
-| Need | Start here | Health-checker example |
-| --- | --- | --- |
-| State what must be built | Task brief and acceptance criteria | One URL, status `200`, literal body substring, timeout and exit-code rules |
-| Preserve repository-wide conventions | `AGENTS.md` and linked project docs | Learner’s language, run command and output format |
-| Perform a deterministic operation | Program, test, or script | Run the checker against `/healthy`, `/wrong-body` and `/slow` |
-| Repeat a judgment | Skill or short procedure | Compare implementation and evidence with the contract |
-| Enforce a boundary | Host policy, tool policy or OS permissions | Approval rules, filesystem permissions and network policy |
-
-A skill is passive guidance. It is not a test runner, permission boundary, hook, or sandbox. A test can show what an assertion did; a skill can ask whether that assertion exercised the accepted behavior. Keep those roles separate.
-
-## Skills worth trying
-
-**Start with one recurring difficulty, then choose one skill.** The recommendations below come from reading the linked skill files, not from comparing install counts or claiming that one package always produces better code. Matt **Pocock** is the author of [Skills for Real Engineers](https://github.com/mattpocock/skills).
-
-| Skill and source | When it helps | Try it on the health checker |
-| --- | --- | --- |
-| [`i-have-adhd`](https://github.com/ayghri/i-have-adhd/blob/main/skills/i-have-adhd/SKILL.md), from `ayghri/i-have-adhd` | The answer is hard to act on: long preambles, mixed-up steps, too many tangents. It changes communication, not correctness or permissions. | Ask for the next action after a failed check. Can you find the action, reason, and remaining uncertainty without hunting through an essay? |
-| [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) with [`grilling`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), from Matt Pocock | The request contains unresolved decisions. The interview explores those decisions before implementation. | “Check several sites” leaves questions about expected content, timeouts, and whether one failure stops the batch. Use the interview to settle those—not to ask facts the repository can answer. |
-| [`tdd`](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md), from Matt Pocock | You need a behavior check that can fail before implementing the fix. The current skill agrees public testing boundaries, then works one red–green slice at a time. | Write a check that catches accepting `/wrong-body` solely because it returned 200. If the checker is already correct, use a genuinely new behavior rather than breaking it to stage a demonstration. |
-| [`diagnosing-bugs`](https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md), from Matt Pocock | Repeated edits are not explaining a failure. The procedure establishes a reproducible signal, tests hypotheses, and verifies the repair. | Investigate a checker that accepts `/slow` despite the agreed deadline. Distinguish a missing deadline from a wrong URL or fixture that was never started. |
-| [`code-review`](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md), from Matt Pocock | You have a committed change and want separate checks against repository standards and the requested behavior. | Review the multi-target change against its specification. Supply a real Git baseline and the spec; inspect whether invalid later entries can trigger earlier requests. |
-
-**My starting recommendation:** use `i-have-adhd` if its communication style suits you; choose `grill-me` for unclear requirements or `diagnosing-bugs` for a real failure. Add `tdd` when you want the test-first loop. Save the upstream `code-review` workflow for a repository with a usable committed baseline: its documented comparison is against `HEAD`, not a complete review of untracked first-exercise files.
-
-These skills are opinionated. `grilling` can conduct an extensive interview, while `tdd` asks you to agree the testing boundaries. That structure can help uncertain work and be unnecessary for a small, settled change. Review the instructions and adapt them deliberately; do not treat a popular author's preferences as universal rules.
-
-In the source versions reviewed here, `i-have-adhd` and `grill-me` set `disable-model-invocation: true`; `tdd`, `diagnosing-bugs`, and `code-review` omit it and use the discoverable default. Check your installed revision. The next section explains what this means in OMP rather than assuming every host uses the same invocation controls.
-
-### Example: clearer communication without losing evidence
-
-`i-have-adhd` is already used in the course author's working setup. Its source asks for an action-first answer, bounded numbered steps, a small visible working set, and explicit progress. You do not need to disclose a diagnosis to prefer that format. This course makes no medical or measured productivity claim about it.
-
-Compare these **prepared rewrites**, not recorded model output:
-
-> **Hard to act on:** “There are several possible causes, including networking configuration and timeout handling. It might be worth investigating how the request is made and perhaps reviewing the code before trying again.”
-
-> **Action-first:** “Inspect where the 1000 ms deadline is applied. `/slow` passed after two seconds; we do not yet know why. Check the timer units and whether the deadline remains active until the response finishes. Rerun that case after a supported fix.”
-
-The second answer is useful because the action and uncertainty are explicit—not merely because it is shorter. Keep warnings, evidence, and explanations when they affect the decision. Try one communication style at a time; stacking contradictory style skills makes the result harder to judge.
-
-If the package is not installed, this ordinary prompt lets you try the communication preference without pretending you invoked the skill:
-
-```text
-Lead with the next action. Use numbered steps when order matters.
-Keep the main answer focused, but retain the reason, risks, and what is unverified.
-Do not add unrelated suggestions.
-```
-
-### Inspect before installing
-
-1. **Read the source and dependencies.** The current `grill-me` file delegates to `grilling`. The `tdd` directory includes supporting references; `diagnosing-bugs` has a helper for its human-assisted branch. Keep required files and referenced skills, not just a copied name.
-2. **Check what it may do.** Inspect scripts, hooks, network operations, repository writes, and tools it assumes. A skill file is guidance; a plugin may also install executable behavior. Do not install a whole bundle just to try one procedure.
-3. **Check host compatibility.** Claude plugin commands are not OMP commands. For OMP, use its documented skill layout, preserve required relative files, and verify the resolved source and invocation as described below.
-4. **Try it on disposable work.** Use the same task and evidence with and without the procedure. Keep it only if it improves the outcome you care about; one useful response is not a benchmark.
-5. **Record the source and revision.** Reinspect updates. Avoid loading two copies with the same name, and keep a way to remove the trial.
-
-Matt's [current installation guide](https://github.com/mattpocock/skills#installation-30-second-setup) offers an interactive installer:
-
-```sh
-npx skills@latest add mattpocock/skills
-```
-
-This is an **optional upstream command**, not a workshop prerequisite or a command this course has run for you. It requires Node/npm and downloads code. Review it first, select only what you need, and verify support for your host. OMP learners can instead place reviewed skill folders and their dependencies under the native `.omp/skills/` layout, then verify discovery. No Node requirement is added to the learner's implementation language.
-
-The collection's [`setup-matt-pocock-skills`](https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md) writes repository guidance for issue tracking and domain documents. Follow that setup when adopting workflows that require it, after reviewing the proposed changes; do not silently add those files for a one-off skill demonstration. For `i-have-adhd`, use its own [installation guide](https://github.com/ayghri/i-have-adhd/blob/main/INSTALL.md), not Matt's installer.
-
-The linked upstream files can change. These are source-reviewed recommendations, not a claim that every package or host integration has been executed in this workshop.
+The candidate below is intentionally review-only. Its inputs stay in the task packet: the accepted contract, current checker, changed files, and actual run records. It must not edit the checker, call endpoints, or claim that a command ran without evidence.
 
 ## Choose how the skill loads
 
@@ -279,33 +203,9 @@ If the command is unavailable, the package is not listed, or your host uses a di
 
 Keep mode changes separate from the ordinary-versus-procedure comparison. Otherwise you cannot tell whether different results came from the procedure, discovery state, or another setting.
 
-## Use at work
+## Apply the result
 
-### Choose one-off prompt, procedure, or skill
-
-Use a one-off prompt when the judgment is unique or the inputs are still being discovered. Keep a short procedure in the task when it is useful once or twice but not stable enough to route automatically. Package a skill after a repeated omission survives a normal request and the procedure has a clear negative example.
-
-For a real health-check review, inputs stay outside the package:
-
-- accepted contract and changed files;
-- current run records, including endpoint and exit code;
-- relevant source links and code state;
-- the decision the engineer still owns.
-
-Do not expand the package into a generic autonomous-agent charter. If the body starts implementing checks, editing files, or calling endpoints, move that work back to the program or an explicitly authorized task.
-
-### Maintain it from concrete failures
-
-| Observed problem | Smallest response |
-| --- | --- |
-| Relevant requests never load the body | Check the invocation flag and winning source first; improve description triggers only for a model-selectable skill |
-| The review trusts a green summary | Require inspection of assertions and current code state |
-| It invents a timeout or status | Require separation of observed status, transport failure and missing evidence |
-| It audits unrelated code | Add a near-miss example and narrow the description |
-| It finds only `/wrong-body` | Remove fixture-specific hints and retry with another contract |
-| It adds no useful signal | Keep the ordinary request or delete the skill |
-
-Change one thing, repeat the case that exposed it, then try a different case. Keep a small record of package revision, OMP version, mode, source, findings and checks actually run. Do not treat one model comparison as a broad effectiveness claim.
+Use [Skills](../foundations/skills.md) for the one-off prompt versus procedure versus skill decision and the maintenance rules. This workshop's decision is local: keep, revise, try another case, or remove the candidate based on the evidence you recorded.
 
 ## Go deeper
 
@@ -335,6 +235,6 @@ The record should let another engineer reproduce the comparison without unsafe t
 - [Pinned skill loader](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/packages/coding-agent/src/extensibility/skills.ts) — catalog hiding, retained direct access, and which fields reach the runtime skill object.
 - [Pinned skill frontmatter type](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/packages/coding-agent/src/capability/skill.ts) — `hide` and normalized `disableModelInvocation`; additional metadata is not necessarily an enforced control.
 - The health-check contract and loopback fixture are course-owned. `demo/health-checker/README.md` is the source of route behavior; expected observations in this lesson are instructions to check, not claims that a run occurred.
-- The package above is a teaching example. It is not installed by the course and is not evidence of provider-backed invocation.
 
-[Previous: context and repository knowledge](04-context-and-repository-knowledge.md) · [Next: reliable execution](06-reliable-execution.md) · [Back to outline](../../OUTLINE.md)
+[Back to Skills foundation](../foundations/skills.md)
+

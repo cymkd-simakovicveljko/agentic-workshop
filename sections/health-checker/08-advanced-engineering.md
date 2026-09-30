@@ -1,4 +1,4 @@
-# 8. Advanced engineering: harness boundaries and existing consumers
+# 6. Advanced engineering: harness boundaries and existing consumers
 
 **Choose one route, or take both independently.** Route A inspects the boundary
 around an agent-run health check. Route B changes the checker you already own while
@@ -7,7 +7,7 @@ installation or a fictional exporter. Both stay local and bounded.
 
 | Route | Starting point | Exit evidence |
 | --- | --- | --- |
-| **A — harness boundary** | The learner checker and opt-in JSON report from section 7, shared fixture, and section 6 evidence rules | A reviewed authority/context/tool-result loop plus a real consumer check; not an implemented harness |
+| **A — harness boundary** | A checker implementing the [archived JSON-report contract](https://github.com/cymkd-simakovicveljko/agentic-workshop/blob/491d6fbe8d32fc4ab474a044737a881f90cc7d62/sections/health-checker/07-optional-flavors.md#before-you-choose-a-flavor), the local fixture, and the evidence distinctions in [Artifacts](../foundations/artifacts.md) | A reviewed authority/context/tool-result loop plus a real consumer check; not an implemented harness |
 | **B — existing-system change** | The learner checker's current CLI plus a tiny consumer scenario | Characterization, a small seam, additive JSON output, preserved old interface and consumer checks |
 
 The shared fixture is started from the course root, not from inside the learner
@@ -122,7 +122,7 @@ clock while keeping the default real HTTP path intact. If the code has no such
 boundary, first use the local fixture as an outer observation, then make one small
 preparatory change and re-run the characterization cases.
 
-The desired feature is the `--report-json PATH` option defined in [section 7](07-optional-flavors.md): a single-target report with explicit validation and output-error rules. Preserve the no-flag single-target and batch interfaces. If you already implemented it, use characterization and consumer checks to assess it rather than rebuilding it. Route B does not require completing Route A.
+This retained example uses the `--report-json PATH` option defined in the [archived report contract](https://github.com/cymkd-simakovicveljko/agentic-workshop/blob/491d6fbe8d32fc4ab474a044737a881f90cc7d62/sections/health-checker/07-optional-flavors.md#before-you-choose-a-flavor), not the current Optional flavors notes. It specifies a single-target report with validation and output-error rules. Preserve the no-flag single-target and batch interfaces. If you already implemented it, use characterization and consumer checks to assess it rather than rebuilding it. Route B does not require completing Route A.
 
 ## Watch or try
 
@@ -153,7 +153,7 @@ reports, using a different unused report path for each run. A language-neutral c
 ```text
 parse report as JSON
 require report.schemaVersion == 1
-require the section 7 field types and target/result consistency
+require the archived report contract's field types and target/result consistency
 accept only when report.result.outcome == "pass", report.result.status == 200,
   report.result.matched == true, and report.exitStatus == 0
 reject fail/invalid reports and missing, wrongly typed, or contradictory fields

@@ -258,6 +258,83 @@ button:hover {
     padding: 18px;
   }
 }
+
+.harness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.prose .harness-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  text-decoration: none;
+}
+.prose .harness-card:hover,
+.prose .harness-card:focus-visible,
+.prose .harness-choice {
+  border-color: var(--accent);
+}
+.prose .harness-card img {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  padding: 5px;
+  background: #f5f5f5;
+}
+.harness-card > span {
+  min-width: 0;
+}
+.harness-card strong,
+.harness-card small,
+.harness-card em {
+  display: block;
+}
+.harness-card small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.harness-card em {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 12px;
+  font-style: normal;
+}
+.prose .harness-choice img {
+  background: #0d0d0d;
+}
+.terminal-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+.prose .terminal-card {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 8px 14px;
+  font-size: 14px;
+}
+.terminal-card .external-link-mark {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+}
+@media (max-width: 650px) {
+  .terminal-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 .skip:focus {
   top: 12px;
 }
@@ -513,6 +590,28 @@ button:hover {
 .lesson-item.current .lesson-number,
 .lesson-item.current .lesson-arrow {
   color: #abc8ee;
+}
+.lesson-item.section-current > .lesson-link {
+  color: #d0dced;
+}
+.lesson-children {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 7px 30px;
+  padding: 0 0 0 12px;
+  border-left: 1px solid #374352;
+}
+.lesson-children .lesson-link {
+  gap: 9px;
+  padding: 7px 9px;
+  font-size: var(--type-small);
+}
+.lesson-children .lesson-number {
+  min-width: 31px;
+  color: #879bb5;
+}
+.lesson-children .lesson-arrow {
+  font-size: 13px;
 }
 .nested-headings {
   padding: 0 13px 13px 44px;
@@ -789,6 +888,16 @@ main {
 }
 .prose a:hover {
   color: #d0e0f6;
+}
+.external-link-mark {
+  display: inline-block;
+  flex: 0 0 auto;
+  margin-inline-start: 0.25em;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+.harness-card .external-link-mark {
+  margin-inline-start: auto;
 }
 .prose ul,
 .prose ol {

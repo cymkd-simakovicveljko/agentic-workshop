@@ -11,6 +11,8 @@ const assets = new Map([
   ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
   ["/diagrams/workflow.svg", ["reader/diagrams/workflow.svg", "image/svg+xml"]],
   ["/diagrams/context.svg", ["reader/diagrams/context.svg", "image/svg+xml"]],
+  ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],
+  ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
   [
     "/fonts/dm-sans.woff2",
     [

@@ -4,6 +4,7 @@ import DOMPurify from "/vendor/purify.js";
 const $ = (selector) => document.querySelector(selector);
 const article = $("#article");
 const defaultDocument = "sections/introduction.md";
+let course = { introduction: null, sections: [], lessons: [] };
 let lessons = [];
 let currentDocument = "";
 let controller;
@@ -86,51 +87,153 @@ $("#collapse").addEventListener("click", () => {
 $("#lesson-search").addEventListener("input", (event) => {
   const query = event.target.value.trim().toLowerCase();
   let matches = 0;
-  document.querySelectorAll(".lesson-item").forEach((item) => {
-    item.hidden = !item
-      .querySelector(".lesson-link")
+  const parentItems = [...$("#lessons").children].filter((item) =>
+    item.classList.contains("lesson-item"),
+  );
+  parentItems.forEach((parent) => {
+    const parentMatch = parent
+      .querySelector(":scope > .lesson-link")
       .textContent.toLowerCase()
       .includes(query);
-    if (!item.hidden) matches++;
+    const childItems = [
+      ...parent.querySelectorAll(":scope > .lesson-children .lesson-item"),
+    ];
+    if (!query) {
+      parent.hidden = false;
+      childItems.forEach((item) => {
+        item.hidden = false;
+      });
+      return;
+    }
+    let childMatches = 0;
+    childItems.forEach((item) => {
+      const matched = item
+        .querySelector(":scope > .lesson-link")
+        .textContent.toLowerCase()
+        .includes(query);
+      item.hidden = !matched && !parentMatch;
+      if (matched) childMatches++;
+    });
+    parent.hidden = !parentMatch && childMatches === 0;
+    if (parentMatch || childMatches) matches++;
   });
   document.querySelectorAll(".chapter-label").forEach((label) => {
     label.hidden = Boolean(query);
   });
-  $("#no-results").hidden = matches > 0;
+  $("#no-results").hidden = matches > 0 || !query;
 });
+
+function lessonAnchor(item) {
+  return [...item.querySelectorAll('a[href^="sections/"]')].find(
+    (anchor) => anchor.closest("li") === item,
+  );
+}
+
+function parseCourseOutline(document) {
+  const root = document.querySelector(".course-lessons");
+  const lists = root
+    ? [...root.children].filter((element) => element.matches("ol"))
+    : [];
+  const topItems = lists.flatMap((list) =>
+    [...list.children].filter((element) => element.matches("li")),
+  );
+  const readLesson = (item) => {
+    const anchor = lessonAnchor(item);
+    if (!anchor) return null;
+    const nestedList = [...item.children].find((element) =>
+      element.matches("ol"),
+    );
+    return {
+      title: anchor.textContent.trim(),
+      path: anchor.getAttribute("href"),
+      children: nestedList
+        ? [...nestedList.children]
+            .filter((element) => element.matches("li"))
+            .map(readLesson)
+            .filter(Boolean)
+        : [],
+      parent: null,
+      number: "",
+      sectionNumber: null,
+      isIntroduction: false,
+    };
+  };
+  const roots = topItems.map(readLesson).filter(Boolean);
+  if (!roots.length) throw new Error("The course outline contains no lesson links.");
+  const flatLessons = [];
+  const visit = (lesson, parent, sectionNumber, number) => {
+    lesson.parent = parent;
+    lesson.sectionNumber = sectionNumber;
+    lesson.number = number;
+    lesson.isIntroduction = !parent && !sectionNumber;
+    flatLessons.push(lesson);
+    lesson.children.forEach((child, index) =>
+      visit(
+        child,
+        lesson,
+        sectionNumber,
+        sectionNumber ? `${sectionNumber}.${index + 1}` : "—",
+      ),
+    );
+  };
+  const introduction = roots[0];
+  visit(introduction, null, null, "—");
+  const sections = roots.slice(1);
+  sections.forEach((section, index) => {
+    const sectionNumber = String(index + 1);
+    visit(section, null, sectionNumber, sectionNumber);
+  });
+  return { introduction, sections, lessons: flatLessons };
+}
+
+function createLessonItem(lesson) {
+  const item = document.createElement("div");
+  item.className = `lesson-item${lesson.parent ? " lesson-child" : ""}`;
+  item.dataset.path = lesson.path;
+  const anchor = document.createElement("a");
+  anchor.className = "lesson-link";
+  anchor.href = readerUrl(lesson.path);
+  const number = document.createElement("span");
+  number.className = "lesson-number";
+  number.textContent = lesson.number;
+  const name = document.createElement("span");
+  name.className = "lesson-name";
+  name.textContent = lesson.title;
+  const arrow = document.createElement("span");
+  arrow.className = "lesson-arrow";
+  arrow.textContent = "›";
+  arrow.setAttribute("aria-hidden", "true");
+  anchor.append(number, name, arrow);
+  item.append(anchor);
+  if (lesson.children.length) {
+    const children = document.createElement("div");
+    children.className = "lesson-children";
+    children.setAttribute("aria-label", `${lesson.title} lessons`);
+    lesson.children.forEach((child) => children.append(createLessonItem(child)));
+    item.append(children);
+  }
+  return item;
+}
 
 function buildOutline() {
   const nav = $("#lessons");
   nav.replaceChildren();
-  lessons.forEach((lesson, index) => {
-    if (index === 0 || index === 2) {
-      const label = document.createElement("p");
-      label.className = "chapter-label";
-      label.textContent = index === 0 ? "START HERE" : "THE EIGHT SECTIONS";
-      nav.append(label);
-    }
-    const item = document.createElement("div");
-    item.className = "lesson-item";
-    item.dataset.path = lesson.path;
-    const anchor = document.createElement("a");
-    anchor.className = "lesson-link";
-    anchor.href = readerUrl(lesson.path);
-    const number = document.createElement("span");
-    number.className = "lesson-number";
-    number.textContent = index < 2 ? "—" : String(index - 1).padStart(2, "0");
-    const name = document.createElement("span");
-    name.className = "lesson-name";
-    name.textContent = lesson.title;
-    const arrow = document.createElement("span");
-    arrow.className = "lesson-arrow";
-    arrow.textContent = "›";
-    arrow.setAttribute("aria-hidden", "true");
-    anchor.append(number, name, arrow);
-    item.append(anchor);
-    nav.append(item);
-  });
-  $("#lesson-count").textContent = `${lessons.length - 2} sections · introduction + setup`;
+  if (course.introduction) {
+    const label = document.createElement("p");
+    label.className = "chapter-label";
+    label.textContent = "START HERE";
+    nav.append(label, createLessonItem(course.introduction));
+  }
+  if (course.sections.length) {
+    const label = document.createElement("p");
+    label.className = "chapter-label";
+    label.textContent = `THE ${course.sections.length} SECTIONS`;
+    nav.append(label);
+    course.sections.forEach((section) => nav.append(createLessonItem(section)));
+  }
+  $("#lesson-count").textContent = `${course.sections.length} sections · introduction`;
 }
+
 
 function headingLinks(target, selectedHeadings) {
   target.replaceChildren();
@@ -197,6 +300,16 @@ function decorateDocument(path) {
     if (resolved.origin !== location.origin) {
       anchor.target = "_blank";
       anchor.rel = "noopener noreferrer";
+      if (["http:", "https:"].includes(resolved.protocol)) {
+        const marker = document.createElement("span");
+        marker.className = "external-link-mark";
+        marker.setAttribute("aria-hidden", "true");
+        marker.textContent = "↗";
+        const notice = document.createElement("span");
+        notice.className = "sr-only";
+        notice.textContent = " (external link, opens in a new tab)";
+        anchor.append(marker, notice);
+      }
       return;
     }
     if (resolved.pathname.startsWith("/content/")) {
@@ -270,8 +383,12 @@ function selectOutline(path) {
     .forEach((element) => element.remove());
   document.querySelectorAll(".lesson-item").forEach((item) => {
     const selected = item.dataset.path === path;
+    const childSelected = [
+      ...item.querySelectorAll(".lesson-children .lesson-item"),
+    ].some((child) => child.dataset.path === path);
     item.classList.toggle("current", selected);
-    const anchor = item.querySelector(".lesson-link");
+    item.classList.toggle("section-current", childSelected);
+    const anchor = item.querySelector(":scope > .lesson-link");
     if (selected) {
       anchor.setAttribute("aria-current", "page");
       const nested = document.createElement("nav");
@@ -298,8 +415,8 @@ function pagination(index) {
     index < 0
       ? [
           {
-            path: lessons[0]?.path,
-            title: lessons[0]?.title,
+            path: course.introduction?.path,
+            title: course.introduction?.title,
             label: "START THE COURSE →",
           },
         ]
@@ -320,6 +437,7 @@ function pagination(index) {
   }
 }
 
+
 async function loadDocument({ focus = false } = {}) {
   controller?.abort();
   controller = new AbortController();
@@ -338,25 +456,33 @@ async function loadDocument({ focus = false } = {}) {
     article.innerHTML = markdown(source);
     const h1 = article.querySelector("h1");
     const title = (h1?.textContent || path.split("/").pop()).replace(
-      /^\d+\.\s*/,
+      /^\d+(?:\.\d+)*\.?\s+/,
       "",
     );
     h1?.remove();
     const index = lessons.findIndex((lesson) => lesson.path === path);
+    const lesson = index >= 0 ? lessons[index] : null;
     $("#title").textContent = title;
     document.title = `${title} — Agentic engineering`;
-    $("#chapter").textContent =
-      index >= 0 ? "MAIN COURSE" : "COURSE RESOURCES";
-    $("#crumb").textContent =
-      index >= 0
-        ? index === 0 ? "INTRODUCTION" : index === 1 ? "SETUP" : `SECTION ${String(index - 1).padStart(2, "0")}`
-        : path === "OUTLINE.md" ? "OUTLINE" : "RESOURCE";
-    $("#lesson-position").textContent =
-      index >= 0
-        ? index === 0 ? "Introduction" : index === 1 ? "Setup" : `Section ${index - 1}`
-        : path === "OUTLINE.md"
-          ? "Eight-section course outline"
-          : "Reference document";
+    $("#chapter").textContent = lesson
+      ? lesson.isIntroduction
+        ? "INTRODUCTION"
+        : `SECTION ${lesson.sectionNumber.padStart(2, "0")}`
+      : "COURSE RESOURCES";
+    $("#crumb").textContent = lesson
+      ? lesson.isIntroduction
+        ? "INTRODUCTION"
+        : `SECTION ${lesson.number}`
+      : path === "OUTLINE.md"
+        ? "OUTLINE"
+        : "RESOURCE";
+    $("#lesson-position").textContent = lesson
+      ? lesson.isIntroduction
+        ? "Introduction"
+        : `Section ${lesson.number}`
+      : path === "OUTLINE.md"
+        ? `${course.sections.length}-section course outline`
+        : "Reference document";
     $("#read-time").textContent =
       `~${Math.max(1, Math.ceil(source.split(/\s+/).length / 220))} min read`;
     $("#read-time").title =
@@ -492,14 +618,8 @@ try {
     markdown(outline),
     "text/html",
   );
-  lessons = [...parsed.querySelectorAll('.course-lessons ol a[href^="sections/"]')].map(
-    (anchor) => ({
-      title: anchor.textContent,
-      path: anchor.getAttribute("href"),
-    }),
-  );
-  if (!lessons.length)
-    throw new Error("The course outline contains no lesson links.");
+  course = parseCourseOutline(parsed);
+  lessons = course.lessons;
   buildOutline();
 } catch (error) {
   $("#lessons").textContent = `Outline unavailable: ${error.message}`;

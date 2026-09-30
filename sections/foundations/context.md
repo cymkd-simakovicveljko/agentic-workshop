@@ -38,44 +38,73 @@ The distinction matters: **40% of a 1M window is still 400K tokens.** Use a fixe
 
 Watch whether the agent keeps the important decisions and makes fewer mistakes. If compaction repeatedly drops facts you still need, adjust the setting rather than chasing the lowest number. See [OMP’s threshold settings](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/session/context-settings.ts) and [compaction documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/compaction.md) for the current behavior.
 
+## Four ways to keep context useful
+
+Compaction makes existing context smaller. Notes and subagents help keep everything from piling into one conversation in the first place.
+
+- **Summarize with an LLM.** Replace older conversation with a shorter account of decisions, progress, and open questions. Useful for continuing a long task, but summaries can miss details.
+- **Keep notes or a handoff document.** Save important decisions, file paths, and next steps, then load what you need later. A document only helps if it stays current and the agent reads it.
+- **Delegate to subagents.** Let a separate agent investigate a focused question and return findings with source references, rather than its entire transcript. This keeps the main context smaller, but adds model calls and can lose detail in the handoff.
+- **Clear stale tool results.** Remove old logs and superseded file reads from active context. Keep a way to retrieve the originals when they matter again.
+
+**Keep the decisions and evidence you still need, not every step it took to find them.**
+
+Read: Anthropic’s [context engineering guide](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) and [context editing and memory overview](https://claude.com/blog/context-management).
+
+Watch: [Claude plays Catan: Managing agent context with Sonnet 4.5](https://www.youtube.com/watch?v=BER3EhUIyz0), an official Anthropic demo of context management, not an OMP setup tutorial.
+
 ## What reaches the model
 
-Opening OMP in a repository gives the agent somewhere to work. It does not put every file into the model’s context.
+**Your message is only part of the context.** Instructions, tool definitions, loaded files, and conversation history take up space too. Opening a repository does not load all its files.
 
-<div class="scenario-grid">
-<section class="scenario-card">
-<h3>What you supply</h3>
-<p>Your request, examples, pasted output, and supported attachments. Include the facts the agent cannot discover from the repository, such as the behavior you agreed with the team.</p>
-</section>
-<section class="scenario-card">
-<h3>What the harness supplies</h3>
-<p>System instructions, available tool definitions, applicable project guidance, and conversation history or summaries. The exact contents depend on the harness and its configuration.</p>
-</section>
-<section class="scenario-card">
-<h3>What tools bring back</h3>
-<p>File contents, search results, command output, and fetched documentation. Each result gives the model information it can use to decide what to do next.</p>
-</section>
-</div>
+<aside class="judgment-callout">
+<p class="judgment-kicker">Try this now</p>
+<h3>See what is taking up space</h3>
+<pre><code>/context</code></pre>
+<p>Run this in OMP to see an <strong>estimated context-usage breakdown</strong>. Look at the largest categories, not just the total percentage.</p>
+<ol>
+<li><strong>Check a fresh session.</strong> Notice how much context is used before you ask anything.</li>
+<li><strong>Check again after an investigation.</strong> What grew after the agent read files and used tools?</li>
+<li><strong>Question the overhead.</strong> Are you carrying instructions or integrations this task does not need?</li>
+</ol>
+<p>This is a usage view, not a complete dump of everything sent to the provider.</p>
+</aside>
 
-**A path is a starting point, not the file’s contents.** “Look at `src/auth`” helps the agent find the code. Reading that code is what brings it into context. The same goes for a link to a ticket or documentation page.
+<aside class="judgment-callout">
+<p class="judgment-kicker">After bulky tool output</p>
+<h3>Shake out the extra weight</h3>
+<pre><code>/shake</code></pre>
+<p><strong>Use this when large tool results or code blocks are crowding the session.</strong> It trims eligible content rather than asking an LLM to summarize the conversation, keeping recoverable text behind artifact references.</p>
+<p>Check <code>/context</code> before and after. Manual shaking can also trim recent material, so the agent may need to retrieve details again. It is not a substitute for preserving important decisions.</p>
+<p><a href="https://github.com/can1357/oh-my-pi/blob/main/docs/compaction.md#shake-method">How OMP’s shake method works.</a></p>
+</aside>
 
-OMP automatically loads applicable context files such as `AGENTS.md` according to its discovery rules. Ordinary source files still need to be retrieved. See [OMP’s context-file documentation](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/context-files.md) for the exact loading rules.
+<aside class="judgment-callout">
+<p class="judgment-kicker">When the conversation needs reducing</p>
+<h3>Compact or make a handoff</h3>
+<p><strong><code>/compact</code></strong> manually triggers context compaction using OMP’s configured methods. Use it to make room before continuing a long task. For a focused LLM summary, select <code>soft</code> and add instructions: <code>/compact soft Preserve the API decisions and failing test details</code>.</p>
+<p><strong><code>/handoff</code></strong> generates a handoff document and uses it to compact the current session in place. Use it when you want a structured continuation brief covering the goal, constraints, progress, decisions, and next steps. It does not start a new session or automatically create a standalone Markdown file; the document is stored as the session’s compaction summary.</p>
+<p>Both reduce what the model carries forward, so check that important decisions survived. See <a href="https://github.com/can1357/oh-my-pi/blob/main/docs/compaction.md">OMP’s compaction reference</a> and <a href="sessions.md">Sessions and memory</a> for the details.</p>
+</aside>
 
-## Give it a useful starting point
+### The usual suspects
 
-You do not need to assemble the whole investigation yourself. Give the agent enough to start in the right place, then let it follow the evidence.
+- **[AGENTS.md and CLAUDE.md](https://github.com/can1357/oh-my-pi/blob/main/docs/context-files.md):** project and personal guidance. OMP loads applicable files automatically according to its discovery rules. Keep them useful, not encyclopedic. Run **`/extensions`** to inspect discovered context files, their source, and their current state.
+- **[Skills](https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md):** OMP normally lists names and descriptions first, then loads the full instructions when a skill is used. Installing a skill does not mean its entire body is always in context.
+- **[MCP servers](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md):** exposed tool definitions, server instructions, and returned results can all add context. Connecting a server does not load its whole database, but a large tool catalog can still add overhead before any calls.
+- **System instructions and built-in tools:** the harness supplies the model’s operating instructions and tool definitions. They are context too. The harness itself is the software that runs the tools, not the text describing them.
+- **Your conversation:** prompts, attachments, earlier answers, and summaries. Old plans still take up space if they remain in the active context.
+- **Retrieved material:** source code, documentation, logs, test output, and loaded memory notes. A path or link is only a pointer until its contents are retrieved.
 
-Compare these two requests:
+### Progressive disclosure: load details when needed
 
-> Find out why access is broken. Do not edit anything yet.
+**Show what is available first. Load the detail when the task calls for it.** That is progressive disclosure, and skills are a good example:
 
-Versus:
+1. The agent sees a skill’s name and short description.
+2. If it fits the task, the agent reads its instructions.
+3. It opens supporting references only when needed.
 
-> Find out why an editor gets a 403 when saving a draft. Viewing the same draft works. Start with the save endpoint and its permission checks, then inspect the relevant tests. Editors should be allowed to save their own drafts, but not publish them. Report what explains the failure and what is still uncertain. Do not edit anything yet.
-
-The second request adds an observed failure, a useful contrast, and the intended behavior. It does not prescribe the fix. If you know the endpoint, file, failing command, or exact error, include it. Remove credentials and personal data from logs before sharing them.
-
-**Tell it what you know. Let it investigate what it can find.** That is a better division of work than either a vague request or a pasted copy of the entire repository.
+Use the same approach for project knowledge: short guidance pointing to focused documents beats loading every document at startup. Keep essential constraints visible; defer the detailed reference material. [Anthropic’s context engineering guide](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) explains this approach to retrieving context as the agent works.
 
 ## Choose what earns its place
 
@@ -115,23 +144,29 @@ For when to resume, start fresh, or compact, see [Sessions and memory](sessions.
 </details>
 </div>
 
-## Try it: change the context, not the model
+## Stay vigilant about context
 
-Open a repository you know. Pick one function with two or three branches and a concrete input whose result you can check yourself. Find a relevant caller or test before starting.
+Be stricter with context than feels necessary. Old assumptions, irrelevant output, and abandoned plans pile up easily. Keep the evidence you need, but do not carry everything forward just because it is already there.
 
-1. **Run a baseline in a fresh session.** Use the prompt below with your function, path, and input. Keep the answer and note which files the agent inspected.
-2. **Repeat in another fresh session with the same model and effort.** Keep the repository, instructions, and available tools unchanged. Use the same prompt, but add the relevant caller or test path and any actual output you have for that input. Do not give it the first answer.
-3. **Check both explanations against the code.** Did they identify the right branch, result, and error behavior? Did either invent missing details? Compare unnecessary searches and corrections, not just answer length.
+> **Remember, every word matters.**
+
+## Try it: watch your context grow
+
+Open a repository you know and start a fresh OMP session.
+
+1. Run **`/context`** and note the usage.
+2. Give the agent the task below, replacing the feature or endpoint.
+3. Run **`/context`** again. What grew?
+4. Run **`/shake`**, then **`/context`** once more. How much space did it recover?
+5. Ask a specific follow-up about the code. Does the agent still have the detail, or does it need to read a file again?
 
 ```text
-Explain what happens when [concrete input] is passed to [function name]
-in [file path]. Use the available tools to inspect the code and its
-relevant dependencies. Identify the branch taken, the result or error,
-and the files supporting your explanation. Say what you could not verify.
-Do not change any files.
+Trace how [feature or endpoint] works, from its entry point through
+the main dependencies and tests. Use tools to inspect the code and
+explain what you find. Do not change files.
 ```
 
-**Finish with one observation:** which added fact helped, or did the agent already find it on its own? Both runs may succeed. The point is to notice which context saves useful work, not to force the first run to fail.
+**The takeaway:** context grows as the agent works. Reducing it can save space, but some details may need to be fetched again. If `/shake` saves little, there may not be much eligible content to trim.
 
 Next, we will turn that information into a clear request in [Prompting](prompting.md).
 

@@ -220,6 +220,15 @@ Two other names you will encounter are **self-consistency**, which compares mult
 
 “Do not change files” is an instruction, not a permission control. Keep reviewing proposed actions; we cover that distinction in [Tools and permissions](tools-and-permissions.md).
 
+### Model-specific prompting
+
+**Keep the goal and acceptance criteria; adjust the guidance when you change models.** The same prompt can produce different verbosity, initiative, and tool use. Even effort settings can change the behavior.
+
+- **OpenAI GPT-6 Astra:** OpenAI reports detailed, heavily formatted replies and a tendency to ask clarifying questions. Specify the answer length and which decisions require your input. See the [GPT-6 prompting guide](https://developers.openai.com/api/docs/guides/latest-model#prompting-best-practices).
+- **Anthropic Claude Fable 5.1 / Mythos 5.1:** Anthropic documents dense prose and less frequent search at low effort. Ask for concise explanations and explicitly require source lookup when current facts matter. See the [model-specific prompting guide](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1) and [guides for other current Claude models](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#model-specific-guidance).
+
+These are documented tendencies, not fixed personalities. Use the guide for your exact model, then try one adjustment on a real task. Do not accumulate workarounds for models you no longer use.
+
 ## Tips and tricks
 
 Use these habits when the agent sounds convincing, misses a boundary, or gives you an answer that is hard to work with. Better wording helps, but it does not replace checking the result.
@@ -287,11 +296,24 @@ A review can suggest a different design, more abstraction, or another round of w
 <p class="judgment-kicker">Voice and tone</p>
 <h3>Make the answer easier to read</h3>
 <p>Ask for a language, tone, structure, and level of detail that helps you work. You can ask for another language while keeping code identifiers and commands unchanged, or use this starting point:</p>
-<pre><code class="language-text">Lead with the recommendation. Use plain English and short paragraphs.
-Keep exact technical terms, commands, and important caveats.
-Explain unfamiliar terms once. Use bullets for actions and a table
-only when it makes a comparison clearer. Avoid hype and filler.</code></pre>
+<pre><code class="language-text">Lead with the recommendation. Use the principles of ASD-STE100
+Simplified Technical English: short sentences, direct instructions,
+and consistent terminology.
+Preserve exact technical terms, code identifiers, commands, and
+important caveats. Explain unfamiliar terms once.
+Use bullets for actions and tables when they clarify a comparison.
+Avoid hype and filler.</code></pre>
+<p><a href="https://www.asd-ste100.org/">ASD-STE100</a> is a controlled language for technical documentation. This prompt borrows its principles; naming the standard does not guarantee compliance with its vocabulary and writing rules.</p>
 <p><strong>Change the presentation without asking it to hide uncertainty.</strong> Try the style on a real answer. If it becomes too terse to act on, ask for the missing explanation rather than abandoning the useful structure.</p>
+<p><strong>Use visual markers for things you need to notice.</strong> A star can flag a decision waiting for you; a checkpoint marker can flag a pause before the agent proceeds. Give each marker a consistent meaning so you can scan a long conversation:</p>
+<pre><code class="language-text">Use ⭐ Decision needed when you need me to choose.
+Use 🛑 Checkpoint before an action that requires my approval.
+State the decision or proposed action in words beside the marker.
+At a checkpoint, wait for my response before proceeding.
+Reserve these markers for those situations, not decoration.</code></pre>
+<p>If everything is highlighted, nothing stands out. Keep the text labels so the meaning does not depend on recognizing the emoji. The marker helps you notice a checkpoint; it does not enforce one.</p>
+<p>In the <a href="skills.md">Skills lesson</a>, we’ll look at turning repeated guidance into reusable skills. Communication skills such as <a href="https://github.com/ayghri/i-have-adhd"><code>i-have-adhd</code></a> for action-first answers and <a href="https://github.com/JuliusBrussee/caveman"><code>caveman</code></a> for highly compressed wording are examples of how to package voice and concision preferences. Try one style at a time, and judge it by whether you can act on the answer, not just how short it is.</p>
+<p><a href="https://github.com/cymkd-simakovicveljko/clear-cut"><code>clear-cut</code></a> asks for compact, direct explanations that preserve the reasoning and uncertainty, challenge unsupported assumptions, and leave decisions with you.</p>
 </aside>
 
 ## Check the result, then decide what needs changing
@@ -317,7 +339,12 @@ Use an agent review when you have a specific concern worth investigating, such a
 
 **Keep a result that meets the goal. Revise because there is a supported problem, not because another prompting step is available.**
 
-For comparison, the [refinement-loop skill](https://github.com/lexler/skill-factory/blob/main/output_skills/practices/refinement-loop/SKILL.md) packages repeated critique and polishing. That is an alternative procedure, not our default or a prerequisite for accepting useful work.
+**Use OMP’s native controls when the work needs automatic continuation.** You do not need a separate skill just to repeat a prompt or keep an objective active:
+
+- **[`/loop`](https://omp.sh/docs/modes)** resubmits a prompt after each yield. Bound the repetition by a count or duration, or use a command’s exit status as the continuation condition.
+- **[`/goal`](https://omp.sh/docs/goal)** maintains a persistent objective for the session, with controls to set a token budget, pause, resume, or drop it.
+
+A skill can supply reusable instructions for the work; these commands control continuation. Neither proves the result is correct. Define a checkable outcome and appropriate limits instead of asking for endless polishing.
 
 ## Keep the patterns that help
 

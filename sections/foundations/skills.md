@@ -306,9 +306,73 @@ Check that it prints the file you intended. This isolates discovery from whether
 
 **Fallback for learning:** ask OMP to read `.omp/skills/handoff-brief/SKILL.md` directly and apply its procedure to the supplied notes. That can exercise the instructions, but it does not verify skill discovery or slash invocation. Keep that distinction in your notes.
 
+## Evaluate the skill, not just one answer
+
+> **Don't trust a skill you haven't evaluated.**
+>
+> Writing a skill proposes a way of working. Compare it with the same task done without it before adopting or sharing it.
+
+**Check the result, not the appearance of obedience.** The right headings and a confident answer do not prove that a skill helps. Our first handoff comparison is a starting point. Now try cases that could expose its weaknesses.
+
+### Try a small comparison
+
+Use these four inputs. Before running them, read the success criteria and predict which case is most likely to expose a problem.
+
+| Supplied notes | What a useful handoff must preserve |
+| --- | --- |
+| “Quoted CSV fields containing commas. Ran `npm test -- csv`; exit 0. Safari download not checked.” | The recorded command and result, with Safari explicitly unverified. |
+| “The fix is ready. Tests should pass. No command output was recorded.” | No invented passing check. Readiness is a claim, not verification evidence. |
+| “The CSV test failed on embedded quotes. Changed the escaping afterward. Have not rerun it.” | The failed check and subsequent unverified fix, without presenting the failure as resolved. |
+| “Fixed the typo in the settings heading. Checked the rendered heading and destination link. Both matched the request. No remaining work recorded.” | The completed checks, without inventing another task merely to fill the Next action section. |
+
+1. **Compare with and without the skill.** Use the ordinary handoff request from the first exercise for each input, then repeat with `/skill:handoff-brief`. Keep the model, effort, and notes unchanged. Start every run in a fresh session; the baseline must not have the skill loaded.
+2. **Grade against the criteria.** Record missed facts, invented claims, and useful differences. Would this handoff make the next person's job easier?
+3. **Repeat uncertain results.** A single pair can expose an obvious problem, but cannot establish reliability. Notice extra time, tool use, or verbosity too.
+4. **Keep, revise, or remove.** If you revise, change one instruction to address an observed failure. Rerun all four cases and add a fresh case you did not use while editing.
+
+**A short record is enough.** Keep the model, effort, skill revision, inputs, outputs, and verdict together. You do not need an evaluation framework for this exercise.
+
+### Check selection separately from execution
+
+**Loading and helping are different checks.** Our handoff skill is explicit-only, so the exercise checks execution, not automatic selection.
+
+For a model-selectable skill, try both:
+
+- **A relevant request:** does the agent read the skill when it should?
+- **A near miss:** does it leave the skill alone when it is not needed?
+
+Inspect the actual reads. A successful explicit invocation does not tell you whether the description works as a trigger.
+
+### Three references, three useful lessons
+
+**Pocock: make every instruction earn its place.** [Writing-for-agents](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md) asks whether guidance changes behavior compared with the model's default. Run it to find out, then delete instructions that add nothing useful. This is authoring guidance, not a test runner.
+
+**Pstack: make the comparison fair.** Its [eval playbook](https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/eval.md) defines the rubric first, isolates runs, and hides variant identities from the judge. It also requires inspecting actual transcripts and outputs rather than trusting the agent's self-report.
+
+**Anthropic: turn comparisons into a repeatable workflow.** [Test, measure, and refine Agent Skills](https://claude.com/resources/articles/improving-skill-creator-test-measure-and-refine-agent-skills) introduces baseline comparisons, trigger checks, and tracking pass rates, time, and tokens. The [skill-creator package](https://github.com/anthropics/skills/tree/main/skills/skill-creator) supplies tooling; check its runtime assumptions before adapting it to OMP.
+
+<div class="setup-platforms">
+<details>
+<summary><strong>When you automate the grading</strong><span>Keep a convincing score from hiding a weak evaluation.</span></summary>
+
+**Hold the model fixed while changing the skill.** Pstack also describes multi-model experiments. Changing both at once makes it harder to identify what caused the difference.
+
+Keep private grading notes out of candidate context, but include every requirement the agent needs to do the job. Blinding should hide the comparison, not the task.
+
+**Review generated cases before trusting their scores.** They may repeat the skill's instructions instead of checking useful outcomes. A model judge can also reward convincing prose over correct facts. Inspect its grading evidence.
+
+Use deterministic checks for mechanically verifiable outcomes and human review for usefulness or style. **Subjective skills still need evaluation**, even when automated assertions would be a poor fit.
+
+</details>
+</div>
+
+**Reevaluate after meaningful skill or model changes.** Anthropic distinguishes skills that add capability from those that encode a preferred workflow. A newer model may no longer need the capability guidance; a workflow skill still needs to preserve the process you want.
+
 ## Keep the skills that earn their place
 
-**Make a skill from a repeated useful procedure, not from every good prompt.** A one-line preference may be clearer in the request. A script is better when the operation should be deterministic. A skill is useful when the agent needs reusable guidance while still adapting to the task.
+**Make a skill from a repeated useful procedure, not from every good prompt.**
+
+A one-line preference may belong in the request. A deterministic operation may belong in a script. Use a skill when the agent needs reusable guidance while still adapting to the task.
 
 Maintain it from observed failures:
 
@@ -318,13 +382,13 @@ Maintain it from observed failures:
 - **It invented work after success:** make the stopping condition explicit.
 - **It added no useful difference:** keep the ordinary request and remove the trial skill.
 
-Change one thing, repeat the failing case, then try a different case. Keep a short note of the model, effort, skill revision, inputs, observed result, and anything unverified. Do not turn one successful response into a general claim about effectiveness.
+Fix the observed failure, then check that other cases still work. Use the comparison above rather than accumulating instructions after every disappointing response.
 
 Removing a skill file stops future discovery after restart; it does not erase instructions already present in an existing conversation. Use a fresh session when checking that a trial is no longer affecting the work.
 
 ## Before you move on
 
-You should have a local skill, two handoffs you can compare, and a decision about whether the procedure helped. Keep it, revise it against a concrete failure, or remove it. All three are reasonable outcomes.
+You should have a local skill, compared handoffs, and a decision supported by the small evaluation above. Keep it, revise it against a concrete failure, or remove it. All three are reasonable outcomes.
 
 Can you explain **what the skill adds, how it gets loaded, what it depends on, and how you checked its result**? Those questions matter more than how many skills you have installed.
 

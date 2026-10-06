@@ -1,139 +1,343 @@
 # 2.7 Skills
 
-**Point:** a skill is a named, reusable set of guidance that OMP can discover and load when a task needs it. Use one to make a recurring judgment more consistent—not to hide a test, permission boundary, hook, or autonomous program behind a markdown file.
+**Start with one useful procedure, not a collection of installed skills.** A skill packages instructions the agent can load when needed: how to investigate a failure, review a design, build an interface, or explain a result.
 
-## When a skill earns a home
+We’ll make a small handoff skill, compare it with an ordinary request, and then choose an upstream skill for a different kind of work. No health-checker project or third-party installer is needed for the first exercise.
 
-Start with a one-off prompt when the task is new or the inputs are still being discovered. Keep a short procedure in the task when the judgment is useful but not stable enough to route automatically. Package a skill after a repeated omission survives a normal request and the procedure has a clear counterexample.
+## First, make a handoff you can trust
 
-For a health-check review, the recurring judgment is:
+Imagine a teammate needs to continue your work. They need to know what changed, what was checked, and what remains uncertain. A polished summary that quietly turns “should work” into “verified” is a bad handoff.
 
-> Does the checker's source and recorded evidence support its claimed behavior?
+### 1. Try an ordinary request
 
-That has recognizable inputs and an inspectable result: the accepted contract, current checker, and actual run records. The procedure should not repair the program, bake in one prepared defect, or pretend that an unobserved command ran.
-
-A skill is passive guidance. A test can show what an assertion did; a skill can ask whether that assertion exercised the accepted behavior. A tool executes an operation, and a hook intercepts an event. Keep those roles separate.
-
-Use the right mechanism for the need:
-
-| Need | Start here | Health-checker example |
-| --- | --- | --- |
-| State what must be built | Task brief and acceptance criteria | One URL, status `200`, literal body substring, timeout, and exit-code rules |
-| Preserve repository-wide conventions | `AGENTS.md` and linked project docs | Learner's language, run command, and output format |
-| Perform a deterministic operation | Program, test, or script | Run the checker against `/healthy`, `/wrong-body`, and `/slow` |
-| Repeat a judgment | Skill or short procedure | Compare implementation and evidence with the contract |
-| Enforce a boundary | Host policy, tool policy, or OS permissions | Approval rules, filesystem permissions, and network policy |
-
-## What to load, and when
-
-Choose one recurring difficulty, then choose one skill. These are source-reviewed recommendations, not claims that an upstream package always produces better work:
-
-| Skill and source | When it helps | Try it on the health checker |
-| --- | --- | --- |
-| [`i-have-adhd`](https://github.com/ayghri/i-have-adhd/blob/main/skills/i-have-adhd/SKILL.md), from `ayghri/i-have-adhd` | The answer is hard to act on: long preambles, mixed-up steps, or too many tangents. It changes communication, not correctness or permissions. | Ask for the next action after a failed check. Can you find the action, reason, and remaining uncertainty without hunting through an essay? |
-| [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) with [`grilling`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), from Matt Pocock | The request contains unresolved decisions. The interview explores those decisions before implementation. | “Check several sites” leaves questions about expected content, timeouts, and whether one failure stops the batch. Use the interview to settle those—not to ask facts the repository can answer. |
-| [`tdd`](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md), from Matt Pocock | You need a behavior check that can fail before implementing the fix. | Write a check that catches accepting `/wrong-body` solely because it returned 200. If the checker is already correct, use a genuinely new behavior rather than breaking it to stage a demonstration. |
-| [`diagnosing-bugs`](https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md), from Matt Pocock | Repeated edits are not explaining a failure. The procedure establishes a reproducible signal, tests hypotheses, and verifies the repair. | Investigate a checker that accepts `/slow` despite the agreed deadline. Distinguish a missing deadline from a wrong URL or a fixture that was never started. |
-| [`code-review`](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md), from Matt Pocock | You have a committed change and want separate checks against repository standards and requested behavior. | Review the multi-target change against its specification. Supply a real Git baseline and the spec; inspect whether invalid later entries can trigger earlier requests. |
-
-A useful starting choice is `i-have-adhd` for action-first communication, `grill-me` for unclear requirements, or `diagnosing-bugs` for a real failure. Add `tdd` for a test-first loop. Save the upstream `code-review` workflow for a repository with a usable committed baseline: its documented comparison is against `HEAD`, not a complete review of untracked first-exercise files.
-
-These skills are opinionated. `grilling` can conduct an extensive interview, while `tdd` asks you to agree the testing boundaries. That structure can help uncertain work and be unnecessary for a small, settled change. Read the instructions and adapt them deliberately; do not treat a popular author's preferences as universal rules.
-
-You can try an action-first communication preference without installing a skill:
+Start OMP in a scratch project you own. Use a fresh session, keep your chosen model and effort setting, and send this prepared example:
 
 ```text
-Lead with the next action. Use numbered steps when order matters.
-Keep the main answer focused, but retain the reason, risks, and what is unverified.
-Do not add unrelated suggestions.
+Turn these work notes into a short handoff for a teammate.
+Use only the notes; do not run commands or change files.
+
+Notes:
+- Changed CSV export to quote fields containing commas.
+- Ran npm test -- csv; it exited 0.
+- The download should work in Safari now, but I did not try it.
+- Older clients have not been checked. Preserve the current CSV columns.
 ```
 
-Compare the result by whether the action, reason, evidence, and uncertainty are visible—not by whether the answer is shorter. Keep warnings that change the decision, and try one communication style at a time; stacking contradictory style skills makes the result harder to judge.
+**Predict before reading:** which claim must remain unverified? Then save or copy the answer somewhere you can compare it later. These notes are exercise inputs, not a record of commands we ran.
 
-Compare these prepared rewrites, not recorded model output:
+### 2. Package the procedure
 
-> **Hard to act on:** “There are several possible causes, including networking configuration and timeout handling. It might be worth investigating how the request is made and perhaps reviewing the code before trying again.”
+In the same scratch project, create the skill directory from your terminal:
 
-> **Action-first:** “Inspect where the 1000 ms deadline is applied. `/slow` passed after two seconds; we do not yet know why. Check the timer units and whether the deadline remains active until the response finishes. Rerun that case after a supported fix.”
+```sh
+mkdir -p .omp/skills/handoff-brief
+```
 
-## How OMP discovers and loads skills
+Create `.omp/skills/handoff-brief/SKILL.md` in your editor with this content. If that path already contains your work, use a different skill name and directory rather than replacing it.
 
-The current OMP skills guide describes file-backed skills discovered at startup. Discovery, loading the body, and following the procedure are separate events:
+```markdown
+---
+name: handoff-brief
+description: Turn supplied work notes into a handoff with evidence and open questions.
+disable-model-invocation: true
+---
 
-1. OMP discovers a `SKILL.md` and exposes lightweight name/description metadata to the model when the `read` tool is available.
-2. The full body is read on demand through `skill://<name>` or through an enabled `/skill:<name>` command.
-3. The model follows the loaded guidance in the current task. Loading a skill does not execute its scripts, grant tool permissions, or prove that its procedure improved a result.
+# Handoff brief
 
-For the project-local layout, keep each skill one level below `.omp/skills/`:
+Use only the supplied notes. This is a writing task; do not run commands,
+change files, or infer missing results.
+
+1. Identify what changed and which observations support it.
+2. Separate completed checks from planned checks and unverified claims.
+3. Write four short sections: Changed, Evidence, Unknowns, Next action.
+4. For missing information, say "not recorded". Keep exact commands,
+   errors, and compatibility constraints when provided.
+5. Propose the smallest next action supported by the unknowns. If the
+   notes establish no remaining work, say so rather than inventing a task.
+
+Before finishing, check that every claimed success has an observation
+in the supplied notes. "Should pass" is not a recorded pass.
+```
+
+The procedure belongs in the skill. Today's CSV notes do not. Keeping the inputs separate lets you reuse the same skill for a deployment handoff or a bug investigation.
+
+### 3. Invoke it explicitly
+
+Exit OMP and start it again from the scratch project so it discovers the new skill. Use a fresh conversation with the same model and effort setting. Enter this **inside OMP**, not your shell:
+
+```text
+/skill:handoff-brief Turn these work notes into a short handoff for a teammate.
+Use only the notes; do not run commands or change files.
+
+Notes:
+- Changed CSV export to quote fields containing commas.
+- Ran npm test -- csv; it exited 0.
+- The download should work in Safari now, but I did not try it.
+- Older clients have not been checked. Preserve the current CSV columns.
+```
+
+If the command is missing, check the troubleshooting section below before rewriting the skill. Skill commands must be enabled in OMP.
+
+### 4. Compare the useful differences
+
+Do not grade the headings. Check the content:
+
+- Did it preserve the exact test command and its recorded result?
+- Did Safari and older-client compatibility remain unverified?
+- Did it preserve the constraint on CSV columns?
+- Can the next person tell what to check without reconstructing the conversation?
+
+The ordinary request may already do this well. That is a valid result: a skill earns its place through useful reuse, not by making every first answer look worse. This small comparison is a learning exercise, not a controlled model benchmark.
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Try the awkward case</strong><span>Does the procedure preserve missing evidence instead of filling it in?</span></summary>
+
+Invoke the same skill with these notes:
+
+```text
+The export fix is ready. Tests should pass. No command output was saved.
+```
+
+**Notice:** “ready” is the author's claim; there is no recorded test pass. The handoff should expose the missing evidence, not invent a command, result, or bug. Now try notes that genuinely establish completion. Does it stop, or invent more work because it has a “Next action” heading?
+
+If it mishandles either case, change the relevant instruction and repeat both cases. Keep the revision only if it addresses the problem without losing useful behavior.
+
+</details>
+</div>
+
+## What you just built
+
+A skill is a reusable instruction package. The simplest one is a directory containing `SKILL.md`; larger ones can include references, examples, and scripts.
+
+In OMP, there are three separate events:
+
+<div class="course-flow" aria-label="Skill discovery and use">
+<span>Discover metadata</span><span aria-hidden="true">→</span><span>Load instructions</span><span aria-hidden="true">→</span><span>Apply to the task</span>
+</div>
+
+The **name and description** help identify and select the skill. The **body** describes the procedure. The **current task** supplies the actual inputs. Finding a skill does not mean its body was loaded; loading it does not prove the agent followed it.
+
+Our example uses `disable-model-invocation: true` so we choose when to apply it. OMP hides it from the model-facing catalog, but it remains explicitly accessible. That flag is not a permission boundary.
+
+### Put guidance in the right place
+
+| You need… | Use… | Example |
+| --- | --- | --- |
+| A result once | An ordinary prompt | Explain this error. |
+| A reusable prompt shortcut | A Markdown command | Insert a familiar task brief with arguments. |
+| Conventions across this repository | `AGENTS.md` and project documentation | Which build command and compatibility rules apply. |
+| A procedure for a recognizable task | A skill | Turn work notes into an evidence-based handoff. |
+| A repeatable operation or enforced check | A script, test, or tool | Parse a file or reject an invalid record. |
+| Access to an external system | A suitable tool or integration | Read an issue from the tracker. |
+
+**Skills can guide tool use; they do not create the tool or grant access.** Our handoff skill is text-only. A document-generation skill may ask the agent to run Python, and a deployment skill may ask it to publish something. Inspect those actions before adopting the package.
+
+## Choose another kind of skill
+
+Pick one recipe that matches work you actually do. Read the linked source before installing anything. These are source-based recommendations, not claims that we benchmarked every package or that a named author always produces better results.
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Communication: make explanations easier to act on</strong><span>Use when the answer is correct but hard to read or use.</span></summary>
+
+Try [clear-cut](https://github.com/cymkd-simakovicveljko/clear-cut) for compact explanations that retain connections, uncertainty, and decisions you own. Its package is a single instruction file with no runtime dependencies.
+
+Two alternatives emphasize different things: [i-have-adhd](https://github.com/ayghri/i-have-adhd) asks for action-first, focused answers; [caveman](https://github.com/JuliusBrussee/caveman) emphasizes compressed wording. Inspect the skill itself rather than installing an entire plugin or proxy just to change the writing style.
+
+**Try:** ask for an explanation of a real retry, caching, or timeout decision, then repeat with one communication skill in a fresh session. Keep the same question and supporting material.
+
+**Notice:** can you still see why the recommendation works and when it would be wrong? A shorter answer that drops an important condition is not an improvement. Select one voice at a time rather than stacking conflicting preferences.
+
+</details>
+<details>
+<summary><strong>Clarification: expose decisions before implementation</strong><span>Use when you know the problem but have not settled the approach.</span></summary>
+
+Start with Matt Pocock's [grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) for an interview about a plan. Its [grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) entry point only calls a host-specific `Skill` tool to load `grilling`; copying that wrapper alone into OMP is not enough. Load the underlying procedure with OMP's skill mechanism.
+
+**Try:** bring a real proposal such as “add bulk import” and ask the agent to inspect the existing behavior before interviewing you. Decide how duplicates, partial failures, and retries should work before authorizing implementation.
+
+**Notice:** good questions uncover choices that change the result. Asking you to recite facts already available in the repository is not useful clarification. Skip an extensive interview when the behavior and boundaries are already settled.
+
+</details>
+<details>
+<summary><strong>Debugging: stop accumulating guesses</strong><span>Use when successive fixes have not explained a real failure.</span></summary>
+
+The [diagnosing-bugs skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md) structures investigation around evidence and hypotheses rather than another speculative edit.
+
+**Try:** supply a real failing command, its output, and the expected behavior. Ask for a reproducible case and a discriminating check before a fix. If you do not have a failure, choose a different recipe instead of inventing one for the exercise.
+
+**Notice:** did a check rule a hypothesis in or out? Did the final check exercise the original failure? More logging and a confident explanation are not evidence that the cause was found.
+
+</details>
+<details>
+<summary><strong>Test-first work: define behavior before building it</strong><span>Use when an observable rule is settled but its implementation is not.</span></summary>
+
+The [tdd skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md) gives a test-first procedure with supporting reference material. It asks you to agree the public boundaries under test and references `codebase-design` when those boundaries need design work; preserve those dependencies and adapt host-specific skill calls.
+
+**Try:** choose a small real behavior change, such as rejecting duplicate identifiers during import. Agree the observable contract, then ask the agent to demonstrate a relevant failing check before implementing the behavior.
+
+**Notice:** would that check fail for a plausible incorrect implementation? A test that only echoes a mock or checks an internal helper call can pass while the user's problem remains. The skill cannot decide an unresolved product rule for you.
+
+</details>
+<details>
+<summary><strong>Review: check a change against something concrete</strong><span>Use when you have a real baseline and requirements to review against.</span></summary>
+
+The [code-review skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md) separates repository standards from the requested behavior.
+
+**Try:** supply an existing commit or branch baseline and the originating issue or specification. Ask for findings with source locations and consequences, including “none found” when appropriate.
+
+**Notice:** did it inspect the intended changes and real callers? This workflow compares the fixed point with committed `HEAD`, excluding staged, uncommitted, and untracked work, and uses parallel subagents for standards and specification reviews. Choose it when those inputs and capabilities are available. A finding must survive inspection; it is not automatically a repair instruction.
+
+</details>
+<details>
+<summary><strong>Frontend work: compare design guidance with performance guidance</strong><span>Use when building or reviewing an actual interface.</span></summary>
+
+Anthropic's [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) addresses visual design and implementation. Vercel's [React best practices](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices) addresses React and Next.js performance. These solve different problems.
+
+**Try:** use a disposable branch to improve one existing screen. Give it a user task and preserve the current behavior. Choose design guidance for a weak visual hierarchy, or performance guidance for a relevant React/Next.js problem.
+
+**Notice:** run the screen, try its main action, and check keyboard use and a narrow viewport. For a performance claim, inspect the affected loading or rendering behavior rather than accepting a cleaner-looking diff. Do not apply framework-specific rules to an unrelated stack.
+
+</details>
+<details>
+<summary><strong>Documents: produce a real deliverable outside the codebase</strong><span>Use when someone needs a Word document, not another chat response.</span></summary>
+
+Anthropic's [docx skill](https://github.com/anthropics/skills/tree/main/skills/docx) covers creating, reading, and editing Word files. This is a useful contrast with our text-only handoff skill: it includes scripts and has runtime dependencies.
+
+**Try:** turn an agreed decision into a one-page Word memo with headings and a small comparison table. Work on a disposable output file. Inspect the required tooling first: its different paths use tools such as the Node `docx` package, Python, Pandoc, LibreOffice, and Poppler.
+
+**Notice:** open or render the actual document. Check page breaks, table layout, and whether the content preserves the decision. A successful file write does not prove that the document is usable. If a required tool is missing, resolve that prerequisite or choose another recipe; do not quietly substitute Markdown for the requested Word file. Check the package's own license before adapting it.
+
+</details>
+</div>
+
+## Repositories worth starting with
+
+**Our shortlist is based on useful, inspectable examples, not stars or a claim that these are universally “the best.”** Start at one skill's source, not the collection's install button.
+
+| Repository | Why we would open it | What to watch |
+| --- | --- | --- |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | Opinionated engineering procedures: clarification, debugging, TDD, and review. | Some entry points depend on other skills or reference files; workflows may assume particular tools. |
+| [anthropics/skills](https://github.com/anthropics/skills) | Examples spanning frontend design, document work, and skill creation. | Document skills can include executable helpers and dependencies. An official example is not automatic OMP compatibility. |
+| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Focused frontend guidance, especially React/Next.js and web-interface review. | Framework and version assumptions matter; a performance recommendation needs a relevant case. |
+| [cymkd-simakovicveljko/clear-cut](https://github.com/cymkd-simakovicveljko/clear-cut) | A small, readable example of packaging a communication preference. | It changes presentation and interaction, not the correctness of the underlying work. |
+| [Poteto's pstack](https://github.com/cursor/plugins/tree/main/pstack), by Lauren Tan | Connected engineering procedures for understanding code, investigating change impact, and improving explanations. | The full stack targets Cursor and references companion skills, subagents, and tools. Adapt selected procedures for OMP rather than treating its installer or commands as portable. |
+
+The [Agent Skills specification](https://agentskills.io/specification) explains the shared package format. It is a useful reference when comparing repositories, but hosts differ in discovery paths, optional metadata, tools, and invocation commands.
+
+### Explore Poteto's pstack
+
+Start with a specific task rather than enabling the whole `poteto-mode` workflow:
+
+- **[`teach`](https://github.com/cursor/plugins/blob/main/pstack/skills/teach/SKILL.md):** explain how a subsystem works and why it was built that way. It builds on `how`, `why`, and `unslop`; preserve those dependencies and check what tools they require.
+- **[`blast-radius`](https://github.com/cursor/plugins/blob/main/pstack/skills/blast-radius/SKILL.md):** investigate what a change could break beyond its immediate callers, then run real code to check the facts its safety depends on. This is not a read-only review: it can write and run a verification script, and references other pstack procedures.
+- **[`unslop`](https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md):** revise writing to remove filler, vague claims, and formulaic phrasing while preserving meaning. Its style rules are opinionated; keep the terminology and qualifications your audience needs.
+
+**Try:** inspect `unslop`, load it using OMP's skill mechanism, and ask it to revise a copy of one paragraph from a real handoff or PR description. Compare the versions: is the action clearer, and did every technical fact and uncertainty survive?
+
+**Then explore:** use `teach` for an unfamiliar subsystem or `blast-radius` for a small-looking change with compatibility risk, after reviewing their dependencies. The [pstack guide](https://github.com/cursor/plugins/tree/main/pstack/docs/guide) explains the larger workflow. Its Cursor setup is reference material, not an OMP installation recipe.
+
+### Inspect one package before adopting it
+
+Ask the agent to help inspect a candidate, then open the relevant files yourself:
+
+```text
+Inspect [skill source URL or local directory] without installing or executing it.
+Explain when it activates, what it instructs the agent to do, and what files,
+other skills, tools, scripts, or external services it requires.
+Identify repository writes, network access, and publication or deployment steps.
+Point to the source for each consequential behavior.
+Separate portable instructions from assumptions about a particular host.
+```
+
+**Install the reviewed package, not a remembered name.** For a text-only skill, place its directory under `.omp/skills/` in your project. Preserve required references and companion files. A single copied `SKILL.md` is insufficient when it points to scripts or other skills.
+
+Start project-local so the trial does not affect every repository. Record the upstream URL and commit you inspected. Review updates before replacing your copy. Follow the upstream license when copying or adapting it.
+
+An installer is software too: inspect its source, destination, and selected packages before running it. A command documented for Claude Code is not automatically an OMP command. We use manual placement in the first exercise so the package and its destination stay visible.
+
+## How OMP loads it, and where to look when it does not
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Layout, invocation, and supporting files</strong><span>Open this when adding a skill or troubleshooting discovery.</span></summary>
+
+Use the simple project-local layout:
 
 ```text
 .omp/
   skills/
-    health-check-review/
+    handoff-brief/
       SKILL.md
 ```
 
-Use explicit `name` and `description` frontmatter. The native `.omp` provider and custom-directory scanning require a description; the directory name is the fallback for `name`. A useful description helps a model choose a skill, but it is a routing hint, not a guarantee that the body will be loaded or followed.
+The current [OMP skills guide](https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md) describes startup discovery, lightweight metadata, and loading the body through `skill://<name>` or `/skill:<name>` when skill commands are enabled.
 
-The current guide supports `hide: true` and the Agent Skills spelling `disable-model-invocation: true` (normalized internally). Both hide a discovered skill from the model-facing catalog; neither is an access-control boundary. A hidden skill remains reachable through `skill://<name>` and `/skill:<name>` when skill commands are enabled. `skills.enableSkillCommands` is a host setting, not a `SKILL.md` field.
+Use explicit `name` and `description` frontmatter. Keep the name aligned with the directory. A model-selectable description should say **what the skill does and when to use it**, not “helpful engineering assistant.” Omit `disable-model-invocation: true` if you want it in the model-facing catalog. A description makes selection possible; it does not guarantee selection.
 
-Discovery is non-recursive under a skills root. `.omp/skills/reviews/health-check-review/SKILL.md` is not found by the normal scan; use `.omp/skills/health-check-review/SKILL.md` or configure a custom directory that points at the nested parent. Duplicate names are resolved by provider precedence, so inspect the winning source instead of trusting a familiar name.
+For an explicit-only skill, keep that flag. OMP also documents `hide: true`; neither spelling is access control. `skills.enableSkillCommands` is an OMP setting, not a frontmatter field.
 
-Discovery happens at startup. After changing a skill's name, description, or invocation mode, exit and relaunch OMP from the learner repository before checking the catalog. A slash invocation reads the current file body and strips frontmatter, but it does not prove that cached discovery metadata was refreshed.
+Supporting files can be addressed through paths such as `skill://handoff-brief/references/examples.md`. Keep references relative to the skill package and tell the agent when it needs them. Neighboring files do not all become context automatically.
 
-## One explicit invocation
+Restart OMP after changing discovery metadata. Duplicate names can resolve to a different provider's copy, so inspect the resolved source instead of assuming the file you edited won.
 
-The [companion Skill workshop](../health-checker/05-skills.md) creates a review-only `health-check-review` package and supplies the contract and run records it needs. After moving that candidate to `.omp/skills/health-check-review/SKILL.md`, relaunch OMP with `skills.enableSkillCommands` enabled and enter this inside OMP:
+Keep skill directories directly under `.omp/skills/`. Adding a grouping level such as `.omp/skills/reviews/handoff-brief/SKILL.md` prevents normal native discovery.
 
-```text
-/skill:health-check-review Review the supplied health-checker packet; review only.
-```
-
-The current guide also documents `skill://health-check-review/references/<file>` for files kept inside the skill directory. Resolve references from that directory, and say when a script or reference needs to be loaded; a skill does not load every neighboring file automatically.
-
-## Inspect before installing
-
-1. **Read the source and dependencies.** A skill may refer to supporting skills, references, or scripts. In the source versions reviewed for this course, `grill-me` delegates to `grilling`, `tdd` includes supporting references, and `diagnosing-bugs` has a helper for its human-assisted branch. Keep required files and referenced skills, not just a copied name.
-2. **Check what it may do.** Inspect scripts, hooks, network operations, repository writes, and assumed tools. A skill file is guidance; a plugin may also install executable behavior.
-3. **Check host compatibility.** Claude plugin commands are not OMP commands. Use OMP's documented layout and verify the resolved source and invocation.
-4. **Try it on disposable work.** Use the same task and evidence with and without the procedure. Keep it only if it improves the outcome you care about; one useful response is not a benchmark.
-5. **Record the source and revision.** Reinspect updates, avoid loading two copies with the same name, and keep a way to remove the trial.
-
-Matt Pocock's [current installation guide](https://github.com/mattpocock/skills#installation-30-second-setup) offers this optional upstream command:
+From the project directory, this terminal command lets you inspect resource resolution without sending a model request:
 
 ```sh
-npx skills@latest add mattpocock/skills
+omp read skill://handoff-brief
 ```
 
-It requires Node/npm and downloads code. Review it first, select only what you need, and verify support for OMP. Learners can instead place reviewed skill folders and their dependencies under the native `.omp/skills/` layout; no Node requirement is added to the checker implementation language. For `i-have-adhd`, use its own [installation guide](https://github.com/ayghri/i-have-adhd/blob/main/INSTALL.md), not Matt's installer.
+Check that it prints the file you intended. This isolates discovery from whether the model follows the procedure.
 
-The collection's [`setup-matt-pocock-skills`](https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md) writes repository guidance for issue tracking and domain documents. Follow that setup only when adopting workflows that require it, after reviewing the proposed changes; do not silently add those files for a one-off skill demonstration. The linked upstream files can change, so keep the source and revision you evaluated.
+</details>
+</div>
 
-## Keep the package useful
-
-Keep the accepted contract, changed files, current run records, source links, and the decision the engineer still owns outside the skill. The package should describe how to review, not become a generic autonomous-agent charter. If it starts implementing checks, editing files, or calling endpoints, move that work back to the program or an explicitly authorized task.
-
-Maintain it from concrete failures:
-
-| Observed problem | Smallest response |
+| What you notice | What to do next |
 | --- | --- |
-| Relevant requests never load the body | Check the invocation flag and winning source first; improve description triggers only for a model-selectable skill. |
-| The review trusts a green summary | Require inspection of assertions and current code state. |
-| It invents a timeout or status | Require separation of observed status, transport failure, and missing evidence. |
-| It audits unrelated code | Add a near-miss example and narrow the description. |
-| It finds only `/wrong-body` | Remove fixture-specific hints and retry with another contract. |
-| It adds no useful signal | Keep the ordinary request or delete the skill. |
+| `/skill:handoff-brief` is missing | Check the project directory, filename, frontmatter, startup refresh, and `skills.enableSkillCommands`. |
+| The model never selects a skill | Check whether it is explicit-only, then inspect the description and the resolved source. Try explicit invocation before changing the procedure. |
+| Changes to the skill seem ignored | Check for a duplicate name and restart after metadata changes. Use a fresh session so earlier instructions do not obscure the comparison. |
+| The skill loads but a command or tool is unavailable | Inspect its host assumptions and dependencies. Rewrite the procedure for available tools or choose a compatible package. |
+| Two skills pull in different directions | Test one at a time. Resolve the contradictory instructions instead of adding a third set of rules. |
+| The output has the right shape but wrong facts | Check its inputs and evidence. Formatting compliance is not task success. |
 
-Change one thing, repeat the case that exposed it, then try a different case. Keep a small record of package revision, OMP version, mode, source, findings, and checks actually run. Do not treat one model comparison as a broad effectiveness claim.
+**Fallback for learning:** ask OMP to read `.omp/skills/handoff-brief/SKILL.md` directly and apply its procedure to the supplied notes. That can exercise the instructions, but it does not verify skill discovery or slash invocation. Keep that distinction in your notes.
 
-## Continue with the workshop
+## Keep the skills that earn their place
 
-The [Skill workshop](../health-checker/05-skills.md) turns this map into a bounded exercise: create a review candidate, compare an ordinary request with a procedure-guided one, verify discovery or use a manual fallback, and record what the evidence supports. It retains the loader warnings and source evidence needed to reason about OMP 18.2.9, while this page follows the current OMP skills guide rather than silently treating that pinned snapshot as today's runtime.
+**Make a skill from a repeated useful procedure, not from every good prompt.** A one-line preference may be clearer in the request. A script is better when the operation should be deterministic. A skill is useful when the agent needs reusable guidance while still adapting to the task.
 
-## Sources
+Maintain it from observed failures:
 
-- [Current OMP skills guide](https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md) — discovery layout, frontmatter, catalog exposure, `skill://`, `/skill:<name>`, precedence, and skill/tool boundaries.
-- [Health-checker fixture contract](../../demo/health-checker/README.md)
-- [OMP 18.2.9 sources retained in the companion workshop](../health-checker/05-skills.md#sources-and-adaptation)
+- **An important step was skipped:** make its completion condition checkable.
+- **It applied to unrelated work:** narrow the description and try a near-miss request.
+- **It buried the task in background material:** move optional detail into a reference with a clear instruction about when to read it.
+- **It invented work after success:** make the stopping condition explicit.
+- **It added no useful difference:** keep the ordinary request and remove the trial skill.
+
+Change one thing, repeat the failing case, then try a different case. Keep a short note of the model, effort, skill revision, inputs, observed result, and anything unverified. Do not turn one successful response into a general claim about effectiveness.
+
+Removing a skill file stops future discovery after restart; it does not erase instructions already present in an existing conversation. Use a fresh session when checking that a trial is no longer affecting the work.
+
+## Before you move on
+
+You should have a local skill, two handoffs you can compare, and a decision about whether the procedure helped. Keep it, revise it against a concrete failure, or remove it. All three are reasonable outcomes.
+
+Can you explain **what the skill adds, how it gets loaded, what it depends on, and how you checked its result**? Those questions matter more than how many skills you have installed.
+
+For a deeper code-review exercise, the optional [Skill workshop](../health-checker/05-skills.md) builds and evaluates a health-check review procedure. It has its own fixture prerequisites and retains evidence for OMP 18.2.9; it is not required for this lesson.
+
+Next, [MCP, plugins, and extensions](mcp-and-plugins.md) covers adding and packaging capabilities, rather than instructions alone.
+
+## Sources and verification scope
+
+- [OMP skills guide](https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md): current discovery and invocation documentation; check your installed version when behavior differs.
+- [Agent Skills specification](https://agentskills.io/specification): package structure and portable metadata.
+- The linked repository sources describe the recommended procedures. They are not evidence that those procedures improved a particular learner's result.
+
+The local example was resolved with `omp read skill://handoff-brief` in an isolated scratch directory using OMP 18.2.9. That checks file discovery and reading, not a provider-backed comparison or successful slash-command execution. Run the guided comparison with your own connected model.
 
 [Back to foundations](../health-checker/02-foundations.md) · [Previous: Artifacts](artifacts.md) · [Next: MCP and plugins](mcp-and-plugins.md)

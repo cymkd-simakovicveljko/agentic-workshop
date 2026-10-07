@@ -49,7 +49,7 @@ Each lesson uses a focused example to make its idea concrete. Install additional
 
 The retained [health-checker guide](demo/health-checker/README.md) supplies predictable local endpoints for examples involving HTTP behavior. Some existing examples build on that checker; their prerequisites are specific to those examples, not to the course as a whole.
 
-Use only the local fixtures or systems you own or are authorized to check. No credentials, production changes, retries, scheduled monitoring, or external integrations are needed for the guided route.
+Use only the local fixtures, public documentation services, or systems you own or are authorized to check. The MCP lesson connects to Microsoft Learn's public, no-authentication documentation server. No additional service credentials, production changes, retries, or scheduled monitoring are needed for the guided route.
 
 ## How we learn
 

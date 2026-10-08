@@ -97,7 +97,20 @@ Recommend the smallest adjustment and name the behavior it changes.
 Don't change the agreed requirement or implementation until I decide.
 ```
 
-Once you choose, update the affected requirement, design, task, and check. You do not need to regenerate the whole plan. In our example, a focus decision may affect the filtering logic and keyboard check, but not the rule that lesson URLs stay unchanged.
+Suppose we agree on this policy for our example: if a filter update would hide the focused lesson link, move focus to the search input before hiding it. Otherwise, leave focus alone. This gives the reader a way to change the query without sending them to an arbitrary lesson.
+
+The decision now changes four parts of the note:
+
+| Part | Updated note |
+| --- | --- |
+| **Requirement** | A filter update must not leave focus on a hidden lesson. If the focused lesson disappears, focus returns to the search input. |
+| **Design** | Before hiding links, check whether the active element is a lesson link that will disappear. Move focus only in that case. |
+| **Remaining task** | Add that focus handling to the existing filter update. Keep completed title matching and clearing behavior. |
+| **Check** | With a lesson link focused, apply a query that excludes it: focus should reach the input. Repeat with a query that keeps the link: focus should stay on it. |
+
+The second check matters: moving focus to the input on *every* update would pass the first check while introducing a different problem. Also try normal typing in the search input; focus should remain there. These are proposed checks, not reported results.
+
+This is one policy for the hypothetical reader, not a universal accessibility rule. In your product, first establish how a filter update can occur while a lesson link has focus. If that state cannot occur, do not add handling just to match this example.
 
 **Notice:** does the revised plan retain completed work and unchanged constraints? A freshly generated plan can look tidy while losing both.
 
@@ -107,10 +120,11 @@ Once you choose, update the affected requirement, design, task, and check. You d
 
 ```text
 Agreed: title search only; existing lesson URLs stay unchanged.
+Focus decision: return to the search input only if the focused link will hide.
 Work to inspect: [branch or commit and relevant files].
 Checks run: [actual cases and results, or "not run"].
-Still open: behavior when filtering hides the focused link.
-Next: settle that behavior, then finish and rerun the keyboard check.
+Remaining: implement the focus decision and run both focus cases.
+Next: inspect the filter update; retain completed matching and clearing work.
 ```
 
 This is a template, not a claim that the example has been implemented. Fill it from the actual work. Point the next session to the note and ask it to compare the note with the current files before continuing. The [Context lesson](../foundations/context.md) explains why saving a file does not mean an agent has read it.
@@ -147,17 +161,13 @@ The search question is not handed from one role to the next with a different int
 - **Design:** how will someone recover from no results, including with a keyboard?
 - **Engineering:** can the existing lesson list support this without a new service?
 
-The shared note records the decision. An agent can then propose tasks against it rather than inventing the missing product direction.
+Suppose product chooses “find a lesson,” design agrees that clearing the query restores the list, and engineering confirms the existing list can be filtered locally. The note now says **title search, a clear action, and no new service**. Implementation tasks can follow those decisions; neither a full-text index nor a new search endpoint belongs in the plan.
 
 Parallel work comes later, once the boundaries are clear. UI work and an independent review may be separable; two agents rewriting the same filter are not independent just because their prompts differ.
 
-**Use this when** a new or cross-cutting feature needs several kinds of judgment at once. It assumes those people can collaborate and someone will review the combined result. For a clear local fix, the meeting and task structure may cost more than they save.
-
-If intent changes, update the shared spec and identify which assigned tasks are affected. The coordination cost has not disappeared: it now sits in keeping people, tasks, and the spec aligned.
+This live agreement is worth the coordination when several people own consequential decisions. For a clear local fix, use the existing issue instead. If intent changes after work splits, the people assigning tasks must identify which assignments are now invalid.
 
 **Read with a question:** in the playbook's “Markdown Layer,” inspect the notification-preferences example. Which lines describe user needs, which choose a design, and which need review by a different person? Its cycle-time claims are the author's claims, not workshop measurements.
-
-**Borrow this:** settle a shared decision in one place before splitting the work. You can use that habit without adopting every role or running multiple agents.
 
 </details>
 <details>
@@ -193,11 +203,9 @@ Before archiving, check the implemented behavior and resolve differences. If you
 
 OpenSpec calls its artifacts “enablers, not gates.” You can revisit the proposal or design as you learn. That flexibility requires someone to keep the change coherent.
 
-**Use this when** an existing system has several contributors or repeated changes that need lasting behavior specs. It adds a CLI and coding-tool integration, plus the job of keeping current specs, pending changes, and archives distinct. It is less useful if no one will maintain the current specs after shipping.
+This separation earns its upkeep when several contributors need to distinguish shipped behavior from unfinished proposals. Someone still has to maintain the current specs after shipping; the CLI and coding-tool integration do not remove that responsibility.
 
 **Read with a question:** follow the two-folder picture and archive explanation in the core-concepts guide. Where would you look for what works today? Where would you look for an unfinished proposal? Compare those answers with your own repo.
-
-**Borrow this:** separate **Current behavior** from **What changes**, and decide where the final behavior will be documented when the work closes.
 
 </details>
 <details>
@@ -223,15 +231,11 @@ Check that the full list returns and links still work.
 
 In requirements, ask whether the behavior is right. In design, ask whether the approach fits the codebase. In tasks, ask whether the work will deliver and check that behavior.
 
-A requirement that says “create a SearchService class” has probably mixed implementation into the behavior discussion. A task that says “finish search” gives the next session little help. Three files are useful only if the distinctions inside them are useful.
+Now suppose the reader moves from a static page to a server-rendered application. “Clearing the query restores every lesson” can remain valid while “derive the visible list in the browser” needs revision. That is the benefit of separating requirements from design: a technical change need not reopen an agreed product decision.
 
-The walkthrough describes editing specs and regenerating a plan when requirements change. Review that update: it should account for work already done, not imply that editing a document has undone code.
-
-**Use this when** you work in Kiro and feature development needs those review points. The IDE makes the sequence convenient, but you take on its workflow and document upkeep. For a small fix, three documents may repeat a clear issue; in OMP, the same distinctions can start as headings in one note.
+Kiro's walkthrough describes editing specs and regenerating the plan. Check which tasks the new design invalidates; document edits do not undo code already written. If you work in Kiro, these files provide convenient review points. In OMP, start with the same distinctions as headings in the existing note.
 
 **Read with a question:** in the walkthrough's spec examples, find one user-facing requirement and follow it into design and tasks. Could you change the design without changing the requirement? The walkthrough is from July 2025; use the [current feature-spec docs](https://kiro.dev/docs/specs/feature-specs/) for current UI behavior.
-
-**Borrow this:** review “what” before “how,” then make each task lead to an observable result.
 
 </details>
 <details>
@@ -262,13 +266,9 @@ A constitution is meant to carry principles across changes. In our search exampl
 
 Putting all three in permanent instructions would make future work inherit an old feature's scope. Putting all three only in chat would lose the reusable rule.
 
-**Use this when** the team has recurring work that benefits from common templates and review expectations. It assumes someone will maintain those shared rules and inspect generated outputs. The CLI, supported-agent integration, and optional extensions add setup; a new project and an existing one will need different starting context.
-
-When a requirement changes, revise the relevant feature files before continuing. On resume, compare recorded tasks and results with the code. A “Converged” label needs supporting checks; it is not a reason to ignore a failing scenario.
+Spec Kit makes those shared rules and per-change processes reusable through its CLI, templates, and supported-agent integrations. That is useful when a team repeatedly needs the same review expectations. Assign someone to maintain the project rules, or future features will inherit stale guidance.
 
 **Read with a question:** compare the feature, bug-fix, and idea-assessment examples in the README. Which would you use for a new search feature, a broken clear button, or uncertainty about whether search is needed at all? Notice how the outputs differ.
-
-**Borrow this:** retain rules that apply across changes, and choose a process that fits the job rather than treating every request as a new feature.
 
 </details>
 <details>
@@ -280,34 +280,43 @@ A clear intent can go to `bmad-spec`. Work that fits one build session can conti
 
 ### Size the process by the unresolved problem
 
-Our search example could need very different preparation:
+Consider two changes:
 
-- **We know the behavior and the existing list supports it.** A short spec and one implementation task may be enough.
-- **We don't know why readers cannot find lessons.** Investigate that before assuming a search box is the answer.
-- **Search must cover several separately maintained course catalogs.** Agree on shared behavior and interfaces before splitting implementation.
+- **Rename a private helper across forty files.** The behavior is settled, callers are known, and existing checks cover the affected paths. A mechanical plan may be enough despite the large diff.
+- **Rename one field in a public API response.** The patch may be one line, but consumers could depend on the old name. Before planning the replacement, identify those consumers and decide who owns the compatibility commitment.
 
-The number of files is not the deciding factor. A small change can carry a difficult product decision; a larger mechanical change can have little uncertainty.
+For the API change, suppose a client cannot update until next month. The decision might be to add the new field while retaining the old one until an agreed removal date. That produces different work: support both fields, check the old client still works, coordinate migration, then remove the old field after confirming consumers have moved. If all consumers can change together, an atomic cutover may be simpler.
 
-If implementation reveals a missing constraint, BMAD recommends updating the spec and re-slicing remaining stories. Preserve completed work and inspect the combined result, not just each story's completion status.
+The point is not that every API change needs a migration program. **An unresolved compatibility decision changes the plan; a large file count may not.** This is where BMAD's choice of planning activities is useful: investigate the missing dependency before splitting implementation into stories.
 
-**Use this when** your work varies enough that choosing the planning depth is a recurring need. You take on installable skills, saved output conventions, and the judgment to choose a path. It won't make an unclear goal clear simply by generating more documents.
+The guide recommends updating the spec and re-slicing remaining stories when a missing constraint emerges. Its installable skills and saved plans provide structure, but choosing the right activity remains your job.
 
 **Read with a question:** use the guide's “Get to a Well-Defined Intent” table. Name the gap in your own change, then find the activity that addresses it. If there is no gap, do not add an activity just because it appears in the table.
-
-**Borrow this:** add research for an unanswered question, design for a shared technical decision, and separate tasks for real handoffs.
 
 </details>
 </div>
 
 ## Compare the choices, not the number of features
 
-The names and file layouts are useful to recognize. The more important differences show up when work changes or someone else takes over.
+Choose by the problem that keeps costing you time. These approaches overlap; we are choosing a first practice, not a permanent allegiance.
 
-### What is expected to stay stable?
+### “We cannot tell which proposal actually shipped”
 
-A process that builds tasks from an agreed spec works best when the important behavior is clear enough to guide those tasks. If you are still deciding whether the feature is worth building, a detailed implementation plan is premature.
+Suppose two search proposals exist: titles only and titles plus headings. A new agent reads the larger proposal and treats it as current behavior.
 
-For an existing system, include behavior that must survive the change. For a new system, spend more attention on the assumptions you have not tested. “Spec-driven” does not remove either job.
+**We would start with OpenSpec's current-versus-pending distinction.** Check the implementation and the accepted decision, update the current behavior description, and mark the other proposal as superseded. Future work has an explicit starting point.
+
+FSAD's shared discussion would not, by itself, solve this stale-record problem. If an existing issue tracker already makes acceptance and current documentation clear, use that instead of adding another change system.
+
+### “Product and engineering keep implementing different interpretations”
+
+Suppose product expects readers to find passages, but engineering has planned title filtering. Both have written clear documents; the documents disagree.
+
+**We would borrow FSAD's shared decision session before generating more tasks.** Resolve what readers need to find, record the decision, then use Kiro's requirements/design/tasks separation to review the resulting plan. Adding an archive would preserve the disagreement, not settle it.
+
+If the behavior is already agreed and the recurring problem is mixing project rules with feature scope, Spec Kit's separation is a better fit. If nobody knows whether search addresses the real problem, follow BMAD's advice to investigate that gap before planning a build.
+
+**Try the comparison on your note:** name the recurring failure, choose one practice, and say what evidence would make you choose differently.
 
 ### Where do decisions live—and who can change them?
 
@@ -317,11 +326,9 @@ In the search example, code that searches headings could be a bug, or it could r
 
 **Let the agent propose changes, not silently approve its own new requirements.** Name the decisions it can make locally and the ones that need your input. This is particularly important when several agents read copies of the plan.
 
-### Where does the extra work go?
+### Who takes on the upkeep?
 
-Each approach saves one kind of effort while adding another. Shared specs reduce repeated explanation but need updates. Parallel execution needs integration review. Templates improve consistency but need maintenance. An IDE can guide the sequence but ties that convenience to its tooling.
-
-Before adopting an approach, ask: **which recurring problem does it remove, and who will maintain what it adds?** If the answer is only “it feels more organized,” try it on one change before spreading it across the repo.
+Shared specs need updates; parallel work needs integration review; templates need maintenance. Before adopting tooling, name who will maintain what it adds. A practice that helps one author is not yet a process a team can rely on.
 
 ### What actually prevents a skipped step?
 
@@ -331,7 +338,7 @@ There are three different things to inspect:
 - **Automation:** a tool runs a command or creates a file.
 - **Enforcement:** a controller refuses the next action unless the required result is present.
 
-A method can contain all three. A diagram or an agent role does not tell you which is in use. If approval matters, ask what blocks the action, who can bypass it, and whether approval still applies after the code changes. The [workflow lesson](03-everyday-workflow.md) develops that distinction.
+A method can contain all three. A diagram or an agent role does not tell you which is in use. If approval matters, ask what blocks the action, who can bypass it, and whether approval still applies after the code changes. [Prompting: put code in charge when the rules must hold](../foundations/prompting.md#2-put-code-in-charge-when-the-rules-must-hold) explains the distinction between agent-directed and code-controlled workflows.
 
 ## Try one useful idea without migrating the repo
 
@@ -374,20 +381,16 @@ Don't mark unrun checks as passed or declare the change accepted for me.
 
 You make the acceptance decision. For this lesson, you do not need to implement the example or install a framework: finish with a reviewed note for your own change and one deliberate choice about how to maintain it.
 
-## Read further with a purpose
+## Sources
 
-The linked materials describe how their authors intend the approaches to work. They are useful for understanding mechanics, not proof that one method is faster or more reliable than another.
+The questions beside each approach suggest what to inspect. These primary sources explain intended mechanics; they are not independent evidence that one method is faster or more reliable.
 
-- **FSAD's [playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html):** inspect the shared-spec example and who contributes each decision. Separate that collaboration model from its speed claims.
-- **OpenSpec's [core concepts](https://github.com/Fission-AI/OpenSpec/blob/main/docs/overview.md):** follow a change from proposal to archive. Notice the difference between current specs and pending deltas.
-- **Kiro's [spec walkthrough](https://kiro.dev/blog/from-chat-to-specs-deep-dive/):** compare the requirements, design, and task views. Read it as a product demonstration, not an independent evaluation.
-- **Spec Kit's [README](https://github.com/github/spec-kit):** compare its three entry points and the outputs they promise. Check the supported integration before copying commands.
-- **BMAD's [planning-path guide](https://docs.bmad-method.org/plan/choose-a-planning-path/):** study how uncertainty and coordination change the path, rather than treating its skill list as a checklist.
+[FSAD playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html) · [OpenSpec core concepts](https://github.com/Fission-AI/OpenSpec/blob/main/docs/overview.md) · [Kiro walkthrough](https://kiro.dev/blog/from-chat-to-specs-deep-dive/) · [Spec Kit README](https://github.com/github/spec-kit) · [BMAD planning paths](https://docs.bmad-method.org/plan/choose-a-planning-path/)
 
 <details>
 <summary>Source versions and what was checked</summary>
 
-Primary sources were reviewed on October 8, 2026. FSAD's page labels itself v40. The Kiro walkthrough is dated July 15, 2025; consult current docs for current controls. OpenSpec and Spec Kit links follow their default branches, and BMAD's docs are mutable.
+FSAD's reviewed page labels itself v40. The Kiro walkthrough is dated July 15, 2025; consult current docs for current controls. OpenSpec and Spec Kit links follow their default branches, and BMAD's docs are mutable.
 
 The examples in this lesson illustrate the ideas; the five tools and methods were not installed, run, or benchmarked for this comparison. File and workflow descriptions are source-based. Adoption advice and the search scenario are course recommendations and teaching examples.
 

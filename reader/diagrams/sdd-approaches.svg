@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="706" viewBox="0 0 760 706" role="img" aria-labelledby="title desc">
+  <title id="title">Five ways to organize spec-driven work</title>
+  <desc id="desc">Different emphases, not rankings. FSAD: agree together before splitting work. OpenSpec: current behavior, proposed change, then updated specs after acceptance. Kiro: requirements, design, and tasks. Spec Kit: shared project rules guide each change. BMAD: find what is unclear, then choose the planning needed. These are simplified views, not complete workflows.</desc>
+  <style>
+    svg { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .background { fill: #101820; }
+    .row { fill: #17232f; stroke: #304252; }
+    .box { fill: #101b26; stroke: #42566a; }
+    .heading { fill: #f1f5f9; font-size: 25px; font-weight: 700; }
+    .name { font-size: 21px; font-weight: 700; }
+    .note { fill: #bdcbd8; font-size: 16px; }
+    .label { fill: #f1f5f9; font-size: 18px; font-weight: 600; text-anchor: middle; }
+    .sub { fill: #bdcbd8; font-size: 14px; text-anchor: middle; }
+    .arrow { fill: none; stroke: #a4b8ca; stroke-width: 2; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#a4b8ca" stroke-width="1.5"/></marker></defs>
+  <rect class="background" width="760" height="706" rx="16"/>
+  <text class="heading" x="24" y="40">Five ways to organize spec-driven work</text>
+
+  <g aria-label="FSAD: agree together before splitting work">
+    <rect class="row" x="16" y="62" width="728" height="116" rx="10"/>
+    <text class="name" fill="#7dd3fc" x="32" y="91">FSAD</text>
+    <text class="note" x="208" y="91">People agree before work splits</text>
+    <rect class="box" x="32" y="106" width="280" height="54" rx="7"/>
+    <text class="label" x="172" y="140">Agree together</text>
+    <path class="arrow" d="M324 133H436"/>
+    <rect class="box" x="448" y="106" width="280" height="54" rx="7"/>
+    <text class="label" x="588" y="140">Split the work</text>
+  </g>
+
+  <g aria-label="OpenSpec: separate current behavior from pending changes">
+    <rect class="row" x="16" y="190" width="728" height="116" rx="10"/>
+    <text class="name" fill="#5eead4" x="32" y="219">OpenSpec</text>
+    <text class="note" x="208" y="219">Keep today separate from what changes</text>
+    <rect class="box" x="32" y="234" width="212" height="54" rx="7"/>
+    <text class="label" x="138" y="268">Current behavior</text>
+    <path class="arrow" d="M251 261H266"/>
+    <rect class="box" x="274" y="234" width="212" height="54" rx="7"/>
+    <text class="label" x="380" y="268">Proposed change</text>
+    <path class="arrow" d="M493 261H508"/>
+    <rect class="box" x="516" y="234" width="212" height="54" rx="7"/>
+    <text class="label" x="622" y="256">Updated specs</text>
+    <text class="sub" x="622" y="276">after acceptance</text>
+  </g>
+
+  <g aria-label="Kiro: review requirements, design, and tasks">
+    <rect class="row" x="16" y="318" width="728" height="116" rx="10"/>
+    <text class="name" fill="#c4b5fd" x="32" y="347">Kiro</text>
+    <text class="note" x="208" y="347">Review what, how, and remaining work</text>
+    <rect class="box" x="32" y="362" width="212" height="54" rx="7"/>
+    <text class="label" x="138" y="396">Requirements</text>
+    <path class="arrow" d="M251 389H266"/>
+    <rect class="box" x="274" y="362" width="212" height="54" rx="7"/>
+    <text class="label" x="380" y="396">Design</text>
+    <path class="arrow" d="M493 389H508"/>
+    <rect class="box" x="516" y="362" width="212" height="54" rx="7"/>
+    <text class="label" x="622" y="396">Tasks</text>
+  </g>
+
+  <g aria-label="GitHub Spec Kit: shared rules guide each change">
+    <rect class="row" x="16" y="446" width="728" height="116" rx="10"/>
+    <text class="name" fill="#fcd34d" x="32" y="475">GitHub Spec Kit</text>
+    <text class="note" x="208" y="475">Reuse project rules across changes</text>
+    <rect class="box" x="32" y="490" width="280" height="54" rx="7"/>
+    <text class="label" x="172" y="524">Shared project rules</text>
+    <text class="sub" x="380" y="507">guide</text>
+    <path class="arrow" d="M324 522H436"/>
+    <rect class="box" x="448" y="490" width="280" height="54" rx="7"/>
+    <text class="label" x="588" y="524">Each change's spec and plan</text>
+  </g>
+
+  <g aria-label="BMAD: find what is unclear, then choose the planning needed">
+    <rect class="row" x="16" y="574" width="728" height="116" rx="10"/>
+    <text class="name" fill="#fda4af" x="32" y="603">BMAD</text>
+    <text class="note" x="208" y="603">Match the planning to the problem</text>
+    <rect class="box" x="32" y="618" width="280" height="54" rx="7"/>
+    <text class="label" x="172" y="652">What is unclear?</text>
+    <path class="arrow" d="M324 645H436"/>
+    <rect class="box" x="448" y="618" width="280" height="54" rx="7"/>
+    <text class="label" x="588" y="652">Choose the planning</text>
+  </g>
+</svg>

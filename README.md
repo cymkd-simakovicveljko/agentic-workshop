@@ -64,8 +64,8 @@ The health-checker lessons include static diagrams, practical prompting
 techniques, and source-reviewed skill recommendations. No third-party skills
 are installed by the course.
 
-The reader serves three allowlisted SVG diagrams and does not load a diagram
-JavaScript library. Regenerate a compact SVG with:
+The reader serves allowlisted static SVG and WebP diagrams and does not load a
+diagram JavaScript library. Regenerate a compact SVG with:
 
 ```sh
 node reader/diagrams/derive-course-svg.mjs context reader/diagrams/context.svg

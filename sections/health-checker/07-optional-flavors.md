@@ -137,13 +137,10 @@ That is the basic loop: agree, build, learn, update, continue. The approaches be
 
 These are not five competing Markdown templates. FSAD organizes collaboration; OpenSpec organizes changes; Kiro integrates spec work into an IDE; Spec Kit packages reusable processes; BMAD helps choose a planning path.
 
-| Approach | Where to look first | What you take on |
-| --- | --- | --- |
-| **FSAD** | Shared decisions across product, design, and engineering | Coordination and review of parallel work |
-| **OpenSpec** | Current behavior versus proposed changes | Spec updates and change-folder maintenance |
-| **Kiro specs** | Requirements, design, and tasks in the IDE | Kiro and its project documents |
-| **GitHub Spec Kit** | Repeatable processes across changes | Tool setup, templates, and shared rules |
-| **BMAD Method** | Planning depth and division of larger work | Skill setup, path selection, and saved plans |
+<figure class="course-diagram course-diagram-wide">
+<a href="/diagrams/sdd-approaches.svg"><img src="/diagrams/sdd-approaches.svg" width="760" height="706" alt="Five different emphases: FSAD agrees before splitting work; OpenSpec separates current behavior from proposed changes; Kiro separates requirements, design, and tasks; GitHub Spec Kit carries project rules into each change; BMAD chooses planning based on what is unclear." /></a>
+<figcaption>Different starting points—not exclusive capabilities. These simplified views overlap; they are not rankings or complete workflows. <a href="/diagrams/sdd-approaches.svg">Open the full-size diagram.</a></figcaption>
+</figure>
 
 Open the approach closest to a problem you have. Each section explains documented behavior, then applies it to our example. **The search examples and adoption advice are ours; they are not outputs from running these tools.**
 

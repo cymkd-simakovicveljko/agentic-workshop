@@ -85,6 +85,8 @@ A note is easiest to trust when it distinguishes **agreed**, **proposed**, and *
 
 ### When implementation reveals a problem
 
+**Was the note wrong, or did the code fail to follow it?** If the note says clearing search restores every lesson but the code does not, fix the code. If nobody agreed what clearing should do, settle that first. Don't rewrite the requirement to excuse a bug.
+
 Suppose a keyboard check reveals that filtering hides the link that currently has focus. “Preserve keyboard navigation” was too vague to tell us what should happen next.
 
 Do not ask the agent to silently choose and rewrite the requirement to match its code. Ask for the decision first:
@@ -167,6 +169,8 @@ Parallel work comes later, once the boundaries are clear. UI work and an indepen
 
 This live agreement is worth the coordination when several people own consequential decisions. For a clear local fix, use the existing issue instead. If intent changes after work splits, the people assigning tasks must identify which assignments are now invalid.
 
+Keep people involved without making them switch tools. Product can review the goal in an existing ticket; engineers can keep code details in the repo. Link the two. If several repos are involved, keep one shared goal and give each repo its own work item. The [InfoQ article on enterprise adoption](https://www.infoq.com/articles/enterprise-spec-driven-development/) walks through this approach.
+
 **Read with a question:** in the playbook's “Markdown Layer,” inspect the notification-preferences example. Which lines describe user needs, which choose a design, and which need review by a different person? Its cycle-time claims are the author's claims, not workshop measurements.
 
 </details>
@@ -232,6 +236,8 @@ Check that the full list returns and links still work.
 In requirements, ask whether the behavior is right. In design, ask whether the approach fits the codebase. In tasks, ask whether the work will deliver and check that behavior.
 
 Now suppose the reader moves from a static page to a server-rendered application. “Clearing the query restores every lesson” can remain valid while “derive the visible list in the browser” needs revision. That is the benefit of separating requirements from design: a technical change need not reopen an agreed product decision.
+
+You do not always need to start with new requirements. For a change to an existing API, first check what callers already depend on. This [AWS community article](https://builder.aws.com/content/3CqAvQIUtbv3TbYaWitncAz9TGQ/beyond-prompt-to-code-why-enterprise-ai-coding-needs-spec-driven-development) shows why through an order-service example: adding an endpoint must not bypass login checks or break existing clients.
 
 Kiro's walkthrough describes editing specs and regenerating the plan. Check which tasks the new design invalidates; document edits do not undo code already written. If you work in Kiro, these files provide convenient review points. In OMP, start with the same distinctions as headings in the existing note.
 

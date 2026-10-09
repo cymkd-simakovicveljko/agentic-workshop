@@ -60,12 +60,12 @@ or classroom pacing.
 
 ## Diagrams, prompting, and skills
 
-The health-checker lessons include static diagrams, practical prompting
-techniques, and source-reviewed skill recommendations. No third-party skills
+The lessons include static diagrams, practical prompting techniques,
+and source-reviewed skill recommendations. No third-party skills
 are installed by the course.
 
-The reader serves allowlisted static SVG and WebP diagrams and does not load a
-diagram JavaScript library. Regenerate a compact SVG with:
+The reader serves explicitly allowlisted SVG diagrams and raster images; it
+does not load a diagram JavaScript library. Regenerate a compact SVG with:
 
 ```sh
 node reader/diagrams/derive-course-svg.mjs context reader/diagrams/context.svg

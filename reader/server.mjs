@@ -15,6 +15,7 @@ const assets = new Map([
   ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
   ["/diagrams/prompting-strategies.webp", ["reader/diagrams/prompting-strategies.webp", "image/webp"]],
   ["/diagrams/sdd-approaches.svg", ["reader/diagrams/sdd-approaches.svg", "image/svg+xml"]],
+  ["/diagrams/software-development-lifecycle.webp", ["reader/diagrams/software-development-lifecycle.webp", "image/webp"]],
   [
     "/fonts/dm-sans.woff2",
     [

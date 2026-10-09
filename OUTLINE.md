@@ -22,14 +22,14 @@ Start with the introduction, then install and connect OMP in section 1. There is
    4. **[Tools and permissions](sections/foundations/tools-and-permissions.md)** — Understand tool calls, approvals, and actual execution.
    5. **[Sessions and memory](sections/foundations/sessions.md)** — Resume, start fresh, fork, compact, and hand off.
    6. **[Artifacts](sections/foundations/artifacts.md)** — Save useful work to files and inspect the outputs.
-   7. **[Skills](sections/foundations/skills.md)** — Reuse a procedure instead of repeating instructions.
+   7. **[Skills](sections/foundations/skills.md)** — Reuse a procedure, compare four engineering skill packs, and evaluate what helps.
    8. **[MCP, plugins, and extensions](sections/foundations/mcp-and-plugins.md)** — Connect capabilities and understand how they are packaged.
 3. **[Key productivity tips](sections/working-with-omp/index.md)** — Voice input, keyboard controls, phone access, and managing agents.
    1. **[Voice input](sections/working-with-omp/voice-input.md)** — Say the rough thought, check the transcription, then submit.
    2. **[Keyboard controls and steering](sections/working-with-omp/keyboard-and-steering.md)** — Direct, queue, interrupt, and inspect work.
    3. **[Working from your phone](sections/working-with-omp/phone-access.md)** — Connect to work running on your computer.
    4. **[Managing several agents](sections/working-with-omp/managing-agents.md)** — Organize sessions, attention, and independent tasks.
-4. **[SDLC: the everyday workflow](sections/health-checker/03-everyday-workflow.md)** — Practice agent-directed and code-controlled work, parallel execution, dependency graphs, bounded loops, and enforced gates.
+4. **[SDLC: the everyday workflow](sections/health-checker/03-everyday-workflow.md)** — Follow a feature through the lifecycle, then practice workflow control, dependencies, bounded loops, and enforced gates.
 5. **[Optional flavors](sections/health-checker/07-optional-flavors.md)** — Discussion notes on FSAD, OpenSpec, Kiro, GitHub Spec Kit, and BMAD.
 6. **[Advanced harness design and enterprise-scale work](sections/health-checker/08-advanced-engineering.md)** — Examine harness boundaries and changes to existing systems.
 

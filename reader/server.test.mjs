@@ -25,6 +25,11 @@ test(
     const [output] = await once(child.stdout, "data");
     const base = output.toString().match(/http:\/\/127\.0\.0\.1:\d+/)?.[0];
     assert.ok(base, "Server reports its listening address");
+    const page = await fetch(base);
+    assert.match(
+      page.headers.get("content-security-policy"),
+      /(?:^|;)\s*frame-src https:\/\/www\.youtube-nocookie\.com(?:;|$)/,
+    );
     const response = await fetch(`${base}/content/OUTLINE.md`);
     assert.equal(response.status, 200);
     assert.equal(

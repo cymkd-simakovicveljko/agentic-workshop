@@ -1,4 +1,4 @@
-# 4. SDLC: the everyday workflow
+# 4. Engineering workflows
 
 ## Before we bring in the agent
 
@@ -597,6 +597,6 @@ Use this as a longer follow-on when you want to explore spec-driven development 
 
 **Watch with one change of your own in mind:** what belongs in its specification, and what evidence would show that the implementation meets it? Borrow the procedure; we will continue using OMP rather than requiring another tool setup.
 
-For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Optional flavors](07-optional-flavors.md#optional-watch-a-use-case-driven-approach).
+For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Spec-driven development](07-optional-flavors.md#optional-watch-a-use-case-driven-approach).
 
-[Previous: Key productivity tips](../working-with-omp/index.md) · [Next: Optional flavors](07-optional-flavors.md) · [Back to the outline](../../OUTLINE.md)
+[Previous: Key productivity tips](../working-with-omp/index.md) · [Next: Spec-driven development](07-optional-flavors.md) · [Back to the outline](../../OUTLINE.md)

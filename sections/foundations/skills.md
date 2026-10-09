@@ -137,7 +137,7 @@ Our example uses `disable-model-invocation: true` so we choose when to apply it.
 
 Once a procedure helps, it is natural to ask what other engineers have packaged. We will look at four: **Matt Pocock's skills, Addy Osmani's Agent Skills, Lauren Tan's pstack, and Jesse Vincent's Superpowers.** This is our shortlist, not an industry ranking.
 
-These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. The [SDLC lesson](../health-checker/03-everyday-workflow.md) explains that underlying work. Here, we are looking at how people turn parts of it into instructions for agents.
+These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. The [Engineering workflows lesson](../health-checker/03-everyday-workflow.md) explains that underlying work. Here, we are looking at how people turn parts of it into instructions for agents.
 
 **Start with the failure you want to prevent.** Are you building the wrong thing, skipping checks, or losing track of a long change? Read the relevant procedure before adopting the author's whole workflow.
 

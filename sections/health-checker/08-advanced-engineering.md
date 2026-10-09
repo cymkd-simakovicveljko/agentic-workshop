@@ -122,7 +122,7 @@ clock while keeping the default real HTTP path intact. If the code has no such
 boundary, first use the local fixture as an outer observation, then make one small
 preparatory change and re-run the characterization cases.
 
-This retained example uses the `--report-json PATH` option defined in the [archived report contract](https://github.com/cymkd-simakovicveljko/agentic-workshop/blob/491d6fbe8d32fc4ab474a044737a881f90cc7d62/sections/health-checker/07-optional-flavors.md#before-you-choose-a-flavor), not the current Optional flavors notes. It specifies a single-target report with validation and output-error rules. Preserve the no-flag single-target and batch interfaces. If you already implemented it, use characterization and consumer checks to assess it rather than rebuilding it. Route B does not require completing Route A.
+This retained example uses the `--report-json PATH` option defined in the [archived report contract](https://github.com/cymkd-simakovicveljko/agentic-workshop/blob/491d6fbe8d32fc4ab474a044737a881f90cc7d62/sections/health-checker/07-optional-flavors.md#before-you-choose-a-flavor), not the current Spec-driven development notes. It specifies a single-target report with validation and output-error rules. Preserve the no-flag single-target and batch interfaces. If you already implemented it, use characterization and consumer checks to assess it rather than rebuilding it. Route B does not require completing Route A.
 
 ## Watch or try
 
@@ -321,4 +321,4 @@ and [Agent Hub docs](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c6
 These are source citations, not evidence that this lesson executed OMP or a
 production harness.
 
-[Previous: optional flavors](07-optional-flavors.md) · [Back to outline](../../OUTLINE.md)
+[Previous: Spec-driven development](07-optional-flavors.md) · [Back to outline](../../OUTLINE.md)

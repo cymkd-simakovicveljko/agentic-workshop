@@ -2,7 +2,9 @@
 
 Prompting is the skill of shaping a request so an LLM can do useful work. You can ask it to explain, compare, build, critique, or coordinate several steps. Different tasks call for different approaches.
 
-**Every word can matter.** A missing constraint, an ambiguous phrase, or a leading question can change the result. That does not mean longer prompts are better. Give the model what it needs, and check what it does with it.
+This is the bread and butter of working with LLMs.
+
+**Every word can matter.** A missing constraint, an ambiguous phrase, or a leading question can change the result. That does not mean longer prompts are better. Precisions trumps vagueness everytime.
 
 In this lesson, we’ll try common prompting styles and output formats, learn practical tips for steering the work, and recognize where agents tend to go wrong. We’ll also turn a first result into something worth using through focused review and revision, then see how prompts become the starting point for reusable workflows.
 
@@ -13,11 +15,12 @@ In this lesson, we’ll try common prompting styles and output formats, learn pr
 
 ## Don’t leave the important choices unstated
 
-An LLM generates responses using patterns learned during training and the context available to it. Its outputs are probabilistic: the same request can produce different answers. Training draws on large collections of data, but that does not mean the model has seen everything or knows which standards apply to your task.
+An LLM generates responses using patterns learned during training and the context available to it. Its outputs are probabilistic: **the same request can produce different answers**. Training draws on large collections of data, but that does not mean the model has seen everything or more importantly, the model does not know what structure, output, focus you want it to provide in its answer.
 
-Fluent conversation makes this easy to forget. We can start treating the agent like a colleague who shares our experience, priorities, and understanding of the problem. Then we ask it to “improve this code” and assume it knows what improvement means.
-
-But improve it how? Make it faster? Easier to read? More reusable? Preserve the public API? Those choices can lead to very different results.
+<aside class="judgment-callout">
+<p>Fluent conversation makes this easy to forget. We can start treating the agent like a colleague who shares our experience, priorities, and understanding of the problem. Then we ask it to “improve this code” and assume it knows what improvement means.</p>
+<p><strong>But improve it how?</strong> Make it faster? Easier to read? More reusable? Preserve the public API? Those choices can lead to very different results.</p>
+</aside>
 
 **If a choice matters to the outcome, make it visible in the request.**
 
@@ -49,6 +52,26 @@ These are a check on your thinking, not four headings you must paste into every 
 That is where prompting skills help. **Structure, examples, constraints, and output formats reduce ambiguity and give us something concrete to judge.** They can make results more consistent and useful, but they do not guarantee correctness.
 
 Open-ended questions still have a place. Use them when you want to explore possibilities. When you need a particular outcome, make the consequential decisions explicit, then verify what the agent actually delivers.
+
+**Important repeating message** It is in human nature to find the most energy efficient way of doing things.
+
+**Do not delegate thinking** . The biggest misuse of LLM is to unconsciously delegate critical thinking, understanding and decision making to LLM model. This is the biggest cumulative danger LLM's bring to the table.
+
+Legendary Kent Beck explains this wonderfully in this video. There are many other resources on this topic, even more, there are studies and papers which show that from the behavioral aspect that LLM brings irresopnbiel delegation of decisions and understanding. 
+
+<a class="video-card" href="https://www.youtube.com/watch?v=F8fBgDCf2Y4">
+<span class="video-card-preview">
+<img src="https://i.ytimg.com/vi/F8fBgDCf2Y4/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" referrerpolicy="no-referrer">
+<span class="video-card-play" aria-hidden="true">▶</span>
+</span>
+<span class="video-card-body">
+<span class="video-card-label">Further viewing · Prodacity 2026</span>
+<strong>Kent Beck: Software Engineering in the Age of AI</strong>
+<span>Rise8</span>
+<span class="video-card-action">Watch on YouTube ↗</span>
+</span>
+</a>
+
 
 ## Prompting techniques you can use today
 

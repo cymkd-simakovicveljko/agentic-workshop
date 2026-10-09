@@ -60,4 +60,4 @@ The lesson uses public GitHub profile images and Lauren Tan's React team photogr
 | Lauren Tan | [React team profile](https://react.dev/community/team#lauren-tan), identifying Cursor and Compiler work | [React team photograph](https://react.dev/images/team/lauren.jpg) |
 | Jesse Vincent | [Official biography](https://blog.fsck.com/about/), identifying Superpowers and Keyboardio | [GitHub avatar](https://avatars.githubusercontent.com/u/45416?v=4) |
 
-The lifecycle illustration in the SDLC lesson was supplied by the course author and included unchanged. It was not sourced from any of these packs.
+The lifecycle illustration in the Engineering workflows lesson was supplied by the course author and included unchanged. It was not sourced from any of these packs.

@@ -30,6 +30,12 @@ build step, account, database, or copied content, and uses the installed
 `marked` and `DOMPurify` packages. Refresh after editing a document. Stop it
 with **Ctrl+C**; if port 4173 is occupied, use `PORT=4174 npm start`.
 
+Selected lessons embed YouTube talks and retain a direct link as a fallback.
+To opt in, add `data-youtube-embed` to a link with the form
+`https://www.youtube.com/watch?v=VIDEO_ID`. The reader validates the host and
+video ID, then creates a responsive player on `www.youtube-nocookie.com`.
+Arbitrary iframe markup remains blocked.
+
 ## Course material
 
 | Material | Purpose |

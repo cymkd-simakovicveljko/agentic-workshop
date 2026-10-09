@@ -44,7 +44,7 @@ Use `--add-dir` only when the task needs another workspace directory. `/resume` 
 
 The useful habit is simple: one main session, one bounded worker when it buys independent progress, and one human review of every result before integration.
 
-[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Next: SDLC — the everyday workflow](../health-checker/03-everyday-workflow.md)
+[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Next: Engineering workflows](../health-checker/03-everyday-workflow.md)
 
 ## Sources
 

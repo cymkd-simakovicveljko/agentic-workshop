@@ -11,15 +11,16 @@ const assets = new Map([
   ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
   ["/diagrams/workflow.svg", ["reader/diagrams/workflow.svg", "image/svg+xml"]],
   ["/diagrams/context.svg", ["reader/diagrams/context.svg", "image/svg+xml"]],
+  ["/diagrams/llm-context.png", ["reader/diagrams/llm-context.png", "image/png"]],
   ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],
   ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
   ["/diagrams/prompting-strategies.webp", ["reader/diagrams/prompting-strategies.webp", "image/webp"]],
   ["/diagrams/sdd-approaches.svg", ["reader/diagrams/sdd-approaches.svg", "image/svg+xml"]],
   ["/diagrams/software-development-lifecycle.webp", ["reader/diagrams/software-development-lifecycle.webp", "image/webp"]],
   [
-    "/fonts/dm-sans.woff2",
+    "/fonts/inter.woff2",
     [
-      "node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2",
+      "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
       "font/woff2",
     ],
   ],
@@ -54,7 +55,7 @@ const server = createServer(async (request, response) => {
       "Content-Security-Policy":
         type === "image/svg+xml"
           ? "default-src 'none'; style-src 'unsafe-inline'; font-src data:; sandbox"
-          : "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+          : "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
     });
     response.end(request.method === "HEAD" ? undefined : body);
   };

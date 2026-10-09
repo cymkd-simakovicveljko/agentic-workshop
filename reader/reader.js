@@ -297,6 +297,23 @@ function decorateDocument(path) {
       anchor.removeAttribute("href");
       return;
     }
+    const videoId = resolved.searchParams.get("v");
+    if (
+      anchor.hasAttribute("data-youtube-embed") &&
+      resolved.origin === "https://www.youtube.com" &&
+      resolved.pathname === "/watch" &&
+      /^[A-Za-z0-9_-]{11}$/.test(videoId)
+    ) {
+      const player = document.createElement("iframe");
+      player.className = "youtube-player";
+      player.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
+      player.title = anchor.textContent;
+      player.loading = "lazy";
+      player.referrerPolicy = "strict-origin-when-cross-origin";
+      player.allow = "encrypted-media; picture-in-picture; fullscreen";
+      player.allowFullscreen = true;
+      anchor.before(player);
+    }
     if (resolved.origin !== location.origin) {
       anchor.target = "_blank";
       anchor.rel = "noopener noreferrer";

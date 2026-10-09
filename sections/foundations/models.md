@@ -1,8 +1,8 @@
 # 2.1 Models and roles
 
-**Large language models (LLMs) are at the heart of agentic engineering, so choosing the right model for the job is essential.** The model landscape changes almost daily. Learning how to evaluate and choose models matters more than knowing which one leads today.
+**Large language models (LLMs) are at the heart of agentic engineering, so choosing the right model for the job is essential.** The model landscape changes almost daily. Learning how to evaluate and choose models often matters more than knowing which one leads today. In the end we want to pick the most suitable model for our task at hand!
 
-Before configuring roles, we need to understand what we are choosing: capability, speed, cost, and where the model runs.
+Before configuring which model does a role use (more on this below), we need to understand what we are choosing: capability, speed, cost, and where the model runs.
 
 ## Pick the model for the job
 
@@ -14,16 +14,22 @@ Think in three workload buckets—not three permanent classes of model:
 | **Everyday workhorse** | Implementing a bounded feature, reading unfamiliar code, writing a useful first draft. | Reliable results at a cost and pace we can use all day. |
 | **Lightweight work** | Extracting fields, classifying requests, summarizing a short document, producing a commit message. | Low latency and low cost, with enough capability for the narrow task. |
 
-The useful triangle is **capability, cost, and speed**. A stronger model may spend more time reasoning. A small model may answer quickly but need several attempts. A newer release can improve all three, so this is a comparison tool—not a law that says we can only have two.
+The useful triangle is **capability, cost, and speed**. 
+
+- A stronger model may spend more time reasoning. 
+- A small model may answer quickly but need several attempts. 
+- A newer release can improve all three, so this is a comparison tool—not a law that says we can only have two.
 
 <figure class="course-diagram">
 <a href="/diagrams/model-tradeoffs.webp"><img src="/diagrams/model-tradeoffs.webp" width="894" height="610" alt="Speed, cost, and quality form a triangle. Its edges are labelled substandard, expensive, and slow. A purple arrow asks ‘Why not here?’ and points to a spot inside the triangle." /></a>
 <figcaption>Can we get enough quality, quickly, at a cost worth paying? The purple dot is a discussion prompt, not a measured model ranking; the answer depends on the task.</figcaption>
 </figure>
 
-Start with a workhorse at medium effort. If it does the job, try spending less: lower the effort or try a lighter model. If it struggles, turn up the effort before reaching for a frontier model.
+The safe advice is: always start with a workhorse at medium effort. If it does the job, try spending less: lower the effort or try a lighter model. If it struggles, turn up the effort before reaching for a frontier model. 
 
 Don’t assume pricier means better. A cheaper model thinking harder can match a pricier one thinking less. Compare them on the same task and context, and pay for results, not the model’s reputation.
+
+In the end, its not only the tokens ($) that you are saving, it is also time! Usually less reasoning means faster response times!
 
 <aside class="judgment-callout">
 <p class="judgment-kicker">Find the right level</p>
@@ -71,9 +77,9 @@ Source: [Artificial Analysis leaderboard](https://artificialanalysis.ai/leaderbo
 
 ### Know the labs and what “open” means
 
-For hosted proprietary models, the familiar families include OpenAI's GPT models, Anthropic's Claude models, and Google's Gemini models. Names such as Opus, Sonnet, Haiku, Pro, Flash, and mini suggest different product positions, but they are not a universal grading system across labs.
+For hosted proprietary models, the familiar families include [OpenAI's GPT models](https://platform.openai.com/docs/models), [Anthropic's Claude models](https://www.anthropic.com/claude), and [Google's Gemini models](https://deepmind.google/models/gemini/). Names such as Opus, Sonnet, Haiku, Pro, Flash, and mini suggest different product positions, but they are not a universal grading system across labs.
 
-There is also a substantial open-weight ecosystem. Chinese labs such as Qwen, Z.ai, and Moonshot are part of it; so are OpenAI, Google, and European labs such as Mistral. The exact release matters more than the lab's nationality or a family-level label.
+There is also a substantial open-weight ecosystem. Chinese labs such as [Qwen](https://qwen.ai/), [Z.ai](https://z.ai/), and [Moonshot](https://www.moonshot.ai/) are part of it; so are [OpenAI](https://openai.com/index/introducing-gpt-oss/), [Google](https://ai.google.dev/gemma), and European labs such as [Mistral](https://mistral.ai/). The exact release matters more than the lab's nationality or a family-level label.
 
 | Lab / family | Concrete open-weight example | Useful distinction |
 | --- | --- | --- |
@@ -128,7 +134,7 @@ Local inference buys control and can avoid sending prompts to a remote inference
 </details>
 </div>
 
-## Pay for completed work, not the cheapest token
+## Pay for completed work, not the cheapest token!
 
 **Compare the cost of completing the task, not the price per token.** Models use different numbers of tokens to get the same job done, so a model with pricier tokens can still cost less overall.
 
@@ -161,6 +167,7 @@ For examples, see [DailyBench’s repeat-testing approach](https://github.com/ja
 ## Put those choices into OMP roles
 
 A role is a **routing assignment**, not a persona. It tells OMP which model to use when a particular workload runs.
+Model routing isn’t unique to OMP. Other harnesses expose it through per-agent settings or dedicated planning, editing, and lightweight models. OMP makes these assignments explicit through named model roles.
 
 | Control | What it changes | What it does not do |
 | --- | --- | --- |
@@ -202,14 +209,16 @@ For the full setup, see [OMP’s model and role documentation](https://raw.githu
 
 ## Try it: can a cheaper model do the same job?
 
-Open a repository you already know. Pick a function with two or three branches, such as input validation, a permissions check, or a price calculation. Choose something you can verify yourself without tracing half the codebase.
+Open 2,3 or 4 tabs or terminals, and in all of them:
+
+- open a repository you already know. Think of a class, module or a feature. Choose something you can verify yourself without tracing half the codebase.
 
 Use this prompt, replacing the function name and file path:
 
 > Inspect `[function name]` in `[file path]`. Use the available tools to read its dependencies and existing tests as needed. Explain its inputs, outputs, branches, and error cases, then suggest three tests with concrete inputs and expected results. Base your answer on the code and point to the relevant files. If something is unclear, say so rather than guessing. Do not change any files.
 
-1. **Run it with your workhorse at medium effort**, if supported. Start a fresh session in the repository. Note the model, provider, and effort setting, and keep the answer.
-2. **Repeat with a cheaper model in another fresh session.** Use exactly the same prompt, repository state, instructions, and available tools. Do not include the first model’s answer. Note this model’s settings too.
+1. **In the first instance: Run it with your workhorse at medium effort**, if supported. Start a fresh session in the repository. Note the model, provider, and effort setting, and keep the answer.
+2. **In the second, third etc: Repeat with a cheaper or just a different model in another fresh session.** Use exactly the same prompt, repository state, instructions, and available tools. Do not include the first model’s answer. Note this model’s settings too.
 3. **Check both answers against the code.** Did they explain every branch correctly? Are all three expected test results right? Did either invent behavior or miss an error case? Count an answer as correct only when these checks pass.
 4. **Compare total cost and completion time**, including any follow-up needed to correct the answer. Record those corrections too. Different tool choices are part of the comparison, so count the whole run, not just the final response. If your provider does not expose cost, mark it as unavailable rather than guessing.
 

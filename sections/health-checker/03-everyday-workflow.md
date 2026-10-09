@@ -156,4 +156,14 @@ That is the habit we will build on: use agents across the work, while keeping de
 
 We'll use focused examples for these topics, rather than one shared course project.
 
+### Optional watch: put a specification to work
+
+[**Full Course: Spec-Driven Development with Coding Agents**](https://www.youtube.com/watch?v=hy8UstR2NEg) — Paul Everitt, DeepLearning.AI with JetBrains · **62 minutes**.
+
+Use this as a longer follow-on when you want to explore spec-driven development (SDD). The course description covers a project constitution, planning and validating features against a Markdown spec, introducing SDD to existing code, and packaging the workflow as a reusable skill. It is optional, not a prerequisite for this workshop.
+
+**Watch with one change of your own in mind:** what belongs in its specification, and what evidence would show that the implementation meets it? Borrow the procedure; we will continue using OMP rather than requiring another tool setup.
+
+For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Optional flavors](07-optional-flavors.md#optional-watch-a-use-case-driven-approach).
+
 [Previous: Key productivity tips](../working-with-omp/index.md) · [Next: Optional flavors](07-optional-flavors.md) · [Back to the outline](../../OUTLINE.md)

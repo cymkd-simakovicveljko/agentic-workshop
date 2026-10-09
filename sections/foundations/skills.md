@@ -133,6 +133,71 @@ Our example uses `disable-model-invocation: true` so we choose when to apply it.
 
 **Skills can guide tool use; they do not create the tool or grant access.** Our handoff skill is text-only. A document-generation skill may ask the agent to run Python, and a deployment skill may ask it to publish something. Inspect those actions before adopting the package.
 
+## Four skill packs, four starting points
+
+Once a procedure helps, it is natural to ask what other engineers have packaged. We will look at four: **Matt Pocock's skills, Addy Osmani's Agent Skills, Lauren Tan's pstack, and Jesse Vincent's Superpowers.** This is our shortlist, not an industry ranking.
+
+These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. The [SDLC lesson](../health-checker/03-everyday-workflow.md) explains that underlying work. Here, we are looking at how people turn parts of it into instructions for agents.
+
+**Start with the failure you want to prevent.** Are you building the wrong thing, skipping checks, or losing track of a long change? Read the relevant procedure before adopting the author's whole workflow.
+
+<div class="community-voices">
+<figure class="voice-card">
+<figcaption><img src="https://avatars.githubusercontent.com/u/28293365?v=4&amp;s=96" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer"><div><strong>Matt Pocock</strong><span>Creator of Total TypeScript · Author of mattpocock/skills</span></div></figcaption>
+<p><strong>Start by agreeing on what we are building.</strong> Pocock's <a href="https://github.com/mattpocock/skills">pack</a> favors small procedures you can combine and adapt. Grilling exposes unresolved decisions; domain modeling establishes shared terminology and records consequential choices in architecture decision records (ADRs). The collection also covers implementation, debugging, tests, and review—it is not only an interview toolkit.</p>
+<p><strong>We would start here when:</strong> a request sounds clear until we ask about duplicates, permissions, or partial failure. Read the underlying <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md">grilling procedure</a>, not just its <code>grill-me</code> wrapper.</p>
+<p class="voice-source"><a href="https://github.com/mattpocock">Creator profile and portrait source</a></p>
+</figure>
+<figure class="voice-card">
+<figcaption><img src="https://avatars.githubusercontent.com/u/110953?v=4&amp;s=96" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer"><div><strong>Addy Osmani</strong><span>Former engineering director at Google · Author of Agent Skills</span></div></figcaption>
+<p><strong>Make the steps and checks explicit.</strong> Osmani's <a href="https://github.com/addyosmani/agent-skills">Agent Skills</a> uses a familiar sequence: Define, Plan, Build, Verify, Review, Ship. Specifications lead to small implementation tasks, with checks between slices. Supporting skills cover areas such as performance, observability, and migration.</p>
+<p><strong>We would start here when:</strong> a team needs a recognizable workflow and wants to inspect what each stage should produce. Its <a href="https://github.com/addyosmani/agent-skills/blob/main/skills/doubt-driven-development/SKILL.md">doubt-driven development</a> procedure also asks a fresh-context reviewer to challenge an artifact against its requirements during the work—not only at the final review.</p>
+<p class="voice-source"><a href="https://github.com/addyosmani">Creator profile and portrait source</a></p>
+</figure>
+<figure class="voice-card">
+<figcaption><img src="https://react.dev/images/team/lauren.jpg" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer"><div><strong>Lauren Tan, known as poteto</strong><span>Engineer at Cursor · React Compiler contributor</span></div></figcaption>
+<p><strong>Investigate deeply and show that the result works.</strong> Tan's <a href="https://github.com/cursor/plugins/tree/main/pstack">pstack</a> routes tasks through engineering playbooks. It combines code investigation, architecture, implementation, runtime verification, and review. Arenas compare alternative attempts; multi-model reviews use different models to examine the work.</p>
+<p><strong>We would start here when:</strong> a change has unclear consequences or a difficult bug needs evidence rather than another guess. It is not just a post-build checker: <a href="https://github.com/cursor/plugins/blob/main/pstack/skills/architect/SKILL.md">architect</a> works on the design before implementation. Its larger workflow is built around Cursor; selected procedures need adaptation for OMP.</p>
+<p class="voice-source"><a href="https://react.dev/community/team#lauren-tan">React team profile and portrait source</a></p>
+</figure>
+<figure class="voice-card">
+<figcaption><img src="https://avatars.githubusercontent.com/u/45416?v=4&amp;s=96" alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer"><div><strong>Jesse Vincent</strong><span>Creator of Superpowers · Co-founder of Keyboardio</span></div></figcaption>
+<p><strong>Follow a connected workflow instead of jumping straight to code.</strong> Vincent's <a href="https://github.com/obra/superpowers">Superpowers</a> links design conversations and approval, implementation plans, test-driven development, review, and verification. Its <a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">verification-before-completion</a> procedure asks for fresh evidence before claiming success.</p>
+<p><strong>We would start here when:</strong> we want a more prescribed path from an idea to a reviewed change. The tradeoff is more workflow to understand and adapt. Its <a href="https://github.com/obra/superpowers/blob/main/docs/porting-to-a-new-harness.md">porting guide</a> distinguishes reusable instructions from the hooks and tool mappings needed to make the full system work in another harness.</p>
+<p class="voice-source"><a href="https://blog.fsck.com/about/">Creator biography</a> · <a href="https://github.com/obra">Portrait source</a></p>
+</figure>
+</div>
+
+### How the approaches differ
+
+All four care about requirements, code quality, and verification. The distinction is emphasis, not exclusive ownership of a stage.
+
+| Pack | What we would borrow first | What to check before using it in OMP |
+| --- | --- | --- |
+| **Pocock** | Clarify decisions and establish shared language before implementing. | Some entry points call other skills through a host-specific tool. Spec workflows may also need issue-tracker setup. |
+| **Osmani** | A lifecycle with explicit outputs and checks between small changes. | Keep shared reference files as well as skill bodies. Command wrappers and reviewer roles depend on the host. |
+| **pstack** | Investigate the code, compare approaches, and verify the real result. | Cursor modes, model configuration, subagents, and companion tools do not transfer just because the instructions are Markdown. |
+| **Superpowers** | A connected design, approval, planning, TDD, and review workflow. | Copying skill files is not the same as installing its session-start integration and adapting its tool calls. |
+
+**These are instructions, not enforcement.** A skill that says “do not continue until tests pass” can guide an agent. It does not replace a CI check that actually blocks a merge. Nor does adding another reviewer guarantee that the reviewers have different blind spots.
+
+### Match the process to the stakes
+
+For this workshop, we would use:
+
+- **A small, low-risk edit:** a clear request and a direct check of the result.
+- **A bounded feature:** settle the uncertain behavior, implement a small slice, and check it.
+- **A large or fuzzy change:** agree the scope and design, split the work, and verify each part before continuing.
+- **A security-sensitive or hard-to-reverse change:** add the relevant specialist review, explicit approval, and recovery plan.
+
+The stakes matter more than the line count. A one-line permission change can need more scrutiny than a new page.
+
+**Installing is not the same as loading.** OMP normally exposes lightweight skill metadata and loads a body when needed. Installing a collection does not automatically put every instruction into context. Loading overlapping workflows can still add cost and conflicting directions; dependencies and selection rules also need attention.
+
+Our recommendation is to borrow one useful procedure, preserve what it depends on, and evaluate it on your work. Do not enable four competing workflows to fix one unclear request.
+
+Rob Shocks's comparison, “Pocock vs Pstack vs Osmani: Which Skill Pack Wins?”, prompted this section; Superpowers is an additional comparison. [Research notes, inspected revisions, and portrait credits](../../research/2026-10-09-engineering-skill-packs.md) record the primary sources behind it. We have not benchmarked these four packs against one another.
+
 ## Choose another kind of skill
 
 Pick one recipe that matches work you actually do. Read the linked source before installing anything. These are source-based recommendations, not claims that we benchmarked every package or that a named author always produces better results.
@@ -212,17 +277,15 @@ Anthropic's [docx skill](https://github.com/anthropics/skills/tree/main/skills/d
 </details>
 </div>
 
-## Repositories worth starting with
+## Other repositories worth exploring
 
-**Our shortlist is based on useful, inspectable examples, not stars or a claim that these are universally “the best.”** Start at one skill's source, not the collection's install button.
+Beyond the four engineering packs above, these collections offer useful examples for particular tasks. Start at one skill's source, not the collection's install button.
 
 | Repository | Why we would open it | What to watch |
 | --- | --- | --- |
-| [mattpocock/skills](https://github.com/mattpocock/skills) | Opinionated engineering procedures: clarification, debugging, TDD, and review. | Some entry points depend on other skills or reference files; workflows may assume particular tools. |
 | [anthropics/skills](https://github.com/anthropics/skills) | Examples spanning frontend design, document work, and skill creation. | Document skills can include executable helpers and dependencies. An official example is not automatic OMP compatibility. |
 | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Focused frontend guidance, especially React/Next.js and web-interface review. | Framework and version assumptions matter; a performance recommendation needs a relevant case. |
 | [cymkd-simakovicveljko/clear-cut](https://github.com/cymkd-simakovicveljko/clear-cut) | A small, readable example of packaging a communication preference. | It changes presentation and interaction, not the correctness of the underlying work. |
-| [Poteto's pstack](https://github.com/cursor/plugins/tree/main/pstack), by Lauren Tan | Connected engineering procedures for understanding code, investigating change impact, and improving explanations. | The full stack targets Cursor and references companion skills, subagents, and tools. Adapt selected procedures for OMP rather than treating its installer or commands as portable. |
 
 The [Agent Skills specification](https://agentskills.io/specification) explains the shared package format. It is a useful reference when comparing repositories, but hosts differ in discovery paths, optional metadata, tools, and invocation commands.
 

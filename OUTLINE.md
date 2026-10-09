@@ -30,7 +30,7 @@ Start with the introduction, then install and connect OMP in section 1. There is
    3. **[Working from your phone](sections/working-with-omp/phone-access.md)** — Connect to work running on your computer.
    4. **[Managing several agents](sections/working-with-omp/managing-agents.md)** — Organize sessions, attention, and independent tasks.
 4. **[SDLC: the everyday workflow](sections/health-checker/03-everyday-workflow.md)** — Follow a feature through the lifecycle, then practice workflow control, dependencies, bounded loops, and enforced gates.
-5. **[Optional flavors](sections/health-checker/07-optional-flavors.md)** — Discussion notes on FSAD, OpenSpec, Kiro, GitHub Spec Kit, and BMAD.
+5. **[Optional flavors](sections/health-checker/07-optional-flavors.md)** — Keep useful change notes, then see what FSAD, OpenSpec, Kiro, Spec Kit, and BMAD add.
 6. **[Advanced harness design and enterprise-scale work](sections/health-checker/08-advanced-engineering.md)** — Examine harness boundaries and changes to existing systems.
 
 </div>

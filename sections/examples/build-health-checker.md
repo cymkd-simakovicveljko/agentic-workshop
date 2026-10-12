@@ -4,9 +4,9 @@
 
 You have just shipped a change. The website responds, but does it show what users expect? Let’s ask OMP to build a small tool that can tell the difference.
 
-This standalone example turns a plain-language request into a working tool. You will watch OMP work, try what it builds, and ask for a change. [Foundations](../foundations/index.md) explains the model, context, and tools behind the run.
+[Foundations](../foundations/index.md) explains the model, context, and tools
+behind the run.
 
-Your job is to stay involved: read what OMP asks permission to do, try the result, and tell it what needs changing. The commands and outputs in your run may differ from someone else’s. Follow the outcome, not an exact transcript.
 
 ## 1. Take the controls
 
@@ -91,7 +91,6 @@ Look for three things in your actual run:
 - **Commands running.** Did it execute the checker, or only suggest a command?
 - **Evidence coming back.** What did those commands report?
 
-This is the difference from asking a chatbot for a code sample: OMP can use tools to act in your workspace. A file on disk is not proof that the model read it, and a successful write is not proof that the program works.
 
 If OMP asks a question, answer it. If it asks for an unagreed package, edits outside the exercise, or expands into a bigger project, interrupt and restate the boundary. Prefer an available HTTP client rather than implementing one; agree any necessary dependency with the host before proceeding.
 
@@ -143,7 +142,6 @@ Choose a concrete improvement—a clearer failure reason or a more readable arra
 
 Run `/healthy` and `/wrong-body` again. **Did the output improve, and did the checker still make the right decisions?** If the report was already clear, choose a small wording or layout preference rather than inventing a bug.
 
-You have now directed a build, used the result, and steered a revision. Next, decide whether it is ready to keep.
 
 ## 6. Decide whether it is ready
 
@@ -216,9 +214,6 @@ An interrupt stops a turn; it does not undo edits or guarantee that a child proc
 
 ## What just happened?
 
-You described an outcome, watched OMP act through tools, ran the product yourself, and gave a follow-up request. You also checked a case where a successful HTTP response was not enough.
-
-The useful part is not just that code appeared. You could direct the work and compare the result with what you asked for. The same pattern applies to a feature, a bug fix, or a small automation at work.
 
 **Would you accept this tool?** Name one thing you verified and one thing you still would not claim about it. Keep a short note outside the source files:
 

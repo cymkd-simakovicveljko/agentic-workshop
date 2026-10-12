@@ -2,13 +2,7 @@
 
 ## Before we bring in the agent
 
-Think about the last feature you shipped. Someone had to work out what people needed, decide how it would fit the system, build it, check it, and get it into use. After release, someone still had to answer questions and fix problems.
-
-Writing code was part of that work. Not all of it.
-
-**SDLC means software development lifecycle.** It is the whole life of a piece of software: deciding whether to build it, creating it, running it, changing it, and eventually replacing or retiring it.
-
-The name sounds formal. The questions are familiar.
+**SDLC means software development lifecycle.** It covers understanding needs, fitting a change into the system, building, checking, releasing, operating, and eventually retiring software.
 
 <figure class="course-diagram course-diagram-wide">
 <a href="/diagrams/software-development-lifecycle.webp"><img src="/diagrams/software-development-lifecycle.webp" width="1568" height="882" alt="Software development lifecycle shown as a cycle: Plan, Design, Develop, Test, Deploy, then Operate and Improve. User feedback and monitoring feed the next round of planning. Supporting principles are solving real problems, building securely, keeping it simple, iterating continuously, and creating impact at scale." /></a>
@@ -324,7 +318,7 @@ DOWNSTREAM ALLOWED: wrote published.txt
 published revision <the same 12 hexadecimal characters>
 ```
 
-The exact hash depends on the artifact bytes. The observable contract is the branch: a failed check exits nonzero and does not write the dependent file; a passing check writes it. The commands above were checked locally in Bash and Zsh. Run them yourself to inspect the files rather than taking the output text on trust.
+The exact hash depends on the artifact bytes. The observable contract is the branch: a failed check exits nonzero and does not write the dependent file; a passing check writes it. Run the commands yourself to inspect the files rather than taking the output text on trust.
 
 <aside class="judgment-callout">
 <p class="judgment-kicker">The hinge</p>
@@ -436,7 +430,6 @@ The controller is whoever or whatever decides whether a transition is allowed.
 | **Hybrid** | Code owns deterministic transitions; an agent proposes or repairs; a person decides the judgment call | The seam must be explicit, or the agent quietly becomes the real controller | Most production engineering workflows |
 | **Human approval** | A person owns a consequential judgment or release decision | A chat “yes” is not enough if it is not bound to the exact revision | Deployments, data changes, accepting ambiguous evidence |
 
-The author of a controller does not change its kind. Agent-generated code is still a code controller after it is reviewed and executed. Human-written prompts are still agent-controlled if the agent can decide to skip, reinterpret, or reorder the steps.
 
 The practical recommendation is **hybrid**: let the agent handle interpretation and small repairs; let code enforce objective prerequisites; require human approval for the judgment that code cannot settle. Keep the handoff visible:
 
@@ -628,7 +621,7 @@ The last step matters most: the agent may author the code, but the workflow shou
 
 **Course recommendations:** sequential by default, explicit ownership for parallel branches, revision-bound evidence, bounded repair, and hybrid control are our engineering recommendations. They are not guarantees supplied by an agent or by this local script.
 
-**Execution limits:** the Node example uses only standard-library file and hash APIs and was exercised locally: the draft, missing input, missing newline, and extra-content cases blocked the write; the exact accepted input wrote the matching revision. The displayed failure/success commands also ran in Bash and Zsh. This demonstrates control flow, not tamper-resistant security, durable approvals, crash recovery, or a production deployment. Provider access is optional, and no provider-backed run is claimed here.
+**Execution limits:** The Node example uses only standard-library file and hash APIs; the local exercise covered the draft, missing input, missing newline, extra-content, and exact accepted-input cases, with the matching revision written on success. The displayed failure/success commands also ran in Bash and Zsh. This demonstrates control flow, not tamper-resistant security, durable approvals, crash recovery, or production deployment; no provider-backed run is claimed.
 
 ## Optional watch: put a specification to work
 

@@ -37,7 +37,7 @@ When a focused subagent is active, type a message and press `Enter` to steer tha
 3. If the condition becomes wrong, recall it with `Alt+Up`, edit, and resubmit.
 4. If the agent starts an unsafe or unrelated action, press `Escape`, inspect the files and process state, then decide whether to resume.
 
-That is enough control for the workshop. Add a remap only when a terminal or accessibility constraint makes one of these chords unreliable; keep `/hotkeys` as the source of truth after remapping.
+Add a remap only when a terminal or accessibility constraint makes one of these chords unreliable; keep `/hotkeys` as the source of truth after remapping.
 
 [Back to Key productivity tips](index.md) · [Previous: Voice input](voice-input.md) · [Next: Phone access](phone-access.md)
 

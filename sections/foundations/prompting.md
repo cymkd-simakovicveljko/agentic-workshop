@@ -1,26 +1,11 @@
 # 2.3 Prompting
 
-Prompting is the skill of shaping a request so an LLM can do useful work. You can ask it to explain, compare, build, critique, or coordinate several steps. Different tasks call for different approaches.
-
-This is the bread and butter of working with LLMs.
-
-**Every word can matter.** A missing constraint, an ambiguous phrase, or a leading question can change the result. That does not mean longer prompts are better. Precisions trumps vagueness everytime.
-
-In this lesson, we’ll try common prompting styles and output formats, learn practical tips for steering the work, and recognize where agents tend to go wrong. We’ll also turn a first result into something worth using through focused review and revision, then see how prompts become the starting point for reusable workflows.
-
-<aside class="judgment-callout">
-<p class="judgment-kicker">Take it one technique at a time</p>
-<p><strong>Prompting is a complex skill, and getting good at it takes practice.</strong> Be patient with yourself. Try one technique at a time, inspect the result, and learn when it helps before adding another. You do not need to master everything in this lesson at once.</p>
-</aside>
+Prompting shapes a request so an LLM can do useful work: explain, compare, build, critique, or coordinate steps. Different tasks call for different approaches.
 
 ## Don’t leave the important choices unstated
 
-An LLM generates responses using patterns learned during training and the context available to it. Its outputs are probabilistic: **the same request can produce different answers**. Training draws on large collections of data, but that does not mean the model has seen everything or more importantly, the model does not know what structure, output, focus you want it to provide in its answer.
+An LLM generates responses from learned patterns and the available context, so the same request can produce different answers. Training data does not tell it what structure, focus, or output you want.
 
-<aside class="judgment-callout">
-<p>Fluent conversation makes this easy to forget. We can start treating the agent like a colleague who shares our experience, priorities, and understanding of the problem. Then we ask it to “improve this code” and assume it knows what improvement means.</p>
-<p><strong>But improve it how?</strong> Make it faster? Easier to read? More reusable? Preserve the public API? Those choices can lead to very different results.</p>
-</aside>
 
 **If a choice matters to the outcome, make it visible in the request.**
 
@@ -53,11 +38,9 @@ That is where prompting skills help. **Structure, examples, constraints, and out
 
 Open-ended questions still have a place. Use them when you want to explore possibilities. When you need a particular outcome, make the consequential decisions explicit, then verify what the agent actually delivers.
 
-**Important repeating message** It is in human nature to find the most energy efficient way of doing things.
+Keep consequential thinking and decisions yours. Ask the model to surface options, assumptions, and evidence, then decide what to accept and do.
 
-**Do not delegate thinking** . The biggest misuse of LLM is to unconsciously delegate critical thinking, understanding and decision making to LLM model. This is the biggest cumulative danger LLM's bring to the table.
-
-Legendary Kent Beck explains this wonderfully in this video. There are many other resources on this topic, even more, there are studies and papers which show that from the behavioral aspect that LLM brings irresopnbiel delegation of decisions and understanding. 
+The linked Kent Beck talk explores this boundary.
 
 <a class="video-card" href="https://www.youtube.com/watch?v=F8fBgDCf2Y4">
 <span class="video-card-preview">
@@ -72,12 +55,11 @@ Legendary Kent Beck explains this wonderfully in this video. There are many othe
 </span>
 </a>
 
-
 ## Prompting techniques you can use today
 
-**Start with a direct request. Add examples, a review perspective, or separate stages when the task needs them.** These techniques can be combined; you do not need to choose one school of prompting.
+**Start with a direct request. Add examples, a review perspective, or separate stages when the task needs them.** These techniques can be combined.
 
-Open a relevant example below. Each gives you a copyable prompt and something to inspect afterward. Replace bracketed text before sending it. The familiar technique names help you recognize the ideas in other guides, not memorize a vocabulary before getting started.
+Open a relevant example below. Each gives you a copyable prompt and something to inspect afterward. Replace bracketed text before sending it.
 
 <figure class="course-diagram course-diagram-wide">
 <a href="/diagrams/prompting-strategies.webp"><img src="/diagrams/prompting-strategies.webp" width="1568" height="653" alt="Eight prompting strategies: direct prompting, clarification-first, role or perspective, example-based prompting, critique and refinement, output-format prompting, decomposition and chaining, and chain-of-thought. Each panel illustrates its inputs, result, and an example prompt." /></a>
@@ -375,7 +357,7 @@ As you work this way, you will recognize requests you make repeatedly. Keep the 
 
 **Save a template after it has been useful, not because a template looks more professional.** Before reusing it, check whether its assumptions still fit. Try it on a normal case and a case where information is missing; the second one often exposes instructions that encourage guessing.
 
-OMP supports reusable Markdown commands with arguments. The [command reference](https://github.com/can1357/oh-my-pi/blob/main/docs/slash-command-internals.md) explains how to package a repeated prompt when you need that shortcut. We do not need to configure one for this exercise. [Skills](skills.md) cover reusable procedures later.
+OMP supports reusable Markdown commands with arguments. The [command reference](https://github.com/can1357/oh-my-pi/blob/main/docs/slash-command-internals.md) explains how to package a repeated prompt when you need that shortcut.
 
 <a class="video-card" href="https://www.youtube.com/watch?v=pP_dSNz_EdQ">
 <span class="video-card-preview">

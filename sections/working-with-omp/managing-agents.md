@@ -43,7 +43,6 @@ omp --cwd ~/code/agentic-workshop
 
 Use `--add-dir` only when the task needs another workspace directory. `/resume` and `/fork` change session history and identity; they do not turn an independent session into a subagent. Agent Hub is for workers attached to the current session. `/jobs` is a status snapshot, not a transcript or a control surface.
 
-The useful habit is simple: one main session, one bounded worker when it buys independent progress, and one human review of every result before integration.
 
 [Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Next: Engineering workflows](../engineering-workflows/index.md)
 

@@ -1,7 +1,5 @@
 # 6. Advanced engineering
 
-**Main path:** make authority, evidence, and control visible before an agentic workflow touches a consequential step.
-
 The earlier lessons introduced the parts of an agent loop, the software lifecycle, and shared specifications. This lesson deals with the boundaries that become important when the work is uncertain, long-running, or attached to existing software:
 
 - what an agent may propose versus what a tool or person actually authorizes;
@@ -19,13 +17,11 @@ Choose one of these missions:
 
 1. **Inspect one run.** Pick a recent OMP run whose files, tool calls, and result you are allowed to inspect. Do not infer private reasoning. Record only the request, visible tool activity, returned result, files, and checks.
 2. **Inspect one small change.** Pick a local change with a narrow outcome and at least one observable check. You can make the change yourself or ask an agent to propose it; either way, inspect the files and run the check yourself.
-3. **Use the prepared case below.** It is labelled teaching data, not a provider-backed run. Use it when you have no suitable run yet, and do not report it as an execution.
+3. **Use the prepared case below.** Use it when you have no suitable run yet.
 
 Freeze the relevant revision before you start. A Git commit, content digest, or another stable identity is useful. If the work is not in Git, record the exact files and a timestamped copy you can identify later.
 
 ### Prepared case: a boundary record (teaching data, not a recorded run)
-
-This short trace is deliberately complete enough to inspect. It is not an OMP transcript and does not prove that any command ran:
 
 ```text
 Candidate revision: rev-a17
@@ -102,7 +98,7 @@ Stopping an agent turn and stopping the operation it started are related but dif
 | `cancelled` | Evidence shows the cancellation took effect before the intended completion. |
 | `unknown` | The controller cannot establish what happened. |
 
-Record a stop request against the same operation identifier without treating the request as a cancellation receipt. For example, this prepared case is not an execution record:
+Record a stop request against the same operation identifier without treating the request as a cancellation receipt. Prepared case (teaching data; not an execution record):
 
 ```text
 Operation: op-42
@@ -222,26 +218,11 @@ For deeper examples of characterization, seams, and compatibility, use Michael F
 
 ## Workflow control: agents and code
 
-The useful question is not “Can an agent perform the steps?” It is **“Who is allowed to move the work to the next step?”**
+Use [Engineering workflows](../engineering-workflows/index.md#2-the-two-axes-we-use-to-design-workflows) for the general arrangement and controller patterns: dependencies, routing, joins, bounded repair, and agent, code, or hybrid control. Apply that distinction to one transition in your run:
 
-- **Agent-driven:** an agent interprets the goal, chooses or proposes the next investigation, and reports what it thinks happened. This is useful for ambiguity and exploration, but a prompt can be ignored, misunderstood, or satisfied with a claim.
-- **Code-controlled:** a program defines allowed transitions and checks their conditions. An agent may do work inside a step, but it does not decide whether the next step is authorized.
-- **Hybrid:** code owns deterministic transitions, an agent proposes or repairs within a bounded step, and a person owns the judgment code cannot settle.
-
-The author of a controller does not change its kind. Agent-generated code is still a code controller after it is reviewed and executed. A human-written prompt is still agent-controlled if the agent can skip, reinterpret, or reorder the steps.
-
-### Recognize the arrangement before choosing a framework
-
-| Pattern | Use it when | Make explicit |
-| --- | --- | --- |
-| **Chain** | Each step consumes the prior result | The evidence required before the next step |
-| **Routing** | An observed condition selects a path | Who evaluates the condition, including missing or unknown evidence |
-| **Fan-out and join** | Independent workers can contribute separately | Owned inputs and outputs, required branches, and join behavior on failure |
-| **Orchestrator-workers** | A main agent delegates bounded subtasks | Each worker's context, authority, output, and return condition |
-| **Evaluator-optimizer** | A result receives a focused review and revision | Evidence of improvement and a stopping limit |
-| **Voting or ensembling** | Multiple answers are compared or aggregated | The decision rule; agreement is not proof |
-
-A directed acyclic graph (DAG) represents dependencies without a path returning to an earlier node. A fixed chain or fan-out/join can use a DAG. A review-and-repair loop contains a cycle, so model it as a state machine or bounded loop instead of drawing a DAG and pretending the loop is gone. A fixed attempt limit can be represented as separate DAG nodes, but the limit still needs enforcement.
+- an agent may interpret the goal and propose an action;
+- code may enforce an observable prerequisite; and
+- a person may own the consequential judgment code cannot settle.
 
 ### Map one real transition
 
@@ -257,22 +238,16 @@ Use the run or small change from the beginning of this lesson. Choose one transi
 
 If you cannot fill a row from the run, mark it `not observed` and decide whether the boundary needs a code check, a human decision, or simply better recording. A diagram or agent role describes a control; it does not implement one.
 
-For the longer dependency, gate, and bounded-repair exercise, see [Engineering workflows](../engineering-workflows/index.md#2-the-two-axes-we-use-to-design-workflows). The point here is to choose the smallest controller that holds, not to introduce a workflow engine because a pattern has a name. Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) is useful vocabulary for predefined workflows and dynamically directed agents; use it as a pattern reference, not as a reason to add complexity.
+Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) is useful vocabulary for predefined workflows and dynamically directed agents; use it as a pattern reference, not a reason to add complexity.
 
 ## One bounded review, end to end
 
 Apply the lesson to your selected change. Keep the scope to one transition and one check:
 
-1. **Set authority and scope.** State which files, tools, and side effects are in bounds. Name the human decision that remains yours.
-2. **Freeze the candidate.** Record the current revision or another stable identity.
-3. **Select context.** Include only the files, contract, and command output needed for this transition. Record what was not inspected.
-4. **Ask for a proposal.** If an agent is useful, request a plan or small patch. A proposal is not execution.
-5. **Inspect the result.** Read every changed file. Compare the diff with the preserved behavior and the boundary card.
-6. **Run the named check.** Capture the exact command, output, exit status, and revision. Do not treat a summary as a substitute.
-7. **Check the consumer or dependent step.** Verify the actual file, command, consumer, or reviewer decision that the transition protects.
-8. **Accept, revise, or escalate.** Record unknown outcomes and stale evidence. Stop at the attempt limit you chose before repairing.
-
-If you have no run, use the prepared cases in this lesson only to practise the distinctions. Replace them with a real observed record before treating the work as accepted.
+1. **Set authority and freeze the candidate.** State which files, tools, and side effects are in bounds; record the revision and the human decision that remains yours.
+2. **Select context and ask for a proposal.** Record relevant files, contract, command output, and what you did not inspect. If an agent is useful, request a plan or small patch; a proposal is not execution.
+3. **Inspect, check, and verify.** Read every changed file, compare the diff with preserved behavior, capture the named command, output, exit status, and revision, then check the dependent file, command, consumer, or reviewer decision.
+4. **Accept, revise, or escalate.** Record unknown or stale evidence and stop at the attempt limit chosen before repair.
 
 ## Use at work
 
@@ -286,8 +261,6 @@ Use these ideas when the cost of a wrong transition is higher than the cost of r
 
 Start with existing OMP, repository, and CI controls. Add a controller only when an observed gap has an owner and a falsifiable check. Do not build a queue, evaluator service, credential broker, or deployment platform for a one-transition exercise.
 
-An acceptance note should let another engineer trace the candidate revision to the exact command, observed result, consumer decision, unresolved boundary, and next owner. That is more useful than “the agent completed the workflow.”
-
 ## Sources and execution limits
 
 The source-backed behavior used here comes from:
@@ -297,9 +270,7 @@ The source-backed behavior used here comes from:
 - Michael Feathers' [characterization testing article](https://michaelfeathers.silvrback.com/characterization-testing) and [Seams excerpt](https://www.informit.com/articles/article.aspx?p=359417&seqNum=2); and
 - Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), which distinguishes predefined workflows from dynamically directed agents.
 
-The boundary cards, prepared cases, acceptance-note format, sequential default, revision binding, and hybrid-control recommendation are workshop guidance. They are not claims that OMP enforces every boundary, that an approval contains a shell, or that a model's report is independent evidence.
-
-The prepared traces in this lesson are teaching cases, not recordings of provider-backed executions. Replace them with the actual files, commands, outputs, and decisions from your run or bounded change. This lesson does not claim to have run a provider, external process, cancellation, consumer, or production deployment for you.
+The boundary cards, prepared cases, acceptance-note format, sequential default, revision binding, and hybrid-control recommendation are workshop guidance. They do not claim that OMP enforces every boundary, that an approval contains a shell, or that a model's report is independent evidence. Prepared traces are teaching cases, not recordings of provider-backed executions; replace them with the actual files, commands, outputs, and decisions from your run or bounded change. This lesson does not claim to have run a provider, external process, cancellation, consumer, or production deployment for you.
 
 For the retained implementation-specific material, see [Optional example: health-checker boundaries and compatibility](../examples/advanced-health-checker.md). It requires a checker implementation and is separate from the main route.
 

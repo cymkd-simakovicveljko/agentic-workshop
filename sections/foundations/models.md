@@ -1,8 +1,6 @@
 # 2.1 Models and roles
 
-**Large language models (LLMs) are at the heart of agentic engineering, so choosing the right model for the job is essential.** The model landscape changes almost daily. Learning how to evaluate and choose models often matters more than knowing which one leads today. In the end we want to pick the most suitable model for our task at hand!
-
-Before configuring which model does a role use (more on this below), we need to understand what we are choosing: capability, speed, cost, and where the model runs.
+Choose a model by capability, speed, cost, and where it runs.
 
 ## Pick the model for the job
 
@@ -25,11 +23,7 @@ The useful triangle is **capability, cost, and speed**.
 <figcaption>Can we get enough quality, quickly, at a cost worth paying? The purple dot is a discussion prompt, not a measured model ranking; the answer depends on the task.</figcaption>
 </figure>
 
-The safe advice is: always start with a workhorse at medium effort. If it does the job, try spending less: lower the effort or try a lighter model. If it struggles, turn up the effort before reaching for a frontier model. 
-
 Don’t assume pricier means better. A cheaper model thinking harder can match a pricier one thinking less. Compare them on the same task and context, and pay for results, not the model’s reputation.
-
-In the end, its not only the tokens ($) that you are saving, it is also time! Usually less reasoning means faster response times!
 
 <aside class="judgment-callout">
 <p class="judgment-kicker">Find the right level</p>
@@ -134,7 +128,7 @@ Local inference buys control and can avoid sending prompts to a remote inference
 </details>
 </div>
 
-## Pay for completed work, not the cheapest token!
+## Pay for completed work, not the cheapest token
 
 **Compare the cost of completing the task, not the price per token.** Models use different numbers of tokens to get the same job done, so a model with pricier tokens can still cost less overall.
 
@@ -187,7 +181,7 @@ Useful starting assignments:
 | `task` | Delegated work, subject to agent-specific settings. | Match the delegated task; not every subagent should be cheap. |
 | `advisor` | Alongside-the-main-agent review when enabled. | A capable reviewer, optionally a different model. |
 
-Other roles cover tiny jobs, memory, vision, image generation, speech, dictation, and judgment. Configure them when those workloads matter; there is no prize for filling every setting.
+Configure them when those workloads matter.
 
 A practical split might be: **strong model to reason through a tricky change, workhorse to implement it, small model to summarize the result**. An advisor can provide another review, but it adds cost and can share the same blind spots. This improves the allocation of work; it does not literally add the models' intelligence together.
 
@@ -209,7 +203,7 @@ For the full setup, see [OMP’s model and role documentation](https://raw.githu
 
 ## Try it: can a cheaper model do the same job?
 
-Open 2,3 or 4 tabs or terminals, and in all of them:
+Open 2–4 tabs or terminals, and in all of them:
 
 - open a repository you already know. Think of a class, module or a feature. Choose something you can verify yourself without tracing half the codebase.
 
@@ -218,7 +212,7 @@ Use this prompt, replacing the function name and file path:
 > Inspect `[function name]` in `[file path]`. Use the available tools to read its dependencies and existing tests as needed. Explain its inputs, outputs, branches, and error cases, then suggest three tests with concrete inputs and expected results. Base your answer on the code and point to the relevant files. If something is unclear, say so rather than guessing. Do not change any files.
 
 1. **In the first instance: Run it with your workhorse at medium effort**, if supported. Start a fresh session in the repository. Note the model, provider, and effort setting, and keep the answer.
-2. **In the second, third etc: Repeat with a cheaper or just a different model in another fresh session.** Use exactly the same prompt, repository state, instructions, and available tools. Do not include the first model’s answer. Note this model’s settings too.
+2. **In each additional instance, repeat with a cheaper or different model in another fresh session.** Use exactly the same prompt, repository state, instructions, and available tools. Do not include the first model’s answer. Note this model’s settings too.
 3. **Check both answers against the code.** Did they explain every branch correctly? Are all three expected test results right? Did either invent behavior or miss an error case? Count an answer as correct only when these checks pass.
 4. **Compare total cost and completion time**, including any follow-up needed to correct the answer. Record those corrections too. Different tool choices are part of the comparison, so count the whole run, not just the final response. If your provider does not expose cost, mark it as unavailable rather than guessing.
 

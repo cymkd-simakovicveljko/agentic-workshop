@@ -1,6 +1,6 @@
 # 2.8 MCP, plugins, and extensions
 
-**Start with a missing capability, not a list of servers to install.** We will connect OMP to a public documentation service, use it to answer a concrete question, and check whether the integration earned its place.
+This lesson connects OMP to a public documentation service, tests a concrete question, and checks whether the integration earns its place.
 
 No cloud account, access token, or deployment is needed for this exercise. You need OMP with a connected model and network access to Microsoft Learn.
 
@@ -118,8 +118,6 @@ Local does not mean offline or isolated. A local process may read files and cont
 
 ## Choose the smallest mechanism that works
 
-> **A connection is not a reason to keep an integration.** Add it for a useful capability, verify the result, and remove it if the simpler route works just as well.
-
 | Need | Start with | Why |
 | --- | --- | --- |
 | Read a known documentation URL | OMP's existing web-reading capability | No new server is needed for a page you can already retrieve. |
@@ -142,7 +140,7 @@ You can configure an MCP server without installing a plugin. You can use a skill
 
 ## Other integrations worth inspecting
 
-Choose one that addresses your next task. These are source-backed examples, not a ranking or a recommendation to install the whole list.
+Choose one integration for a task. Each example is source-backed; none is a ranking or recommendation to install the whole list.
 
 <div class="setup-platforms">
 <details>

@@ -1,8 +1,8 @@
 # 2.7 Skills
 
-**Start with one useful procedure, not a collection of installed skills.** A skill packages instructions the agent can load when needed: how to investigate a failure, review a design, build an interface, or explain a result.
+A skill packages instructions the agent can load when needed: how to investigate a failure, review a design, build an interface, or explain a result.
 
-We’ll make a small handoff skill, compare it with an ordinary request, and then choose an upstream skill for a different kind of work. No prior exercise or third-party installer is needed.
+This lesson builds a small handoff skill, compares it with an ordinary request, and then examines skills for other work.
 
 ## First, make a handoff you can trust
 
@@ -108,7 +108,7 @@ If it mishandles either case, change the relevant instruction and repeat both ca
 
 ## What you just built
 
-A skill is a reusable instruction package. The simplest one is a directory containing `SKILL.md`; larger ones can include references, examples, and scripts.
+The simplest package is a directory containing `SKILL.md`; larger ones can include references, examples, and scripts.
 
 In OMP, there are three separate events:
 
@@ -194,13 +194,11 @@ The stakes matter more than the line count. A one-line permission change can nee
 
 **Installing is not the same as loading.** OMP normally exposes lightweight skill metadata and loads a body when needed. Installing a collection does not automatically put every instruction into context. Loading overlapping workflows can still add cost and conflicting directions; dependencies and selection rules also need attention.
 
-Our recommendation is to borrow one useful procedure, preserve what it depends on, and evaluate it on your work. Do not enable four competing workflows to fix one unclear request.
-
 Rob Shocks's comparison, “Pocock vs Pstack vs Osmani: Which Skill Pack Wins?”, prompted this section; Superpowers is an additional comparison. [Research notes, inspected revisions, and portrait credits](../../research/2026-10-09-engineering-skill-packs.md) record the primary sources behind it. We have not benchmarked these four packs against one another.
 
 ## Choose another kind of skill
 
-Pick one recipe that matches work you actually do. Read the linked source before installing anything. These are source-based recommendations, not claims that we benchmarked every package or that a named author always produces better results.
+Read the linked source before installing a recipe. These examples are source-based, not benchmarks of every package or its author.
 
 <div class="setup-platforms">
 <details>
@@ -371,9 +369,7 @@ Check that it prints the file you intended. This isolates discovery from whether
 
 ## Evaluate the skill, not just one answer
 
-> **Don't trust a skill you haven't evaluated.**
->
-> Writing a skill proposes a way of working. Compare it with the same task done without it before adopting or sharing it.
+Writing a skill proposes a way of working. Compare it with the same task without the skill before adopting or sharing it.
 
 **Check the result, not the appearance of obedience.** The right headings and a confident answer do not prove that a skill helps. Our first handoff comparison is a starting point. Now try cases that could expose its weaknesses.
 
@@ -451,7 +447,7 @@ Removing a skill file stops future discovery after restart; it does not erase in
 
 ## Before you move on
 
-You should have a local skill, compared handoffs, and a decision supported by the small evaluation above. Keep it, revise it against a concrete failure, or remove it. All three are reasonable outcomes.
+Keep it, revise it against a concrete failure, or remove it.
 
 Can you explain **what the skill adds, how it gets loaded, what it depends on, and how you checked its result**? Those questions matter more than how many skills you have installed.
 

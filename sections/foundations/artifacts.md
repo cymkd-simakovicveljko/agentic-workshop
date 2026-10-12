@@ -1,6 +1,6 @@
 # 2.6 Artifacts
 
-**An artifact is useful work saved outside the conversation—usually as a file.** A source file, Markdown plan, CSV result, diagram, or verification log all count. For this workshop, the important move is simple: **put the result somewhere you can open, review, update, and use again.** No special artifact system is required.
+**An artifact is useful work saved outside the conversation—usually as a file.** Keep it somewhere you can open, review, update, and use again. No special artifact system is required.
 
 ## Get useful work out of the chat
 
@@ -18,11 +18,9 @@ Then open the file yourself. Does it capture what you agreed, including what rem
 
 ## Files are a simple form of external memory
 
-The [Sessions and memory lesson](sessions.md#retrieval-bring-the-right-information-back) distinguished storage from retrieval. Artifacts give us something durable to retrieve:
+The [Sessions and memory lesson](sessions.md#retrieval-bring-the-right-information-back) distinguishes storage from retrieval. Artifacts give us something durable to retrieve.
 
-**Useful result → saved file → read it in a later session → relevant material enters context.**
-
-That file can outlive a compacted conversation or a fresh session. A colleague can review it, and version control can preserve its changes. But **saved does not mean loaded, and loaded does not mean correct**. An ordinary file is not automatically model context; the agent must read it, or a configured mechanism must supply it. A progress note can also be stale.
+That file can outlive a compacted conversation or a fresh session. But saved does not mean loaded or correct: the agent must read it, or a configured mechanism must supply it. A progress note can also be stale.
 
 In a later session, point to the actual path:
 
@@ -53,7 +51,7 @@ For a small change, these can be headings in **one existing note**. Split them w
 
 **Spec-driven development uses the written specification to guide implementation and judge the result.** The supporting files make that work inspectable: requirements feed a plan, tasks organize execution, and progress and evidence show what actually happened. Writing the documents alone does not establish that the code follows them.
 
-Different workflows and skills choose different places and lifecycles for those files. These are examples to recognize, not folder trees to install together:
+Different workflows and skills choose different places and lifecycles for those files:
 
 | Workflow or skill | How it organizes the work |
 | --- | --- |
@@ -65,7 +63,7 @@ Different workflows and skills choose different places and lifecycles for those 
 
 The Kiro walkthrough is from July 2025; the linked tools and skills can evolve. Follow the conventions of the version and workflow your project actually uses.
 
-The distinction is useful: **a skill describes the procedure; an artifact is the work that procedure produces or consumes.** A skill might write a spec, update a task list, or save a review report. A later skill can read that same artifact instead of reconstructing the decision from chat. The skill file is itself a file, but it has a different job from the per-change output.
+**A skill describes a procedure; an artifact is the work it produces or consumes.** A skill might write a spec, update a task list, or save a review report. A later skill can read that artifact instead of reconstructing the decision from chat.
 
 **Reuse the project's existing organization.** If a workflow already owns the spec and tasks, update those instead of creating a competing `plan.md` and `progress.md` elsewhere. Link the spec from the tasks and the evidence from the progress note. When the plan changes, update the affected tasks; when a decision is superseded, mark it and link its replacement.
 

@@ -271,33 +271,9 @@ when the report belongs to a different candidate or the consumer was never run.
 
 ## Workflow control: agents and code
 
-**Ask who decides the next step.** That is the useful distinction behind the workflow introduction in [Prompting](../foundations/prompting.md#prompting-is-an-entry-point-to-workflows).
-
-- **Agent-driven:** the main agent interprets the goal, delegates assignments, evaluates the returned evidence, and chooses whether to continue. The harness executes permitted operations and manages worker lifecycles.
-- **Code-controlled:** a program defines the allowed transitions and checks their conditions. An agent can do the work inside a step without deciding whether the next step is authorized.
-
-These can be combined. For example, an agent may choose how to fix a defect while a controller enforces at most two attempts and requires a real check result before advancing. If the agent merely reports “passed” and the controller trusts that sentence, the check has not been independently enforced.
-
-Deterministic control does not mean deterministic model output. The same observed state can follow a fixed transition rule even when a later model response varies.
-
 ### Recognize the pattern before choosing a framework
 
-| Pattern | What it does | What to make explicit |
-| --- | --- | --- |
-| Chain | One step consumes the previous result | What must be present before continuing |
-| Routing | A condition selects the next task | Whether code or a model judges the condition |
-| Fan-out and join | Independent workers contribute to a combined result | Ownership, required results, and what happens if a worker fails |
-| Orchestrator-workers | A main agent chooses and delegates subtasks | Each worker's context, boundaries, and return condition |
-| Evaluator-optimizer | A result is reviewed and revised | Evidence of improvement and a stopping limit |
-| Voting or ensembling | Multiple answers are compared or aggregated | How a decision is made; agreement is not proof |
-
-Some patterns resemble familiar machine-learning techniques, such as ensembling, or ordinary software control flow. The name is less important than the rule for accepting a result.
-
-A **directed acyclic graph (DAG)** represents steps and dependencies with no path looping back to an earlier node. It suits a fixed chain or fan-out/join. A refinement loop contains a cycle; use a cyclic graph or state machine to describe it, or expand a fixed number of attempts into separate DAG nodes. Drawing a DAG does not by itself make execution deterministic or enforce a dependency.
-
-**Try this on paper:** take the review loop from Prompting. Mark who decides that a finding is valid, who observes verification, and who stops a second attempt. Then decide which of those decisions can remain with the agent and which need code or a human. A diagram describes the controls; it does not implement them.
-
-For the pattern vocabulary, read Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents). It distinguishes predefined workflows from dynamically directed agents; here we use “workflow” more broadly for the sequence of work under either controller. Choose the simplest arrangement that meets the requirement, not the most elaborate graph.
+Use the main-route [Engineering workflows lesson](../engineering-workflows/index.md#2-the-two-axes-we-use-to-design-workflows). It covers agent/code ownership, chains, routing, fan-out and join, DAGs, and bounded loops; this example's distinctive work is consumer, cancellation and compatibility evidence in Routes A and B.
 
 ## Go deeper: two routes, different questions
 

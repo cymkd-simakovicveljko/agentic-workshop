@@ -2,9 +2,9 @@
 
 > **Review copy from `section-1`.** This is the longer OMP guide and todo-app exercise, not the current main lesson. Its demo and archives have not been imported; the todo exercise is not runnable from this checkout. Commands and product claims are preserved for review, not revalidated here. Older companion links open their original GitHub source. [Open the current lesson](01-getting-started-with-omp.md).
 
-**Goal:** get productive with OMP in your first session, skip the mistakes that
-catch almost everyone, and learn to accept a change on evidence rather than on
-the agent's summary. This is not a React lesson.
+**Goal:** get productive with OMP in your first session, and learn to accept a
+change on evidence rather than on the agent's summary. This is not a React
+lesson.
 
 **You'll leave able to:** connect your subscriptions and pick models for each
 job, start and resume a session, read what the agent is doing, steer or stop it,
@@ -15,9 +15,8 @@ result yourself.
 
 1. **[Quick start](#quick-start)**, about 15 minutes: install, sign in and
    finish a first task in a repo you know.
-2. **[Gotchas from experience](#gotchas-from-experience)**: read these before
-   your first real task. They're what experienced users wish they'd known on
-   day one.
+2. **[Gotchas from experience](#gotchas-from-experience):** check these before
+   your first real task.
 3. **Reference**: skim now, come back when you need it.
    [How OMP works](#how-omp-works) ·
    [Asking and reviewing](#asking-and-reviewing) ·
@@ -32,8 +31,7 @@ result yourself.
 
 ## Quick start
 
-This follows the official [Quickstart](https://omp.sh/docs/quickstart), plus
-the few things experienced users set up on day one.
+This follows the official [Quickstart](https://omp.sh/docs/quickstart).
 
 ### 1. Install
 
@@ -119,9 +117,8 @@ The first launch opens a setup wizard:
 Later launches go straight to the prompt. Use `/login` to sign in to another
 provider and `/model` to change models.
 
-> **Gotcha: a subscription and its API are different providers.** This is the
-> most common setup mistake. If you pay for a chat plan, sign in to the
-> subscription provider, not the API one.
+> **Gotcha: a subscription and its API are different providers.** If you pay for
+> a chat plan, sign in to the subscription provider, not the API one.
 
 | You pay for               | Provider ID         | Not this       |
 | ------------------------- | ------------------- | -------------- |
@@ -196,13 +193,10 @@ omp -c --approval-mode always-ask   # continue the most recent session
 omp -r --approval-mode always-ask   # pick from earlier sessions
 ```
 
-That's the whole loop: ask, watch, review, follow up. The rest of this section
-makes it safer and faster.
 
 ## Gotchas from experience
 
-These catch nearly everyone in their first week. Each is one or two lines; the
-links go to the details.
+Review these before your first real task; links go to details.
 
 ### Safety and undo
 
@@ -230,8 +224,7 @@ links go to the details.
 - **A stored login beats an exported key.** `export ANTHROPIC_API_KEY=...`
   won't override a login. `/logout <provider>` removes one account.
 - **Check the status line after any switch.** It shows the active model,
-  thinking level, mode, directory, Git branch, context use and cost. Most "why
-  is it doing that?" moments are answered there.
+  thinking level, mode, directory, Git branch, context use and cost.
 - **Thinking defaults to `high`.** Good for hard problems; slow and costly for
   quick questions. `Shift+Tab` lowers it.
 - **You don't need to configure roles on day one.** Unassigned roles fall back
@@ -412,8 +405,7 @@ different server or branch. Each is a real way for "done" to be wrong.
 
 ## Everyday controls
 
-Keep this page open for your first few sessions. `/hotkeys` shows the keys in
-your terminal, and typing `/` lists every command.
+Use `/hotkeys` to see the keys in your terminal; typing `/` lists every command.
 
 **Write and send**
 
@@ -496,17 +488,14 @@ exercise.
 
 ## Level up: subscriptions, models and roles
 
-None of this is needed for your first session. Come back when you hit a usage
-limit, want to use several subscriptions, or want cheaper background work.
-Meanwhile, watch cost: the status line shows what the session has cost, and
-`omp usage` shows how much of your plan is left.
+`omp usage` shows how much of your plan remains; the status line shows session
+cost.
 
 ### Use the subscriptions you already have
 
-This is where OMP shines. It isn't tied to one vendor: it can use the coding
-subscriptions you already pay for (ChatGPT Plus/Pro, Claude Pro/Max, GitHub
-Copilot, Cursor, Gemini and more), plus API keys, company gateways and local
-models, all from the same tool.
+OMP isn't tied to one vendor: it can use the coding subscriptions you already
+pay for (ChatGPT Plus/Pro, Claude Pro/Max, GitHub Copilot, Cursor, Gemini and
+more), plus API keys, company gateways and local models, all from the same tool.
 
 ```text
 /login                  # choose from the list

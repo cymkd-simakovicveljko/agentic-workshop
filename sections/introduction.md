@@ -1,16 +1,10 @@
 # Introduction
 
-**This course will bring you up to date with agentic engineering and show you how to use AI to save time in your day-to-day work.**
-
-If you are new to AI or mostly use autocomplete, we will start there. You will learn how to give a coding agent a task, guide its work, and check the result.
-
-An agent can help you find your way through unfamiliar code, implement a feature, or track down a bug. It can read files, make edits, and run tests without you directing every step. The skill is knowing which work to hand over and when doing it yourself is simpler.
+**Use OMP to investigate code, make changes, and check the result.**
 
 **Less typing does not mean less engineering.** You still decide what to build, what must not break, and whether the change is ready.
 
 ## Where this fits your work
-
-Think about the work on your plate. These are the kinds of tasks we will learn to approach with an agent.
 
 <div class="scenario-grid">
 <section class="scenario-card">
@@ -43,17 +37,11 @@ No AI experience needed. Bring your knowledge of code, Git, and tests. We will u
 
 ## How we will work
 
-**We’ll use [Full Stack Agentic Development (FSAD)](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) as a reference for organizing agentic delivery.** Its central practices are shared intent, a living specification, planned delegation, and human review. This workshop makes those practices concrete using OMP: you will direct work, inspect what the agent produces, and decide whether the result meets the agreed goal.
-
-The tools help us carry out the work. Responsibility for architecture, quality, security, and operation remains with us. [Engineering workflows](engineering-workflows/index.md#applying-fsad-across-the-lifecycle) connects FSAD to those lifecycle responsibilities; [Spec-driven development](spec-driven-development/index.md#methodology-and-toolbox-fsad-and-fsd) distinguishes the way of working from the tools that support it.
+We’ll use [Full Stack Agentic Development (FSAD)](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) as a reference: agree on the intended result, keep a shared specification, plan the work, and review what we delegate. [Engineering workflows](engineering-workflows/index.md#applying-fsad-across-the-lifecycle) applies this to delivery; [Spec-driven development](spec-driven-development/index.md#methodology-and-toolbox-fsad-and-fsd) works through maintaining a specification.
 
 ## Why this matters in 2026
 
-**People who built the tools you use are trying this too.**
-
-Researchers, framework authors, and open-source maintainers are changing how they work with AI. They do not all use it the same way—or trust it with the same tasks.
-
-These are selected firsthand accounts, not a survey of the industry or endorsements of this course.
+These selected firsthand accounts show different ways engineers use agents—not a survey of the industry or endorsements of this course.
 
 <div class="community-voices">
 <figure class="voice-card">
@@ -71,6 +59,12 @@ These are selected firsthand accounts, not a survey of the industry or endorseme
 <blockquote>“the python visualizer tool has been basically written by vibe-coding.”</blockquote>
 <p class="voice-source"><a href="https://github.com/torvalds/AudioNoise/blob/71b256a7fcb0aa1250625f79838ab71b2b77b9ff/README.md">January 2026</a> · A personal audio project—not the Linux kernel.</p>
 </figure>
+</div>
+
+<details>
+<summary>Six more firsthand accounts</summary>
+
+<div class="community-voices">
 <figure class="voice-card">
 <figcaption><img src="https://www.andrewng.org/images/andrew-ng-about-page.jpg" alt="" width="48" height="48" referrerpolicy="no-referrer"><div><strong>Andrew Ng</strong><span>Stanford adjunct professor · Founder of DeepLearning.AI · Google Brain founding lead</span></div></figcaption>
 <blockquote>“This allows us to make higher-level product decisions, such as what key features to offer, where the UI needs improvement, and so on.”</blockquote>
@@ -103,9 +97,9 @@ These are selected firsthand accounts, not a survey of the industry or endorseme
 </figure>
 </div>
 
-[Sources, context, and photo credits](../research/2026-09-27-community-voices.md).
+</details>
 
-You do not have to copy their workflow. This course helps you try the tools on your own work and decide what is worth keeping.
+[Sources, context, and photo credits](../research/2026-09-27-community-voices.md).
 
 ## This is agentic engineering
 
@@ -114,16 +108,5 @@ Simon Willison [describes agentic engineering](https://simonwillison.net/guides/
 > “Agents run tools in a loop to achieve a goal.”
 
 That loop makes the difference. A chatbot can suggest a fix. A coding agent can apply it, run a test, see what happened, and decide what to try next—using the tools and permissions it has been given.
-
-You can ask it to investigate a bug, implement a feature, or compare two approaches. You no longer need to choose every file read or write every edit yourself.
-
-<section class="judgment-callout">
-<p class="judgment-kicker">Before you hand over the work</p>
-<h2>Abstractions matter.</h2>
-<p class="judgment-lead">Less typing does not mean less engineering.</p>
-<p>An agent can handle the steps without you writing every line. You still need to understand the important decisions and know how to check the result.</p>
-<p><strong>You are responsible for the code you ship and the systems you build—not the LLM.</strong></p>
-<p>This is the focus of <a href="engineering-workflows/index.md">Engineering workflows</a>.</p>
-</section>
 
 [Next: Getting started with OMP](01-getting-started-with-omp.md)

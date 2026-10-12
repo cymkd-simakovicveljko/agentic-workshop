@@ -106,11 +106,9 @@ that a command ran when the supplied material does not show it.
 
 This is a prepared example, not a course-installed skill and not a provider-backed result. Its wording is deliberately general: the contract belongs in the task packet, not permanently in the skill. If you add “`/wrong-body` must fail” to the package, it may memorize this lesson while missing the same status/body mistake in another service.
 
-### What OMP can and cannot prove
+## What OMP can and cannot prove
 
-The pinned OMP 18.2.9 skills guide describes file-backed skills discovered at startup, lightweight name/description metadata, on-demand `skill://` reads, and optional `/skill:<name>` commands. It also documents the native project shape `.omp/skills/<name>/SKILL.md`, explicit `name` and `description`, and one-level discovery under a skills root:
-
-[OMP 18.2.9 skills guide](https://github.com/can1357/oh-my-pi/blob/8cd6f8c/docs/skills.md)
+The pinned [OMP 18.2.9 skills guide](https://github.com/can1357/oh-my-pi/blob/8cd6f8c/docs/skills.md) documents these host behaviors:
 
 Keep four observations distinct:
 
@@ -209,7 +207,9 @@ Use [Skills](../foundations/skills.md) for the one-off prompt versus procedure v
 
 ## Go deeper
 
-Read the pinned guide when you need to reason about collisions, source precedence, custom directories, hidden skills, or the difference between a skill and a tool or hook. The guide says discovery happens at startup and that duplicate names can come from several providers; therefore inspect the resolved source instead of trusting a familiar name.
+Read the pinned guide when you need to reason about collisions, source precedence,
+custom directories, hidden skills, or the difference between a skill and a tool
+or hook; inspect the resolved source instead of trusting a familiar name.
 
 **Explicit autoload is another mechanism.** Custom subagent definitions can use `autoloadSkills` to inject named skill bodies when the child starts. That field belongs in **agent frontmatter**, not this `SKILL.md`; it is different from advertising a skill for the model to select. The [pinned skills guide](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/skills.md#interactive-skillname-commands) describes this distinction. We do not configure a subagent to complete this lesson.
 

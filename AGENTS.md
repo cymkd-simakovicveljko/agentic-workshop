@@ -38,8 +38,8 @@ Example of the desired specificity: “Before asking for another fix, get the ex
 ## Format and course continuity
 
 - Text-first for now: copyable commands and prompts, short guided steps, and expandable answers or troubleshooting. Videos and GIFs are not prerequisites.
-- When editing lessons, read `OUTLINE.md` for the current route and neighboring lessons for continuity. Existing health-checker material is reusable example material, not a mandatory course-wide project. Consult `demo/health-checker/README.md` when an example uses that fixture.
-- Preserve the current HTML course and linked resources. Adapt older cumulative-project framing as the relevant lessons are revised; keep alternative articles clearly labelled until the author chooses to adopt them.
+- When editing lessons, read `OUTLINE.md` for the current route and neighboring lessons for continuity. Use each lesson's focused example and introduce only the prerequisites it needs.
+- Preserve the current HTML reader and resources linked by the workshop. Keep course navigation and repository instructions aligned with the published lessons.
 - When changing rendered lesson content, check it in the HTML reader, including links and interactive disclosures. For reader startup and existing checks, use `README.md` and `package.json`.
 
 ## Before calling a lesson ready

@@ -114,40 +114,33 @@ button:hover {
   color: var(--accent);
   font-weight: 600;
 }
-.course-map-toggle {
-  margin: 0 0 16px;
-  padding: 10px 16px;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  font-size: var(--type-ui);
-}
-:is(.course-map, .setup-platforms) details {
+.setup-platforms details {
   margin: 0 0 16px;
   padding: 0 22px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--panel);
 }
-:is(.course-map, .setup-platforms) details[open] {
+.setup-platforms details[open] {
   border-color: var(--accent);
   padding-bottom: 12px;
 }
-:is(.course-map, .setup-platforms) summary {
+.setup-platforms summary {
   padding: 20px 0;
   cursor: pointer;
   line-height: 1.5;
 }
-:is(.course-map, .setup-platforms) summary::marker {
+.setup-platforms summary::marker {
   color: var(--accent);
 }
-:is(.course-map, .setup-platforms) summary span {
+.setup-platforms summary span {
   display: block;
   margin-top: 6px;
   color: var(--muted);
   font-size: var(--type-ui);
   font-weight: 400;
 }
-:is(.course-map, .setup-platforms) summary:focus-visible {
+.setup-platforms summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
@@ -394,14 +387,6 @@ button:hover {
   color: #f2f6fc;
   border-top-color: var(--accent);
   background: linear-gradient(#6094d92b, transparent);
-}
-.tag {
-  font-size: 11px;
-  letter-spacing: 0.6px;
-  padding: 3px 5px;
-  border-radius: 3px;
-  background: #b3d4f5;
-  color: #173452;
 }
 .local-label {
   margin-left: auto;
@@ -1196,9 +1181,6 @@ main {
   padding: 25px;
   border: 1px solid #795b62;
   border-radius: 8px;
-}
-.error-panel h2 {
-  margin-top: 0;
 }
 .error-panel button {
   background: #5286c9;

@@ -247,30 +247,6 @@ function headingLinks(target, selectedHeadings) {
 }
 
 function decorateDocument(path) {
-  const courseMap = article.querySelector(".course-map");
-  if (courseMap) {
-    const parts = [...courseMap.querySelectorAll("details")];
-    const toggle = document.createElement("button");
-    toggle.className = "course-map-toggle";
-    toggle.type = "button";
-    toggle.textContent = "Expand all parts";
-    let expandAll = false;
-    toggle.addEventListener("click", () => {
-      expandAll = !expandAll;
-      parts.forEach((part) => { part.open = expandAll; });
-      toggle.textContent = expandAll ? "Collapse all parts" : "Expand all parts";
-    });
-    parts.forEach((part) => {
-      part.addEventListener("toggle", () => {
-        if (part.open && !expandAll) {
-          parts.forEach((other) => {
-            if (other !== part) other.open = false;
-          });
-        }
-      });
-    });
-    courseMap.before(toggle);
-  }
   const ids = new Map();
   article.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((heading) => {
     const title = heading.textContent;
@@ -336,11 +312,6 @@ function decorateDocument(path) {
       if (relative.endsWith("/")) relative += "README.md";
       if (relative.endsWith(".md"))
         anchor.href = readerUrl(relative, resolved.hash);
-      else {
-        anchor.href = resolved.href;
-        anchor.target = "_blank";
-        anchor.rel = "noopener";
-      }
     }
   });
   article.querySelectorAll("img[src]").forEach((image) => {

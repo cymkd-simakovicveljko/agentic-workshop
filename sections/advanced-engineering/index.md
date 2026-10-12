@@ -9,7 +9,7 @@ The earlier lessons introduced the parts of an agent loop, the software lifecycl
 - how to change an existing command without guessing what its consumers depend on; and
 - how to choose a workflow arrangement and controller without building a framework first.
 
-There is no shared project here. Use one OMP run you can inspect, or one small bounded change in a system you own. The retained [health-checker example](../examples/advanced-health-checker.md) is optional reference material, not a prerequisite for this lesson.
+There is no shared project here. Use one OMP run you can inspect, or one small bounded change in a system you own.
 
 ## Start with one boundary you can inspect
 
@@ -214,7 +214,7 @@ Your exit evidence should show:
 
 The important distinction is not “text versus JSON.” It is **producer evidence versus consumer acceptance**. A schema parser can reject malformed output, but it cannot prove that the producer inspected the right candidate or that a business decision is correct.
 
-For deeper examples of characterization, seams, and compatibility, use Michael Feathers' [characterization testing article](https://michaelfeathers.silvrback.com/characterization-testing) and [Seams excerpt](https://www.informit.com/articles/article.aspx?p=359417&seqNum=2). The retained example linked at the end applies the same ideas to a health checker; it is optional and does not define this lesson's route.
+For deeper examples of characterization, seams, and compatibility, use Michael Feathers' [characterization testing article](https://michaelfeathers.silvrback.com/characterization-testing) and [Seams excerpt](https://www.informit.com/articles/article.aspx?p=359417&seqNum=2).
 
 ## Workflow control: agents and code
 
@@ -271,7 +271,5 @@ The source-backed behavior used here comes from:
 - Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), which distinguishes predefined workflows from dynamically directed agents.
 
 The boundary cards, prepared cases, acceptance-note format, sequential default, revision binding, and hybrid-control recommendation are workshop guidance. They do not claim that OMP enforces every boundary, that an approval contains a shell, or that a model's report is independent evidence. Prepared traces are teaching cases, not recordings of provider-backed executions; replace them with the actual files, commands, outputs, and decisions from your run or bounded change. This lesson does not claim to have run a provider, external process, cancellation, consumer, or production deployment for you.
-
-For the retained implementation-specific material, see [Optional example: health-checker boundaries and compatibility](../examples/advanced-health-checker.md). It requires a checker implementation and is separate from the main route.
 
 [Previous: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)

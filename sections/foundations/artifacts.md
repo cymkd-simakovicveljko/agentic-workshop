@@ -75,10 +75,10 @@ A report describes what someone believes happened. Evidence is the file state, c
 
 | Claim | Evidence that could support it |
 | --- | --- |
-| “The checker was created.” | The expected file exists and its contents are readable. |
+| “The requested artifact was created.” | The expected file exists and its contents are readable. |
 | “The command passed.” | The exact command, working directory, output, and exit status. |
 | “All acceptance checks passed.” | Current files plus the expected pass or failure result for every required route. |
-| “The implementation handles timeouts.” | Source inspection and a current timeout result with no invented status. |
+| “The implementation handles a stated boundary case.” | Source inspection and a current result for that case, with no invented status. |
 
 A successful write proves that a write happened. A successful command proves that a process exited as reported. Neither proves that the behavior satisfies the contract. Results from before the latest edit do not verify the latest version.
 
@@ -86,21 +86,22 @@ Treat generated files as work to review, including untracked files. `git diff` a
 
 ## Prepared trace: useful, but labelled
 
-The optional [health-checker example](../examples/build-health-checker.md) gives us a small trace to inspect without requiring that project for this lesson:
+A small handoff-note task gives us a trace to inspect without requiring a particular project:
 
 ```text
-Engineer: Build a one-URL checker with status, literal body, timeout, no redirects.
-Model:    I will inspect the repository and create a small program.
-Tool:     read/list repository
-Result:   no source files; instructions and the request are available.
-Tool:     write checker source and a standard project file
-Result:   files created successfully.
-Tool:     run /healthy
-Result:   status 200, expected text found, exit 0.
-Model:    Inspect the files and run the remaining cases before accepting.
+Engineer: Read the supplied run notes, write a handoff note, and read the saved note back.
+Model:    I will use only the supplied notes; I will not run commands or change other files.
+Tool:     read run notes
+Result:   the notes say the CSV export was changed, `npm test -- csv` exited 0,
+          and Safari plus older clients were not checked.
+Tool:     write handoff note
+Result:   the note was saved successfully.
+Tool:     read saved handoff note
+Result:   the file contains the recorded test result and labels Safari and older
+          clients unverified.
 ```
 
-This is a course-authored prepared trace, not a captured provider transcript and not private reasoning. It supports only the visible requests, tool activity, and returned results shown. It does not prove that the remaining cases passed or that the generated code is safe.
+This is a course-authored prepared trace, not a captured provider transcript and not private reasoning. It supports only the visible request, tool activity, and returned results shown. The saved file is evidence of what was written and what it contains; the copied notes do not independently prove the CSV change, the test execution, or Safari compatibility.
 
 ## One small handoff artifact
 
@@ -122,8 +123,6 @@ Put durable behavior and decisions in the right home: project guidance for curre
 
 ## Sources
 
-- [Health-checker fixture contract](../../demo/health-checker/README.md)
-- [The checker example](../examples/build-health-checker.md) — inspect generated files and compare claims with actual checks.
 - [Sessions and memory](sessions.md) — saved history, retrieval, and optional OMP memory backends.
 - [OpenSpec core concepts](https://github.com/Fission-AI/OpenSpec/blob/main/docs/overview.md) — current specs, pending changes, and archiving.
 - [Kiro: From chat to specs](https://kiro.dev/blog/from-chat-to-specs-deep-dive/) — the requirements/design/tasks file split.

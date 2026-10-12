@@ -16,6 +16,7 @@ dist/
 coverage/
 test-results/
 playwright-report/
+/sections/reader-boundary-*/
 
 # Local agent runs and disposable working copies.
 .runs/

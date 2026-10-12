@@ -35,15 +35,10 @@ Start with the introduction, then install and connect OMP in section 1. There is
 
 </div>
 
-## Alternative for review
-
-[Getting started with OMP — alternative article](sections/01-getting-started-with-omp-alternative.md) is the longer guide from the `section-1` branch, with commands, reference material, and a todo-app exercise. It is a review copy, not a replacement for section 1 above; its old demo is not included in this checkout.
 
 ## Practical examples
 
-Each lesson uses a focused example to make its idea concrete. There is no shared course project. Install additional tools only when that lesson’s example needs them.
-
-Use only the local fixtures, public documentation services, or systems you own or are authorized to check. The MCP lesson connects to Microsoft Learn's public, no-authentication documentation server. No additional service credentials, production changes, retries, or scheduled monitoring are needed for the guided route.
+Each lesson uses a focused example to make its idea concrete. There is no shared course project. Install additional tools only when that lesson’s example needs them. The MCP lesson connects to Microsoft Learn's public, no-authentication documentation server; no additional service credentials or production changes are needed for the guided route.
 
 ## How we learn
 
@@ -59,16 +54,5 @@ Use the amount of planning the change needs. A small, clear request does not nee
 
 ## Teaching and verification limits
 
-The lessons and local fixture are course material, not a hosted monitoring service. Prepared traces and expected results are labelled. They are not recordings of a provider-backed run. Model access, fresh OS installation, learner-generated implementations, and classroom pacing still need rehearsal with the intended audience.
+Prepared traces and expected results are labelled. They are not recordings of a provider-backed run. Model access, fresh OS installation, learner-generated implementations, and classroom pacing still need rehearsal with the intended audience.
 
-<details>
-<summary>Retained standalone examples</summary>
-
-These older exercises are separate from the main course route. Their implementation and fixture prerequisites apply only if you choose one:
-
-- [Build a health checker](sections/examples/build-health-checker.md)
-- [Create and evaluate a health-check review skill](sections/examples/health-check-review-skill.md)
-- [Inspect checker boundaries and compatibility](sections/examples/advanced-health-checker.md)
-- [Checker example guide](sections/examples/health-checker-guide.md) and [local fixture](demo/health-checker/README.md)
-
-</details>

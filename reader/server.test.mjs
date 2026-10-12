@@ -2,13 +2,17 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
-import { readFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { basename, join } from "node:path";
 
 // A local reader must serve source documents without exposing Git or dotfiles.
 test(
   "serves the real outline and rejects private paths and writes",
   { timeout: 10000 },
   async (t) => {
+    const fixture = await mkdtemp(new URL("../sections/reader-boundary-", import.meta.url));
+    t.after(() => rm(fixture, { recursive: true, force: true }));
+    await writeFile(join(fixture, "private.mjs"), "export const value = 1;\n");
     const child = spawn(
       process.execPath,
       [new URL("./server.mjs", import.meta.url).pathname],
@@ -36,15 +40,15 @@ test(
       await response.text(),
       await readFile(new URL("../OUTLINE.md", import.meta.url), "utf8"),
     );
-    const diagram = await fetch(`${base}/diagrams/context.svg`);
+    const diagram = await fetch(`${base}/diagrams/agent-loop.svg`);
     assert.equal(diagram.status, 200);
     assert.match(diagram.headers.get("content-type"), /^image\/svg\+xml/);
     assert.match(diagram.headers.get("content-security-policy"), /default-src 'none'/);
     assert.match(diagram.headers.get("content-security-policy"), /sandbox/);
     for (const path of [
-      "/content/.git/config",
-      "/content/demo/.env",
-      "/content/demo/%2e%2e%2f.git/config",
+      "/content/sections/.env",
+      "/content/sections/%2e%2e%2f.git/config",
+      `/content/sections/${basename(fixture)}/private.mjs`,
       "/package.json",
       "/diagrams/%2e%2e%2fserver.mjs",
       "/diagrams/context.html",

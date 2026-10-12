@@ -1,83 +1,73 @@
-# Agentic engineering course
+# From autocomplete to agentic engineering
 
-This repository contains an HTML course reader and Markdown lessons for practical
-agentic engineering with OMP. Each lesson uses a focused example rather than one
-mandatory course-wide project.
+A practical workshop for engineers learning to direct coding agents, inspect their work, and decide whether a change is ready. We use [Oh My Pi (OMP)](https://github.com/can1357/oh-my-pi) in the terminal alongside your usual editor.
 
-Start with the [Introduction](sections/introduction.md), then [Getting started with OMP](sections/01-getting-started-with-omp.md),
-and follow the [outline](OUTLINE.md). The course is language-agnostic: use a
-language and normal run/test tools you can review confidently. Later lessons
-name any example-specific prerequisites; the health-checker fixture is only for
-the optional checker examples that use it.
+You do not need prior AI experience. Bring your knowledge of code, Git, and tests. Each lesson uses a focused example rather than one project you must carry through the course.
 
-OMP and an approved provider are needed for live agent exercises. Keep
-credentials out of prompts and course files. Use only local, owned, or
-authorized endpoints.
+**Start with the [Introduction](sections/introduction.md), then [Getting started with OMP](sections/01-getting-started-with-omp.md).** Read the Markdown here on GitHub, or run the browser reader below for lesson navigation, search, and an on-page contents list.
 
-## Read in the browser
+## Run the reader
 
-Use Node 22.12 or newer to host the reader. From the course root:
+Use Node.js **22.12 or newer**. From the repository root:
 
 ```sh
-npm install
+npm ci
 npm start
 ```
 
-Open **http://127.0.0.1:4173**. The reader renders the Markdown course from this
-checkout, including the outline in `OUTLINE.md`. It binds to loopback, has no
-build step, account, database, or copied content, and uses the installed
-`marked` and `DOMPurify` packages. Refresh after editing a document. Stop it
-with **Ctrl+C**; if port 4173 is occupied, use `PORT=4174 npm start`.
+Open **http://127.0.0.1:4173**. Stop the reader with **Ctrl+C**. If the port is occupied, use `PORT=4174 npm start`.
 
-Selected lessons embed YouTube talks and retain a direct link as a fallback.
-To opt in, add `data-youtube-embed` to a link with the form
-`https://www.youtube.com/watch?v=VIDEO_ID`. The reader validates the host and
-video ID, then creates a responsive player on `www.youtube-nocookie.com`.
-Arbitrary iframe markup remains blocked.
+The reader serves the Markdown in this checkout on loopback; there is no build step, account, or database. You do not need OMP or model access just to read the lessons. For the live exercises, [section 1](sections/01-getting-started-with-omp.md) walks through installing OMP and connecting a provider and model. Install other tools only when a lesson needs them.
 
-## Course material
+## Workshop route
 
-| Material | Purpose |
+The [full outline](OUTLINE.md) includes the individual lessons and their sequence.
+
+| Section | What you will work on |
 | --- | --- |
-| [Outline](OUTLINE.md) | Course route and lesson sequence |
-| [Introduction](sections/introduction.md) | Course framing and agentic engineering basics |
-| [Getting started with OMP](sections/01-getting-started-with-omp.md) | Harness introduction, terminal choice, installation, and model connection |
-| [Foundations](sections/foundations/index.md) | Models, context, prompting, tools, sessions, artifacts, skills, and extensions |
-| [Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, phone access, and managing agents |
-| [Engineering workflows](sections/engineering-workflows/index.md) | Workflow control, dependencies, bounded loops, and enforced gates |
-| [Spec-driven development](sections/spec-driven-development/index.md) | Shared specifications, plans, tasks, and supporting tools |
-| [Advanced engineering](sections/advanced-engineering/index.md) | Harness boundaries and changes to existing systems |
-| [Build a health checker](sections/examples/build-health-checker.md) | Optional focused example for turning a plain-language request into a tool |
-| [Health-check review skill](sections/examples/health-check-review-skill.md) | Optional workshop for creating and evaluating a review procedure |
-| [Advanced health-checker example](sections/examples/advanced-health-checker.md) | Optional examples for harness boundaries and compatibility |
-| [Health-checker example guide](sections/examples/health-checker-guide.md) | Contract and workspace guidance for the retained checker examples |
-| [Health-checker fixture](demo/health-checker/README.md) | Local endpoints used by checker examples |
+| [1. Getting started with OMP](sections/01-getting-started-with-omp.md) | Choose a terminal, install OMP, connect a model, and learn how to interrupt it. |
+| [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, and MCP/extensions. |
+| [3. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
+| [4. Engineering workflows](sections/engineering-workflows/index.md) | Apply Full Stack Agentic Development (FSAD) across the delivery lifecycle, with dependencies, bounded loops, and enforced gates. |
+| [5. Spec-driven development](sections/spec-driven-development/index.md) | Keep specifications, plans, and tasks useful as work changes; compare the tools that support them. |
+| [6. Advanced engineering](sections/advanced-engineering/index.md) | Reason about harness boundaries, cancellation, stale work, compatibility, and changes to existing systems. |
 
-## Verification
+## How we work
 
-Run the focused local checks with the reader-hosting Node runtime:
+Give the agent a bounded task, observe what it actually does, and check the result yourself. A small change may need only a clear request; a larger or ambiguous change needs decisions before code.
 
-```sh
-node --test demo/health-checker/server.test.mjs reader/server.test.mjs
-```
+**An agent's summary is not proof.** Inspect the files, run the relevant checks, and distinguish what was observed from what was merely claimed. The lessons teach working habits alongside the mechanics: useful follow-up prompts, context handoffs, interruption, and recovery when a run goes off track.
 
-These tests cover the fixture's fixed HTTP behavior and the reader's
-file-serving boundary. They do not prove a learner-generated checker,
-provider-backed interaction, every language toolchain, fresh OS installation,
-or classroom pacing.
+Keep credentials out of prompts and repository files. The setup lesson starts in a scratch folder with supervised tool approvals; it explains what those approvals do and do not protect.
 
-## Diagrams, prompting, and skills
+## Working on the material
 
-The lessons include static diagrams, practical prompting techniques,
-and source-reviewed skill recommendations. No third-party skills
-are installed by the course.
+- `OUTLINE.md` defines the route and drives the reader's sidebar.
+- `sections/` contains the published lessons and their source links.
+- `research/` contains supporting notes linked from the lessons.
+- `reader/` contains the local server, browser reader, styles, and diagrams.
 
-The reader serves explicitly allowlisted SVG diagrams and raster images; it
-does not load a diagram JavaScript library. Regenerate a compact SVG with:
+Edit the Markdown directly, refresh the reader, and check the changed lesson—including links and expandable sections. Read the neighboring lessons so prerequisites and next steps still line up.
+
+Run the reader's file-serving and security checks with:
 
 ```sh
-node reader/diagrams/derive-course-svg.mjs context reader/diagrams/context.svg
+node --test reader/server.test.mjs
 ```
 
-The command also accepts `agent-loop` and `workflow` with their corresponding
-output paths. Recheck the rendered image after changing its layout.
+These checks cover the local reader, not provider access, fresh-machine installation, or the results of a learner's agent session. Prepared traces in the lessons are labelled examples, not recordings of live runs.
+
+<details>
+<summary>Maintaining diagrams and video embeds</summary>
+
+The reader serves explicitly allowlisted images; it does not load a diagram JavaScript library. Regenerate the agent-loop diagram with:
+
+```sh
+node reader/diagrams/derive-course-svg.mjs reader/diagrams/agent-loop.svg
+```
+
+Check the rendered image after changing its layout.
+
+Selected lessons embed YouTube talks and retain a direct link as a fallback. Add `data-youtube-embed` to a link of the form `https://www.youtube.com/watch?v=VIDEO_ID` to opt in. The reader validates the host and video ID, then creates a player on `www.youtube-nocookie.com`; arbitrary iframe markup remains blocked.
+
+</details>

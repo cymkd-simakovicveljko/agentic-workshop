@@ -9,8 +9,6 @@ const assets = new Map([
   ["/reader.css", ["reader/reader.css", "text/css"]],
   ["/reader.js", ["reader/reader.js", "text/javascript"]],
   ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
-  ["/diagrams/workflow.svg", ["reader/diagrams/workflow.svg", "image/svg+xml"]],
-  ["/diagrams/context.svg", ["reader/diagrams/context.svg", "image/svg+xml"]],
   ["/diagrams/llm-context.png", ["reader/diagrams/llm-context.png", "image/png"]],
   ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],
   ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
@@ -33,18 +31,8 @@ const assets = new Map([
     ["node_modules/dompurify/dist/purify.es.mjs", "text/javascript"],
   ],
 ]);
-const contentRoots = new Set(["sections", "demo", "research"]);
+const contentRoots = new Set(["sections", "research"]);
 const rootDocuments = new Set(["README.md", "OUTLINE.md"]);
-const sourceExtensions = new Set([
-  ".md",
-  ".mjs",
-  ".js",
-  ".jsx",
-  ".json",
-  ".py",
-  ".yaml",
-  ".yml",
-]);
 
 const server = createServer(async (request, response) => {
   const send = (status, body, type = "text/plain") => {
@@ -72,7 +60,7 @@ const server = createServer(async (request, response) => {
       if (
         parts.some((part) => !part || part.startsWith(".")) ||
         !(rootDocuments.has(relative) || contentRoots.has(parts[0])) ||
-        !sourceExtensions.has(extname(relative))
+        extname(relative) !== ".md"
       )
         return send(404, "Document not available.");
       asset = [relative, "text/plain"];

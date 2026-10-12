@@ -451,8 +451,6 @@ Keep it, revise it against a concrete failure, or remove it.
 
 Can you explain **what the skill adds, how it gets loaded, what it depends on, and how you checked its result**? Those questions matter more than how many skills you have installed.
 
-For a deeper code-review exercise, the optional [Skill workshop](../examples/health-check-review-skill.md) builds and evaluates a health-check review procedure. It has its own fixture prerequisites and retains evidence for OMP 18.2.9; it is not required for this lesson.
-
 Next, [MCP, plugins, and extensions](mcp-and-plugins.md) covers adding and packaging capabilities, rather than instructions alone.
 
 ## Sources and verification scope

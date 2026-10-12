@@ -1,4 +1,4 @@
-# 5. Spec-driven development
+# 4. Spec-driven development
 
 In [Engineering workflows](../engineering-workflows/index.md#applying-fsad-across-the-lifecycle), we mapped FSAD’s way of organizing delivery onto familiar lifecycle responsibilities. Here, we practise maintaining the shared specification and examine supporting practices and tools.
 

@@ -1,4 +1,4 @@
-# 3.4 Managing several agents
+# 6.4 Managing several agents
 
 **Keep the main session for decisions and integration. Give a subagent one bounded, independent job.** A separate `omp` process is a separate session; it is not automatically a child in Agent Hub. A `task` subagent belongs to the current session and appears there. A Collab guest is a client of the host session, not another local worker.
 
@@ -44,7 +44,7 @@ omp --cwd ~/code/agentic-workshop
 Use `--add-dir` only when the task needs another workspace directory. `/resume` and `/fork` change session history and identity; they do not turn an independent session into a subagent. Agent Hub is for workers attached to the current session. `/jobs` is a status snapshot, not a transcript or a control surface.
 
 
-[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Next: Engineering workflows](../engineering-workflows/index.md)
+[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Back to the outline](../../OUTLINE.md)
 
 ## Sources
 

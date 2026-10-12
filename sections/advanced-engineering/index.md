@@ -1,4 +1,4 @@
-# 6. Advanced engineering
+# 5. Advanced engineering
 
 The earlier lessons introduced the parts of an agent loop, the software lifecycle, and shared specifications. This lesson deals with the boundaries that become important when the work is uncertain, long-running, or attached to existing software:
 
@@ -272,4 +272,4 @@ The source-backed behavior used here comes from:
 
 The boundary cards, prepared cases, acceptance-note format, sequential default, revision binding, and hybrid-control recommendation are workshop guidance. They do not claim that OMP enforces every boundary, that an approval contains a shell, or that a model's report is independent evidence. Prepared traces are teaching cases, not recordings of provider-backed executions; replace them with the actual files, commands, outputs, and decisions from your run or bounded change. This lesson does not claim to have run a provider, external process, cancellation, consumer, or production deployment for you.
 
-[Previous: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)
+[Previous: Spec-driven development](../spec-driven-development/index.md) · [Next: Key productivity tips](../working-with-omp/index.md) · [Back to the outline](../../OUTLINE.md)

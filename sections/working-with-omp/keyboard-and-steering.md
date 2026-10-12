@@ -1,4 +1,4 @@
-# 3.2 Keyboard controls and steering
+# 6.2 Keyboard controls and steering
 
 **Use a few controls deliberately; do not memorize the whole catalog.** Run `/hotkeys` in your installed OMP build first. It includes remaps and extension bindings.
 

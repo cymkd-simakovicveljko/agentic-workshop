@@ -2,6 +2,46 @@
 
 **A model requests an operation; the harness executes it if the applicable policy allows it.** Keep those steps separate. “I edited the file” is a model message. The file changing is a result you can inspect.
 
+## Try denying a harmless edit
+
+Use a Bash or Zsh terminal and the connected OMP setup from section 1. Create a fresh scratch folder, away from private code and credentials:
+
+```sh
+cd "$(mktemp -d /tmp/permission-demo.XXXXXX)"
+printf 'ORIGINAL\n' > permission-demo.txt
+pwd
+omp --approval-mode always-ask
+```
+
+Keep the printed directory path. In a second terminal, change into that same directory; use it to inspect the file without asking the agent.
+
+Send this request in OMP:
+
+```text
+Read permission-demo.txt with the built-in read tool, then use a built-in
+file-editing tool to replace its entire contents with CHANGED followed by
+one newline. Do not run commands, touch other files, or delegate the work.
+If the edit is denied, stop; do not retry or use another tool.
+```
+
+**First, deny the edit.** Inspect the tool name, target path, and proposed change before choosing deny. Reads normally need no approval in `always-ask`; the file edit should prompt unless an existing policy overrides it. If it runs without a prompt, stop and inspect the active mode and per-tool policies before retrying in a fresh scratch folder. Do not count an automatic edit as an approval exercise.
+
+After the turn stops, run this in your second terminal:
+
+```sh
+printf 'ORIGINAL\n' | cmp - permission-demo.txt &&
+  echo "confirmed: denied edit left the file unchanged"
+```
+
+**Now approve one edit.** Send the same request again. Approve only the call targeting this scratch file with the intended contents—not a broader permission grant. After the turn finishes, check independently:
+
+```sh
+printf 'CHANGED\n' | cmp - permission-demo.txt &&
+  echo "confirmed: approved edit changed the file"
+```
+
+If either comparison fails, inspect the file and tool result before continuing. Denial blocks that call; approval permits execution but does not guarantee it succeeded. The two comparisons let you distinguish the requested change, your decision, and the actual result.
+
 ## Follow the request through execution
 
 A normal tool call has this shape:

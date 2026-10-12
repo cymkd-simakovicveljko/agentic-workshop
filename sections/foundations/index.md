@@ -46,7 +46,7 @@ The engineer sets the goal and authority. The model proposes a response or actio
 
 The exact order can differ. A model may inspect first, write first, be denied a tool, or stop at a limit. Describe only the visible request, tool activity, returned result, and files; never claim to have inspected private reasoning.
 
-Then move to [Key productivity tips](../working-with-omp/index.md) for voice input, keyboard controls, phone access, and managing agents. Foundations explains what is happening; that section helps you get comfortable doing it.
+After the foundations lessons, move to [Engineering workflows](../engineering-workflows/index.md) to put a check in control of the next action. [Key productivity tips](../working-with-omp/index.md) closes the course with voice input, keyboard controls, phone access, and managing agents.
 
 ## Sources and adaptation
 

@@ -1,4 +1,4 @@
-# 4. Engineering workflows
+# 3. Engineering workflows
 
 ## Before we bring in the agent
 
@@ -91,7 +91,8 @@ While checking cancellation, we might discover that a shared calendar still show
 
 **SDLC describes the work. A development approach describes how we organize it.** Waterfall and Agile are different ways of organizing that work; neither is another name for the lifecycle itself.
 
-## A little history: when do we find out we were wrong?
+<details>
+<summary>Optional history: when do we find out we were wrong?</summary>
 
 That question connects much of software development's history. We need enough planning to work together, but we also need chances to discover what our plans missed.
 
@@ -128,6 +129,7 @@ These approaches did not neatly replace one another. A team can plan a migration
 - **Agile:** read the [four values](https://agilemanifesto.org/) and then the [twelve principles](https://agilemanifesto.org/principles.html). Notice how much they say about collaboration, good design, and useful software—not ceremonies.
 - **DevOps:** browse the [2009 event program](https://legacy.devopsdays.org/events/2009-ghent/program/). The problems are recognizable even though the tools have changed.
 
+</details>
 </details>
 
 ## What we will carry into agentic work
@@ -633,4 +635,4 @@ Use this as a longer follow-on when you want to explore spec-driven development 
 
 For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Spec-driven development](../spec-driven-development/index.md#optional-watch-a-use-case-driven-approach).
 
-[Previous: Key productivity tips](../working-with-omp/index.md) · [Next: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)
+[Previous: MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) · [Next: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)

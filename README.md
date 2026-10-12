@@ -46,10 +46,10 @@ The [full outline](OUTLINE.md) includes the individual lessons and their sequenc
 | --- | --- |
 | [1. Getting started with OMP](sections/01-getting-started-with-omp.md) | Choose a terminal, install OMP, connect a model, and learn how to interrupt it. |
 | [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, and MCP/extensions. |
-| [3. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
-| [4. Engineering workflows](sections/engineering-workflows/index.md) | Apply Full Stack Agentic Development (FSAD) across the delivery lifecycle, with dependencies, bounded loops, and enforced gates. |
-| [5. Spec-driven development](sections/spec-driven-development/index.md) | Keep specifications, plans, and tasks useful as work changes; compare the tools that support them. |
-| [6. Advanced engineering](sections/advanced-engineering/index.md) | Reason about harness boundaries, cancellation, stale work, compatibility, and changes to existing systems. |
+| [3. Engineering workflows](sections/engineering-workflows/index.md) | Apply Full Stack Agentic Development (FSAD) across the delivery lifecycle, with dependencies, bounded loops, and enforced gates. |
+| [4. Spec-driven development](sections/spec-driven-development/index.md) | Keep specifications, plans, and tasks useful as work changes; compare the tools that support them. |
+| [5. Advanced engineering](sections/advanced-engineering/index.md) | Reason about harness boundaries, cancellation, stale work, compatibility, and changes to existing systems. |
+| [6. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
 
 ## How we work
 

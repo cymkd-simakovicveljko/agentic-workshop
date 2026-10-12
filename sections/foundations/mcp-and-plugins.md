@@ -229,7 +229,7 @@ You should have a sourced answer, evidence that the server handled the lookup, a
 
 Can you explain **what capability was missing, what ran where, what data left the machine, and how you checked the result**? That is more useful than having a long list of connected servers.
 
-Next, [Key productivity tips](../working-with-omp/index.md) focuses on directing the session at the keyboard, remotely, and across delegated workers.
+Next, [Engineering workflows](../engineering-workflows/index.md) follows a feature through the software lifecycle and shows where agents help—and where checks and people control the next step.
 
 ## Sources and verification scope
 
@@ -240,4 +240,4 @@ Next, [Key productivity tips](../working-with-omp/index.md) focuses on directing
 
 The public Microsoft Learn endpoint was exercised directly through MCP initialization, tool listing, documentation search, and page fetch. The fetched HTTP trigger documentation contained both the local-development and local-container conditions. This is protocol-level evidence, not a provider-backed OMP session or an Azure deployment test. The locally installed OMP reported version 18.2.9; command guidance follows the linked current OMP documentation.
 
-[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Key productivity tips](../working-with-omp/index.md)
+[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Engineering workflows](../engineering-workflows/index.md)

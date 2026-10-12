@@ -69,7 +69,7 @@ The distinction is useful: **a skill describes the procedure; an artifact is the
 
 **Reuse the project's existing organization.** If a workflow already owns the spec and tasks, update those instead of creating a competing `plan.md` and `progress.md` elsewhere. Link the spec from the tasks and the evidence from the progress note. When the plan changes, update the affected tasks; when a decision is superseded, mark it and link its replacement.
 
-For a deeper comparison, continue to [Spec-driven development](../health-checker/07-optional-flavors.md). The [Skills lesson](skills.md#four-skill-packs-four-starting-points) shows how reusable procedures guide this work. Neither a folder convention nor a skill's instructions enforce approval or prove completion on their own.
+For a deeper comparison, continue to [Spec-driven development](../spec-driven-development/index.md). The [Skills lesson](skills.md#four-skill-packs-four-starting-points) shows how reusable procedures guide this work. Neither a folder convention nor a skill's instructions enforce approval or prove completion on their own.
 
 ## Report is not evidence
 
@@ -88,7 +88,7 @@ Treat generated files as work to review, including untracked files. `git diff` a
 
 ## Prepared trace: useful, but labelled
 
-The optional [health-checker example](../health-checker/01-getting-started.md) gives us a small trace to inspect without requiring that project for this lesson:
+The optional [health-checker example](../examples/build-health-checker.md) gives us a small trace to inspect without requiring that project for this lesson:
 
 ```text
 Engineer: Build a one-URL checker with status, literal body, timeout, no redirects.
@@ -120,12 +120,12 @@ Next action:
 
 Put durable behavior and decisions in the right home: project guidance for current commands, a spec for the agreed behavior, an ADR for a consequential architectural choice, and a handoff for unfinished work. Preserve detailed output in a linked log or report. Do not turn a one-off result into a permanent instruction or leave yesterday's progress note claiming today's state.
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Sessions and memory](sessions.md) · [Next: Skills](skills.md)
+[Back to foundations](index.md) · [Previous: Sessions and memory](sessions.md) · [Next: Skills](skills.md)
 
 ## Sources
 
 - [Health-checker fixture contract](../../demo/health-checker/README.md)
-- [The checker example](../health-checker/01-getting-started.md) — inspect generated files and compare claims with actual checks.
+- [The checker example](../examples/build-health-checker.md) — inspect generated files and compare claims with actual checks.
 - [Sessions and memory](sessions.md) — saved history, retrieval, and optional OMP memory backends.
 - [OpenSpec core concepts](https://github.com/Fission-AI/OpenSpec/blob/main/docs/overview.md) — current specs, pending changes, and archiving.
 - [Kiro: From chat to specs](https://kiro.dev/blog/from-chat-to-specs-deep-dive/) — the requirements/design/tasks file split.

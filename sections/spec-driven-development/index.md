@@ -1,12 +1,14 @@
 # 5. Spec-driven development
 
+In [Engineering workflows](../engineering-workflows/index.md#applying-fsad-across-the-lifecycle), we mapped FSAD’s way of organizing delivery onto familiar lifecycle responsibilities. Here, we practise maintaining the shared specification and examine supporting practices and tools—not five interchangeable alternatives to FSAD.
+
 ## How do you note down a change in your repo?
 
 You agree on a change in chat, start working, and discover something that changes the plan. Where do you put that decision so you—or the next agent—can pick it up tomorrow?
 
 **Start with a short change note.** Use the repo's existing issue, spec, or planning convention. If there isn't one, a Markdown file is enough. Keep the intent, decisions, and remaining work—not a transcript of the conversation.
 
-We'll follow a note as the work changes, then look at five approaches that organize this process: FSAD, OpenSpec, Kiro, GitHub Spec Kit, and BMAD. The point is to understand what each adds, not to install five tools.
+We'll follow a note as the work changes, apply FSAD’s shared-decision practice, then examine ways to organize specifications, plans, and tasks. The point is to choose useful support for the work, not to install a collection of frameworks.
 
 ### Try it with your next change
 
@@ -133,20 +135,32 @@ This is a template, not a claim that the example has been implemented. Fill it f
 
 That is the basic loop: agree, build, learn, update, continue. The approaches below give parts of that loop more structure.
 
-## Five approaches, five useful differences
+## Methodology and toolbox: FSAD and FSD
 
-These are not five competing Markdown templates. FSAD organizes collaboration; OpenSpec organizes changes; Kiro integrates spec work into an IDE; Spec Kit packages reusable processes; BMAD helps choose a planning path.
+**FSAD is the way of working we are learning to apply; FSD provides tools for parts of that work.** The similar names do not mean they are the same thing.
+
+The [FSAD playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) organizes collaboration around a living specification, reviewed plans, delegated execution, and human review. A team needs shared decisions and clear ownership to make that work; a file template alone cannot establish either.
+
+[FSD](https://github.com/tbeack/fsd) is a **Claude Code plugin** with reusable skills, agents, and commands. It helps maintain specifications, plans, and task state, and provides procedures for implementation and verification. Its artifact schema validation checks document structure; it does not establish that the implementation meets the intended behavior.
+
+FSD can support parts of this approach. Installing it is not the same as adopting FSAD, and a completed checkbox is not evidence that a check passed. Keep the actual commands, observed results, and human acceptance decisions available for review.
+
+**We continue using OMP for this workshop.** FSD is a concrete example of a supporting toolbox, not an OMP plugin or an installation prerequisite. The practices below are compared for the problems they address; we are not claiming that these tools integrate with each other or form an official FSAD toolchain.
+
+## Collaboration practices and supporting tools
+
+Start with FSAD’s shared-decision practice, then look at the supporting choices. OpenSpec separates current behavior from proposed changes; Kiro integrates requirements, design, and tasks into an IDE; Spec Kit packages reusable processes; BMAD helps choose the planning work a change needs. These contributions can inform how we work without being equivalent products or complete replacements for one another.
 
 <figure class="course-diagram course-diagram-wide">
 <a href="/diagrams/sdd-approaches.svg"><img src="/diagrams/sdd-approaches.svg" width="760" height="706" alt="Five different emphases: FSAD agrees before splitting work; OpenSpec separates current behavior from proposed changes; Kiro separates requirements, design, and tasks; GitHub Spec Kit carries project rules into each change; BMAD chooses planning based on what is unclear." /></a>
-<figcaption>Different starting points—not exclusive capabilities. These simplified views overlap; they are not rankings or complete workflows. <a href="/diagrams/sdd-approaches.svg">Open the full-size diagram.</a></figcaption>
+<figcaption>A collaboration method alongside supporting practices and tools—not five competing operating models. These simplified views overlap; they are not rankings or complete workflows. <a href="/diagrams/sdd-approaches.svg">Open the full-size diagram.</a></figcaption>
 </figure>
 
-Open the approach closest to a problem you have. Each section explains documented behavior, then applies it to our example. **The search examples and adoption advice are ours; they are not outputs from running these tools.**
+Read the FSAD example first, then open the supporting approach closest to a problem you have. Each section explains documented behavior and applies it to our example. **The search examples and adoption advice are ours; they are not outputs from running these tools.**
 
 <div class="setup-platforms">
-<details>
-<summary><strong>FSAD: agree on the change together</strong><span>Look here when the difficult part is agreement across people.</span></summary>
+<details open>
+<summary><strong>FSAD in practice: agree on the change together</strong><span>Start with shared decisions before splitting the work.</span></summary>
 
 [Full Stack Agentic Development](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html) is a playbook for small cross-functional teams, called pods. Product, design, and engineering co-author a living spec. They then plan tasks, delegate implementation to agents, and review the result together.
 
@@ -301,7 +315,7 @@ The guide recommends updating the spec and re-slicing remaining stories when a m
 
 ## Compare the choices, not the number of features
 
-Choose by the problem that keeps costing you time. These approaches overlap; we are choosing a first practice, not a permanent allegiance.
+Within that way of working, choose support for the problem that keeps costing you time. These practices overlap; adopting one does not require replacing the whole workflow or installing its associated tool.
 
 ### “We cannot tell which proposal actually shipped”
 
@@ -315,7 +329,7 @@ FSAD's shared discussion would not, by itself, solve this stale-record problem. 
 
 Suppose product expects readers to find passages, but engineering has planned title filtering. Both have written clear documents; the documents disagree.
 
-**We would borrow FSAD's shared decision session before generating more tasks.** Resolve what readers need to find, record the decision, then use Kiro's requirements/design/tasks separation to review the resulting plan. Adding an archive would preserve the disagreement, not settle it.
+**Apply FSAD's shared decision session before generating more tasks.** Resolve what readers need to find, record the decision, then use Kiro's requirements/design/tasks separation to review the resulting plan. Adding an archive would preserve the disagreement, not settle it.
 
 If the behavior is already agreed and the recurring problem is mixing project rules with feature scope, Spec Kit's separation is a better fit. If nobody knows whether search addresses the real problem, follow BMAD's advice to investigate that gap before planning a build.
 
@@ -388,14 +402,14 @@ You make the acceptance decision. For this lesson, you do not need to implement 
 
 The questions beside each approach suggest what to inspect. These primary sources explain intended mechanics; they are not independent evidence that one method is faster or more reliable.
 
-[FSAD playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html) · [OpenSpec core concepts](https://github.com/Fission-AI/OpenSpec/blob/main/docs/overview.md) · [Kiro walkthrough](https://kiro.dev/blog/from-chat-to-specs-deep-dive/) · [Spec Kit README](https://github.com/github/spec-kit) · [BMAD planning paths](https://docs.bmad-method.org/plan/choose-a-planning-path/)
+[FSAD playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html) · [FSD README, inspected revision](https://github.com/tbeack/fsd/blob/2cc13c63d7ed08aa16f686126dff7ddfa7052e23/README.md) · [OpenSpec core concepts](https://github.com/Fission-AI/OpenSpec/blob/main/docs/overview.md) · [Kiro walkthrough](https://kiro.dev/blog/from-chat-to-specs-deep-dive/) · [Spec Kit README](https://github.com/github/spec-kit) · [BMAD planning paths](https://docs.bmad-method.org/plan/choose-a-planning-path/)
 
 <details>
 <summary>Source versions and what was checked</summary>
 
-FSAD's reviewed page labels itself v40. The Kiro walkthrough is dated July 15, 2025; consult current docs for current controls. OpenSpec and Spec Kit links follow their default branches, and BMAD's docs are mutable.
+FSAD's reviewed page labels itself v40. FSD's README and plugin manifest at commit `2cc13c63d7ed08aa16f686126dff7ddfa7052e23` declare version 0.15.0; its documentation and relevant artifact scripts were inspected, not executed. The Kiro walkthrough is dated July 15, 2025; consult current docs for current controls. OpenSpec and Spec Kit links follow their default branches, and BMAD's docs are mutable.
 
-The examples in this lesson illustrate the ideas; the five tools and methods were not installed, run, or benchmarked for this comparison. File and workflow descriptions are source-based. Adoption advice and the search scenario are course recommendations and teaching examples.
+The examples in this lesson illustrate the ideas; the tools and methods were not installed, run, or benchmarked for this comparison. File and workflow descriptions are source-based. Adoption advice and the search scenario are course recommendations and teaching examples.
 
 </details>
 
@@ -415,6 +429,6 @@ His modernization example starts by extracting use cases and a model from existi
 
 **Our takeaway:** try describing one behavior this way and ask a colleague who knows the domain to challenge it. His choices about team size, architecture, and avoiding pull requests are reports from his projects—not defaults we need to adopt.
 
-For a longer guided introduction first, see the [DeepLearning.AI SDD course linked from Engineering workflows](03-everyday-workflow.md#optional-watch-put-a-specification-to-work).
+For a longer guided introduction first, see the [DeepLearning.AI SDD course linked from Engineering workflows](../engineering-workflows/index.md#optional-watch-put-a-specification-to-work).
 
-[Previous: Engineering workflows](03-everyday-workflow.md) · [Next: Advanced engineering](08-advanced-engineering.md) · [Back to the outline](../../OUTLINE.md)
+[Previous: Engineering workflows](../engineering-workflows/index.md) · [Next: Advanced engineering](../advanced-engineering/index.md) · [Back to the outline](../../OUTLINE.md)

@@ -1,10 +1,10 @@
 # Example: build a health checker
 
-**Your first mission: “It returns 200. Is it actually working?”**
+**Optional example: “It returns 200. Is it actually working?”**
 
 You have just shipped a change. The website responds, but does it show what users expect? Let’s ask OMP to build a small tool that can tell the difference.
 
-Before we unpack how agentic engineering works, let’s experience one part of it: turning a plain-language request into a working tool. You will watch OMP work, try what it builds, and ask for a change. You do not need to understand everything on screen yet—we will return to what happened in [section 2](02-foundations.md).
+This standalone example turns a plain-language request into a working tool. You will watch OMP work, try what it builds, and ask for a change. [Foundations](../foundations/index.md) explains the model, context, and tools behind the run.
 
 Your job is to stay involved: read what OMP asks permission to do, try the result, and tell it what needs changing. The commands and outputs in your run may differ from someone else’s. Follow the outcome, not an exact transcript.
 
@@ -232,11 +232,11 @@ Decision: accept / needs another change / unable to verify
 What I have not verified:
 ```
 
-Keep the checker in your learner repository—we will build on it later. Stop the fixture with **Ctrl+C** in its terminal when you are finished.
+Keep the checker only if you want to continue with the optional checker examples. No main-route lesson requires it. Stop the fixture with **Ctrl+C** in its terminal when you are finished.
 
 If you could not make a provider-backed run, use the request and expected results as a prepared walkthrough. Label it as prepared, not executed.
 
-In [Foundations](02-foundations.md), we unpack the model, prompt, context, and tools behind a run. [Prompting](../foundations/prompting.md) gives you more practice writing your own requests.
+In [Foundations](../foundations/index.md), we unpack the model, prompt, context, and tools behind a run. [Prompting](../foundations/prompting.md) gives you more practice writing your own requests.
 
 ## Sources and adaptation
 
@@ -252,4 +252,4 @@ OMP command details are tied to the course's pinned **18.2.9** references:
 
 Read the official pages for the pinned release when a command matters. Other agents and providers may expose different commands; do not silently transfer OMP controls to them.
 
-[Back to Getting started with OMP](../01-getting-started-with-omp.md) · [Next: Foundations](02-foundations.md) · [Back to the outline](../../OUTLINE.md)
+[Getting started with OMP](../01-getting-started-with-omp.md) · [Foundations](../foundations/index.md) · [Example guide](health-checker-guide.md) · [Back to the outline](../../OUTLINE.md)

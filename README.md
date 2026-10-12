@@ -1,15 +1,14 @@
 # Agentic engineering course
 
 This repository contains an HTML course reader and Markdown lessons for practical
-agentic engineering with OMP. Each lesson uses focused examples rather than one
+agentic engineering with OMP. Each lesson uses a focused example rather than one
 mandatory course-wide project.
 
 Start with the [Introduction](sections/introduction.md), then [Getting started with OMP](sections/01-getting-started-with-omp.md),
 and follow the [outline](OUTLINE.md). The course is language-agnostic: use a
-language and normal run/test tools you can review confidently. The
-[health-checker fixture](demo/health-checker/README.md) provides predictable
-local endpoints; keep the checker you build in a separate, empty learner-owned
-repository.
+language and normal run/test tools you can review confidently. Later lessons
+name any example-specific prerequisites; the health-checker fixture is only for
+the optional checker examples that use it.
 
 OMP and an approved provider are needed for live agent exercises. Keep
 credentials out of prompts and course files. Use only local, owned, or
@@ -43,13 +42,16 @@ Arbitrary iframe markup remains blocked.
 | [Outline](OUTLINE.md) | Course route and lesson sequence |
 | [Introduction](sections/introduction.md) | Course framing and agentic engineering basics |
 | [Getting started with OMP](sections/01-getting-started-with-omp.md) | Harness introduction, terminal choice, installation, and model connection |
-| [Health-checker build example](sections/health-checker/01-getting-started.md) | Optional source material for lessons using the checker |
-| [Foundations](sections/health-checker/02-foundations.md) | Eight topics: models and roles, context, prompting, tools, sessions, artifacts, skills, and extensions |
+| [Foundations](sections/foundations/index.md) | Models, context, prompting, tools, sessions, artifacts, skills, and extensions |
 | [Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, phone access, and managing agents |
-| `sections/health-checker/` | Guided exercises, foundations overview, and the later engineering lessons |
-| [Skill-building workshop](sections/health-checker/05-skills.md) | Create and evaluate a reusable review procedure after learning the foundations |
-| [Health-checker fixture](demo/health-checker/README.md) | Local endpoints, startup instructions, and acceptance rules |
-| [Project guide](PROJECT.md) | Checker contract, workspace guidance, safety, and verification limits |
+| [Engineering workflows](sections/engineering-workflows/index.md) | Workflow control, dependencies, bounded loops, and enforced gates |
+| [Spec-driven development](sections/spec-driven-development/index.md) | Shared specifications, plans, tasks, and supporting tools |
+| [Advanced engineering](sections/advanced-engineering/index.md) | Harness boundaries and changes to existing systems |
+| [Build a health checker](sections/examples/build-health-checker.md) | Optional focused example for turning a plain-language request into a tool |
+| [Health-check review skill](sections/examples/health-check-review-skill.md) | Optional workshop for creating and evaluating a review procedure |
+| [Advanced health-checker example](sections/examples/advanced-health-checker.md) | Optional examples for harness boundaries and compatibility |
+| [Health-checker example guide](sections/examples/health-checker-guide.md) | Contract and workspace guidance for the retained checker examples |
+| [Health-checker fixture](demo/health-checker/README.md) | Local endpoints used by checker examples |
 
 ## Verification
 

@@ -78,7 +78,7 @@ When `/tree` offers to summarize the branch you're leaving, keep that summary on
 
 For resuming work, clearing context, and the full command reference, see [Sessions and memory](sessions.md#choose-the-operation-deliberately).
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Models and roles](models.md) · [Next: Prompting](prompting.md)
+[Back to foundations](index.md) · [Previous: Models and roles](models.md) · [Next: Prompting](prompting.md)
 
 ## Sources
 

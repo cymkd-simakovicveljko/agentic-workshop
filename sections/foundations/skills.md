@@ -2,7 +2,7 @@
 
 **Start with one useful procedure, not a collection of installed skills.** A skill packages instructions the agent can load when needed: how to investigate a failure, review a design, build an interface, or explain a result.
 
-We’ll make a small handoff skill, compare it with an ordinary request, and then choose an upstream skill for a different kind of work. No health-checker project or third-party installer is needed for the first exercise.
+We’ll make a small handoff skill, compare it with an ordinary request, and then choose an upstream skill for a different kind of work. No prior exercise or third-party installer is needed.
 
 ## First, make a handoff you can trust
 
@@ -137,7 +137,7 @@ Our example uses `disable-model-invocation: true` so we choose when to apply it.
 
 Once a procedure helps, it is natural to ask what other engineers have packaged. We will look at four: **Matt Pocock's skills, Addy Osmani's Agent Skills, Lauren Tan's pstack, and Jesse Vincent's Superpowers.** This is our shortlist, not an industry ranking.
 
-These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. The [Engineering workflows lesson](../health-checker/03-everyday-workflow.md) explains that underlying work. Here, we are looking at how people turn parts of it into instructions for agents.
+These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. The [Engineering workflows lesson](../engineering-workflows/index.md) explains that underlying work. Here, we are looking at how people turn parts of it into instructions for agents.
 
 **Start with the failure you want to prevent.** Are you building the wrong thing, skipping checks, or losing track of a long change? Read the relevant procedure before adopting the author's whole workflow.
 
@@ -455,7 +455,7 @@ You should have a local skill, compared handoffs, and a decision supported by th
 
 Can you explain **what the skill adds, how it gets loaded, what it depends on, and how you checked its result**? Those questions matter more than how many skills you have installed.
 
-For a deeper code-review exercise, the optional [Skill workshop](../health-checker/05-skills.md) builds and evaluates a health-check review procedure. It has its own fixture prerequisites and retains evidence for OMP 18.2.9; it is not required for this lesson.
+For a deeper code-review exercise, the optional [Skill workshop](../examples/health-check-review-skill.md) builds and evaluates a health-check review procedure. It has its own fixture prerequisites and retains evidence for OMP 18.2.9; it is not required for this lesson.
 
 Next, [MCP, plugins, and extensions](mcp-and-plugins.md) covers adding and packaging capabilities, rather than instructions alone.
 
@@ -467,4 +467,4 @@ Next, [MCP, plugins, and extensions](mcp-and-plugins.md) covers adding and packa
 
 The local example was resolved with `omp read skill://handoff-brief` in an isolated scratch directory using OMP 18.2.9. That checks file discovery and reading, not a provider-backed comparison or successful slash-command execution. Run the guided comparison with your own connected model.
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Artifacts](artifacts.md) · [Next: MCP and plugins](mcp-and-plugins.md)
+[Back to foundations](index.md) · [Previous: Artifacts](artifacts.md) · [Next: MCP and plugins](mcp-and-plugins.md)

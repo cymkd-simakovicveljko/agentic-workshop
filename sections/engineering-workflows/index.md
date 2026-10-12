@@ -146,13 +146,53 @@ Before moving on, take a recent change of your own. Where did you discover somet
 
 That is the habit we will build on: use agents across the work, while keeping decisions and results open to inspection.
 
+## Applying FSAD across the lifecycle
+
+**FSAD changes how we organize delivery around people and agents. The responsibilities of software engineering remain.**
+
+The [Full Stack Agentic Development playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) brings product, design, and engineering together around a living specification. The team agrees on the intended result, reviews an implementation plan, delegates suitable work to agents, and checks the implementation before release.
+
+The intended benefit is shorter feedback loops and less time lost between decisions and implementation. That depends on clear specifications, technical judgment, and meaningful verification—not simply more agents.
+
+Keep three terms separate:
+
+- **SDLC describes the work we remain responsible for**, from understanding a need through delivery, operation, and eventual retirement.
+- **FSAD describes a way of organizing delivery**, through cross-functional collaboration, shared specifications, delegated execution, and human review.
+- **FSD is a supporting toolbox**, not another name for FSAD. The [next chapter](../spec-driven-development/index.md#methodology-and-toolbox-fsad-and-fsd) explains its role and its Claude Code dependency.
+
+Here is how the playbook’s five phases relate to familiar engineering activities. The booking example is our application of the method, not a reported FSAD implementation:
+
+| Engineering activity | FSAD phase | In our booking-cancellation example |
+| --- | --- | --- |
+| Understand the problem | **Intent & Discovery** | Establish why colleagues need cancellation and what a useful outcome would look like. |
+| Agree requirements and design | **Live Spec Session** | Product, design, and engineering resolve who may cancel, what the interface does, and how cancellation affects existing integrations. |
+| Plan implementation | **Implementation Planning** | An agent examines the codebase and proposes tasks. The engineer reviews the approach, dependencies, and acceptance checks before implementation. |
+| Build and test | **Agent Execution** | Agents implement bounded tasks and run checks. We parallelize independent work; coupled work still needs sequencing and integration. |
+| Review and release | **Human Review & Ship** | Review the implementation against the agreed behavior, technical constraints, and release requirements—not only the agent’s summary. |
+
+This is a mapping, not five boxes we visit only once. If implementation exposes an incorrect assumption, revisit the decision, update the specification, and adjust the affected work. A living spec records the agreed target; the code and running system show what was actually built.
+
+For cancellation, an agent can propose the endpoint and write tests. People still decide who is allowed to cancel, assess compatibility with the calendar integration, and check whether the tests exercise those decisions. Delegating implementation does not delegate away technical judgment.
+
+**After release, the lifecycle continues.** Monitor whether cancellation works for users, investigate failures, maintain integrations, and feed what we learn into the next change. FSAD includes supporting operational practices, but its five-phase delivery loop is not a complete model for service ownership, maintenance, or eventual retirement.
+
+### Try the shift on one real change
+
+Choose a bounded change that needs input from more than one discipline. Before delegating implementation:
+
+1. Agree on the intended behavior with the people who own the relevant decisions. Record unresolved questions instead of letting an agent silently settle them.
+2. Ask the agent for a plan against that agreement. Check dependencies before assigning parallel work.
+3. Name the evidence needed for acceptance and who will review it. Include release and operational concerns where they affect the change.
+
+Keep the process proportional: a clear local fix can use the existing issue and checks; a consequential cross-team decision needs the relevant people involved. Assess results through delivery time, review and rework effort, and behavior after release—not code volume or the number of agents.
+
 ## From the lifecycle to a controlled workflow
 
 **The useful question is not “Can an agent do the steps?” It is “Who is allowed to move the work to the next step?”**
 
 We will make that distinction concrete with a small, local workflow. First, ask an agent to follow a procedure. Then run the same rule through a program that can actually block its dependent step. The example is deliberately boring: a learner-owned text artifact must contain one exact line before a second file may be written.
 
-This exercises part of the lifecycle: specify a result, choose a small design, implement it, check the behavior, review the change, and accept it only when the evidence is good enough.
+This exercises one part of the FSAD approach: making an acceptance check control the next action. It is not an implementation of the full playbook, a substitute for cross-functional agreement, or a production release gate.
 
 ## 1. Start with a bounded exercise
 
@@ -581,6 +621,7 @@ The last step matters most: the agent may author the code, but the workflow shou
 
 **Source facts:**
 
+- The [FSAD playbook, reviewed as v40](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) describes the five-phase delivery loop and the responsibilities of product, design, engineering, and agents. The booking mapping and adoption advice here are course recommendations, not measured outcomes from running FSAD.
 - GitHub Actions documents `jobs.<job_id>.needs` as a dependency: a job waits for its prerequisites, and a failed or skipped prerequisite causes dependent jobs to be skipped unless an explicit condition changes that behavior. See [Using jobs in a workflow](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-jobs).
 - GitHub documents required status checks, required reviews, stale-review dismissal, and bypass permissions as separate protected-branch settings. See [About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) and [Dismissing a pull request review](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/dismissing-a-pull-request-review).
 - The Bash reference describes the exit status of a command and the shell's use of a nonzero status for failure. See [Exit Status](https://www.gnu.org/software/bash/manual/bash.html#Exit-Status).
@@ -597,6 +638,6 @@ Use this as a longer follow-on when you want to explore spec-driven development 
 
 **Watch with one change of your own in mind:** what belongs in its specification, and what evidence would show that the implementation meets it? Borrow the procedure; we will continue using OMP rather than requiring another tool setup.
 
-For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Spec-driven development](07-optional-flavors.md#optional-watch-a-use-case-driven-approach).
+For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Spec-driven development](../spec-driven-development/index.md#optional-watch-a-use-case-driven-approach).
 
-[Previous: Key productivity tips](../working-with-omp/index.md) · [Next: Spec-driven development](07-optional-flavors.md) · [Back to the outline](../../OUTLINE.md)
+[Previous: Key productivity tips](../working-with-omp/index.md) · [Next: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)

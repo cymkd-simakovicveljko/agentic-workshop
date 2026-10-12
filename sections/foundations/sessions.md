@@ -137,7 +137,7 @@ If we are building on OpenAI's Responses API, [**hosted file search**](https://d
 
 </details>
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Tools and permissions](tools-and-permissions.md) · [Next: Artifacts](artifacts.md)
+[Back to foundations](index.md) · [Previous: Tools and permissions](tools-and-permissions.md) · [Next: Artifacts](artifacts.md)
 
 ## Sources
 

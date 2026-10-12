@@ -1,7 +1,5 @@
 # 1. Getting started with OMP: from answers to action
 
-We’ll start with the tool: what it does, why we’re using it, and how to install and connect it. Each lesson will use its own practical examples; there is no single project you need to build throughout the course.
-
 ## The model is only part of the story
 
 To talk to a model, you don’t need a coding agent. You can call an API or run a model locally and send it input.
@@ -233,4 +231,4 @@ Prefer talking to typing? [Voice input](working-with-omp/voice-input.md) shows h
 
 **OMP is installed and connected. Next, let’s understand the pieces behind it.**
 
-[Back to the outline](../OUTLINE.md) · [Next: Agentic engineering foundations](health-checker/02-foundations.md)
+[Back to the outline](../OUTLINE.md) · [Next: Agentic engineering foundations](foundations/index.md)

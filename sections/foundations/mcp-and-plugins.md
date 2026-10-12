@@ -242,4 +242,4 @@ Next, [Key productivity tips](../working-with-omp/index.md) focuses on directing
 
 The public Microsoft Learn endpoint was exercised directly through MCP initialization, tool listing, documentation search, and page fetch. The fetched HTTP trigger documentation contained both the local-development and local-container conditions. This is protocol-level evidence, not a provider-backed OMP session or an Azure deployment test. The locally installed OMP reported version 18.2.9; command guidance follows the linked current OMP documentation.
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Skills](skills.md) · [Next: Key productivity tips](../working-with-omp/index.md)
+[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Key productivity tips](../working-with-omp/index.md)

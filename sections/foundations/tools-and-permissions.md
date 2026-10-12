@@ -32,12 +32,11 @@ An approved shell command retains the shell's ambient filesystem, network, and s
 
 Start with OMP's built-in read, search, edit, and command tools. Add a custom tool, plugin, or MCP server only when a recurring operation needs a real executable interface that the built-ins cannot provide. A skill is passive guidance; it does not grant permissions or execute its own scripts. When you add executable capability, inspect its source, approval tier, network behavior, and write scope before using it.
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Prompting](prompting.md) · [Next: Sessions](sessions.md)
+[Back to foundations](index.md) · [Previous: Prompting](prompting.md) · [Next: Sessions](sessions.md)
 
 ## Sources
 
 - [OMP tool approval modes and safety rules (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/approval-mode.md)
 - [OMP skills, tools, and hooks distinctions (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/skills.md)
-- [Health-checker fixture contract](../../demo/health-checker/README.md)
 
 These links follow OMP's current `main` documentation rather than a pinned release; the installed version controls the available tools and settings.

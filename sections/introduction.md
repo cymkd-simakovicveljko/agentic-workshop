@@ -35,11 +35,17 @@ Think about the work on your plate. These are the kinds of tasks we will learn t
 </section>
 </div>
 
-We will start by creating a small website health checker in a language you already know. Everyone gets the same task and controlled local endpoints. Then we will use your checker for changes, debugging, and review.
+We will start by installing OMP and connecting a model, then use focused examples to practise different kinds of work. There is no shared project to build or carry between lessons.
 
 You will make a change, fix a bug, write a skill, and try working with subagents. Each time, you get less step-by-step help.
 
 No AI experience needed. Bring your knowledge of code, Git, and tests. We will use OMP in the terminal; keep your usual editor.
+
+## How we will work
+
+**We’ll use [Full Stack Agentic Development (FSAD)](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) as a reference for organizing agentic delivery.** Its central practices are shared intent, a living specification, planned delegation, and human review. This workshop makes those practices concrete using OMP: you will direct work, inspect what the agent produces, and decide whether the result meets the agreed goal.
+
+The tools help us carry out the work. Responsibility for architecture, quality, security, and operation remains with us. [Engineering workflows](engineering-workflows/index.md#applying-fsad-across-the-lifecycle) connects FSAD to those lifecycle responsibilities; [Spec-driven development](spec-driven-development/index.md#methodology-and-toolbox-fsad-and-fsd) distinguishes the way of working from the tools that support it.
 
 ## Why this matters in 2026
 
@@ -117,7 +123,7 @@ You can ask it to investigate a bug, implement a feature, or compare two approac
 <p class="judgment-lead">Less typing does not mean less engineering.</p>
 <p>An agent can handle the steps without you writing every line. You still need to understand the important decisions and know how to check the result.</p>
 <p><strong>You are responsible for the code you ship and the systems you build—not the LLM.</strong></p>
-<p>This is the focus of <a href="health-checker/03-everyday-workflow.md">Engineering workflows</a>.</p>
+<p>This is the focus of <a href="engineering-workflows/index.md">Engineering workflows</a>.</p>
 </section>
 
 [Next: Getting started with OMP](01-getting-started-with-omp.md)

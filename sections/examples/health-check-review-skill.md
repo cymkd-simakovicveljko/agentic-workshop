@@ -4,7 +4,7 @@
 
 This is a companion workshop, not a numbered main-route section. Read [Skills](../foundations/skills.md) first for what skills are, when to use them, current OMP loading behavior, and recommendations. This page keeps the bounded create-and-evaluate exercise, including its loader warnings and source evidence.
 
-**For this example:** use a health-checker program implementing the [fixture guide's single-URL and multi-target contracts](../../demo/health-checker/README.md). The [guided checker example](01-getting-started.md) covers the single-URL starting point. Read [Skills](../foundations/skills.md) before creating the review procedure. Start the local fixture from the **course root**, in a separate terminal:
+**For this example:** use a health-checker program implementing the [fixture guide's single-URL and multi-target contracts](../../demo/health-checker/README.md). The [guided checker example](build-health-checker.md) covers the single-URL starting point. Read [Skills](../foundations/skills.md) before creating the review procedure. Start the local fixture from the **course root**, in a separate terminal:
 
 ```sh
 bun demo/health-checker/server.mjs

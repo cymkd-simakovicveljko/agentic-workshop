@@ -416,13 +416,6 @@ function selectOutline(path) {
       item.append(nested);
     } else anchor.removeAttribute("aria-current");
   });
-  document.querySelectorAll(".topnav a").forEach((anchor) => {
-    const selected =
-      anchor.dataset.nav === "project"
-        ? path === "PROJECT.md"
-        : path !== "PROJECT.md";
-    anchor.classList.toggle("active", selected);
-  });
 }
 
 function pagination(index) {

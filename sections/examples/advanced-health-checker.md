@@ -1,4 +1,6 @@
-# 6. Advanced engineering: harness boundaries and existing consumers
+# Optional example: health-checker boundaries and compatibility
+
+This retained example is outside the main course route. It requires a checker implementation; [Advanced engineering](../advanced-engineering/index.md) covers the principles without that prerequisite.
 
 **Choose one route, or take both independently.** Route A inspects the boundary
 around an agent-run health check. Route B changes the checker you already own while
@@ -321,4 +323,4 @@ and [Agent Hub docs](https://raw.githubusercontent.com/can1357/oh-my-pi/8cd6f8c6
 These are source citations, not evidence that this lesson executed OMP or a
 production harness.
 
-[Previous: Spec-driven development](07-optional-flavors.md) · [Back to outline](../../OUTLINE.md)
+[Advanced engineering](../advanced-engineering/index.md) · [Back to outline](../../OUTLINE.md)

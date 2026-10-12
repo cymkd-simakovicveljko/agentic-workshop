@@ -19,7 +19,7 @@ Give the agent one clear next decision, then watch what it actually does. Queue 
 
 Start with [Voice input](voice-input.md), then continue through the keyboard controls. The phone and Agent Hub pages are optional when you need remote access or delegated work.
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) · [Next: Voice input](voice-input.md)
+[Back to foundations](../foundations/index.md) · [Previous: MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) · [Next: Voice input](voice-input.md)
 
 ## Sources
 

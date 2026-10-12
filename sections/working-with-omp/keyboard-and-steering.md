@@ -18,12 +18,12 @@ The exact action names and defaults are in the [keybindings reference](https://g
 
 ## Queue, steer, interrupt
 
-A queued follow-up waits for the current turn; it is not a second agent and it does not rewrite a tool call already in flight. Dequeue it if your understanding changes. A useful queued message narrows the next decision:
+A queued follow-up waits for the current turn; it is not a second agent and it does not rewrite a tool call already in flight. Dequeue it if your understanding changes. When inspecting the course checkout, a useful queued message narrows the next decision:
 
 ```text
-After the current inspection, report the exact checker entry point and run
-command. Do not edit. If the fixture guide and source disagree, quote both
-paths and stop.
+After the current inspection, report the HTML reader's entry point and run
+command. Do not edit or start the server. If README.md and package.json
+disagree, quote both paths and stop.
 ```
 
 Use `Escape` when the turn is heading somewhere wrong. Interrupting stops the current operation; it is not rollback. A command or edit that already ran still needs inspection, and an interrupted turn can leave partial work. Ask the agent to inspect the current files before continuing.

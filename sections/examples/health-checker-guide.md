@@ -2,17 +2,17 @@
 
 The course uses focused examples rather than one mandatory project. This guide
 defines the website health checker used in some of the retained examples.
-Start the course with [Getting started with OMP](sections/01-getting-started-with-omp.md); use this guide only when working through a checker example.
+Start the course with [Getting started with OMP](../01-getting-started-with-omp.md); use this guide only when working through a checker example.
 
 ## Build the health checker
 
 The checker requests a URL, checks its HTTP status and expected body text,
-measures elapsed time, and reports pass or failure. Start with one URL; later
-lessons add a configuration for several targets. Use a language and toolchain
+measures elapsed time, and reports pass or failure. The [build example](build-health-checker.md)
+starts with one URL; other optional checker examples use several targets. Use a language and toolchain
 you already know. There are no supplied implementations or language-specific
 solution branches.
 
-The [health-checker fixture](demo/health-checker/README.md) provides controlled
+The [health-checker fixture](../../demo/health-checker/README.md) provides controlled
 local endpoints for healthy, wrong-body, missing, error, redirect, and slow
 responses. Its first contract expects a `GET`, status `200`, the literal
 `Workshop service ready` body text, and a `1000` ms timeout for the whole

@@ -15,7 +15,7 @@ Start with the introduction, then install and connect OMP in section 1. There is
 ## The six sections
 
 1. **[Getting started with OMP](sections/01-getting-started-with-omp.md)** — Choose a terminal, install OMP, and connect a model.
-2. **[Agentic engineering foundations](sections/health-checker/02-foundations.md)** — Understand the parts behind agentic work.
+2. **[Agentic engineering foundations](sections/foundations/index.md)** — Understand the parts behind agentic work.
    1. **[Models and roles](sections/foundations/models.md)** — Choose models and assign them to jobs in OMP.
    2. **[Context](sections/foundations/context.md)** — What the model sees, what persists, and what to keep.
    3. **[Prompting](sections/foundations/prompting.md)** — Give direction, supply examples, and refine a request.
@@ -29,15 +29,11 @@ Start with the introduction, then install and connect OMP in section 1. There is
    2. **[Keyboard controls and steering](sections/working-with-omp/keyboard-and-steering.md)** — Direct, queue, interrupt, and inspect work.
    3. **[Working from your phone](sections/working-with-omp/phone-access.md)** — Connect to work running on your computer.
    4. **[Managing several agents](sections/working-with-omp/managing-agents.md)** — Organize sessions, attention, and independent tasks.
-4. **[Engineering workflows](sections/health-checker/03-everyday-workflow.md)** — Follow a feature through the lifecycle, then practice workflow control, dependencies, bounded loops, and enforced gates.
-5. **[Spec-driven development](sections/health-checker/07-optional-flavors.md)** — Keep useful change notes, then see what FSAD, OpenSpec, Kiro, Spec Kit, and BMAD add.
-6. **[Advanced harness design and enterprise-scale work](sections/health-checker/08-advanced-engineering.md)** — Examine harness boundaries and changes to existing systems.
+4. **[Engineering workflows](sections/engineering-workflows/index.md)** — Connect lifecycle responsibilities to FSAD, then practise workflow control, dependencies, bounded loops, and enforced gates.
+5. **[Spec-driven development](sections/spec-driven-development/index.md)** — Apply FSAD’s shared-spec practices, distinguish FSD tooling, and compare support for specifications, plans, and tasks.
+6. **[Advanced harness design and enterprise-scale work](sections/advanced-engineering/index.md)** — Examine harness boundaries and changes to existing systems.
 
 </div>
-
-**Example library:** [Build a health checker](sections/health-checker/01-getting-started.md) is available for lessons that use it; it is not a section 1 prerequisite.
-
-**Skill-building workshop:** [Create and evaluate a health-check review skill](sections/health-checker/05-skills.md). The [Skills foundation](sections/foundations/skills.md) introduces the mechanism; the workshop applies it to your checker.
 
 ## Alternative for review
 
@@ -45,9 +41,7 @@ Start with the introduction, then install and connect OMP in section 1. There is
 
 ## Practical examples
 
-Each lesson uses a focused example to make its idea concrete. Install additional tools only when the example needs them.
-
-The retained [health-checker guide](demo/health-checker/README.md) supplies predictable local endpoints for examples involving HTTP behavior. Some existing examples build on that checker; their prerequisites are specific to those examples, not to the course as a whole.
+Each lesson uses a focused example to make its idea concrete. There is no shared course project. Install additional tools only when that lesson’s example needs them.
 
 Use only the local fixtures, public documentation services, or systems you own or are authorized to check. The MCP lesson connects to Microsoft Learn's public, no-authentication documentation server. No additional service credentials, production changes, retries, or scheduled monitoring are needed for the guided route.
 
@@ -67,4 +61,14 @@ Use the amount of planning the change needs. A small, clear request does not nee
 
 The lessons and local fixture are course material, not a hosted monitoring service. Prepared traces and expected results are labelled. They are not recordings of a provider-backed run. Model access, fresh OS installation, learner-generated implementations, and classroom pacing still need rehearsal with the intended audience.
 
-The [project guide](PROJECT.md) explains starting states.
+<details>
+<summary>Retained standalone examples</summary>
+
+These older exercises are separate from the main course route. Their implementation and fixture prerequisites apply only if you choose one:
+
+- [Build a health checker](sections/examples/build-health-checker.md)
+- [Create and evaluate a health-check review skill](sections/examples/health-check-review-skill.md)
+- [Inspect checker boundaries and compatibility](sections/examples/advanced-health-checker.md)
+- [Checker example guide](sections/examples/health-checker-guide.md) and [local fixture](demo/health-checker/README.md)
+
+</details>

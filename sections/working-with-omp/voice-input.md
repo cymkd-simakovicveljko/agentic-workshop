@@ -19,27 +19,27 @@ With speech-to-text enabled, **hold Space to record and release it to transcribe
 ## Dictate, inspect, structure, submit
 
 1. **Dictate the raw request.** Say the goal and important boundaries without trying to sound like a prompt engineer.
-2. **Inspect the transcription.** Check paths, filenames, numbers and units, URLs, punctuation, and especially negation. “Do not follow redirects” becoming “follow redirects” changes the program.
+2. **Inspect the transcription.** Check paths, filenames, numbers and units, URLs, punctuation, and especially negation. “Do not install packages” becoming “install packages” changes what you authorized.
 3. **Tidy only what needs it.** Remove transcription mistakes and resolve ambiguous words. For a longer request, separate the goal, useful context, and boundaries; a short clear sentence can stay a sentence.
 4. **Submit only the corrected request.** Read the response and inspect the resulting files and evidence as usual.
 
 ## One safe example
 
-A useful dictated draft might be:
+Use the course checkout for this read-only example. A useful dictated draft might be:
 
 ```text
-Read the fixture guide and the current checker. Do not edit yet. Keep the one
-second request plus body timeout and do not follow redirects. Tell me the real
-entry point, run command, and what the redirect case still needs to prove.
+Read README.md and package.json. Do not edit files or install packages.
+Find the command that starts the HTML reader and tell me whether the docs
+and package scripts agree. Quote the source paths.
 ```
 
-Before submitting, verify that the transcript contains exactly `fixture guide`, the actual checker path, `1000 ms` or “one second,” **do not** before “follow redirects,” and the intended `/redirect` case. Then structure it:
+Before submitting, verify the filenames `README.md` and `package.json`, and **do not** before “edit files or install packages.” Then structure it:
 
 ```text
-Goal: inspect the current checker before changing it.
-Context: the actual checker entry point, its run command, and the fixture guide.
-Constraints: no edits; keep the 1000 ms whole-operation timeout; do not follow redirects.
-Done when: report the observed entry point, command, and redirect evidence gap.
+Goal: identify the HTML reader's start command.
+Context: README.md and package.json in the course checkout.
+Constraints: read only; no edits, package installation, or server startup.
+Done when: report the documented command, the script it invokes, and any disagreement.
 ```
 
 If the transcript changed a path or dropped “not,” stop and correct it before OMP sees it. The harness can execute an incorrectly transcribed instruction just as readily as a correctly typed one.
@@ -52,4 +52,3 @@ If the transcript changed a path or dropped “not,” stop and correct it befor
 - [OMP speech settings](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/stt/settings.ts) — `stt.enabled` and submit behavior.
 - [OMP speech model registry](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/stt/models.ts) — local model choices and sizes.
 - [OMP live transport](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/live/transport.ts) — `openai-codex` authentication and realtime connection.
-- [Health-checker fixture contract](../../demo/health-checker/README.md)

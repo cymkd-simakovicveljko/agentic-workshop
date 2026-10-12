@@ -34,7 +34,7 @@ const assets = new Map([
   ],
 ]);
 const contentRoots = new Set(["sections", "demo", "research"]);
-const rootDocuments = new Set(["README.md", "OUTLINE.md", "PROJECT.md"]);
+const rootDocuments = new Set(["README.md", "OUTLINE.md"]);
 const sourceExtensions = new Set([
   ".md",
   ".mjs",

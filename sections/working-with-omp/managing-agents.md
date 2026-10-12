@@ -4,7 +4,7 @@
 
 ## Give each session a home
 
-For independent sessions, use separate terminal tabs labelled with the repository and task: `checker · implement`, `checker · review`, or `docs · outline`. Keep a note of which session is working, waiting for your input, or ready for review. A quiet terminal does not prove the task is finished.
+For independent sessions, use separate terminal tabs labelled with the repository and task: `reader · inspect`, `docs · review`, or `docs · outline`. Keep a note of which session is working, waiting for your input, or ready for review. A quiet terminal does not prove the task is finished.
 
 Keep edits to the same files in one session. If two sessions must implement independently in the same repository, use separate Git worktrees and review their changes before integration. Tabs organize your attention; they do not isolate files.
 
@@ -12,11 +12,12 @@ Subagents are different: the main session delegates a bounded job and collects i
 
 ## Start with one worker
 
-Use a small read-only request before delegating edits:
+Use a small read-only request before delegating edits. For example, in the course checkout:
 
 ```text
-Inspect the current checker and its fixture guide. Do not edit. Return the
-entry point, real run command, one behavior risk, and the smallest next check.
+Inspect README.md, package.json, and the reader startup code. Do not edit or
+start a process. Return the entry point, run command, and any startup
+prerequisite that the documentation leaves unclear. Cite source paths.
 ```
 
 If the work is independent, ask OMP to dispatch one task agent. Do not start ten workers to make a small change: parallel workers add context, review, and merge work. Use another worker only when the slices do not touch the same files or depend on each other's decisions.
@@ -34,17 +35,17 @@ The inspector shows the current tool, activity, context use when available, outp
 
 ## Keep sessions and directories straight
 
-Start the main session in the repository it should work on, or say it explicitly:
+Start the main session in the repository it should work on, or say it explicitly. Replace this example path with your course checkout:
 
 ```sh
-omp --cwd ~/code/omp-health-checker
+omp --cwd ~/code/agentic-workshop
 ```
 
 Use `--add-dir` only when the task needs another workspace directory. `/resume` and `/fork` change session history and identity; they do not turn an independent session into a subagent. Agent Hub is for workers attached to the current session. `/jobs` is a status snapshot, not a transcript or a control surface.
 
 The useful habit is simple: one main session, one bounded worker when it buys independent progress, and one human review of every result before integration.
 
-[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Next: Engineering workflows](../health-checker/03-everyday-workflow.md)
+[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Next: Engineering workflows](../engineering-workflows/index.md)
 
 ## Sources
 

@@ -224,4 +224,4 @@ Use this prompt, replacing the function name and file path:
 
 **Make a choice:** would you trust the cheaper model with this kind of explanation again? Write down your choice and one reason based on the results. One task is a starting point, not proof that either model wins at everything.
 
-[Back to foundations](../health-checker/02-foundations.md) · [Previous: Foundations overview](../health-checker/02-foundations.md) · [Next: Context](context.md)
+[Back to foundations](index.md) · [Previous: Foundations overview](index.md) · [Next: Context](context.md)

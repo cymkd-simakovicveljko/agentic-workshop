@@ -1,9 +1,17 @@
-import { marked } from "/vendor/marked.js";
-import DOMPurify from "/vendor/purify.js";
+import { marked } from "./vendor/marked.js";
+import DOMPurify from "./vendor/purify.js";
 
 const $ = (selector) => document.querySelector(selector);
 const article = $("#article");
 const defaultDocument = "sections/introduction.md";
+const siteBase = new URL("./", import.meta.url);
+const contentBase = new URL("content/", siteBase);
+const contentUrl = (path) =>
+  new URL(path.split("/").map(encodeURIComponent).join("/"), contentBase);
+const documentUrl = (href, path) =>
+  href.startsWith("/") && !href.startsWith("//")
+    ? new URL(`.${href}`, siteBase)
+    : new URL(href, contentUrl(path));
 let course = { introduction: null, sections: [], lessons: [] };
 let lessons = [];
 let currentDocument = "";
@@ -21,13 +29,10 @@ const markdown = (source) =>
     FORBID_ATTR: ["style", "id", "name"],
   });
 const readerUrl = (path, hash = "") =>
-  `/?doc=${encodeURIComponent(path)}${hash}`;
+  `${siteBase.pathname}?doc=${encodeURIComponent(path)}${hash}`;
 
 async function getDocument(path, signal) {
-  const response = await fetch(
-    `/content/${path.split("/").map(encodeURIComponent).join("/")}`,
-    { signal },
-  );
+  const response = await fetch(contentUrl(path), { signal });
   if (!response.ok)
     throw new Error(
       response.status === 404
@@ -274,7 +279,7 @@ function decorateDocument(path) {
   article.querySelectorAll("a[href]").forEach((anchor) => {
     const href = anchor.getAttribute("href");
     if (href.startsWith("#")) return;
-    const resolved = new URL(href, `${location.origin}/content/${path}`);
+    const resolved = documentUrl(href, path);
     if (!["http:", "https:", "mailto:"].includes(resolved.protocol)) {
       anchor.removeAttribute("href");
       return;
@@ -311,9 +316,10 @@ function decorateDocument(path) {
       }
       return;
     }
-    if (resolved.pathname.startsWith("/content/")) {
+    anchor.href = resolved.href;
+    if (resolved.pathname.startsWith(contentBase.pathname)) {
       let relative = decodeURIComponent(
-        resolved.pathname.slice("/content/".length),
+        resolved.pathname.slice(contentBase.pathname.length),
       );
       if (relative.endsWith("/")) relative += "README.md";
       if (relative.endsWith(".md"))
@@ -321,10 +327,7 @@ function decorateDocument(path) {
     }
   });
   article.querySelectorAll("img[src]").forEach((image) => {
-    image.src = new URL(
-      image.getAttribute("src"),
-      `${location.origin}/content/${path}`,
-    ).href;
+    image.src = documentUrl(image.getAttribute("src"), path).href;
     image.loading = "lazy";
   });
   article.querySelectorAll("table").forEach((table) => {
@@ -432,8 +435,7 @@ async function loadDocument({ focus = false, view } = {}) {
   const path =
     new URL(location.href).searchParams.get("doc") || defaultDocument;
   currentDocument = path;
-  $("#source-link").href =
-    `/content/${path.split("/").map(encodeURIComponent).join("/")}`;
+  $("#source-link").href = contentUrl(path);
   article.setAttribute("aria-busy", "true");
   $("#title").textContent = "Loading your lesson…";
   article.replaceChildren();
@@ -609,7 +611,8 @@ document.addEventListener("click", (event) => {
   const url = new URL(anchor.href);
   if (
     url.origin !== location.origin ||
-    url.pathname !== "/" ||
+    (url.pathname !== siteBase.pathname &&
+      url.pathname !== `${siteBase.pathname}index.html`) ||
     (!url.searchParams.has("doc") && !anchor.getAttribute("href").startsWith("#"))
   )
     return;

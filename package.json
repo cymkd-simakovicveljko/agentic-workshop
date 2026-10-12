@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node reader/server.mjs"
+    "start": "node reader/server.mjs",
+    "build": "node reader/build.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "5.3.0",

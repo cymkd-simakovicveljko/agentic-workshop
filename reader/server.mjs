@@ -2,37 +2,9 @@ import { createServer } from "node:http";
 import { readFile, realpath } from "node:fs/promises";
 import { dirname, extname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { assets, contentRoots, rootDocuments, documentPolicy } from "./site.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const assets = new Map([
-  ["/", ["reader/index.html", "text/html"]],
-  ["/reader.css", ["reader/reader.css", "text/css"]],
-  ["/reader.js", ["reader/reader.js", "text/javascript"]],
-  ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
-  ["/diagrams/llm-context.png", ["reader/diagrams/llm-context.png", "image/png"]],
-  ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],
-  ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
-  ["/diagrams/prompting-strategies.webp", ["reader/diagrams/prompting-strategies.webp", "image/webp"]],
-  ["/diagrams/sdd-approaches.svg", ["reader/diagrams/sdd-approaches.svg", "image/svg+xml"]],
-  ["/diagrams/software-development-lifecycle.webp", ["reader/diagrams/software-development-lifecycle.webp", "image/webp"]],
-  [
-    "/fonts/inter.woff2",
-    [
-      "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
-      "font/woff2",
-    ],
-  ],
-  [
-    "/vendor/marked.js",
-    ["node_modules/marked/lib/marked.esm.js", "text/javascript"],
-  ],
-  [
-    "/vendor/purify.js",
-    ["node_modules/dompurify/dist/purify.es.mjs", "text/javascript"],
-  ],
-]);
-const contentRoots = new Set(["sections", "research"]);
-const rootDocuments = new Set(["README.md", "OUTLINE.md"]);
 
 const server = createServer(async (request, response) => {
   const send = (status, body, type = "text/plain") => {
@@ -43,7 +15,7 @@ const server = createServer(async (request, response) => {
       "Content-Security-Policy":
         type === "image/svg+xml"
           ? "default-src 'none'; style-src 'unsafe-inline'; font-src data:; sandbox"
-          : "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+          : `${documentPolicy}; frame-ancestors 'none'`,
     });
     response.end(request.method === "HEAD" ? undefined : body);
   };

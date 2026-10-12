@@ -1,4 +1,4 @@
-// Run in the browser console on the local reader. No test dependencies needed.
+// Run in the browser console on the local or published reader. No test dependencies needed.
 (async () => {
   const waitFor = async (condition) => {
     const deadline = performance.now() + 5000;
@@ -69,7 +69,8 @@
   await visit(context);
   const fetchDocument = window.fetch;
   try {
-    window.fetch = (url, options) => String(url) === `/content/${sdd}`
+    window.fetch = (url, options) => new URL(url, location.href).href ===
+      new URL(`content/${sdd}`, new URL("./", location.href)).href
       ? Promise.resolve(new Response("Temporary failure", { status: 503 }))
       : fetchDocument(url, options);
     await visit(sdd);

@@ -17,7 +17,26 @@ npm start
 
 Open **http://127.0.0.1:4173**. Stop the reader with **Ctrl+C**. If the port is occupied, use `PORT=4174 npm start`.
 
-The reader serves the Markdown in this checkout on loopback; there is no build step, account, or database. You do not need OMP or model access just to read the lessons. For the live exercises, [section 1](sections/01-getting-started-with-omp.md) walks through installing OMP and connecting a provider and model. Install other tools only when a lesson needs them.
+The local reader serves the Markdown in this checkout on loopback without a build step, account, or database. You do not need OMP or model access just to read the lessons. For the live exercises, [section 1](sections/01-getting-started-with-omp.md) walks through installing OMP and connecting a provider and model. Install other tools only when a lesson needs them.
+
+## Publish on GitHub Pages
+
+**Check visibility before publishing.** A private repository does not automatically give you a private Pages site. [Private Pages hosting requires GitHub Enterprise Cloud](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site). The deployment includes the course and supporting research notes; only publish publicly if that material can be public.
+
+1. In the repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
+2. Push the publishing changes to `main`, or run **Publish course reader** from the Actions tab after the workflow is on `main`.
+3. Open the URL reported by the deployment. The reader works at either a domain root or a repository path such as `/agentic-workshop/`; no base-path setting is needed.
+
+To generate the same static files locally:
+
+```sh
+npm ci
+npm run build
+```
+
+The build replaces `dist/` with the reader, allowlisted assets, `README.md`, `OUTLINE.md`, and non-hidden Markdown files under `sections/` and `research/`. It skips symlinked content and does not publish the checkout, server code, or all of `node_modules`. The workflow checks the serving and publishing boundaries before uploading only `dist/`.
+
+Pages does not run our Node server or preserve its custom response headers. The static reader includes a content-security policy in its HTML, but that cannot enforce the local server's `frame-ancestors` restriction or its separate SVG sandbox header. Exercise commands still run on the learner's machine.
 
 ## Workshop route
 
@@ -45,19 +64,19 @@ Keep credentials out of prompts and repository files. The setup lesson starts in
 - `OUTLINE.md` defines the route and drives the reader's sidebar.
 - `sections/` contains the published lessons and their source links.
 - `research/` contains supporting notes linked from the lessons.
-- `reader/` contains the local server, browser reader, styles, and diagrams.
+- `reader/` contains the local server, static build, shared publishing allowlist, browser reader, styles, and diagrams.
 
 Edit the Markdown directly, refresh the reader, and check the changed lesson—including links and expandable sections. Read the neighboring lessons so prerequisites and next steps still line up.
 
-Run the reader's file-serving and security checks with:
+Run the reader's file-serving and static-publishing security checks with:
 
 ```sh
-node --test reader/server.test.mjs
+node --test reader/server.test.mjs reader/build.test.mjs
 ```
 
-For browser regressions, open the reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 850px or less. It navigates between lessons and checks Back/Forward positions, disclosure progress, heading navigation, keyboard focus, and recovery from a simulated failed document load. A failure throws an error; success logs `Reader checks passed`.
+For browser regressions, open the local or published reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 850px or less. It navigates between lessons and checks Back/Forward positions, disclosure progress, heading navigation, keyboard focus, and recovery from a simulated failed document load. A failure throws an error; success logs `Reader checks passed`.
 
-These checks cover the local reader, not provider access, fresh-machine installation, or the results of a learner's agent session. Prepared traces in the lessons are labelled examples, not recordings of live runs.
+These checks cover the reader and publication boundary, not GitHub account settings, provider access, fresh-machine installation, or the results of a learner's agent session. Prepared traces in the lessons are labelled examples, not recordings of live runs.
 
 <details>
 <summary>Maintaining diagrams and video embeds</summary>

@@ -1,20 +1,20 @@
 # 2.8 MCP, plugins, and extensions
 
-This lesson connects OMP to a public documentation service, tests a concrete question, and checks whether the integration earns its place.
+**MCP lets OMP connect to tools and data provided by another program.** For example, a documentation service can give OMP tools to search its pages and read the results.
 
-No cloud account, access token, or deployment is needed for this exercise. You need OMP with a connected model and network access to Microsoft Learn.
+We will connect Microsoft Learn, ask one question, and check the answer. You need OMP with a connected model and internet access. No Azure account, access token, or deployment is needed.
 
 ## First, get an answer you can check
 
-You are reviewing an HTTP endpoint. It works locally without an access key, but someone says the deployed version requires one. Is that a contradiction?
+An HTTP endpoint works on your laptop without an access key. Once deployed to Azure, it requires one. Why?
 
-We will use Azure Functions documentation to investigate. You do not need to build or run an Azure Function. The deliverable is a short, sourced explanation that distinguishes local behavior from deployed behavior.
+We will use the Azure Functions documentation to find out. You do not need to build anything. The result should be a short explanation with a source you can open.
 
-**Predict before you search:** does a successful local request prove that the deployed endpoint allows anonymous access?
+**Make a prediction:** does “it worked locally without a key” prove that anyone can call the deployed endpoint?
 
-### 1. Connect one documentation server
+### 1. Connect Microsoft Learn
 
-Use a scratch project directory, not a repository whose integrations you have not inspected. Create `.omp/mcp.json` in your editor with this configuration:
+Use a scratch project directory. Create `.omp/mcp.json` in your editor:
 
 ```json
 {
@@ -27,217 +27,218 @@ Use a scratch project directory, not a repository whose integrations you have no
 }
 ```
 
-If that file already exists, add the `learn` entry inside its existing `mcpServers` object rather than replacing the file.
+If the file already exists, add only the `learn` entry inside `mcpServers`. Do not replace your other settings. Review any existing server entries before starting OMP; some can launch programs on your machine.
 
-This is Microsoft's [Microsoft Learn MCP server](https://github.com/MicrosoftDocs/mcp). It provides documentation search and retrieval. The endpoint requires no authentication; your queries still leave your machine. Use the public question below, not private code or customer details.
+This connects to the [Microsoft Learn MCP server](https://github.com/MicrosoftDocs/mcp). It needs no login, but your search queries go to Microsoft. Use the public question below—not private code or customer details.
 
-Start OMP in that directory:
+Start OMP from that directory:
 
 ```sh
 omp
 ```
 
-Then enter these commands **inside OMP**, not in your shell:
+Then run these commands **inside OMP**, not in your terminal shell:
 
 ```text
 /mcp list
 /mcp test learn
 ```
 
-Look for the `learn` server and the configuration source you intended. Inspect the test result rather than treating the presence of a configuration entry as a successful connection.
+Check that `learn` appears, that it comes from the file you edited, and that the connection test succeeds. A saved configuration is not proof of a working connection.
 
-**Already running OMP?** After editing the configuration, use `/mcp reload`. `/mcp add` is the guided alternative to editing JSON. The exact commands here follow OMP's current documentation; check `/mcp` in your installed build if its interface differs.
+**Already running OMP?** Run `/mcp reload` after editing the file. You can also use `/mcp add` for guided setup instead of editing JSON. If your build offers different commands, check `/mcp` and the [OMP configuration guide](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md).
 
-### 2. Ask for a sourced explanation
+### 2. Ask the question
 
 ```text
-Use the Microsoft Learn MCP server to check Azure Functions HTTP trigger
-access-key authorization.
+Use the Microsoft Learn MCP server to answer this:
 
-Explain anonymous, function, and admin authorization levels. Does a successful
-request without a key during local development prove the deployed endpoint
-allows anonymous access? Check whether local containers or Core Tools'
---enableAuth option change the answer.
+Why can an Azure Functions HTTP endpoint work without an access key locally,
+but require one after deployment?
 
-Search the documentation, then fetch the relevant page. Give me a short answer
-with source links and the conditions that change the result. Do not create,
-deploy, or modify anything. If the MCP server is unavailable, say so rather
-than silently answering from memory or another tool.
+Search the docs, then fetch the relevant page. Check the exceptions for
+local containers and Core Tools' --enableAuth option.
+
+Give me a short answer with source links. Do not create or change anything.
+If this MCP server is unavailable, say so. Do not silently use another tool
+or answer from memory.
 ```
 
-Watch the actual tool calls. The server advertises tools including `microsoft_docs_search` and `microsoft_docs_fetch`; OMP may display them with a server prefix.
+Watch for calls to `microsoft_docs_search` and `microsoft_docs_fetch`. OMP may add a server prefix to their names.
 
-**A correct answer is not enough to prove MCP worked.** Check that the agent used this server, then open the cited page yourself. If it used ordinary web access instead, you may still have a useful answer, but you have not exercised this integration.
+**Check the tool call, not just the answer.** If the agent uses ordinary web access, it might still answer correctly—but it has not tested this MCP connection.
 
-### 3. Check the important exception
+### 3. Open the source
 
-The answer should distinguish the deployed authorization setting from local development behavior. Search excerpts may omit a condition, so inspect the full [HTTP trigger documentation](https://learn.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger#authorization-level).
+Open the cited [HTTP trigger documentation](https://learn.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger#authorization-level). Does it support the answer, including the local-development exceptions?
 
 <div class="setup-platforms">
 <details>
-<summary><strong>Compare your answer with the documentation</strong><span>Open after making your own prediction.</span></summary>
+<summary><strong>Compare your answer</strong><span>Open after checking the source yourself.</span></summary>
 
-The documentation describes `anonymous` as requiring no access key, `function` as requiring a function key, and `admin` as requiring the master key. The page also explains which function or host keys requests can use.
+**No: a successful local request does not prove the deployed endpoint allows access without a key.**
 
-**The local exception matters.** Local development bypasses HTTP authorization by default. After publishing to Azure, the trigger's authorization setting is enforced. The HTTP trigger documentation separately notes that keys are still required when running locally in a container.
+Normal local development skips the key check by default. Once published to Azure, the function's authorization setting applies:
 
-The [local-development guide](https://learn.microsoft.com/azure/azure-functions/functions-run-local) adds another condition: Core Tools' `--enableAuth` option enables local authorization checks. “Locally” alone is not enough to describe the environment.
+- `anonymous`: no access key required.
+- `function`: a function key is required; the docs also describe using host keys.
+- `admin`: the master key is required.
 
-A local success therefore does not establish deployed anonymous access. Keep these conditions in the explanation rather than compressing them into “local functions do not need keys.” This is documentation evidence, not a test of your own deployment.
+Two local exceptions matter: the HTTP trigger docs say keys are still required in local containers, and the [local-development guide](https://learn.microsoft.com/azure/azure-functions/functions-run-local) documents `--enableAuth` to turn on local authorization checks.
+
+So “local functions never need keys” is too broad. These docs explain the behavior; they do not test your own deployment.
 
 </details>
 </div>
 
-**If the result is vague:** ask, “Fetch the page behind that claim. Show the local-development exception and the container exception separately.” More tools are not the first fix for an incomplete reading.
+**If the answer is vague:** ask, “Fetch the full page. Show the local-development rule and its exceptions.” Search snippets can leave out the part that changes the answer.
 
 ## What just happened
 
-MCP, the **Model Context Protocol**, gives an agent application a standard way to connect to servers that expose capabilities. OMP is the host application; its MCP client connects to the server. The model requests a tool call, and OMP handles execution and returns the result.
+The model asked for a documentation search. OMP sent the request to Microsoft's server, received the result, and passed it back to the model to help answer you.
 
 <div class="course-flow" aria-label="Documentation lookup through MCP">
-<span>OMP requests a tool</span><span aria-hidden="true">→</span><span>Server searches docs</span><span aria-hidden="true">→</span><span>Result returns to OMP</span><span aria-hidden="true">→</span><span>You check the source</span>
+<span>Model requests a search</span><span aria-hidden="true">→</span><span>OMP calls the server</span><span aria-hidden="true">→</span><span>Server returns docs</span><span aria-hidden="true">→</span><span>Model uses the result</span>
 </div>
 
-**MCP is a connection protocol, not another model.** It does not make retrieved content correct, grant safe permissions, or guarantee that the agent uses the right tool.
+Three terms describe the connection:
 
-Servers can expose more than tools:
+- **MCP** means **Model Context Protocol**. It defines how an agent app and a server exchange requests and results.
+- **An MCP server** is a program that offers tools or data. Microsoft's server offers documentation search and page retrieval.
+- **A tool** is one action the server offers, such as “search these docs.” Connecting a server makes its tools available; the agent still has to call them.
 
-- **Tools** perform operations, such as searching documentation or creating an issue.
-- **Resources** expose content an application can read, such as a document or data record.
-- **Prompts** provide reusable prompt templates offered by the server.
+**MCP is not another model.** The model can still misread a result, so check the source yourself.
 
-What a server offers and what a particular client exposes are separate questions. Our exercise uses tools; it does not require resource or prompt support.
+<details>
+<summary>Terms you may see in MCP documentation</summary>
 
-### Local process or remote service?
+**Host** means the agent app—OMP in this lesson. The **client** is the part of OMP that talks to an MCP server. You do not need to run a separate client for this exercise.
 
-**A stdio server runs as a local process.** OMP starts the configured executable and exchanges protocol messages over its standard input and output. A configuration containing `npx`, `uvx`, or `docker` is an instruction to run software, not just a bookmark.
+A server can offer three kinds of things:
 
-**An HTTP server runs behind a URL.** OMP connects over the network, as it did with Microsoft Learn. Prefer the publisher's current Streamable HTTP setup for new remote connections; SSE-only configurations also exist, particularly in older integrations.
+- **Tools:** actions to call, such as searching docs or creating an issue.
+- **Resources:** content to read, such as a document or a database description.
+- **Prompts:** reusable prompt templates supplied by the server.
 
-Local does not mean offline or isolated. A local process may read files and contact external services. A remote read-only tool still receives the arguments you send it.
+Both the server and the client need to support the feature you want. This exercise uses tools only.
 
-## Choose the smallest mechanism that works
+</details>
 
-| Need | Start with | Why |
-| --- | --- | --- |
-| Read a known documentation URL | OMP's existing web-reading capability | No new server is needed for a page you can already retrieve. |
-| Search a service's domain-specific data or act through its API | An MCP server, or an existing suitable CLI | Choose based on the actual operation, authentication, and controls. MCP is not automatically better than a CLI. |
-| Repeat a review or writing procedure | A skill | Instructions guide work; they do not supply missing API access. |
-| Add in-process tools, events, commands, or UI behavior to OMP | An extension | The change belongs inside the host runtime. |
-| Distribute related capabilities together | A plugin | Packaging and enablement are the need, not a new protocol. |
+## Where does the server run?
 
-Our documentation question can also be answered from the linked page without MCP. That is intentional: compare the integration against a real alternative rather than assuming setup effort proves value.
+- **On your machine (`stdio`):** OMP starts a program and sends messages through its standard input and output. If the configuration says `npx`, `uvx`, or `docker`, it runs software—not just opens a link.
+- **Behind a URL (`http`):** OMP sends requests over the network. Microsoft Learn works this way.
 
-### How plugins and extensions fit
+A local server can still read files or contact the internet. A remote server receives the arguments you send it, even when the tool only reads data.
 
-**A plugin packages capabilities. An extension executes inside OMP.** A plugin can bundle an extension alongside skills, commands, hooks, agents, or MCP configuration. It does not have to contain all of them.
+For a remote connection, use the publisher's current **Streamable HTTP** setup. You may see **SSE** in older configurations; follow the publisher's instructions rather than copying an old example.
 
-Imagine an issue-review package: a skill supplies the review procedure, an MCP server reads the issue tracker, and a plugin distributes them together. An extension is only needed if you also want custom host behavior, such as a command or event handler.
+## MCP, skill, extension, or plugin?
 
-You can configure an MCP server without installing a plugin. You can use a skill without either one. Keep these decisions separate.
+These solve different problems:
 
-**Inspect executable additions as software.** OMP extensions and plugin code are not sandboxed merely because they are installed through a package manager. A separate OMP profile separates selected state and credentials; it is not filesystem or network isolation.
+- **MCP server:** gives OMP access to another program's tools or data. For example, read an issue from GitHub.
+- **Skill:** tells the agent how to do a task. For example, follow a checklist when reviewing that issue.
+- **Extension:** runs code inside OMP. For example, add a custom command to start a review.
+- **Plugin:** packages additions so you can install them together. For example, bundle the review skill and MCP configuration.
 
-## Other integrations worth inspecting
+A plugin can include an extension, but it does not have to. You can also use an MCP server or a skill without installing a plugin.
 
-Choose one integration for a task. Each example is source-backed; none is a ranking or recommendation to install the whole list.
+**Start with what OMP already has.** For a known web page, use its existing reader. For a service you already use through a suitable CLI, try that before adding MCP. Add a server when it gives you access you need or makes the task easier—not because a connection is available.
+
+Our documentation question also works without MCP. That is useful: you can compare the two approaches with the same question.
+
+**Treat installed code as code.** Extensions run inside OMP, and plugins may contain executable code. Neither is automatically sandboxed. A separate OMP profile separates settings and credentials, not filesystem or network access.
+
+## Other integrations to try later
+
+Pick one only when you have a task for it. You do not need these for this lesson.
 
 <div class="setup-platforms">
 <details>
-<summary><strong>Library documentation: Context7</strong><span>Use when the installed version matters more than a plausible code example.</span></summary>
+<summary><strong>Context7: library documentation</strong><span>When you need guidance for the version your project uses.</span></summary>
 
-[Context7](https://github.com/upstash/context7) provides library documentation and examples. Its hosted MCP endpoint currently accepts anonymous use; the publisher recommends an API key for higher limits. Check the current setup before connecting, and do not include proprietary code or secrets in documentation queries.
+[Context7](https://github.com/upstash/context7) supplies library documentation and examples. Ask the agent to identify your installed version before looking up an API. Check that the result covers that version; “latest” is not always what your project needs.
 
-**Try:** ask a question about a library and version actually used by your project. Have the agent identify the package version before retrieving guidance.
-
-**Notice:** a working documentation tool does not guarantee the returned example matches your installed version. Check the library identity, version coverage, and original documentation. If the version is unavailable, keep that limitation explicit rather than substituting the latest API silently.
+The hosted service currently allows anonymous use and recommends an API key for higher limits. Check its setup guide before connecting. Keep secrets and proprietary code out of queries.
 
 </details>
 <details>
-<summary><strong>Repository work: GitHub MCP server</strong><span>Use when issues, pull requests, or repository data are the missing input.</span></summary>
+<summary><strong>GitHub MCP: issues and pull requests</strong><span>When the missing information lives in GitHub.</span></summary>
 
-The [GitHub MCP server](https://github.com/github/github-mcp-server) exposes GitHub operations. It needs authentication, and the available tools and credential permissions determine what the agent can do.
+The [GitHub MCP server](https://github.com/github/github-mcp-server) needs authentication. Start with read-only access and ask for a summary of one issue, linked to its source. Compare it with your existing GitHub CLI workflow.
 
-**Try:** begin with read-only access to one repository and ask for a summary of one issue's acceptance criteria, linked to its source. Compare this with your existing GitHub CLI workflow before adding another integration.
-
-**Notice:** reading an issue and posting a comment are different permissions and consequences. Inspect the server's read-only configuration and selected toolsets. Do not give broad write access for a reading task, or paste a token into the prompt or a committed configuration file.
+Reading an issue and posting a comment need different access. Check the enabled tools and credential permissions. Do not give write access for a reading task or put tokens in a prompt or committed configuration.
 
 </details>
 <details>
-<summary><strong>Browser interaction: Playwright MCP</strong><span>Use when a task needs a real page interaction and your current browser tools do not cover it.</span></summary>
+<summary><strong>Playwright MCP: browser interaction</strong><span>Only when OMP's built-in browser does not cover your task.</span></summary>
 
-Microsoft's [Playwright MCP](https://github.com/microsoft/playwright-mcp) lets agents interact with browsers, including through accessibility snapshots. OMP already has browser tooling, so first identify what this additional server would provide.
+[Playwright MCP](https://github.com/microsoft/playwright-mcp) lets an agent interact with a browser. OMP already has browser tools; try those first.
 
-**OMP-specific catch:** current OMP filters recognized Playwright/browser MCP configurations when its built-in browser and Eval are enabled under the default tool configuration. If you deliberately choose Playwright MCP instead, follow the [OMP configuration guide](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md), which documents `browser.enabled: false`. Do not disable the existing browser merely to collect another integration.
+OMP normally filters out recognized browser MCP servers while its built-in browser and Eval are active. If you deliberately choose Playwright MCP instead, follow the [OMP configuration guide](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md), including its `browser.enabled: false` setting.
 
-**Try:** on a local app, ask the agent to complete one user action and show its visible result. Use a disposable browser context without personal logins.
-
-**Notice:** an accessibility snapshot helps locate controls but is not a visual layout check. Inspect the rendered page too. Browser isolation is not automatically a security sandbox, and a logged-in browser can perform actions as that account.
+Try one action in a local app using a browser without personal logins. Inspect the rendered page as well as the tool's text description. A browser logged into an account can act as that account; a separate browser context is not a security sandbox.
 
 </details>
 <details>
-<summary><strong>Discovery and debugging: registry and Inspector</strong><span>Use when finding a publisher or separating a server problem from an agent problem.</span></summary>
+<summary><strong>Registry and Inspector: find or debug a server</strong><span>When you need the publisher's setup or a clearer error.</span></summary>
 
-Start discovery with the [official MCP Registry](https://registry.modelcontextprotocol.io/) and follow entries to the publisher's source. A listing is not a security audit or proof that the package works with OMP.
+The [MCP Registry](https://registry.modelcontextprotocol.io/) helps you find servers. Follow the listing to the publisher's source; being listed is not a security review.
 
-The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) is a development tool for connecting to servers and inspecting their capabilities and calls independently of the model.
+The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) lets you try a server call without a model. If the same call fails there, check the server, credentials, and inputs. If it works there but fails in OMP, compare the settings and arguments.
 
-**Try:** if a server connects but an operation fails, reproduce that one call in Inspector with the same transport and relevant inputs. Follow its current setup instructions and keep its local UI and proxy private.
-
-**Notice:** if the call fails there too, investigate the server, credentials, or inputs. If it succeeds there but not in OMP, compare client configuration and the actual arguments. Inspector does not judge whether the model chose a useful operation.
+Follow Inspector's setup guide and keep its local interface private.
 
 </details>
 </div>
 
-## Evaluate the integration, not the green status
+## Decide whether to keep it
 
-**Connected, callable, and useful are three different checks.** `/mcp test` checks the connection and tool discovery; it does not execute your documentation search. The actual call tests the operation, and your independent result check establishes whether it was useful.
+Check three things in order:
 
-For the documentation example, record whether the server was actually used, whether the cited page supports the answer, and whether the local/container distinction survived. Then try the known-page route using OMP's existing reader. Keep the same question and model so the comparison is meaningful.
+1. **Connected:** `/mcp test learn` can reach the server and discover its tools.
+2. **Used:** the agent actually calls a tool, and the call succeeds.
+3. **Useful:** you check the source and find that it answers your question.
 
-Before keeping a more powerful integration, check:
+Then ask the same question using OMP's existing web reader, keeping the same model. Did MCP save enough work to justify another connection to maintain?
 
-- **A normal task:** can it retrieve or change the intended item, with evidence from the actual system?
-- **A boundary case:** does it distinguish missing data, denied access, and an empty result instead of guessing?
-- **The access boundary:** are credentials and enabled operations limited to what the task needs?
-- **The overhead:** does it reduce work enough to justify another process, login, failure mode, and tool catalogue?
+**Read-only still needs care.** Queries can disclose private data. Returned text can also contain instructions meant to redirect the agent. Treat it as material to check—not permission to change the task. A server's “read-only” label is not an enforced access limit.
 
-**Read-only is not “no risk.”** Tool arguments can disclose data, and returned documents can contain instructions intended to redirect the agent. Treat retrieved content as evidence, not authority to change the task or expand access. Server-provided read-only hints describe intent; they are not enforcement.
+For tools that write, confirm the target and change before execution. Then inspect the result in the actual service. “Created successfully” is not proof that the right item was created.
 
-For write operations, verify the target and requested change before execution, then inspect the resulting state. An agent saying “created” is not proof that the correct issue, document, or record exists.
+When you finish the trial, remove only the `learn` entry you added. Run `/mcp reload`, then `/mcp list`. If `learn` still appears, check which file supplies it before deleting anything else.
 
 ## When it does not work
 
-| What you see | Next useful check |
+| What you see | What to do next |
 | --- | --- |
-| The server is missing | Check the working directory, JSON shape, and `/mcp list` sources. Reload after editing configuration. |
-| The wrong configuration wins | Inspect discovery sources before editing another copy. OMP can import configurations from other tools and plugins. |
-| A local server exits immediately | Check the executable, runtime prerequisites, and startup error. Starting the process is separate from completing an MCP handshake. |
-| A remote server returns 401 or 403 | Check the publisher's authentication setup and credential permissions. Do not put secrets into chat to debug it. |
-| Opening the Learn endpoint in a browser returns 405 | It is a protocol endpoint, not a documentation page. Use the MCP client to test it; a browser GET is not a connection test. |
-| Tools are listed, but the request fails | Inspect the actual tool arguments and error. Test the specific operation, not just the connection. |
-| The agent answers without calling the server | Request that integration explicitly for the exercise and inspect the trace. Do not claim MCP success from answer quality alone. |
-| Search finds something close but wrong | Narrow the product or version, then fetch the source page. A nearby result is not evidence for your claim. |
+| `learn` is missing | Check your working directory and JSON, then run `/mcp reload`. |
+| The wrong settings are being used | Use `/mcp list` to find their source. OMP can also load MCP settings from other tools and plugins. |
+| A local server exits immediately | Read the startup error. Check that its executable and required runtime are installed. |
+| A remote server returns 401 or 403 | Check its login setup and permissions. Do not paste credentials into chat. |
+| The Learn URL returns 405 in a browser | It is a tool endpoint, not a web page. Test it through OMP. |
+| Tools appear, but a call fails | Read that call's arguments and error. A connection test does not test every operation. |
+| The agent answers without a tool call | Ask it to use this server explicitly, then check the calls. |
+| A result covers the wrong product or version | Narrow the search and fetch the full source page. |
 
-**Avoid making every timeout longer.** First distinguish a failed connection, an authentication problem, and a slow operation. Increasing a deadline does not repair the first two.
-
-When the trial is over, remove only the `learn` entry you added from `.omp/mcp.json`, then reload OMP and check `/mcp list`. Leave any pre-existing configuration intact. If a same-named server still appears, inspect its source rather than deleting unrelated settings.
+**Get the exact error before changing settings.** A longer timeout will not fix a wrong URL or missing permission.
 
 ## Before you move on
 
-You should have a sourced answer, evidence that the server handled the lookup, and a decision about whether this route is useful for your work.
+You should have a sourced answer and have seen the server handle the lookup.
 
-Can you explain **what capability was missing, what ran where, what data left the machine, and how you checked the result**? That is more useful than having a long list of connected servers.
+Can you explain **what OMP connected to, what data you sent, and how you checked the result**? Those are the useful habits—not collecting more servers.
 
 Next, [Engineering workflows](../engineering-workflows/index.md) follows a feature through the software lifecycle and shows where agents help—and where checks and people control the next step.
 
 ## Sources and verification scope
 
-- [OMP MCP configuration](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md): discovery, configuration, and interactive commands.
-- [OMP plugin management](https://github.com/can1357/oh-my-pi/blob/main/docs/plugin-manager-installer-plumbing.md) and [extensions](https://github.com/can1357/oh-my-pi/blob/main/docs/extensions.md): packaging and in-process capabilities.
-- [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture): host/client/server roles and protocol primitives.
-- The linked publisher repositories document the optional integrations. Their presence here is not evidence of improved results or OMP compatibility for every feature.
+- [OMP MCP configuration](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md): setup, discovery, and commands.
+- [OMP plugin management](https://github.com/can1357/oh-my-pi/blob/main/docs/plugin-manager-installer-plumbing.md) and [extensions](https://github.com/can1357/oh-my-pi/blob/main/docs/extensions.md): packaging and code that runs inside OMP.
+- [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture): host, client, server, tools, resources, and prompts.
+- The linked publisher repositories provide setup details for the optional integrations; they do not prove that every feature works in OMP.
 
-The public Microsoft Learn endpoint was exercised directly through MCP initialization, tool listing, documentation search, and page fetch. The fetched HTTP trigger documentation contained both the local-development and local-container conditions. This is protocol-level evidence, not a provider-backed OMP session or an Azure deployment test. The locally installed OMP reported version 18.2.9; command guidance follows the linked current OMP documentation.
+An earlier workshop check exercised the Microsoft Learn endpoint directly: connecting, listing tools, searching docs, and fetching a page. The page included the local-development and container exceptions. That checked the MCP service—not a model using it through OMP, and not an Azure deployment. The installed OMP reported 18.2.9 at that check; the commands above follow the linked current OMP guide.
 
 [Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Engineering workflows](../engineering-workflows/index.md)

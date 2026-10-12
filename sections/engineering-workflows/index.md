@@ -1,6 +1,8 @@
 # 3. Engineering workflows
 
-## Before we bring in the agent
+Writing code is only part of delivering a change. We will follow a meeting-room cancellation feature from understanding the need to running it, then look at where agents help and who controls the next step.
+
+## Start with the whole lifecycle
 
 **SDLC means software development lifecycle.** It covers understanding needs, fitting a change into the system, building, checking, releasing, operating, and eventually retiring software.
 
@@ -172,163 +174,18 @@ For cancellation, an agent can propose the endpoint and write tests. People stil
 
 **After release, the lifecycle continues.** Monitor whether cancellation works for users, investigate failures, maintain integrations, and feed what we learn into the next change. FSAD includes supporting operational practices, but its five-phase delivery loop is not a complete model for service ownership, maintenance, or eventual retirement.
 
-### Try the shift on one real change
+### Agree on the behavior before asking for code
 
-Choose a bounded change that needs input from more than one discipline. Before delegating implementation:
+Pick one feature. Before asking the agent to build it:
 
-1. Agree on the intended behavior with the people who own the relevant decisions. Record unresolved questions instead of letting an agent silently settle them.
-2. Ask the agent for a plan against that agreement. Check dependencies before assigning parallel work.
-3. Name the evidence needed for acceptance and who will review it. Include release and operational concerns where they affect the change.
+1. **Decide what it should do and what you’re leaving out.** For booking cancellation, who can cancel? Should anyone get a notification? Ask the people responsible for those decisions. Write down anything still undecided instead of leaving the agent to guess.
+2. **Ask the agent how it would build the change.** Review the plan. If several agents will work on it, check which tasks can happen at the same time and which must wait.
+3. **Agree on how you’ll check the result.** What should you test, and who will review it? If the change is going live, decide how you’ll release it and spot problems afterward.
 
-Keep the process proportional: a clear local fix can use the existing issue and checks; a consequential cross-team decision needs the relevant people involved. Assess results through delivery time, review and rework effort, and behavior after release—not code volume or the number of agents.
+For a small fix, the existing issue and tests may be enough. Bring other people in when a decision affects their work. Judge the approach by whether it helps you deliver a useful change with less rework—not by how much code the agent produces.
 
-## From the lifecycle to a controlled workflow
 
-**The useful question is not “Can an agent do the steps?” It is “Who is allowed to move the work to the next step?”**
-
-We will make that distinction concrete with a small, local workflow. First, ask an agent to follow a procedure. Then run the same rule through a program that can actually block its dependent step. The example is deliberately boring: a learner-owned text artifact must contain one exact line before a second file may be written.
-
-This exercises one part of the FSAD approach: making an acceptance check control the next action. It is not an implementation of the full playbook, a substitute for cross-functional agreement, or a production release gate.
-
-## 1. Start with a bounded exercise
-
-Use Node.js from the course setup and a Bash or Zsh terminal. Create a fresh scratch directory; do not run this in a repository with valuable files. If you try the optional agent step, open OMP in this directory too.
-
-```sh
-cd "$(mktemp -d /tmp/workflow-control-demo.XXXXXX)"
-printf 'DRAFT\n' > artifact.txt
-rm -f published.txt
-```
-
-The rule is specific:
-
-- `artifact.txt` is accepted only when its complete contents are exactly `READY\n`.
-- A successful check may write `published.txt`.
-- A missing, malformed, or different artifact must not write `published.txt`.
-
-### Ask for the procedure first
-
-If you have an OMP session available, paste this request. It needs no provider-specific tool or framework:
-
-```text
-In this scratch directory, perform one bounded procedure.
-
-1. Read artifact.txt.
-2. Treat it as accepted only when its complete contents are exactly the
-   single line READY followed by a newline.
-3. If accepted, write published.txt with a short record of the accepted
-   artifact. If it is missing or does not match exactly, do not write
-   published.txt.
-
-Do not edit artifact.txt, install packages, touch another directory, or
-claim that a file was written unless you inspected it afterward. Report the
-exact files you read or wrote and the observed result.
-```
-
-**Predict before you look:** if the agent says the artifact is rejected, is `published.txt` impossible to create? No. The prompt asks for a rule; it does not enforce the rule. The agent might follow it, misunderstand it, or report a result without changing the filesystem. A prompt is a request to a controller, not a controller.
-
-Inspect the directory after the run. If an agent was unavailable, skip this optional run and continue; the deterministic exercise below is the required part. In either case, reset the downstream output before running the program:
-
-```sh
-rm -f published.txt
-```
-
-### Put the gate in code
-
-Save this as `workflow-gate.mjs`:
-
-```js
-import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
-
-const artifactPath = "artifact.txt";
-const downstreamPath = "published.txt";
-
-function revision(contents) {
-  return createHash("sha256").update(contents).digest("hex").slice(0, 12);
-}
-
-async function main() {
-  let contents;
-  try {
-    contents = await readFile(artifactPath, "utf8");
-  } catch (error) {
-    if (error.code !== "ENOENT") throw error;
-    console.log(`GATE BLOCKED: missing ${artifactPath}`);
-    console.log(`DOWNSTREAM SKIPPED: ${downstreamPath} was not written`);
-    process.exitCode = 1;
-    return;
-  }
-
-  const id = revision(contents);
-  if (contents !== "READY\n") {
-    console.log(
-      `GATE BLOCKED: ${artifactPath} is not exactly READY followed by a newline`,
-    );
-    console.log(`OBSERVED REVISION: ${id}`);
-    console.log(`DOWNSTREAM SKIPPED: ${downstreamPath} was not written`);
-    process.exitCode = 1;
-    return;
-  }
-
-  console.log(`GATE PASSED: ${artifactPath} revision ${id}`);
-  await writeFile(downstreamPath, `published revision ${id}\n`, "utf8");
-  console.log(`DOWNSTREAM ALLOWED: wrote ${downstreamPath}`);
-}
-
-main().catch((error) => {
-  console.error(`WORKFLOW ERROR: ${error.message}`);
-  process.exitCode = 2;
-});
-```
-
-Run the failed branch. The shell commands below make the expected decision observable rather than trusting the program's prose:
-
-```sh
-node workflow-gate.mjs
-gate_exit=$?
-printf 'exit status: %s\n' "$gate_exit"
-test "$gate_exit" -eq 1 &&
-  test ! -e published.txt &&
-  echo "confirmed: failed gate blocked downstream"
-```
-
-Expected shape of the output:
-
-```text
-GATE BLOCKED: artifact.txt is not exactly READY followed by a newline
-OBSERVED REVISION: <12 hexadecimal characters>
-DOWNSTREAM SKIPPED: published.txt was not written
-exit status: 1
-confirmed: failed gate blocked downstream
-```
-
-Now satisfy the same acceptance rule and run the success branch:
-
-```sh
-printf 'READY\n' > artifact.txt
-node workflow-gate.mjs &&
-  test -f published.txt &&
-  cat published.txt
-```
-
-Expected shape:
-
-```text
-GATE PASSED: artifact.txt revision <12 hexadecimal characters>
-DOWNSTREAM ALLOWED: wrote published.txt
-published revision <the same 12 hexadecimal characters>
-```
-
-The exact hash depends on the artifact bytes. The observable contract is the branch: a failed check exits nonzero and does not write the dependent file; a passing check writes it. Run the commands yourself to inspect the files rather than taking the output text on trust.
-
-<aside class="judgment-callout">
-<p class="judgment-kicker">The hinge</p>
-<h2>Authorship and control are different axes.</h2>
-<p>An agent can author <code>workflow-gate.mjs</code>, but once reviewed code runs, the program controls this branch. A human can write a prompt that says “run the check before publishing,” while the agent still controls progression if nothing else enforces that order. Ask two separate questions: who produced the instruction or code, and who can move the workflow forward?</p>
-</aside>
-
-## 2. The two axes we use to design workflows
+## The two axes we use to design workflows
 
 ### Axis one: arrangement
 
@@ -390,7 +247,7 @@ Failure mode: shared mutable files turn “parallel” into a race. Use separate
 <details>
 <summary><strong>Conditional and DAG</strong><span>Use explicit edges, not implied conversation order.</span></summary>
 
-**Conditional routing** chooses a path from an observed result. A controller around this demo could use exit `0` to permit acceptance, exit `1` to request a bounded artifact repair, and exit `2` to stop for an execution error. A missing result or an unknown exit code must also stop; neither means success. An agent can suggest a route for ambiguous work, but code should validate the prerequisite before a consequential action.
+**Conditional routing** chooses a path from an observed result. For the booking feature, passing permission tests can move the change to review; a failed test sends it back for repair. If the tests could not run, stop and investigate rather than treating the missing result as success. An agent can suggest a route for ambiguous work, but code should check the prerequisite before a consequential action.
 
 A **DAG** combines dependent paths:
 
@@ -425,6 +282,8 @@ Failure mode: “try again until green” rewards a changed test or a fabricated
 
 The controller is whoever or whatever decides whether a transition is allowed.
 
+Who writes the instructions and who controls the next step are different questions. An agent can write a check that CI later enforces.
+
 | Controller | Strength | Limit | Good fit |
 | --- | --- | --- | --- |
 | **Agent** | Handles ambiguity and can choose a useful next investigation | A prompt can be ignored, misunderstood, or satisfied with a claim | Exploration, diagnosis, draft plans, bounded local edits |
@@ -439,7 +298,7 @@ The practical recommendation is **hybrid**: let the agent handle interpretation 
 agent proposes → code checks → human approves revision → controlled action
 ```
 
-## 3. Gates: permission to continue, not proof of truth
+## Gates: permission to continue, not proof of truth
 
 A deterministic gate answers **may the workflow continue?** It does not answer **is the result wise or sufficient for the real goal?**
 
@@ -458,8 +317,6 @@ Treat the judgment behind `approved=true` separately. A reviewer can approve a p
 
 Bind evidence and approval to a revision identifier: a commit SHA, content digest, or other stable identity. If the artifact changes, invalidate the evidence and approval. A green result from revision A is not a green result for revision B.
 
-The demo prints a short content revision so you can see this relationship. It does not implement a durable approval store, and it is intentionally not a security boundary. A user who can edit the program, the artifact, or the output directory can bypass it. That is useful for learning control flow, not for protecting production changes.
-
 ### A gate agent is not enforcement
 
 An agent can be asked to “check the gate” and then rewrite the check, delete the evidence, or bypass its own failure. If the same writer controls the rule, the evidence, and the action, the rule is advisory.
@@ -472,31 +329,27 @@ Persist the smallest useful state: revision, required checks, evidence locations
 
 Retries need a second question: was the previous side effect completed? Repeating a non-idempotent write, deployment, payment, or migration can do the action twice when the first result was lost. Prefer an idempotency key, an atomic temporary-file-and-rename pattern, or a manual check before retrying. Do not hide this risk behind a generic retry loop.
 
-## 4. Apply the model to the SDLC
+## Apply the model to the SDLC
 
 The workflow shape changes with the work, but the engineering obligations do not disappear when an agent does the typing.
 
 ### Specify: make “done” observable
 
-Start with a small specification:
+A small specification for our booking feature might say:
 
 ```text
-Goal: accept a learner artifact only when its complete contents are READY\n.
-
-Inputs:
-- artifact.txt, owned by this exercise
+Goal: let the booking owner cancel without contacting support.
 
 Acceptance:
-- exact bytes READY followed by one newline → pass
-- missing, malformed, or different bytes → fail
-- failure does not write published.txt
-- success writes published.txt and records the checked revision
+- the owner can cancel an active booking;
+- cancellation keeps a record and makes the room available again;
+- another person's cancellation request is rejected without changing the booking;
+- a missing booking returns "not found";
+- cancelling an already-cancelled booking makes no further changes.
 
-Out of scope:
-- network calls
-- package installation
-- deployment
-- treating an agent's report as evidence
+Out of scope for this change:
+- cancelling a recurring series;
+- adding new notification integrations.
 ```
 
 This is enough to drive a small implementation. It names the boundary, success and failure, side effects, and what we are not building. Add detail when a decision is genuinely ambiguous; do not create a planning ceremony for a settled one.
@@ -512,7 +365,7 @@ change the contract.
 
 ### Design: reuse patterns before inventing architecture
 
-Look for the existing repository convention, standard library primitive, and platform capability before adding a framework. The demo uses Node's standard file and hash APIs because the lesson needs one local gate, not a workflow engine.
+Look for the existing repository convention, standard library primitive, and platform capability before adding a framework. For cancellation, reuse the existing booking and permission checks before introducing a new workflow layer.
 
 Ask:
 
@@ -530,18 +383,18 @@ The design decision is not “agent or no agent.” It is which decisions need f
 For a settled behavior, write or state the failing check before asking for the repair:
 
 ```text
-Add a test that fails because a malformed artifact is accepted. Keep the
-assertion exact: malformed input must block the downstream write. Run it
-and show the failure. Then make the smallest implementation change that
-causes that same assertion to pass. Do not weaken, delete, or rewrite the
-assertion to match the current behavior.
+Add a test that fails because someone can cancel another person's booking.
+Check that the request is rejected and the booking remains unchanged.
+Run it and show the failure. Then make the smallest implementation change
+that makes the same test pass. Do not weaken the assertion to match the
+current behavior.
 ```
 
 The sequence is **failing behavior → implementation → same check passes → refactor**. An agent that edits the test until it turns green has changed the contract, not fixed the implementation. Ask for the failing output and inspect the diff.
 
 ### Implement: keep the control point obvious
 
-Put the gate where the dependent action is attempted. In the demo, `writeFile(published.txt)` is reachable only after the exact-content check. That locality matters: a reviewer can trace the branch without reconstructing a framework.
+Put the check where the protected action happens. The cancellation endpoint must check permission before changing the booking; hiding the button is not enough. Keep that order easy for a reviewer to follow.
 
 For a larger change, ask the agent to report:
 
@@ -600,18 +453,6 @@ Do not turn “the agent said it passed” into a substitute for the command, fi
 <p class="judgment-lead">A prompt is enough for a reversible exploratory step. Add a code gate when a dependent action must not happen after a known failure. Add protected permissions or human approval when the writer must not be able to bypass the transition.</p>
 </aside>
 
-## 5. What to try next
-
-Take the demo one step further without turning it into a framework:
-
-1. Remove `published.txt`, then delete `artifact.txt` and run the gate. Confirm that missing input creates no downstream file.
-2. Keep `published.txt` absent and change the artifact to `READY` without a final newline. Confirm that exact acceptance still fails.
-3. Run the success case, edit `artifact.txt`, and inspect whether the existing `published.txt` still names the old revision. It does; that is stale output, not fresh approval.
-4. Add a second check that reads the current revision and refuses to reuse stale output. Keep the check local and bounded.
-5. Ask an agent to propose the change, then inspect its diff and run the same cases yourself.
-
-The last step matters most: the agent may author the code, but the workflow should make its permitted transitions visible. If the change affects a real repository, move enforcement to the CI or review system that the author cannot rewrite, and verify the actual permissions and required checks.
-
 ## Sources and execution limits
 
 **Source facts:**
@@ -619,11 +460,10 @@ The last step matters most: the agent may author the code, but the workflow shou
 - The [FSAD playbook, reviewed as v40](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) describes the five-phase delivery loop and the responsibilities of product, design, engineering, and agents. The booking mapping and adoption advice here are course recommendations, not measured outcomes from running FSAD.
 - GitHub Actions documents `jobs.<job_id>.needs` as a dependency: a job waits for its prerequisites, and a failed or skipped prerequisite causes dependent jobs to be skipped unless an explicit condition changes that behavior. See [Using jobs in a workflow](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-jobs).
 - GitHub documents required status checks, required reviews, stale-review dismissal, and bypass permissions as separate protected-branch settings. See [About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) and [Dismissing a pull request review](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/dismissing-a-pull-request-review).
-- The Bash reference describes the exit status of a command and the shell's use of a nonzero status for failure. See [Exit Status](https://www.gnu.org/software/bash/manual/bash.html#Exit-Status).
 
-**Course recommendations:** sequential by default, explicit ownership for parallel branches, revision-bound evidence, bounded repair, and hybrid control are our engineering recommendations. They are not guarantees supplied by an agent or by this local script.
+**Course recommendations:** sequential by default, explicit ownership for parallel branches, revision-bound evidence, bounded repair, and hybrid control are our engineering recommendations. They are not guarantees supplied by an agent.
 
-**Execution limits:** The Node example uses only standard-library file and hash APIs; the local exercise covered the draft, missing input, missing newline, extra-content, and exact accepted-input cases, with the matching revision written on success. The displayed failure/success commands also ran in Bash and Zsh. This demonstrates control flow, not tamper-resistant security, durable approvals, crash recovery, or production deployment; no provider-backed run is claimed.
+**Execution limits:** the booking example and prompts are illustrative, not evidence of a provider-backed run or a production deployment.
 
 ## Optional watch: put a specification to work
 

@@ -218,7 +218,7 @@ For deeper examples of characterization, seams, and compatibility, use Michael F
 
 ## Workflow control: agents and code
 
-Use [Engineering workflows](../engineering-workflows/index.md#2-the-two-axes-we-use-to-design-workflows) for the general arrangement and controller patterns: dependencies, routing, joins, bounded repair, and agent, code, or hybrid control. Apply that distinction to one transition in your run:
+Use [Engineering workflows](../engineering-workflows/index.md#the-two-axes-we-use-to-design-workflows) for the general arrangement and controller patterns: dependencies, routing, joins, bounded repair, and agent, code, or hybrid control. Apply that distinction to one transition in your run:
 
 - an agent may interpret the goal and propose an action;
 - code may enforce an observable prerequisite; and

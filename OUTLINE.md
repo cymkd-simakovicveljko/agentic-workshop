@@ -24,7 +24,7 @@ Start with the introduction, then install and connect OMP in section 1. There is
    6. **[Artifacts](sections/foundations/artifacts.md)** — Save results as files, reuse them as memory, and organize specs, decisions, tasks, and progress.
    7. **[Skills](sections/foundations/skills.md)** — Reuse a procedure, compare four engineering skill packs, and evaluate what helps.
    8. **[MCP, plugins, and extensions](sections/foundations/mcp-and-plugins.md)** — Connect capabilities and understand how they are packaged.
-3. **[Engineering workflows](sections/engineering-workflows/index.md)** — Connect lifecycle responsibilities to FSAD, then practise workflow control, dependencies, bounded loops, and enforced gates.
+3. **[Engineering workflows](sections/engineering-workflows/index.md)** — Follow a feature through the lifecycle, then connect it to FSAD, workflow control, dependencies, and bounded loops.
 4. **[Spec-driven development](sections/spec-driven-development/index.md)** — Apply FSAD’s shared-spec practices, distinguish FSD tooling, and compare support for specifications, plans, and tasks.
 5. **[Advanced harness design and enterprise-scale work](sections/advanced-engineering/index.md)** — Examine harness boundaries and changes to existing systems.
 6. **[Key productivity tips](sections/working-with-omp/index.md)** — Voice input, keyboard controls, phone access, and managing agents.

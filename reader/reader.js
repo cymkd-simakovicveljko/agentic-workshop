@@ -10,6 +10,10 @@ let currentDocument = "";
 let controller;
 let headings = [];
 let headingsExpanded = true;
+const views = new Map();
+let currentEntry = crypto.randomUUID();
+history.scrollRestoration = "manual";
+history.replaceState({ readerEntry: currentEntry }, "");
 const markdown = (source) =>
   DOMPurify.sanitize(marked.parse(source), {
     USE_PROFILES: { html: true },
@@ -34,6 +38,7 @@ async function getDocument(path, signal) {
 }
 
 function setOutline(open) {
+  const wasOpen = document.body.classList.contains("outline-open");
   document.body.classList.toggle("outline-open", open);
   $(".menu-toggle").setAttribute("aria-expanded", String(open));
   $(".menu-toggle").setAttribute(
@@ -41,6 +46,7 @@ function setOutline(open) {
     open ? "Close course outline" : "Open course outline",
   );
   syncOutlineAccess();
+  if (!open && wasOpen && $("#sidebar").inert) $(".menu-toggle").focus();
 }
 function syncOutlineAccess() {
   const mobile = matchMedia("(max-width: 850px)").matches;
@@ -59,7 +65,6 @@ window.addEventListener("keydown", (event) => {
     document.body.classList.contains("outline-open")
   ) {
     setOutline(false);
-    $(".menu-toggle").focus();
   }
 });
 window.addEventListener("resize", syncOutlineAccess);
@@ -83,6 +88,7 @@ $("#collapse").addEventListener("click", () => {
     "aria-label",
     headingsExpanded ? "Collapse lesson headings" : "Expand lesson headings",
   );
+  $("#collapse").title = $("#collapse").getAttribute("aria-label");
 });
 $("#lesson-search").addEventListener("input", (event) => {
   const query = event.target.value.trim().toLowerCase();
@@ -419,7 +425,7 @@ function pagination(index) {
 }
 
 
-async function loadDocument({ focus = false } = {}) {
+async function loadDocument({ focus = false, view } = {}) {
   controller?.abort();
   controller = new AbortController();
   const { signal } = controller;
@@ -473,8 +479,7 @@ async function loadDocument({ focus = false } = {}) {
     pagination(index);
     $("#announcement").textContent = `Loaded ${title}`;
     if (focus) article.focus({ preventScroll: true });
-    if (location.hash) scrollToHash();
-    else window.scrollTo({ top: 0, behavior: "instant" });
+    restoreView(view);
   } catch (error) {
     if (error.name === "AbortError") return;
     $("#title").textContent = "This page isn’t available";
@@ -508,6 +513,27 @@ async function loadDocument({ focus = false } = {}) {
     }
   }
 }
+function saveView() {
+  if (
+    article.getAttribute("aria-busy") === "true" ||
+    article.querySelector(".error-panel")
+  ) return;
+  views.set(currentEntry, {
+    top: window.scrollY,
+    details: [...article.querySelectorAll("details")].map((part) => part.open),
+  });
+}
+
+function restoreView(view) {
+  if (view) {
+    article.querySelectorAll("details").forEach((part, index) => {
+      part.open = view.details[index] ?? false;
+    });
+    window.scrollTo({ top: view.top, behavior: "instant" });
+  } else if (location.hash) scrollToHash();
+  else window.scrollTo({ top: 0, behavior: "instant" });
+}
+
 function scrollToHash() {
   try {
     const target = document.getElementById(
@@ -515,7 +541,11 @@ function scrollToHash() {
     );
     const part = target?.closest("details");
     if (part) part.open = true;
-    target?.scrollIntoView({ behavior: "instant" });
+    if (target) {
+      if (!target.hasAttribute("tabindex")) target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ behavior: "instant" });
+    }
   } catch {
     /* Invalid fragments do not prevent reading the document. */
   }
@@ -553,12 +583,16 @@ window.addEventListener(
   { passive: true },
 );
 window.addEventListener("resize", updateProgress);
-window.addEventListener("hashchange", scrollToHash);
-window.addEventListener("popstate", () => {
+new ResizeObserver(updateProgress).observe(article);
+window.addEventListener("popstate", (event) => {
+  saveView();
+  currentEntry = event.state?.readerEntry || crypto.randomUUID();
+  history.replaceState({ readerEntry: currentEntry }, "");
+  const view = views.get(currentEntry);
   const path =
     new URL(location.href).searchParams.get("doc") || defaultDocument;
-  if (path !== currentDocument) loadDocument();
-  else scrollToHash();
+  if (path !== currentDocument) loadDocument({ view });
+  else restoreView(view);
 });
 document.addEventListener("click", (event) => {
   const anchor = event.target.closest("a[href]");
@@ -572,25 +606,22 @@ document.addEventListener("click", (event) => {
     anchor.target
   )
     return;
-  if (anchor.getAttribute("href").startsWith("#")) {
-    setOutline(false);
-    return;
-  }
   const url = new URL(anchor.href);
   if (
     url.origin !== location.origin ||
     url.pathname !== "/" ||
-    !url.searchParams.has("doc")
+    (!url.searchParams.has("doc") && !anchor.getAttribute("href").startsWith("#"))
   )
     return;
   event.preventDefault();
-  const same = url.searchParams.get("doc") === currentDocument;
-  history.pushState(null, "", url);
+  saveView();
+  const same =
+    (url.searchParams.get("doc") || defaultDocument) === currentDocument;
+  currentEntry = crypto.randomUUID();
+  history.pushState({ readerEntry: currentEntry }, "", url);
   setOutline(false);
-  if (same) {
-    if (url.hash) scrollToHash();
-    else window.scrollTo({ top: 0, behavior: "instant" });
-  } else loadDocument({ focus: true });
+  if (same) restoreView();
+  else loadDocument({ focus: true });
 });
 
 try {

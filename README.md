@@ -55,6 +55,8 @@ Run the reader's file-serving and security checks with:
 node --test reader/server.test.mjs
 ```
 
+For browser regressions, open the reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 850px or less. It navigates between lessons and checks Back/Forward positions, disclosure progress, heading navigation, keyboard focus, and recovery from a simulated failed document load. A failure throws an error; success logs `Reader checks passed`.
+
 These checks cover the local reader, not provider access, fresh-machine installation, or the results of a learner's agent session. Prepared traces in the lessons are labelled examples, not recordings of live runs.
 
 <details>

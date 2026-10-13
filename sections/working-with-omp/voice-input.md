@@ -1,4 +1,4 @@
-# 6.1 Voice input
+# 5.1 Voice input
 
 **Say the rough thought. Check it before sending.** Dictation is useful when explaining a problem is easier than typing it. The transcript does not have to sound polished; it has to preserve what you meant.
 

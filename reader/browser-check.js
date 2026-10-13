@@ -83,5 +83,36 @@
   await waitFor(() => loaded(sdd));
   assert([...article.querySelectorAll("details")].every((part, index) =>
     part.open === initialPanels[index]), "Error recovery changed the lesson's initial disclosures");
-  console.log("Reader checks passed: history, progress, headings, keyboard focus, and error recovery.");
+  const reloadTab = window.open(
+    new URL("?doc=sections/01-getting-started-with-omp.md#install-omp", location.href),
+    "_blank",
+  );
+  assert(reloadTab, "Allow popups to run the refresh check");
+  try {
+    const ready = () =>
+      reloadTab.document.querySelector("#article")?.getAttribute("aria-busy") === "false";
+    await waitFor(ready);
+    await reloadTab.document.fonts.ready;
+    const panels = [...reloadTab.document.querySelectorAll("#article details")];
+    panels.forEach((part, index) => { part.open = index === 0; });
+    reloadTab.scrollTo({ top: 2200, behavior: "instant" });
+    await settle();
+    const expectedY = reloadTab.scrollY;
+    const expectedPanels = panels.map((part) => part.open);
+    assert(expectedY > 0 && expectedPanels.length > 0, "Refresh check needs a scrolled lesson with disclosures");
+    const beforeReload = reloadTab.document;
+    reloadTab.location.reload();
+    await waitFor(() => reloadTab.document !== beforeReload && ready());
+    await reloadTab.document.fonts.ready;
+    await settle();
+    assert(Math.abs(reloadTab.scrollY - expectedY) < 2,
+      `Refresh lost position: ${expectedY} → ${reloadTab.scrollY}`);
+    const actualPanels = [...reloadTab.document.querySelectorAll("#article details")];
+    assert(actualPanels.length === expectedPanels.length &&
+      actualPanels.every((part, index) => part.open === expectedPanels[index]),
+      "Refresh lost expanded or collapsed sections");
+  } finally {
+    reloadTab.close();
+  }
+  console.log("Reader checks passed: history, refresh, progress, headings, keyboard focus, and error recovery.");
 })();

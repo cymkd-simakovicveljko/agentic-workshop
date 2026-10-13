@@ -19,7 +19,21 @@ let controller;
 let headings = [];
 let headingsExpanded = true;
 const views = new Map();
-let currentEntry = crypto.randomUUID();
+const viewStorageKey = `reader-views:${siteBase.pathname}`;
+try {
+  const savedViews = JSON.parse(sessionStorage.getItem(viewStorageKey) || "[]");
+  for (const [entry, view] of savedViews) {
+    if (
+      typeof entry === "string" &&
+      Number.isFinite(view?.top) &&
+      Array.isArray(view?.details) &&
+      view.details.every((open) => typeof open === "boolean")
+    ) views.set(entry, view);
+  }
+} catch {
+  // Reading still works when saved state is invalid or storage is unavailable.
+}
+let currentEntry = history.state?.readerEntry || crypto.randomUUID();
 history.scrollRestoration = "manual";
 history.replaceState({ readerEntry: currentEntry }, "");
 const markdown = (source) =>
@@ -586,6 +600,15 @@ window.addEventListener(
 );
 window.addEventListener("resize", updateProgress);
 new ResizeObserver(updateProgress).observe(article);
+window.addEventListener("pagehide", () => {
+  saveView();
+  try {
+    // ponytail: persist the existing view map once on exit, not on every scroll.
+    sessionStorage.setItem(viewStorageKey, JSON.stringify([...views]));
+  } catch {
+    // Back/Forward still works in memory when browser storage is unavailable.
+  }
+});
 window.addEventListener("popstate", (event) => {
   saveView();
   currentEntry = event.state?.readerEntry || crypto.randomUUID();
@@ -639,4 +662,4 @@ try {
 } catch (error) {
   $("#lessons").textContent = `Outline unavailable: ${error.message}`;
 }
-await loadDocument();
+await loadDocument({ view: views.get(currentEntry) });

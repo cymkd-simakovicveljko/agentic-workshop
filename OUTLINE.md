@@ -12,7 +12,7 @@ Start with the introduction, then install and connect OMP in section 1. There is
 
 1. **[Introduction](sections/introduction.md)** — What changes when an agent can read files, edit code, and run commands.
 
-## The six sections
+## The five sections
 
 1. **[Getting started with OMP](sections/01-getting-started-with-omp.md)** — Choose a terminal, install OMP, and connect a model.
 2. **[Agentic engineering foundations](sections/foundations/index.md)** — Understand the parts behind agentic work.
@@ -24,10 +24,9 @@ Start with the introduction, then install and connect OMP in section 1. There is
    6. **[Artifacts](sections/foundations/artifacts.md)** — Save results as files, reuse them as memory, and organize specs, decisions, tasks, and progress.
    7. **[Skills](sections/foundations/skills.md)** — Reuse a procedure, compare four engineering skill packs, and evaluate what helps.
    8. **[MCP, plugins, and extensions](sections/foundations/mcp-and-plugins.md)** — Connect capabilities and understand how they are packaged.
-3. **[Engineering workflows](sections/engineering-workflows/index.md)** — Follow a feature through the lifecycle, then connect it to FSAD, workflow control, dependencies, and bounded loops.
+3. **[Engineering workflows](sections/engineering-workflows/index.md)** — Follow a feature through the lifecycle, then connect it to workflow control, dependencies, and bounded loops.
 4. **[Spec-driven development](sections/spec-driven-development/index.md)** — Apply FSAD’s shared-spec practices, distinguish FSD tooling, and compare support for specifications, plans, and tasks.
-5. **[Advanced harness design and enterprise-scale work](sections/advanced-engineering/index.md)** — Examine harness boundaries and changes to existing systems.
-6. **[Key productivity tips](sections/working-with-omp/index.md)** — Voice input, keyboard controls, phone access, and managing agents.
+5. **[Key productivity tips](sections/working-with-omp/index.md)** — Voice input, keyboard controls, phone access, and managing agents.
    1. **[Voice input](sections/working-with-omp/voice-input.md)** — Say the rough thought, check the transcription, then submit.
    2. **[Keyboard controls and steering](sections/working-with-omp/keyboard-and-steering.md)** — Direct, queue, interrupt, and inspect work.
    3. **[Working from your phone](sections/working-with-omp/phone-access.md)** — Connect to work running on your computer.

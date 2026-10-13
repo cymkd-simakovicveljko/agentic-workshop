@@ -1,4 +1,4 @@
-# 6. Key productivity tips
+# 5. Key productivity tips
 
 **Foundations explain the agent loop. This section makes the loop usable at a keyboard, from a phone, and across a small number of delegated workers.**
 
@@ -19,7 +19,7 @@ Give the agent one clear next decision, then watch what it actually does. Queue 
 
 Start with [Voice input](voice-input.md), then continue through the keyboard controls. The phone and Agent Hub pages are optional when you need remote access or delegated work.
 
-[Back to the outline](../../OUTLINE.md) · [Previous: Advanced engineering](../advanced-engineering/index.md) · [Next: Voice input](voice-input.md)
+[Back to the outline](../../OUTLINE.md) · [Previous: Spec-driven development](../spec-driven-development/index.md) · [Next: Voice input](voice-input.md)
 
 ## Sources
 

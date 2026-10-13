@@ -219,7 +219,7 @@ area and name the check that would show it worked. Do not implement yet.
 
 Our recommendation: ask for **assumptions, a concise rationale, relevant calculations, and checks you can inspect**. A longer explanation is not proof of better reasoning.
 
-Two other names you will encounter are **self-consistency**, which compares multiple sampled solutions, and **ReAct**, which combines reasoning with tool actions and observations. Agreement between answers still does not prove correctness. We connect these ideas to voting, agent loops, and [workflow patterns in Advanced](../advanced-engineering/index.md#workflow-control-agents-and-code), rather than treat them as phrases to paste into every request.
+Two other names you will encounter are **self-consistency**, which compares multiple sampled solutions, and **ReAct**, which combines reasoning with tool actions and observations. Agreement between answers still does not prove correctness. Treat these as techniques to understand, not phrases to paste into every request.
 
 **Try one now:** choose an example above, use it on a small task in a repository you know, and check the result against its “Notice” guidance. Keep the result for a focused review later in this lesson.
 
@@ -408,7 +408,7 @@ The control rules can be deterministic even though the agents' answers are not. 
 
 **Start with prompts to learn the useful sequence. Use code when a consequential rule needs enforcement.** The same patterns can appear in either approach: chains, conditional routes, independent workers, and review loops.
 
-We develop those patterns in [Advanced: workflow control](../advanced-engineering/index.md#workflow-control-agents-and-code), including **directed acyclic graphs (DAGs)** for dependencies without cycles. A repeating review-and-fix loop has a cycle, so not every agent workflow is a DAG.
+We develop those patterns in [Engineering workflows](../engineering-workflows/index.md#the-two-axes-we-use-to-design-workflows), including **directed acyclic graphs (DAGs)** for dependencies without cycles. A repeating review-and-fix loop has a cycle, so not every agent workflow is a DAG.
 
 ## What the courses and research add
 

@@ -1,44 +1,74 @@
-# 3. Engineering workflows
-
-Writing code is only part of delivering a change. We will follow a meeting-room cancellation feature from understanding the need to running it, then look at where agents help and who controls the next step.
+# 3. Simple Engineering workflows
 
 ## Start with the whole lifecycle
 
-**SDLC means software development lifecycle.** It covers understanding needs, fitting a change into the system, building, checking, releasing, operating, and eventually retiring software.
+**SDLC means software development lifecycle.** It covers 
+- understanding needs / the problem, 
+- designing the solution
+- fitting a change into the system, building, 
+- testing and checking, 
+- releasing, 
+- operating, 
+- and eventually retiring software.
 
 <figure class="course-diagram course-diagram-wide">
 <a href="/diagrams/software-development-lifecycle.webp"><img src="/diagrams/software-development-lifecycle.webp" width="1568" height="882" alt="Software development lifecycle shown as a cycle: Plan, Design, Develop, Test, Deploy, then Operate and Improve. User feedback and monitoring feed the next round of planning. Supporting principles are solving real problems, building securely, keeping it simple, iterating continuously, and creating impact at scale." /></a>
 <figcaption>The lifecycle at a glance. These activities overlap: testing, security, and feedback belong throughout the work, not only in the box where they appear. <a href="/diagrams/software-development-lifecycle.webp">Open the image at full size.</a></figcaption>
 </figure>
 
-## One small feature, the whole lifecycle
+## One small feature via the whole lifecycle
 
-Suppose colleagues can book meeting rooms, but they have to contact support to cancel a booking. We want to let them cancel it themselves.
+Let's look at an example of running through the whole lifecycle by implementing one feature.
 
-“Add a cancel button” sounds like a small coding task. Before you read on, name one decision the button cannot make for us.
+Suppose colleagues can book meeting rooms,  
+but they have to contact support to cancel a booking.   
+We want to let them cancel it themselves.
+
+“Add a cancel button” sounds like a small coding task.
 
 ### Understand the need
 
-**Understand the person, not just the request.** Stanford’s d.school calls this [*Empathize* and *Define*](https://dschool.stanford.edu/tools/design-thinking-bootleg): learn how people experience a problem, then decide which problem to solve.
+**Start with the problem, not the button.** For our booking feature:
 
-For our booking feature, ask a colleague to walk through the last time their plans changed. What did they do? Where did they get stuck? Look at the support request and what happened afterward. This tells us more than asking, “Would you use a cancel button?”
+1. **What gets in the way.** <br> Ask a colleague to walk through the last time they needed to cancel. What did they do? Where did they get stuck?
+2. **Agree on what should happen.** <br>Who can cancel a booking? Should anyone get a notification?
+3. **Decide what to tackle now.** <br>Is this worth fixing? What will we include, and what can wait?
 
-“Add a cancel button” is one possible solution. First, we need to understand what makes cancelling difficult and whether it is worth addressing now.
+This is **planning and requirements**: 
+- agreeing on the problem, the behavior we want, and what we are leaving out. 
 
-Before committing to a solution, check it from four angles. [Silicon Valley Product Group calls these the four product risks](https://www.svpg.com/four-big-risks/):
+**Using an agent?** <br>It can organize research notes and suggest questions. <br>It cannot replace talking to the people who use the system.
 
-- **Value:** will people choose to use it?
-- **Usability:** can they figure out how to use it?
+**Our recommendation:** use Matt Pocock’s [grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) approach to challenge your plan before writing code. It is not tied to a software framework: the goal is to uncover assumptions and settle unclear decisions.
+
+In OMP, load the underlying [grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), rather than copying the `grill-me` launcher.
+
+<div class="setup-platforms">
+<details>
+<summary><strong>How do we find the real problem?</strong><span>Stanford’s “Empathize” and “Define,” with a booking example.</span></summary>
+
+Stanford’s d.school calls these activities [*Empathize* and *Define*](https://dschool.stanford.edu/tools/design-thinking-bootleg):
+
+- **Empathize:** understand the person’s experience. Ask a colleague to show you how they cancelled a booking. Look at the support request and what happened afterward—not just whether they say they would use a cancel button.
+- **Define:** decide which problem to solve. “People have to contact support to cancel a booking” describes a problem. “Add a cancel button” proposes one solution.
+
+The distinction matters: we want to fix what makes cancellation difficult, not build a button simply because someone asked for one.
+
+</details>
+<details>
+<summary><strong>How do we decide whether it is worth building?</strong><span>Four questions to discuss before committing to a solution.</span></summary>
+
+[Silicon Valley Product Group calls these the four product risks](https://www.svpg.com/four-big-risks/):
+
+- **Value:** will people choose to use it? Would colleagues cancel bookings themselves rather than keep contacting support?
+- **Usability:** can they figure out how to use it? Can they find the action and tell whether the cancellation worked?
 - **Feasibility:** can we build it with the technology, skills, and time we have?
-- **Business viability:** does it work for the organization, including its costs and obligations?
+- **Business viability:** does it work for the organization, including its costs and obligations? For example, do we need to keep a record of cancellations?
 
-Product, design, and engineering should explore these together. A feature can be easy to build and still be the wrong thing to build.
+Product, design, and engineering should answer these together. A feature can be easy to build and still be the wrong thing to build.
 
-Then agree on the behavior. Who can cancel: the person who booked, anyone invited, or an office administrator? Should everyone receive a notification?
-
-This is **planning and requirements**: deciding why to do the work, what it should achieve, and what is outside its scope.
-
-**Using an agent?** It can help organize research and suggest questions. Its guesses about users are not user research.
+</details>
+</div>
 
 ### Choose an approach
 
@@ -144,37 +174,7 @@ Before moving on, take a recent change of your own. Where did you discover somet
 
 That is the habit we will build on: use agents across the work, while keeping decisions and results open to inspection.
 
-## Applying FSAD across the lifecycle
-
-**FSAD changes how we organize delivery around people and agents. The responsibilities of software engineering remain.**
-
-The [Full Stack Agentic Development playbook](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) brings product, design, and engineering together around a living specification. The team agrees on the intended result, reviews an implementation plan, delegates suitable work to agents, and checks the implementation before release.
-
-The intended benefit is shorter feedback loops and less time lost between decisions and implementation. That depends on clear specifications, technical judgment, and meaningful verification—not simply more agents.
-
-Keep three terms separate:
-
-- **SDLC describes the work we remain responsible for**, from understanding a need through delivery, operation, and eventual retirement.
-- **FSAD describes a way of organizing delivery**, through cross-functional collaboration, shared specifications, delegated execution, and human review.
-- **FSD is a supporting toolbox**, not another name for FSAD. The [next chapter](../spec-driven-development/index.md#methodology-and-toolbox-fsad-and-fsd) explains its role and its Claude Code dependency.
-
-Here is how the playbook’s five phases relate to familiar engineering activities. The booking example is our application of the method, not a reported FSAD implementation:
-
-| Engineering activity | FSAD phase | In our booking-cancellation example |
-| --- | --- | --- |
-| Understand the problem | **Intent & Discovery** | Establish why colleagues need cancellation and what a useful outcome would look like. |
-| Agree requirements and design | **Live Spec Session** | Product, design, and engineering resolve who may cancel, what the interface does, and how cancellation affects existing integrations. |
-| Plan implementation | **Implementation Planning** | An agent examines the codebase and proposes tasks. The engineer reviews the approach, dependencies, and acceptance checks before implementation. |
-| Build and test | **Agent Execution** | Agents implement bounded tasks and run checks. We parallelize independent work; coupled work still needs sequencing and integration. |
-| Review and release | **Human Review & Ship** | Review the implementation against the agreed behavior, technical constraints, and release requirements—not only the agent’s summary. |
-
-This is a mapping, not five boxes we visit only once. If implementation exposes an incorrect assumption, revisit the decision, update the specification, and adjust the affected work. A living spec records the agreed target; the code and running system show what was actually built.
-
-For cancellation, an agent can propose the endpoint and write tests. People still decide who is allowed to cancel, assess compatibility with the calendar integration, and check whether the tests exercise those decisions. Delegating implementation does not delegate away technical judgment.
-
-**After release, the lifecycle continues.** Monitor whether cancellation works for users, investigate failures, maintain integrations, and feed what we learn into the next change. FSAD includes supporting operational practices, but its five-phase delivery loop is not a complete model for service ownership, maintenance, or eventual retirement.
-
-### Agree on the behavior before asking for code
+## Agree on the behavior before asking for code
 
 Pick one feature. Before asking the agent to build it:
 
@@ -457,7 +457,6 @@ Do not turn “the agent said it passed” into a substitute for the command, fi
 
 **Source facts:**
 
-- The [FSAD playbook, reviewed as v40](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) describes the five-phase delivery loop and the responsibilities of product, design, engineering, and agents. The booking mapping and adoption advice here are course recommendations, not measured outcomes from running FSAD.
 - GitHub Actions documents `jobs.<job_id>.needs` as a dependency: a job waits for its prerequisites, and a failed or skipped prerequisite causes dependent jobs to be skipped unless an explicit condition changes that behavior. See [Using jobs in a workflow](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-jobs).
 - GitHub documents required status checks, required reviews, stale-review dismissal, and bypass permissions as separate protected-branch settings. See [About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) and [Dismissing a pull request review](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/dismissing-a-pull-request-review).
 

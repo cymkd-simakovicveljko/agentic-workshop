@@ -1,4 +1,4 @@
-# 6.3 Working from your phone
+# 5.3 Working from your phone
 
 **A phone is a client, not the machine running the agent.** OMP's Collab browser client shows and, with the right link, controls a session that remains on the host computer. The host keeps the working directory, provider login, files, tools, and costs.
 

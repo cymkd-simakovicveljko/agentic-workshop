@@ -28,7 +28,7 @@ The same idea shows up in terminal tools, editors, and desktop apps. Here are a 
 <div class="harness-grid">
 <a class="harness-card" href="https://code.claude.com/docs/en/overview">
 <img src="https://code.claude.com/docs/_mintlify/favicons/claude-code/pLsy-mRpNksna2sx/_generated/favicon/android-chrome-192x192.png" alt="" width="44" height="44" referrerpolicy="no-referrer">
-<span><strong>Claude Code</strong><small>Anthropic’s coding agent, available in the terminal and other development surfaces.</small></span>
+<span><strong>Claude Code</strong><small>Anthropic’s     coding agent, available in the terminal and other development surfaces.</small></span>
 </a>
 <a class="harness-card" href="https://github.com/openai/codex">
 <img src="https://github.com/openai.png?size=96" alt="" width="44" height="44" referrerpolicy="no-referrer">

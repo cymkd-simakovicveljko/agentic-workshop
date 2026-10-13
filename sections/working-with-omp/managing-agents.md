@@ -1,4 +1,4 @@
-# 6.4 Managing several agents
+# 5.4 Managing several agents
 
 **Keep the main session for decisions and integration. Give a subagent one bounded, independent job.** A separate `omp` process is a separate session; it is not automatically a child in Agent Hub. A `task` subagent belongs to the current session and appears there. A Collab guest is a client of the host session, not another local worker.
 

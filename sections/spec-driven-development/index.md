@@ -1,6 +1,12 @@
 # 4. Spec-driven development
 
-In [Engineering workflows](../engineering-workflows/index.md#applying-fsad-across-the-lifecycle), we mapped FSAD’s way of organizing delivery onto familiar lifecycle responsibilities. Here, we practise maintaining the shared specification and examine supporting practices and tools.
+
+Spec driven d je u sutstini framework koji ima asne komadne cermonije i korake.
+
+Engineering workflow readiti girll i spec da b ismo imali bolji pristup
+
+
+In [Engineering workflows](../engineering-workflows/index.md), we followed a feature through the lifecycle and examined where agents, checks, and people control the next step. Here, we practise maintaining the shared specification and examine supporting practices and tools.
 
 ## How do you note down a change in your repo?
 
@@ -431,4 +437,4 @@ His modernization example starts by extracting use cases and a model from existi
 
 For a longer guided introduction first, see the [DeepLearning.AI SDD course linked from Engineering workflows](../engineering-workflows/index.md#optional-watch-put-a-specification-to-work).
 
-[Previous: Engineering workflows](../engineering-workflows/index.md) · [Next: Advanced engineering](../advanced-engineering/index.md) · [Back to the outline](../../OUTLINE.md)
+[Previous: Engineering workflows](../engineering-workflows/index.md) · [Next: Key productivity tips](../working-with-omp/index.md) · [Back to the outline](../../OUTLINE.md)

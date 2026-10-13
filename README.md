@@ -46,10 +46,9 @@ The [full outline](OUTLINE.md) includes the individual lessons and their sequenc
 | --- | --- |
 | [1. Getting started with OMP](sections/01-getting-started-with-omp.md) | Choose a terminal, install OMP, connect a model, and learn how to interrupt it. |
 | [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, and MCP/extensions. |
-| [3. Engineering workflows](sections/engineering-workflows/index.md) | Apply Full Stack Agentic Development (FSAD) across the delivery lifecycle, with dependencies, bounded loops, and enforced gates. |
+| [3. Engineering workflows](sections/engineering-workflows/index.md) | Use agents across the delivery lifecycle, with dependencies, bounded loops, and enforced gates. |
 | [4. Spec-driven development](sections/spec-driven-development/index.md) | Keep specifications, plans, and tasks useful as work changes; compare the tools that support them. |
-| [5. Advanced engineering](sections/advanced-engineering/index.md) | Reason about harness boundaries, cancellation, stale work, compatibility, and changes to existing systems. |
-| [6. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
+| [5. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
 
 ## How we work
 
@@ -66,7 +65,7 @@ Keep credentials out of prompts and repository files. The setup lesson starts in
 - `research/` contains supporting notes linked from the lessons.
 - `reader/` contains the local server, static build, shared publishing allowlist, browser reader, styles, and diagrams.
 
-Edit the Markdown directly, refresh the reader, and check the changed lesson—including links and expandable sections. Read the neighboring lessons so prerequisites and next steps still line up.
+Edit the Markdown directly, refresh the reader, and check the changed lesson—including links and expandable sections. There is no need to restart the server after a Markdown edit. Refresh preserves your scroll position and expanded sections in the same browser tab when session storage is available. Read the neighboring lessons so prerequisites and next steps still line up.
 
 Run the reader's file-serving and static-publishing security checks with:
 
@@ -74,7 +73,7 @@ Run the reader's file-serving and static-publishing security checks with:
 node --test reader/server.test.mjs reader/build.test.mjs
 ```
 
-For browser regressions, open the local or published reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 850px or less. It navigates between lessons and checks Back/Forward positions, disclosure progress, heading navigation, keyboard focus, and recovery from a simulated failed document load. A failure throws an error; success logs `Reader checks passed`.
+For browser regressions, open the local or published reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 850px or less. It navigates between lessons and checks Back/Forward positions, disclosure progress, heading navigation, keyboard focus, and recovery from a simulated failed document load. It also opens and closes a temporary tab to check scroll position and disclosures across refresh; allow popups for this check. A failure throws an error; success logs `Reader checks passed`.
 
 These checks cover the reader and publication boundary, not GitHub account settings, provider access, fresh-machine installation, or the results of a learner's agent session. Prepared traces in the lessons are labelled examples, not recordings of live runs.
 

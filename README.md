@@ -46,8 +46,8 @@ The [full outline](OUTLINE.md) includes the individual lessons and their sequenc
 | --- | --- |
 | [1. Getting started with OMP](sections/01-getting-started-with-omp.md) | Choose a terminal, install OMP, connect a model, and learn how to interrupt it. |
 | [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, and MCP/extensions. |
-| [3. Engineering workflows](sections/engineering-workflows/index.md) | Use agents across the delivery lifecycle, with dependencies, bounded loops, and enforced gates. |
-| [4. Spec-driven development](sections/spec-driven-development/index.md) | Keep specifications, plans, and tasks useful as work changes; compare the tools that support them. |
+| [3. Rules for working with agents](sections/engineering-workflows/index.md) | Set expectations for assumptions, small changes, verification, debugging, context, and permissions. |
+| [4. Spec-driven development](sections/spec-driven-development/index.md) | Specify, plan, implement, and verify a change; keep the spec aligned as decisions change. |
 | [5. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
 
 ## How we work

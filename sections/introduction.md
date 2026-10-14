@@ -37,7 +37,7 @@ No AI experience needed. Bring your knowledge of code, Git, and tests. We will u
 
 ## How we will work
 
-[Engineering workflows](engineering-workflows/index.md) follows a change through delivery: agree on the intended result, plan the work, and review what we delegate. [Spec-driven development](spec-driven-development/index.md#methodology-and-toolbox-fsad-and-fsd) works through maintaining a shared specification, using [Full Stack Agentic Development (FSAD)](https://dejan-kh.github.io/fsad_playbook_live/fsad-playbook.html#fsad) as a reference.
+[Rules for working with agents](engineering-workflows/index.md) sets expectations for assumptions, scope, evidence, and permissions. [Spec-driven development](spec-driven-development/index.md) takes a change from agreed requirements through planning, implementation, and verification, with supporting tools as optional depth.
 
 ## Why this matters in 2026
 

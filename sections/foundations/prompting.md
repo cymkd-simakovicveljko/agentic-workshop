@@ -408,7 +408,7 @@ The control rules can be deterministic even though the agents' answers are not. 
 
 **Start with prompts to learn the useful sequence. Use code when a consequential rule needs enforcement.** The same patterns can appear in either approach: chains, conditional routes, independent workers, and review loops.
 
-We develop those patterns in [Engineering workflows](../engineering-workflows/index.md#the-two-axes-we-use-to-design-workflows), including **directed acyclic graphs (DAGs)** for dependencies without cycles. A repeating review-and-fix loop has a cycle, so not every agent workflow is a DAG.
+The [Rules for working with agents](../engineering-workflows/index.md) chapter sets practical expectations: bounded tasks, checked results, and clear approval boundaries.
 
 ## What the courses and research add
 

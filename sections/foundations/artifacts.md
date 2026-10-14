@@ -67,7 +67,7 @@ The Kiro walkthrough is from July 2025; the linked tools and skills can evolve. 
 
 **Reuse the project's existing organization.** If a workflow already owns the spec and tasks, update those instead of creating a competing `plan.md` and `progress.md` elsewhere. Link the spec from the tasks and the evidence from the progress note. When the plan changes, update the affected tasks; when a decision is superseded, mark it and link its replacement.
 
-For a deeper comparison, continue to [Spec-driven development](../spec-driven-development/index.md). The [Skills lesson](skills.md#four-skill-packs-four-starting-points) shows how reusable procedures guide this work. Neither a folder convention nor a skill's instructions enforce approval or prove completion on their own.
+For the working loop, continue to [Spec-driven development](../spec-driven-development/index.md). The [Skills lesson](skills.md#four-skill-packs-four-starting-points) shows how reusable procedures guide this work. Neither a folder convention nor a skill's instructions enforce approval or prove completion on their own.
 
 ## Report is not evidence
 

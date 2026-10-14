@@ -24,8 +24,8 @@ Start with the introduction, then install and connect OMP in section 1. There is
    6. **[Artifacts](sections/foundations/artifacts.md)** — Save results as files, reuse them as memory, and organize specs, decisions, tasks, and progress.
    7. **[Skills](sections/foundations/skills.md)** — Reuse a procedure, compare four engineering skill packs, and evaluate what helps.
    8. **[MCP, plugins, and extensions](sections/foundations/mcp-and-plugins.md)** — Connect capabilities and understand how they are packaged.
-3. **[Engineering workflows](sections/engineering-workflows/index.md)** — Follow a feature through the lifecycle, then connect it to workflow control, dependencies, and bounded loops.
-4. **[Spec-driven development](sections/spec-driven-development/index.md)** — Apply FSAD’s shared-spec practices, distinguish FSD tooling, and compare support for specifications, plans, and tasks.
+3. **[Rules for working with agents](sections/engineering-workflows/index.md)** — Make assumptions explicit, keep changes small, require evidence, and control scope, context, and permissions.
+4. **[Spec-driven development](sections/spec-driven-development/index.md)** — Turn agreed requirements into a spec, a plan, and a checked result; explore supporting tools as optional depth.
 5. **[Key productivity tips](sections/working-with-omp/index.md)** — Voice input, keyboard controls, phone access, and managing agents.
    1. **[Voice input](sections/working-with-omp/voice-input.md)** — Say the rough thought, check the transcription, then submit.
    2. **[Keyboard controls and steering](sections/working-with-omp/keyboard-and-steering.md)** — Direct, queue, interrupt, and inspect work.

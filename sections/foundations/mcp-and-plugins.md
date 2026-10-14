@@ -230,7 +230,7 @@ You should have a sourced answer and have seen the server handle the lookup.
 
 Can you explain **what OMP connected to, what data you sent, and how you checked the result**? Those are the useful habits—not collecting more servers.
 
-Next, [Engineering workflows](../engineering-workflows/index.md) follows a feature through the software lifecycle and shows where agents help—and where checks and people control the next step.
+Next, [Rules for working with agents](../engineering-workflows/index.md) sets expectations for assumptions, scope, verification, and permission to act.
 
 ## Sources and verification scope
 
@@ -241,4 +241,4 @@ Next, [Engineering workflows](../engineering-workflows/index.md) follows a featu
 
 An earlier workshop check exercised the Microsoft Learn endpoint directly: connecting, listing tools, searching docs, and fetching a page. The page included the local-development and container exceptions. That checked the MCP service—not a model using it through OMP, and not an Azure deployment. The installed OMP reported 18.2.9 at that check; the commands above follow the linked current OMP guide.
 
-[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Engineering workflows](../engineering-workflows/index.md)
+[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Rules for working with agents](../engineering-workflows/index.md)

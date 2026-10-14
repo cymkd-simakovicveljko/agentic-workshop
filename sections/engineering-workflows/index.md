@@ -1,477 +1,69 @@
-# 3. Simple Engineering workflows
+# 3. Rules for working with agents
 
-## Start with the whole lifecycle
+The agent can do the work. You still set the boundaries and decide whether to accept it.
 
-**SDLC means software development lifecycle.** It covers 
-- understanding needs / the problem, 
-- designing the solution
-- fitting a change into the system, building, 
-- testing and checking, 
-- releasing, 
-- operating, 
-- and eventually retiring software.
+## 1. Surface assumptions before implementing
 
-<figure class="course-diagram course-diagram-wide">
-<a href="/diagrams/software-development-lifecycle.webp"><img src="/diagrams/software-development-lifecycle.webp" width="1568" height="882" alt="Software development lifecycle shown as a cycle: Plan, Design, Develop, Test, Deploy, then Operate and Improve. User feedback and monitoring feed the next round of planning. Supporting principles are solving real problems, building securely, keeping it simple, iterating continuously, and creating impact at scale." /></a>
-<figcaption>The lifecycle at a glance. These activities overlap: testing, security, and feedback belong throughout the work, not only in the box where they appear. <a href="/diagrams/software-development-lifecycle.webp">Open the image at full size.</a></figcaption>
-</figure>
+Before a non-trivial change, have the agent state its assumptions about requirements, design, and scope. Don’t let guesses become requirements.
 
-## One small feature via the whole lifecycle
+If instructions conflict, stop. Name the conflict, explain the tradeoff, and settle it before continuing. Facts the agent can look up are its job—not questions for you.
 
-Let's look at an example of running through the whole lifecycle by implementing one feature.
+## 2. Build in thin, verifiable slices
 
-Suppose colleagues can book meeting rooms,  
-but they have to contact support to cancel a booking.   
-We want to let them cancel it themselves.
+One logical change at a time. Implement the smallest complete piece, test it, run it, then move on. Keep the system working between increments.
 
-“Add a cancel button” sounds like a small coding task.
+Reuse existing code. Leave unrelated cleanup alone. Prefer the boring, obvious solution over abstractions for hypothetical future requirements.
 
-### Understand the need
+## 3. Verify, don’t assume
 
-**Start with the problem, not the button.** For our booking feature:
+“Looks right” is not evidence. Require the actual commands, results, and a check of the running behavior.
 
-1. **What gets in the way.** <br> Ask a colleague to walk through the last time they needed to cancel. What did they do? Where did they get stuck?
-2. **Agree on what should happen.** <br>Who can cancel a booking? Should anyone get a notification?
-3. **Decide what to tackle now.** <br>Is this worth fixing? What will we include, and what can wait?
+A skipped check is still unchecked. Recheck after changes that could affect the result—not repeatedly against unchanged code.
 
-This is **planning and requirements**: 
-- agreeing on the problem, the behavior we want, and what we are leaving out. 
+Read the diff yourself. Passing tests do not prove that the agent built what you wanted.
 
-**Using an agent?** <br>It can organize research notes and suggest questions. <br>It cannot replace talking to the people who use the system.
+## 4. Challenge consequential decisions
 
-**Our recommendation:** use Matt Pocock’s [grill-me](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) approach to challenge your plan before writing code. It is not tied to a software framework: the goal is to uncover assumptions and settle unclear decisions.
+A confident answer can still be wrong. For a consequential decision, give a fresh reviewer the work and its requirements—not the author’s explanation of why it is correct.
 
-In OMP, load the underlying [grilling skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), rather than copying the `grill-me` launcher.
+Ask for concrete failures, unsupported assumptions, and missed cases. Require evidence.
 
-<div class="setup-platforms">
-<details>
-<summary><strong>How do we find the real problem?</strong><span>Stanford’s “Empathize” and “Define,” with a booking example.</span></summary>
+Treat findings as information, not a verdict. Check them before making repairs, and stop when there are no substantive issues left. Don’t run an endless review loop.
 
-Stanford’s d.school calls these activities [*Empathize* and *Define*](https://dschool.stanford.edu/tools/design-thinking-bootleg):
+## 5. Match the process to the risk
 
-- **Empathize:** understand the person’s experience. Ask a colleague to show you how they cancelled a booking. Look at the support request and what happened afterward—not just whether they say they would use a cancel button.
-- **Define:** decide which problem to solve. “People have to contact support to cancel a booking” describes a problem. “Add a cancel button” proposes one solution.
+Skip an extensive interview for a clear, mechanical edit. Spend more time on unclear requirements, unfamiliar code, security-sensitive changes, and actions that are hard to undo.
 
-The distinction matters: we want to fix what makes cancellation difficult, not build a button simply because someone asked for one.
+Use only the steps that help with the current task. More planning, more agents, and more reviews are not automatically better.
 
-</details>
-<details>
-<summary><strong>How do we decide whether it is worth building?</strong><span>Four questions to discuss before committing to a solution.</span></summary>
+## 6. Stop and diagnose
 
-[Silicon Valley Product Group calls these the four product risks](https://www.svpg.com/four-big-risks/):
+When something breaks, stop adding changes. Preserve the error output and reproduction steps.
 
-- **Value:** will people choose to use it? Would colleagues cancel bookings themselves rather than keep contacting support?
-- **Usability:** can they figure out how to use it? Can they find the action and tell whether the cancellation worked?
-- **Feasibility:** can we build it with the technology, skills, and time we have?
-- **Business viability:** does it work for the organization, including its costs and obligations? For example, do we need to keep a record of cancellations?
+Reproduce the failure, narrow down where it happens, and reduce it to a small case. Fix the root cause—not the symptom. Keep a regression check and resume only after verification passes.
 
-Product, design, and engineering should answer these together. A feature can be easy to build and still be the wrong thing to build.
+No speculative edit after edit. Each attempt needs new evidence.
 
-</details>
-</div>
+## 7. Delegate outcomes, not keystrokes
 
-### Choose an approach
+State the goal, constraints, and success criteria. Let the agent choose implementation steps within those boundaries—not invent new requirements.
 
-Should cancellation delete the booking or keep a record marked “cancelled”? How does the room become available again? Can we reuse the existing permission checks?
+Expect pushback when an approach has clear problems. The agent should name the downside and suggest an alternative, not agree and build something it knows is wrong. You make the informed decision.
 
-This is **design**. We decide how the change fits the system before those choices become harder to undo.
+## 8. Give the right context at the right time
 
-<details>
-<summary>When an idea needs a quick test: the Google / GV Design Sprint</summary>
+Have the agent read the relevant code, tests, interfaces, and an existing example before editing. Supply the current error, not pages of unrelated logs. Keep secrets out.
 
-If we are unsure whether an approach will help people, we can test a prototype before building the full feature. The [GV Design Sprint](https://www.gv.com/sprint/) gives this work a five-day structure: understand the challenge, sketch alternatives, choose an approach, build a prototype, and test it with customers.
+Before starting fresh, preserve decisions, changed files, verification results, open questions, and the next task. The new session should inspect the actual files, not trust the handoff blindly.
 
-For our booking feature, we could let colleagues try a cancellation flow in a prototype and watch where they hesitate. That can expose confusing choices before we implement them; it does not prove that the underlying system will work.
+**Resetting the conversation does not reset the working tree.** See [context controls](../foundations/context.md#manage-what-stays-in-context).
 
-We do not need a full sprint for every small change. Borrow the habit: test the uncertain part before making an expensive commitment.
+## 9. Make authority explicit
 
-</details>
+Decide which local actions the agent may take and which need approval. Require approval before pushing, deploying, deleting data, or other destructive actions.
 
-### Build and check it
+Use [tool policies and access controls](../foundations/tools-and-permissions.md#follow-the-request-through-execution) to enforce consequential boundaries. A prompt cannot do that alone.
 
-Now we implement the change. The button, the cancellation logic, the permission check, and any agreed notifications need to work together.
-
-Then try the cases that matter. Can the booking owner cancel? Is another person's booking protected? What happens if someone clicks twice?
-
-This is **implementation and testing**. Testing is not just finding broken code. It also helps us discover that a requirement was unclear or that we built the wrong behavior. We can write checks before or alongside the code; they do not have to wait until everything is built.
-
-### Put it into use
-
-Passing local checks does not make the feature available to colleagues. We still need to release it, check it in the live system, and know how to recover if it causes trouble.
-
-This is **delivery**. Installing a change and making it available to users can be separate decisions.
-
-### Look after it
-
-Are cancellations working? Are support requests dropping? Did a calendar integration stop receiving updates?
-
-This is **operation and maintenance**: keep the software useful and reliable, and feed what we learn into the next change. Eventually, if the booking system is replaced, we also need to move or retain the right data and switch the old system off.
-
-**Release is not the end of the lifecycle.**
-
-Teams use different names and divide these activities differently. The important thing is that the work gets done—not whether your diagram has six boxes or seven.
-
-## A lifecycle is not a recipe
-
-It is tempting to draw the work as a straight line:
-
-**Understand → design → build → check → release → maintain**
-
-That is a useful map. It is not a promise that we will visit each step only once.
-
-While checking cancellation, we might discover that a shared calendar still shows the room as booked. That could send us back to design. Watching a colleague use the button might reveal that they need to cancel one meeting in a recurring series, not the whole series. That sends us back to the requirements.
-
-**SDLC describes the work. A development approach describes how we organize it.** Waterfall and Agile are different ways of organizing that work; neither is another name for the lifecycle itself.
-
-<details>
-<summary>Optional history: when do we find out we were wrong?</summary>
-
-That question connects much of software development's history. We need enough planning to work together, but we also need chances to discover what our plans missed.
-
-### Stages made large projects easier to organize
-
-In a phase-based approach, often called **waterfall**, teams aim to settle requirements, then design, then implementation and testing. Each stage gives people something to review before committing to the next.
-
-There is a useful idea here: make decisions visible, coordinate the work, and know what is being handed over. The risk is waiting too long to try the things we are uncertain about. Discovering a wrong assumption near release can mean changing much more than a few lines of code.
-
-This concern is not new. Winston Royce's **1970** paper, often associated with waterfall, already warned about the risks of a simple one-pass sequence. It included feedback between stages, early trial work, and customer involvement. “People used to plan everything once, then Agile invented iteration” is too neat a version of the history.
-
-### Shorter cycles brought feedback closer
-
-The **2001 [Agile Manifesto](https://agilemanifesto.org/)** put more weight on working software, collaboration, and responding to change. Its [principles](https://agilemanifesto.org/principles.html) call for frequent delivery and close work between business people and developers.
-
-For our booking feature, that could mean delivering cancellation for a single booking, watching people use it, and using what we learn before tackling recurring bookings. We still need requirements, design, testing, and delivery. We do them in smaller pieces and revisit them as we learn.
-
-Agile does not mean “no plan” or “no documentation.” The manifesto explicitly says those things have value. It changes their priority when following the original plan would stop us responding to new information.
-
-### Delivery and operations became part of the same conversation
-
-Smaller changes still get stuck if developers finish their work and leave another team to figure out how to release and run it.
-
-**DevOps** emphasizes collaboration between the people building software and the people running it, supported by practices such as automated checks, repeatable releases, and monitoring. The first **DevOpsDays in 2009** is one early landmark: its [program](https://legacy.devopsdays.org/events/2009-ghent/program/) brought together deployment pipelines, infrastructure, monitoring, and cooperation across those roles.
-
-For our feature, the question is no longer only “Does cancellation work on my machine?” It is also “How do we release it safely, and how will we know if it stops working?”
-
-These approaches did not neatly replace one another. A team can plan a migration carefully, build it in small increments, and use automated delivery. We should choose practices because they address a real need, not because they belong to the newest label.
-
-<details>
-<summary>A short reading trail</summary>
-
-- **Royce and waterfall:** this [university teaching summary of the 1970 paper](https://www.cs.huji.ac.il/w~feit/sem/se09/Waterfall.pdf) shows the feedback loops, early trial work, and customer involvement. It is a later presentation, not the original paper.
-- **Agile:** read the [four values](https://agilemanifesto.org/) and then the [twelve principles](https://agilemanifesto.org/principles.html). Notice how much they say about collaboration, good design, and useful software—not ceremonies.
-- **DevOps:** browse the [2009 event program](https://legacy.devopsdays.org/events/2009-ghent/program/). The problems are recognizable even though the tools have changed.
-
-</details>
-</details>
-
-## What we will carry into agentic work
-
-**Our recommendation: keep the whole lifecycle in view, but work in small changes you can check.** Spend more time up front when a decision is expensive to reverse or several teams must agree. Try something early when the uncertainty is whether it will help the user.
-
-An agent can help us investigate, plan, write code, test, and review. It does not make the underlying questions disappear. Generating the cancel button faster does not decide who should be allowed to use it.
-
-Before moving on, take a recent change of your own. Where did you discover something important: while discussing it, building it, testing it, or after release? Could a smaller experiment or an earlier conversation have exposed it sooner?
-
-That is the habit we will build on: use agents across the work, while keeping decisions and results open to inspection.
-
-## Agree on the behavior before asking for code
-
-Pick one feature. Before asking the agent to build it:
-
-1. **Decide what it should do and what you’re leaving out.** For booking cancellation, who can cancel? Should anyone get a notification? Ask the people responsible for those decisions. Write down anything still undecided instead of leaving the agent to guess.
-2. **Ask the agent how it would build the change.** Review the plan. If several agents will work on it, check which tasks can happen at the same time and which must wait.
-3. **Agree on how you’ll check the result.** What should you test, and who will review it? If the change is going live, decide how you’ll release it and spot problems afterward.
-
-For a small fix, the existing issue and tests may be enough. Bring other people in when a decision affects their work. Judge the approach by whether it helps you deliver a useful change with less rework—not by how much code the agent produces.
-
-
-## The two axes we use to design workflows
-
-### Axis one: arrangement
-
-Arrangement describes the shape of dependencies. It does not say whether an agent, a program, or a person decides the next transition.
-
-<div class="course-flow" aria-label="Workflow arrangement">
-<span>Specify</span><span aria-hidden="true">→</span><span>Arrange dependencies</span><span aria-hidden="true">→</span><span>Execute branches</span><span aria-hidden="true">→</span><span>Join evidence</span><span aria-hidden="true">→</span><span>Accept or repair</span>
-</div>
-
-| Arrangement | Use it when | Minimum control rule | Common failure |
-| --- | --- | --- | --- |
-| **Sequential** | The next step depends on the previous result, or the work is small | Do not start step B until A has completed and its evidence is current | Treating “the agent said A is done” as evidence |
-| **Parallel fanout/join** | Branches are genuinely independent | Give each branch an owned input/output; the join waits for every required branch and checks each result | Two workers edit the same file, or the join counts completion rather than success |
-| **Conditional** | A known observation selects one of several paths | Define the observed condition and the behavior for missing or unknown evidence | Letting a vague model judgment choose a consequential branch |
-| **DAG** | Several steps depend on earlier steps, with branches converging later | Make dependencies explicit; a failed branch blocks every dependent node | Hiding a cycle or forgetting one dependency at the join |
-| **Bounded repair loop** | A check can produce a focused fix, then be rerun | Set a maximum attempt count and an escalation path before starting | Retrying forever, or weakening the check until it passes |
-
-**Our default is sequential.** Use parallelism when branches can work independently, without conflicting edits, shared mutable state, or an unresolved shared decision. Parallel execution is not autonomy: four directed workers can still be one tightly controlled workflow. It is an execution arrangement, not a transfer of authority.
-
-An independent branch needs more than a separate prompt. Name its input, output, and acceptance evidence. The join should fail closed when a required branch is missing, malformed, stale, or failed. “Three workers finished” is not the same as “the three required results passed.”
-
-<div class="setup-platforms">
-<details>
-<summary><strong>Sequential: start here</strong><span>Use when dependency is real or the change is small.</span></summary>
-
-Prompt:
-
-```text
-Inspect the current behavior and write down the acceptance criteria first.
-Do not edit implementation files until I confirm the criteria. After I
-confirm, make the smallest change, run the named check, and report the
-command and result before proposing the next step.
-```
-
-Failure mode: a long sequence can serialize unrelated work. Split only after you can name independent inputs and a join that can check all outputs.
-
-</details>
-<details>
-<summary><strong>Parallel fanout and join</strong><span>Use when branches own separate files or artifacts.</span></summary>
-
-Prompt:
-
-```text
-Work on only your assigned file: src/a.js. Do not edit shared files.
-Return the file path, the check you ran, and its observed result. The join
-will not accept a summary without that evidence.
-```
-
-Join checklist:
-
-1. Every required branch returned.
-2. Every branch names the revision or input it checked.
-3. Every branch passed its own acceptance check.
-4. The join ran the integration check after all branches completed.
-
-Failure mode: shared mutable files turn “parallel” into a race. Use separate worktrees or serialize the shared edit; a terminal tab is not file isolation.
-
-</details>
-<details>
-<summary><strong>Conditional and DAG</strong><span>Use explicit edges, not implied conversation order.</span></summary>
-
-**Conditional routing** chooses a path from an observed result. For the booking feature, passing permission tests can move the change to review; a failed test sends it back for repair. If the tests could not run, stop and investigate rather than treating the missing result as success. An agent can suggest a route for ambiguous work, but code should check the prerequisite before a consequential action.
-
-A **DAG** combines dependent paths:
-
-```text
-spec ──→ implementation ──→ unit-check ──→ acceptance
-   └──→ design-review ────────────────┘
-```
-
-Implementation and design review can start independently after `spec`; the unit check waits for implementation. `acceptance` waits for both the unit check and design review. If `unit-check` fails, acceptance is blocked; if `design-review` is missing, acceptance is blocked. A DAG is acyclic by definition: it has no path that returns to an earlier node.
-
-Failure mode: a “repair” edge from acceptance back to implementation is a loop, not a DAG. Model it as a bounded outer loop with an attempt counter, or keep the DAG for one attempt and let a separate controller schedule the next attempt.
-
-</details>
-<details>
-<summary><strong>Bounded repair loop</strong><span>Use when a focused failure can guide a limited repair.</span></summary>
-
-Prompt:
-
-```text
-Run the named check. If it fails, explain the observed failure, make one
-small repair that addresses that failure, and run the same check again.
-Allow at most two repair attempts. Do not weaken, delete, or broaden the
-assertion. If it still fails, stop and escalate with the evidence.
-```
-
-Failure mode: “try again until green” rewards a changed test or a fabricated success. Keep the assertion stable, record each attempt, and stop at the bound.
-
-</details>
-</div>
-
-### Axis two: controller
-
-The controller is whoever or whatever decides whether a transition is allowed.
-
-Who writes the instructions and who controls the next step are different questions. An agent can write a check that CI later enforces.
-
-| Controller | Strength | Limit | Good fit |
-| --- | --- | --- | --- |
-| **Agent** | Handles ambiguity and can choose a useful next investigation | A prompt can be ignored, misunderstood, or satisfied with a claim | Exploration, diagnosis, draft plans, bounded local edits |
-| **Code** | Repeats explicit checks and can stop a dependent action deterministically | It cannot decide whether a weak check is conceptually sufficient; it can be changed by whoever controls it | Status checks, file invariants, dependency ordering, attempt limits |
-| **Hybrid** | Code owns deterministic transitions; an agent proposes or repairs; a person decides the judgment call | The seam must be explicit, or the agent quietly becomes the real controller | Most production engineering workflows |
-| **Human approval** | A person owns a consequential judgment or release decision | A chat “yes” is not enough if it is not bound to the exact revision | Deployments, data changes, accepting ambiguous evidence |
-
-
-The practical recommendation is **hybrid**: let the agent handle interpretation and small repairs; let code enforce objective prerequisites; require human approval for the judgment that code cannot settle. Keep the handoff visible:
-
-```text
-agent proposes → code checks → human approves revision → controlled action
-```
-
-## Gates: permission to continue, not proof of truth
-
-A deterministic gate answers **may the workflow continue?** It does not answer **is the result wise or sufficient for the real goal?**
-
-Use a gate for facts that can be checked:
-
-- every required check completed;
-- evidence exists and has the required shape;
-- evidence refers to the current revision, not an earlier one;
-- every required branch passed;
-- repair attempts remain below the bound;
-- required approval is present and tied to the same revision.
-
-Treat the judgment behind `approved=true` separately. A reviewer can approve a poor design, a test can encode the wrong requirement, and an agent can produce a convincing but incomplete report. The gate can enforce that an approval exists; it cannot make the approval correct.
-
-### Evidence must be current
-
-Bind evidence and approval to a revision identifier: a commit SHA, content digest, or other stable identity. If the artifact changes, invalidate the evidence and approval. A green result from revision A is not a green result for revision B.
-
-### A gate agent is not enforcement
-
-An agent can be asked to “check the gate” and then rewrite the check, delete the evidence, or bypass its own failure. If the same writer controls the rule, the evidence, and the action, the rule is advisory.
-
-Real enforcement puts the transition outside the writer's authority: for example, required CI checks and repository permissions can prevent a merge when checks fail. Configure the platform deliberately: GitHub accepts successful, skipped, or neutral conclusions for required status checks, and administrators may bypass protection unless restrictions apply to them. Require evidence that the intended check actually executed; “CI exists” is not proof that the author cannot bypass it. The platform's current settings and audit trail are the evidence.
-
-### Restart and retry without inventing a framework
-
-Persist the smallest useful state: revision, required checks, evidence locations, approval identity, and attempt number. On restart, reload it and revalidate it against the current revision. Do not resume from “green” merely because a status file exists.
-
-Retries need a second question: was the previous side effect completed? Repeating a non-idempotent write, deployment, payment, or migration can do the action twice when the first result was lost. Prefer an idempotency key, an atomic temporary-file-and-rename pattern, or a manual check before retrying. Do not hide this risk behind a generic retry loop.
-
-## Apply the model to the SDLC
-
-The workflow shape changes with the work, but the engineering obligations do not disappear when an agent does the typing.
-
-### Specify: make “done” observable
-
-A small specification for our booking feature might say:
-
-```text
-Goal: let the booking owner cancel without contacting support.
-
-Acceptance:
-- the owner can cancel an active booking;
-- cancellation keeps a record and makes the room available again;
-- another person's cancellation request is rejected without changing the booking;
-- a missing booking returns "not found";
-- cancelling an already-cancelled booking makes no further changes.
-
-Out of scope for this change:
-- cancelling a recurring series;
-- adding new notification integrations.
-```
-
-This is enough to drive a small implementation. It names the boundary, success and failure, side effects, and what we are not building. Add detail when a decision is genuinely ambiguous; do not create a planning ceremony for a settled one.
-
-Useful prompt:
-
-```text
-Turn this request into a small acceptance table. Include one passing case,
-missing input, malformed input, and a case that looks successful but should
-still fail. Do not propose architecture yet. Ask about only decisions that
-change the contract.
-```
-
-### Design: reuse patterns before inventing architecture
-
-Look for the existing repository convention, standard library primitive, and platform capability before adding a framework. For cancellation, reuse the existing booking and permission checks before introducing a new workflow layer.
-
-Ask:
-
-```text
-Find the closest existing pattern for this behavior. Explain what it
-already guarantees, what our acceptance criteria still require, and the
-smallest change that reuses it. Do not add an abstraction for a single
-caller or a future provider.
-```
-
-The design decision is not “agent or no agent.” It is which decisions need flexible interpretation and which transitions must be explicit, repeatable, and reviewable.
-
-### Test first: fail for the right reason
-
-For a settled behavior, write or state the failing check before asking for the repair:
-
-```text
-Add a test that fails because someone can cancel another person's booking.
-Check that the request is rejected and the booking remains unchanged.
-Run it and show the failure. Then make the smallest implementation change
-that makes the same test pass. Do not weaken the assertion to match the
-current behavior.
-```
-
-The sequence is **failing behavior → implementation → same check passes → refactor**. An agent that edits the test until it turns green has changed the contract, not fixed the implementation. Ask for the failing output and inspect the diff.
-
-### Implement: keep the control point obvious
-
-Put the check where the protected action happens. The cancellation endpoint must check permission before changing the booking; hiding the button is not enough. Keep that order easy for a reviewer to follow.
-
-For a larger change, ask the agent to report:
-
-```text
-Name the transition that each check protects. For every downstream action,
-show the exact evidence that permits it. If a check is advisory rather than
-enforced, label it advisory.
-```
-
-### Review: check behavior and shape
-
-Review two different things:
-
-1. **Behavior:** Does the implementation meet the specification for pass, fail, missing, malformed, and stale cases?
-2. **Shape:** Is the code readable, focused, and consistent with nearby patterns? Did it add speculative flexibility, duplicate an existing helper, or hide the control point?
-
-Use a concrete review request:
-
-```text
-Review this change against the acceptance table and the repository's nearby
-patterns. Return findings only when you can point to a behavior, a missing
-failure case, a stale-evidence risk, or unnecessary complexity. Include the
-file and line, why it matters, and the smallest repair. Do not rewrite the
-whole change.
-```
-
-Read every changed and untracked file. A clean agent summary is not a code review, and a passing check is not proof that the intended behavior was checked.
-
-### Accept: make a decision from evidence
-
-Acceptance is a human judgment informed by checks:
-
-- the current revision is identified;
-- required checks ran against that revision;
-- failures blocked dependent work;
-- the evidence is understandable and current;
-- the change remains within scope;
-- any remaining uncertainty is named.
-
-Record what you actually observed:
-
-```text
-Revision:
-Required checks and observed results:
-Evidence locations:
-Approval bound to:
-Failed or skipped branches:
-Remaining uncertainty:
-Decision: accept / repair / escalate
-```
-
-Do not turn “the agent said it passed” into a substitute for the command, file, or review that would let another person reach the same conclusion.
-
-<aside class="judgment-callout">
-<p class="judgment-kicker">Use the smallest controller that holds</p>
-<p class="judgment-lead">A prompt is enough for a reversible exploratory step. Add a code gate when a dependent action must not happen after a known failure. Add protected permissions or human approval when the writer must not be able to bypass the transition.</p>
-</aside>
-
-## Sources and execution limits
-
-**Source facts:**
-
-- GitHub Actions documents `jobs.<job_id>.needs` as a dependency: a job waits for its prerequisites, and a failed or skipped prerequisite causes dependent jobs to be skipped unless an explicit condition changes that behavior. See [Using jobs in a workflow](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-jobs).
-- GitHub documents required status checks, required reviews, stale-review dismissal, and bypass permissions as separate protected-branch settings. See [About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) and [Dismissing a pull request review](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/dismissing-a-pull-request-review).
-
-**Course recommendations:** sequential by default, explicit ownership for parallel branches, revision-bound evidence, bounded repair, and hybrid control are our engineering recommendations. They are not guarantees supplied by an agent.
-
-**Execution limits:** the booking example and prompts are illustrative, not evidence of a provider-backed run or a production deployment.
-
-## Optional watch: put a specification to work
-
-[**Full Course: Spec-Driven Development with Coding Agents**](https://www.youtube.com/watch?v=hy8UstR2NEg) — Paul Everitt, DeepLearning.AI with JetBrains · **62 minutes**.
-
-Use this as a longer follow-on when you want to explore spec-driven development (SDD). The course description covers a project constitution, planning and validating features against a Markdown spec, introducing SDD to existing code, and packaging the workflow as a reusable skill. It is optional, not a prerequisite for this workshop.
-
-**Watch with one change of your own in mind:** what belongs in its specification, and what evidence would show that the implementation meets it? Borrow the procedure; we will continue using OMP rather than requiring another tool setup.
-
-For a contrasting, use-case-driven approach to business applications, see [Simon Martinelli's talk in Spec-driven development](../spec-driven-development/index.md#optional-watch-a-use-case-driven-approach).
+Inspect the exact command, target, and scope before approving. An approved shell command is not a sandbox.
 
 [Previous: MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) · [Next: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)

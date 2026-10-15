@@ -72,11 +72,22 @@ An approved shell command retains the shell's ambient filesystem, network, and s
 
 Start with OMP's built-in read, search, edit, and command tools. Add a custom tool, plugin, or MCP server only when a recurring operation needs a real executable interface that the built-ins cannot provide. A skill is passive guidance; it does not grant permissions or execute its own scripts. When you add executable capability, inspect its source, approval tier, network behavior, and write scope before using it.
 
-[Back to foundations](index.md) · [Previous: Prompting](prompting.md) · [Next: Sessions](sessions.md)
-
 ## Sources
 
 - [OMP tool approval modes and safety rules (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/approval-mode.md)
 - [OMP skills, tools, and hooks distinctions (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/skills.md)
 
 These links follow OMP's current `main` documentation rather than a pinned release; the installed version controls the available tools and settings.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Separate approval prompts from the security boundaries that must still hold at runtime.</span></summary>
+
+- [Tool approval mode](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md) — Oh My Pi. Trace how tool tiers, user policies, overrides, and safety checks are resolved for the arguments that will actually execute.
+- [LLM06:2025 Excessive Agency](https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/blob/main/2_0_vulns/LLM06_ExcessiveAgency.md) — OWASP GenAI Security Project. Apply least privilege, narrow tool functionality, downstream authorization, and human approval instead of trusting the model to enforce its own boundary.
+</details>
+</div>
+
+[Back to foundations](index.md) · [Previous: Prompting](prompting.md) · [Next: Sessions](sessions.md)

@@ -44,11 +44,22 @@ Done when: report the documented command, the script it invokes, and any disagre
 
 If the transcript changed a path or dropped “not,” stop and correct it before OMP sees it. The harness can execute an incorrectly transcribed instruction just as readily as a correctly typed one.
 
-[Back to Key productivity tips](index.md) · [Previous: Productivity tips overview](index.md) · [Next: Keyboard controls and steering](keyboard-and-steering.md)
-
 ## Sources
 
 - [OMP keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md) — Space push-to-talk and `Ctrl+L` live voice.
 - [OMP speech settings](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/stt/settings.ts) — `stt.enabled` and submit behavior.
 - [OMP speech model registry](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/stt/models.ts) — local model choices and sizes.
 - [OMP live transport](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/live/transport.ts) — `openai-codex` authentication and realtime connection.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Keep dictation reviewable, configurable, and separate from live voice.</span></summary>
+
+- [Keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md) — OMP project documentation. Check the current push-to-talk, live-voice, and remapping actions instead of relying on a shortcut copied from another terminal.
+- [Settings](https://github.com/can1357/oh-my-pi/blob/main/docs/settings.md) — OMP project documentation. Learn how `omp config set` writes settings and how profile and project precedence affect a speech configuration.
+</details>
+</div>
+
+[Back to Key productivity tips](index.md) · [Previous: Productivity tips overview](index.md) · [Next: Keyboard controls and steering](keyboard-and-steering.md)

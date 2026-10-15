@@ -78,8 +78,6 @@ When `/tree` offers to summarize the branch you're leaving, keep that summary on
 
 For resuming work, clearing context, and the full command reference, see [Sessions and memory](sessions.md#choose-the-operation-deliberately).
 
-[Back to foundations](index.md) · [Previous: Models and roles](models.md) · [Next: Prompting](prompting.md)
-
 ## Sources
 
 - [OMP context files and discovery, pinned 18.2.9 source](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/context-files.md)
@@ -91,3 +89,16 @@ For resuming work, clearing context, and the full command reference, see [Sessio
 - [Anthropic: Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — continuity through progress records and verification across sessions.
 - [OMP context usage report (current source)](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/slash-commands/helpers/context-report.ts)
 - [Research notes: context quality and long-running agents](../../research/2026-10-09-context-quality-and-long-running-agents.md) — evidence, limitations, and the reasoning behind our recommendations.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Curate the request, then learn why more context can make retrieval less reliable.</span></summary>
+
+- [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic Engineering. Learn how system instructions, tools, history, and just-in-time retrieval become the context available to an agent at each step.
+- [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://www.trychroma.com/research/context-rot) — Chroma Technical Report. See measured degradation across longer inputs and why adding more tokens is not automatically adding useful context.
+</details>
+</div>
+
+[Back to foundations](index.md) · [Previous: Models and roles](models.md) · [Next: Prompting](prompting.md)

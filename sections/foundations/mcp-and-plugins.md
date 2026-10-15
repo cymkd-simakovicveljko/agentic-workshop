@@ -1,4 +1,4 @@
-# 2.8 MCP, plugins, and extensions
+# 2.9 MCP, plugins, and extensions
 
 **MCP lets OMP connect to tools and data provided by another program.** For example, a documentation service can give OMP tools to search its pages and read the results.
 
@@ -241,4 +241,21 @@ Next, [Rules for working with agents](../engineering-workflows/index.md) sets ex
 
 An earlier workshop check exercised the Microsoft Learn endpoint directly: connecting, listing tools, searching docs, and fetching a page. The page included the local-development and container exceptions. That checked the MCP service—not a model using it through OMP, and not an Azure deployment. The installed OMP reported 18.2.9 at that check; the commands above follow the linked current OMP guide.
 
-[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: Rules for working with agents](../engineering-workflows/index.md)
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Keep the protocol boundary separate from the host integration around it.</span></summary>
+
+- [Architecture overview](https://modelcontextprotocol.io/docs/learn/architecture) — Model Context Protocol. Separates host, client, and server, then explains the data and transport layers so protocol semantics do not get confused with OMP integration.
+- [Build an MCP server](https://modelcontextprotocol.io/docs/develop/build-server) — Model Context Protocol. Walks from a weather server to configuring Claude for Desktop as host, making the integration boundary and user-approval path concrete.
+</details>
+<details>
+<summary><strong>Optional watch: Building Agents with Model Context Protocol</strong><span>See a complete MCP workshop from an Anthropic engineer.</span></summary>
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=kQmXtrmQ5Zg"><strong>Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic</strong></a> — AI Engineer, with Mahesh Murag of Anthropic. 1 hour 44 minutes 11 seconds. The verified description covers what MCP is, building with it, and agent use cases, with chapters for each part.
+</details>
+</div>
+
+
+[Back to foundations](index.md) · [Previous: Evals](evals.md) · [Next: Rules for working with agents](../engineering-workflows/index.md)

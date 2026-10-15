@@ -40,20 +40,9 @@ Open-ended questions still have a place. Use them when you want to explore possi
 
 Keep consequential thinking and decisions yours. Ask the model to surface options, assumptions, and evidence, then decide what to accept and do.
 
-The linked Kent Beck talk explores this boundary.
+Kent Beck's talk explores this boundary.
 
-<a class="video-card" href="https://www.youtube.com/watch?v=F8fBgDCf2Y4">
-<span class="video-card-preview">
-<img src="https://i.ytimg.com/vi/F8fBgDCf2Y4/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" referrerpolicy="no-referrer">
-<span class="video-card-play" aria-hidden="true">▶</span>
-</span>
-<span class="video-card-body">
-<span class="video-card-label">Further viewing · Prodacity 2026</span>
-<strong>Kent Beck: Software Engineering in the Age of AI</strong>
-<span>Rise8</span>
-<span class="video-card-action">Watch on YouTube ↗</span>
-</span>
-</a>
+<a data-youtube-embed href="https://www.youtube.com/watch?v=F8fBgDCf2Y4"><strong>Kent Beck: Software Engineering in the Age of AI</strong></a> — Rise8 · Prodacity 2026.
 
 ## Prompting techniques you can use today
 
@@ -359,22 +348,6 @@ As you work this way, you will recognize requests you make repeatedly. Keep the 
 
 OMP supports reusable Markdown commands with arguments. The [command reference](https://github.com/can1357/oh-my-pi/blob/main/docs/slash-command-internals.md) explains how to package a repeated prompt when you need that shortcut.
 
-<a class="video-card" href="https://www.youtube.com/watch?v=pP_dSNz_EdQ">
-<span class="video-card-preview">
-<img src="https://i.ytimg.com/vi/pP_dSNz_EdQ/maxresdefault.jpg" width="1280" height="720" alt="" loading="lazy" referrerpolicy="no-referrer">
-<span class="video-card-play" aria-hidden="true">▶</span>
-<span class="video-card-duration">10:56</span>
-</span>
-<span class="video-card-body">
-<span class="video-card-label">Further viewing · AI Engineer</span>
-<strong>The Unreasonable Effectiveness of Prompt Learning</strong>
-<span>Aparna Dhinakaran · Arize</span>
-<span class="video-card-action">Watch on YouTube ↗</span>
-</span>
-</a>
-
-The talk’s description outlines a system-prompt learning loop that uses reviews, feedback, and evaluations to update instructions. Watch it as an example of improving reusable prompts from evidence, not as proof that a particular wording always works.
-
 ## Prompting is an entry point to workflows
 
 So far, we have given one agent a sequence of jobs. We can go a step further: ask it to coordinate other agents, or put code in charge of the sequence.
@@ -441,5 +414,23 @@ Take the result from the technique you tried and review it against your original
 **Can you trace a claim to its source, tell what remains unknown, and choose the next action?** Check the relevant source or exercise the affected behavior. If you find a supported problem, use the feedback prompt above and verify the correction. If the result already meets the goal, keep it. An extra agent review is not required to complete the exercise.
 
 Next, we will look at what happens when the agent turns those instructions into tool calls in [Tools and permissions](tools-and-permissions.md).
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Design concrete instructions, then test whether they survive real examples.</span></summary>
+
+- [Anthropic's Interactive Prompt Engineering Tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) — Anthropic. Work through exercises on clear instructions, examples, output formats, and hallucination checks instead of collecting prompt gimmicks.
+- [Reasoning best practices](https://developers.openai.com/api/docs/guides/reasoning-best-practices) — OpenAI. Compare direct instructions, delimiters, examples, and explicit constraints, including why “think step by step” is not a universal fix for reasoning models.
+</details>
+<details>
+<summary><strong>Optional watch: The Unreasonable Effectiveness of Prompt Learning</strong><span>Improve reusable instructions through feedback and evaluations.</span></summary>
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=pP_dSNz_EdQ"><strong>The Unreasonable Effectiveness of Prompt Learning</strong></a> — Aparna Dhinakaran, Arize · AI Engineer · **11 minutes**.
+
+The talk’s description outlines a system-prompt learning loop that uses reviews, feedback, and evaluations to update instructions. Watch it as an example of improving reusable prompts from evidence, not as proof that a particular wording always works.
+</details>
+</div>
 
 [Back to foundations](index.md) · [Previous: Context](context.md) · [Next: Tools and permissions](tools-and-permissions.md)

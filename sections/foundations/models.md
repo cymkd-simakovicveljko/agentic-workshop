@@ -218,4 +218,24 @@ Use this prompt, replacing the function name and file path:
 
 **Make a choice:** would you trust the cheaper model with this kind of explanation again? Write down your choice and one reason based on the results. One task is a starting point, not proof that either model wins at everything.
 
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Choose a model by measured task quality, latency, and cost.</span></summary>
+
+- [Model selection](https://developers.openai.com/api/docs/guides/model-selection) — OpenAI API documentation. Compare models with the same inputs and keep the lightest setting that meets your quality bar, while accounting for workflow frequency and response time.
+- [A practical guide to building agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) — OpenAI. Establish a quality baseline with a capable model, then test smaller models against evals before trading quality for lower cost or latency.
+
+</details>
+<details>
+<summary><strong>Optional watch: Balancing accuracy, latency, and cost at scale</strong><span>See why an operational tradeoff beats shopping by one leaderboard number.</span></summary>
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=Bx6sUDRMx-8"><strong>OpenAI DevDay 2024 | Balancing accuracy, latency, and cost at scale</strong></a> — OpenAI.
+
+The model names and prices are historical; focus on how to measure the tradeoffs, not which 2024 model to choose.
+
+</details>
+</div>
+
 [Back to foundations](index.md) · [Previous: Foundations overview](index.md) · [Next: Context](context.md)

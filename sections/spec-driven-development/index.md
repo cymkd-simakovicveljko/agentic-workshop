@@ -151,8 +151,20 @@ For more on existing systems and team adoption: [InfoQ on enterprise spec-driven
 **Source scope:** the FSAD page labels itself v40; the linked FSD README is pinned to version 0.15.0. Other tool links follow mutable documentation. Their descriptions were checked against those sources, not by installing or running the tools. The working loop and adoption advice above are our recommendations.
 
 </details>
+</div>
+
+## Go deeper
+
+<div class="setup-platforms">
 <details>
-<summary>Optional videos</summary>
+<summary><strong>Read next</strong><span>Understand the different meanings of “spec-driven” before adopting a toolkit.</span></summary>
+
+- [Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html) — Birgitta Böckeler, on Martin Fowler's site. Read the distinctions between spec-first, spec-anchored, and spec-as-source, and her concerns about review overhead. The tool comparison reflects October 2025, not their current feature sets.
+- [Spec-driven development with AI: Get started with a new open source toolkit](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/) — Den Delimarsky, GitHub. Follow the separation of specification, plan, tasks, and implementation, with human review at each step. Its commands are for Spec Kit, not OMP.
+
+</details>
+<details>
+<summary><strong>Optional watches: spec-driven development</strong><span>Two perspectives on turning agreed behavior into checked software.</span></summary>
 
 ### Optional watch: a use-case-driven approach
 

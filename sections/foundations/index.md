@@ -10,9 +10,10 @@ By the end, you should be able to:
 - separate a proposed action, an executed action, an observed result, and a conclusion;
 - choose useful context instead of dumping every file into a request;
 - choose a model by availability, task fit, evidence quality, cost, and effort;
-- treat code, reports, plans, diagrams, and other produced files as artifacts that need inspection.
+- treat code, reports, plans, diagrams, and other produced files as artifacts that need inspection;
+- compare agent instructions on concrete cases and distinguish judge agreement from task success.
 
-## The eight topics
+## The nine topics
 
 Read these in order. Each page stands alone and links to the next decision.
 
@@ -23,7 +24,8 @@ Read these in order. Each page stands alone and links to the next decision.
 5. [Sessions and memory](../foundations/sessions.md) — Continue, reset, branch, and hand off work without losing the important parts.
 6. [Artifacts](../foundations/artifacts.md) — Keep useful outputs in files and inspect what was produced.
 7. [Skills](../foundations/skills.md) — Reuse procedures and know when to create one.
-8. [MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) — Connect tools and understand what an installed package adds.
+8. [Evals](../foundations/evals.md) — Build a small eval and check its judge before trusting the results.
+9. [MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) — Connect tools and understand what an installed package adds.
 
 ## Apply the map to an example
 
@@ -59,5 +61,17 @@ Each topic links to its sources and identifies any example-specific prerequisite
 - [Approval modes and limits](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/approval-mode.md)
 
 These sources describe documented behavior for that pinned source. They do not certify provider access, model quality, local permissions, or a learner's run.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Make the model, harness, tools, and feedback loop concrete.</span></summary>
+
+- [How coding agents work](https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/) — Simon Willison. Trace the harness around an LLM, from tool definitions through returned results and the loop that lets the model continue.
+- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) — Anthropic Engineering. See the augmented-LLM building block, the workflow-versus-agent distinction, and why tool results provide ground truth for each step.
+
+</details>
+</div>
 
 [Back to Getting started with OMP](../01-getting-started-with-omp.md) · [Next: Models and roles](models.md) · [Back to the outline](../../OUTLINE.md)

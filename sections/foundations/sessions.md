@@ -137,8 +137,6 @@ If we are building on OpenAI's Responses API, [**hosted file search**](https://d
 
 </details>
 
-[Back to foundations](index.md) · [Previous: Tools and permissions](tools-and-permissions.md) · [Next: Artifacts](artifacts.md)
-
 ## Sources
 
 - [OMP session operations: new, resume, fork, fresh, and clear (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/session-operations-export-share-fork-resume.md)
@@ -150,3 +148,16 @@ If we are building on OpenAI's Responses API, [**hosted file search**](https://d
 - [Research notes: RAG, retrieval stores, and agent memory](../../research/2026-10-09-rag-and-agent-memory.md) — source evidence, selection boundaries, and verification limits.
 
 Session-operation links follow OMP's current `main`; memory details are pinned to the source snapshot above. Commands, defaults, and backend availability can differ in your installed release.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Know what survives a session change and what the next agent needs to check.</span></summary>
+
+- [Session Operations: export, dump, share, fresh, clear, fork, resume/continue](https://github.com/can1357/oh-my-pi/blob/main/docs/session-operations-export-share-fork-resume.md) — Oh My Pi. Use the operation matrix to see which commands switch identity, rebuild context, or leave the transcript and working tree untouched.
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — Anthropic Engineering. Learn why compaction alone is not continuity, and how incremental work, progress records, and clean-state checks help the next session continue safely.
+</details>
+</div>
+
+[Back to foundations](index.md) · [Previous: Tools and permissions](tools-and-permissions.md) · [Next: Artifacts](artifacts.md)

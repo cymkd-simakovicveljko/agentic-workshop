@@ -66,4 +66,24 @@ Use [tool policies and access controls](../foundations/tools-and-permissions.md#
 
 Inspect the exact command, target, and scope before approving. An approved shell command is not a sandbox.
 
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>How experienced engineers keep control while delegating the work.</span></summary>
+
+- [Vibe engineering](https://simonwillison.net/2025/Oct/7/vibe-engineering/) — Simon Willison. Read how testing, code review, manual QA, and clear instructions become more important when an agent can produce changes quickly.
+- [My AI Adoption Journey](https://mitchellh.com/writing/my-ai-adoption-journey) — Mitchell Hashimoto. Start with “Reproduce Your Own Work” and “Engineer the Harness” for a practical account of learning what to delegate and giving agents ways to check themselves.
+
+</details>
+<details>
+<summary><strong>Optional watch: Mitchell Hashimoto’s new way of writing code</strong><span>A working engineer's approach to delegation, review, and learning the tools.</span></summary>
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=WjckELpzLOU"><strong>Mitchell Hashimoto’s new way of writing code</strong></a> — The Pragmatic Engineer · **1 hour 58 minutes**.
+
+The full interview also covers HashiCorp and Ghostty. For this lesson, start with [how Mitchell uses AI at 1:19:13](https://www.youtube.com/watch?v=WjckELpzLOU&t=4753s), then compare his division of planning, coding, and review with your own workflow.
+
+</details>
+</div>
+
 [Previous: MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) · [Next: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)

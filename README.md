@@ -45,7 +45,7 @@ The [full outline](OUTLINE.md) includes the individual lessons and their sequenc
 | Section | What you will work on |
 | --- | --- |
 | [1. Getting started with OMP](sections/01-getting-started-with-omp.md) | Choose a terminal, install OMP, connect a model, and learn how to interrupt it. |
-| [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, and MCP/extensions. |
+| [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, evals, and MCP/extensions. |
 | [3. Rules for working with agents](sections/engineering-workflows/index.md) | Set expectations for assumptions, small changes, verification, debugging, context, and permissions. |
 | [4. Spec-driven development](sections/spec-driven-development/index.md) | Specify, plan, implement, and verify a change; keep the spec aligned as decisions change. |
 | [5. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
@@ -62,7 +62,7 @@ Keep credentials out of prompts and repository files. The setup lesson starts in
 
 - `OUTLINE.md` defines the route and drives the reader's sidebar.
 - `sections/` contains the published lessons and their source links.
-- `research/` contains supporting notes linked from the lessons.
+- `research/` contains supporting notes linked from the lessons and the [reading and video selection record](research/2026-10-14-lesson-reading-and-video-picks.md).
 - `reader/` contains the local server, static build, shared publishing allowlist, browser reader, styles, and diagrams.
 
 Edit the Markdown directly, refresh the reader, and check the changed lesson—including links and expandable sections. There is no need to restart the server after a Markdown edit. Refresh preserves your scroll position and expanded sections in the same browser tab when session storage is available. Read the neighboring lessons so prerequisites and next steps still line up.
@@ -88,6 +88,6 @@ node reader/diagrams/derive-course-svg.mjs reader/diagrams/agent-loop.svg
 
 Check the rendered image after changing its layout.
 
-Selected lessons embed YouTube talks and retain a direct link as a fallback. Add `data-youtube-embed` to a link of the form `https://www.youtube.com/watch?v=VIDEO_ID` to opt in. The reader validates the host and video ID, then creates a player on `www.youtube-nocookie.com`; arbitrary iframe markup remains blocked.
+Embed recommended YouTube videos in the lesson, keeping a direct link as a fallback. Use each video once per page rather than repeating it in the further-reading section. Add `data-youtube-embed` to a link of the form `https://www.youtube.com/watch?v=VIDEO_ID`. The reader validates the host and video ID, then creates a player on `www.youtube-nocookie.com`; arbitrary iframe markup remains blocked.
 
 </details>

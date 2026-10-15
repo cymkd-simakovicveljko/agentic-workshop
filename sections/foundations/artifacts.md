@@ -119,8 +119,6 @@ Next action:
 
 Put durable behavior and decisions in the right home: project guidance for current commands, a spec for the agreed behavior, an ADR for a consequential architectural choice, and a handoff for unfinished work. Preserve detailed output in a linked log or report. Do not turn a one-off result into a permanent instruction or leave yesterday's progress note claiming today's state.
 
-[Back to foundations](index.md) · [Previous: Sessions and memory](sessions.md) · [Next: Skills](skills.md)
-
 ## Sources
 
 - [Sessions and memory](sessions.md) — saved history, retrieval, and optional OMP memory backends.
@@ -129,3 +127,16 @@ Put durable behavior and decisions in the right home: project guidance for curre
 - [GitHub Spec Kit](https://github.com/github/spec-kit) — shared principles and process-specific artifacts.
 - [Superpowers: writing plans](https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md) — plan location, structure, and handoff.
 - [Pocock: domain modeling, inspected revision](https://github.com/mattpocock/skills/blob/b0618bc436ad893b3c5e84e55fba86586d34a404/skills/engineering/domain-modeling/SKILL.md) — glossary and ADR conventions.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Choose the smallest durable record that preserves the decision, work, or evidence.</span></summary>
+
+- [Architectural Decision Records (ADRs)](https://adr.github.io/) — ADR GitHub organization. Learn when a decision record should preserve rationale, alternatives, tradeoffs, and consequences instead of turning every preference into paperwork.
+- [Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) — Yichao “Peak” Ji, Manus. Start with “Use the File System as Context” for saving information outside the conversation and keeping paths that let an agent retrieve it later; the following section shows how an updated task file keeps unfinished work visible.
+</details>
+</div>
+
+[Back to foundations](index.md) · [Previous: Sessions and memory](sessions.md) · [Next: Skills](skills.md)

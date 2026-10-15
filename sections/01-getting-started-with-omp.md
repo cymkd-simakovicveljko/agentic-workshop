@@ -1,23 +1,5 @@
 # 1. Getting started with OMP: from answers to action
 
-## The model is only part of the story
-
-To talk to a model, you don’t need a coding agent. You can call an API or run a model locally and send it input.
-
-In the coding interaction we’re discussing, the model produces text—including structured requests to use tools. **It cannot take action on your computer by itself.** Generating a command is not the same as running it.
-
-That is where the **harness**, also called a **coding agent**, comes in. Claude Code, Codex CLI, and OMP are examples. We’ll use both terms for these tools; you don’t need to treat them as two separate products.
-
-Here’s what happens when you send a prompt:
-
-1. **The harness sends your request to the model.** Along with your prompt and relevant context, it provides definitions of the tools available for that interaction.
-2. **The model responds.** Its response can include text, tool calls, or both. A tool call requests an action: read a file, create one, change some code, or run a command on your computer.
-3. **The harness looks for tool calls.** If there are any, it handles the required permission checks and executes the allowed calls. The harness does the work—not the model.
-4. **The harness sends the tool results back to the model.** The model can now see what the file contained, whether the command succeeded, or what error came back.
-5. **The model responds again.** It may request more tool calls, which repeat the loop, or give you an answer without further actions.
-
-This is the **agent loop**. One prompt can lead to several rounds of reading, editing, and running commands before the final reply.
-
 ## Harnesses you’ll hear about
 
 <details>
@@ -61,15 +43,6 @@ The same idea shows up in terminal tools, editors, and desktop apps. Here are a 
 </div>
 
 </details>
-
-## Why we’re using OMP
-
-[OMP](https://github.com/can1357/oh-my-pi) is a fork of [Pi](https://github.com/badlogic/pi-mono), an extensible agent harness. We’re using it for two reasons:
-
-- **Open source:** we can read the implementation, investigate its behavior, and change it.
-- **Extensible:** we can add tools and workflows. OMP includes code navigation, execution, browser tools, debugging, and delegation, so we can start working before customizing the environment.
-
-Pi and OMP make their own documentation available to the agent, so it can help write extensions for the harness it is running in.
 
 <details>
 <summary>How the harness affects cost: a benchmark example</summary>
@@ -206,5 +179,17 @@ Before moving on, confirm:
 - You know where OMP is working and how to interrupt it.
 
 Prefer talking to typing? [Voice input](working-with-omp/voice-input.md) shows how to turn a rough explanation into a request without losing important details.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Understand what OMP starts, runs, and controls after installation.</span></summary>
+
+- [Oh My Pi README](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/README.md#install) — Oh My Pi project. See the installation options and built-in tools, and how OMP differs from the model behind it.
+- [CLI reference](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/cli-reference.md) — Oh My Pi project. Follow how `omp` launches and resumes sessions, selects models, and applies tool and approval settings.
+
+</details>
+</div>
 
 [Back to the outline](../OUTLINE.md) · [Next: Agentic engineering foundations](foundations/index.md)

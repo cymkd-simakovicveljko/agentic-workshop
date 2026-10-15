@@ -1,8 +1,47 @@
 # Introduction
 
-**Use OMP to investigate code, make changes, and check the result.**
+This workshop is about using coding agents for the engineering work you already do: investigating unfamiliar code, fixing bugs, making changes, and checking whether the result is ready.
 
-**Less typing does not mean less engineering.** You still decide what to build, what must not break, and whether the change is ready.
+**Producing code is getting cheaper. Understanding what it does, whether it solves the right problem, and what it might break still takes engineering judgment.**
+
+We’ll practise directing the work, giving the agent useful context, and reviewing what it produces. The goal is not to accept more generated code. It is to complete useful work while staying in control of the decisions and the result.
+
+## This is agentic engineering
+
+Simon Willison [describes agentic engineering](https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/) as developing software with the help of coding agents. His definition of an agent is useful:
+
+> “Agents run tools in a loop to achieve a goal.”
+
+That loop makes the difference. A chatbot can suggest a fix. A coding agent can apply it, run a test, see what happened, and decide what to try next—using the tools and permissions it has been given.
+
+## The model is only part of the story
+
+To talk to a model, you don’t need a coding agent. You can call an API or run a model locally and send it input.
+
+In the coding interaction we’re discussing, the model produces text—including structured requests to use tools. **It cannot take action on your computer by itself.** Generating a command is not the same as running it.
+
+That is where the **harness**, also called a **coding agent**, comes in. Claude Code, Codex CLI, and OMP are examples. We’ll use both terms for these tools; you don’t need to treat them as two separate products.
+
+Here’s what happens when you send a prompt:
+
+1. **The harness sends your request to the model.** Along with your prompt and relevant context, it provides definitions of the tools available for that interaction.
+2. **The model responds.** Its response can include text, tool calls, or both. A tool call requests an action: read a file, create one, change some code, or run a command on your computer.
+3. **The harness looks for tool calls.** If there are any, it handles the required permission checks and executes the allowed calls. The harness does the work—not the model.
+4. **The harness sends the tool results back to the model.** The model can now see what the file contained, whether the command succeeded, or what error came back.
+5. **The model responds again.** It may request more tool calls, which repeat the loop, or give you an answer without further actions.
+
+This is the **agent loop**. One prompt can lead to several rounds of reading, editing, and running commands before the final reply.
+
+## Why we’re using OMP
+
+[OMP](https://github.com/can1357/oh-my-pi) is a fork of [Pi](https://github.com/badlogic/pi-mono), an extensible agent harness. We’re using it for two reasons:
+
+- **Open source:** we can read the implementation, investigate its behavior, and change it.
+- **Extensible:** we can add tools and workflows. OMP includes code navigation, execution, browser tools, debugging, and delegation, so we can start working before customizing the environment.
+
+Pi and OMP make their own documentation available to the agent, so it can help write extensions for the harness it is running in.
+
+OMP is our workshop choice, not a requirement for every project. Models, interfaces, and available tools will keep changing. We’ll learn the OMP controls we need, but the habits we practise—defining useful work, managing context, setting boundaries, and checking results—apply beyond this particular harness.
 
 ## Where this fits your work
 
@@ -33,9 +72,15 @@ We will start by installing OMP and connecting a model, then use focused example
 
 You will make a change, fix a bug, write a skill, and try working with subagents. Each time, you get less step-by-step help.
 
+## Before you start
+
 No AI experience needed. Bring your knowledge of code, Git, and tests. We will use OMP in the terminal; keep your usual editor.
 
+You do not need to understand transformer mathematics before starting. The optional background at the end introduces how language models generate text and how attention uses context. Start there if those ideas are unfamiliar, or return to it after your first OMP session.
+
 ## How we will work
+
+Each practical lesson starts with a short explanation, then shows how to use the idea in OMP. You’ll try a focused task, inspect what happened, and decide whether the result is good enough. Deeper reading and videos are there when you want more background.
 
 [Rules for working with agents](engineering-workflows/index.md) sets expectations for assumptions, scope, evidence, and permissions. [Spec-driven development](spec-driven-development/index.md) takes a change from agreed requirements through planning, implementation, and verification, with supporting tools as optional depth.
 
@@ -101,12 +146,40 @@ These selected firsthand accounts show different ways engineers use agents—not
 
 [Sources, context, and photo credits](../research/2026-09-27-community-voices.md).
 
-## This is agentic engineering
+## Go deeper
 
-Simon Willison [describes agentic engineering](https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/) as developing software with the help of coding agents. His definition of an agent is useful:
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Keep the useful parts of agentic engineering and skip the hype.</span></summary>
 
-> “Agents run tools in a loop to achieve a goal.”
+- [What is agentic engineering?](https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/) — Simon Willison. Define the agent loop and the human work of specifying, inspecting, and verifying software instead of treating generated code as finished.
+- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) — Anthropic Engineering. Compare workflows with agents, start with the simplest design, and use tool results and evaluation to keep autonomous work grounded.
 
-That loop makes the difference. A chatbot can suggest a fix. A coding agent can apply it, run a test, see what happened, and decide what to try next—using the tools and permissions it has been given.
+</details>
+<details>
+<summary><strong>Optional watch: Engineering practices that make coding agents work</strong><span>Hear a practical coding-agent workflow from Simon Willison, with emphasis on review and verification.</span></summary>
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=owmJyKVu5f8"><strong>Simon Willison: Engineering practices that make coding agents work - The Pragmatic Summit</strong></a> — The Pragmatic Engineer.
+
+</details>
+<details>
+<summary><strong>Optional background: how language models work</strong><span>Understand the model underneath the agent: transformers first, then attention.</span></summary>
+
+These explain the model underneath the agent. They are background for the workshop, not instructions for operating OMP. Start with the transformer overview; continue to attention if you want to understand how tokens exchange information from their context.
+
+### Transformers, the tech behind LLMs
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=wjZofJX0v4M"><strong>Transformers, the tech behind LLMs | Deep Learning Chapter 5</strong></a> — 3Blue1Brown.
+
+A visual introduction to tokens, embeddings, and next-token prediction. [Read the illustrated lesson](https://www.3blue1brown.com/lessons/gpt/).
+
+### Attention in transformers, step-by-step
+
+<a data-youtube-embed href="https://www.youtube.com/watch?v=eMlx5fFNoYc"><strong>Attention in transformers, step-by-step | Deep Learning Chapter 6</strong></a> — 3Blue1Brown.
+
+How attention updates token representations using surrounding context. [Read the illustrated lesson](https://www.3blue1brown.com/lessons/attention/).
+
+</details>
+</div>
 
 [Next: Getting started with OMP](01-getting-started-with-omp.md)

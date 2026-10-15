@@ -44,11 +44,22 @@ omp --cwd ~/code/agentic-workshop
 Use `--add-dir` only when the task needs another workspace directory. `/resume` and `/fork` change session history and identity; they do not turn an independent session into a subagent. Agent Hub is for workers attached to the current session. `/jobs` is a status snapshot, not a transcript or a control surface.
 
 
-[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Back to the outline](../../OUTLINE.md)
-
 ## Sources
 
 - [OMP Agent Hub](https://github.com/can1357/oh-my-pi/blob/main/docs/agent-hub.md) — roster controls, transcripts, steering, revive, and kill.
 - [OMP task-agent discovery](https://github.com/can1357/oh-my-pi/blob/main/docs/task-agent-discovery.md) — task agents, working directories, and spawn constraints.
 - [OMP CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md) — `--cwd`, `--add-dir`, and session commands.
 - [OMP session operations](https://github.com/can1357/oh-my-pi/blob/main/docs/session-operations-export-share-fork-resume.md) — `/resume`, `/fork`, and session identity.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Separate OMP's controls from the coordination costs of running more workers.</span></summary>
+
+- [Agent Hub](https://github.com/can1357/oh-my-pi/blob/main/docs/agent-hub.md) — OMP project documentation. Use the roster, inspector, transcript, revive, and kill details to watch a bounded worker instead of trusting a completion label.
+- [The Code Agent Orchestra - what makes multi-agent coding work](https://addyosmani.com/blog/code-agent-orchestra/) — Addy Osmani. Read the subagent sections for independent file ownership, dependency handoffs, and the review and coordination cost that makes “more agents” a decision rather than a default.
+</details>
+</div>
+
+[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Back to the outline](../../OUTLINE.md)

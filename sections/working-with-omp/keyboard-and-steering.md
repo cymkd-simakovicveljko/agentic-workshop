@@ -39,10 +39,21 @@ When a focused subagent is active, type a message and press `Enter` to steer tha
 
 Add a remap only when a terminal or accessibility constraint makes one of these chords unreliable; keep `/hotkeys` as the source of truth after remapping.
 
-[Back to Key productivity tips](index.md) · [Previous: Voice input](voice-input.md) · [Next: Phone access](phone-access.md)
-
 ## Sources
 
 - [OMP keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md)
 - [OMP approval modes](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md)
 - [OMP CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md)
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Use the live key map and approval rules to steer without guessing.</span></summary>
+
+- [Keybindings](https://github.com/can1357/oh-my-pi/blob/main/docs/keybindings.md) — OMP project documentation. Use `/hotkeys`, action names, and remap rules as the source of truth when a terminal or extension changes a chord.
+- [Tool approval mode](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md) — OMP project documentation. See how approval prompts, `Escape`, `Ctrl+Q`, and tool tiers interact when a turn is waiting for permission.
+</details>
+</div>
+
+[Back to Key productivity tips](index.md) · [Previous: Voice input](voice-input.md) · [Next: Phone access](phone-access.md)

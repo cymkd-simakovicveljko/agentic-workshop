@@ -31,10 +31,21 @@ Host:  /collab stop
 
 Start read-only. Upgrade to a full-control link only for a bounded action you are ready to review on the host afterward.
 
-[Back to Key productivity tips](index.md) · [Previous: Keyboard and steering](keyboard-and-steering.md) · [Next: Managing agents](managing-agents.md)
-
 ## Sources
 
 - [OMP collaboration](https://github.com/can1357/oh-my-pi/blob/main/docs/collab.md) — browser joins, access levels, relay, encryption, and guest limits.
 - [OMP CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md) — `omp join` and launch/session commands.
 - [OMP README](https://github.com/can1357/oh-my-pi/blob/main/README.md) — current OMP capabilities and installation.
+
+## Go deeper
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Read next</strong><span>Understand the link, relay, and host boundary before sharing a session.</span></summary>
+
+- [Collab: Live Session Sharing](https://github.com/can1357/oh-my-pi/blob/main/docs/collab.md) — OMP project documentation. Follow the browser join flow and review the difference between view-only and full-control links, including the link-as-secret trust boundary.
+- [CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md) — OMP project documentation. Compare browser access with `omp join` and the launch/session flags that keep the host working directory and authentication on the host.
+</details>
+</div>
+
+[Back to Key productivity tips](index.md) · [Previous: Keyboard and steering](keyboard-and-steering.md) · [Next: Managing agents](managing-agents.md)

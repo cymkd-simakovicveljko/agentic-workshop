@@ -138,5 +138,3 @@ Put durable behavior and decisions in the right home: project guidance for curre
 - [Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) — Yichao “Peak” Ji, Manus. Start with “Use the File System as Context” for saving information outside the conversation and keeping paths that let an agent retrieve it later; the following section shows how an updated task file keeps unfinished work visible.
 </details>
 </div>
-
-[Back to foundations](index.md) · [Previous: Sessions and memory](sessions.md) · [Next: Skills](skills.md)

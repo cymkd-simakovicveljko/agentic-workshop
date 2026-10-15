@@ -6,7 +6,7 @@ Spec driven d je u sutstini framework koji ima asne komadne cermonije i korake.
 Engineering workflow readiti girll i spec da b ismo imali bolji pristup
 -->
 
-[Rules for working with agents](../engineering-workflows/index.md) sets expectations for how agents should work. Here, we turn an agreed change into a spec, a plan, and a checked result.
+[Working with agents in a real codebase](../engineering-workflows/index.md) covered investigation, failure recovery, verification, security, and team review. Here, we turn an agreed change into a spec, a plan, and a checked result.
 
 ## 1. What spec-driven development changes
 
@@ -180,5 +180,3 @@ Optional depth on planning and checking work against a spec. Watch with your own
 
 </details>
 </div>
-
-[Previous: Rules for working with agents](../engineering-workflows/index.md) · [Next: Key productivity tips](../working-with-omp/index.md) · [Back to the outline](../../OUTLINE.md)

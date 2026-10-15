@@ -61,5 +61,3 @@ If the transcript changed a path or dropped “not,” stop and correct it befor
 - [Settings](https://github.com/can1357/oh-my-pi/blob/main/docs/settings.md) — OMP project documentation. Learn how `omp config set` writes settings and how profile and project precedence affect a speech configuration.
 </details>
 </div>
-
-[Back to Key productivity tips](index.md) · [Previous: Productivity tips overview](index.md) · [Next: Keyboard controls and steering](keyboard-and-steering.md)

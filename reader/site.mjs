@@ -3,6 +3,7 @@ export const assets = new Map([
   ["/", ["reader/index.html", "text/html"]],
   ["/reader.css", ["reader/reader.css", "text/css"]],
   ["/reader.js", ["reader/reader.js", "text/javascript"]],
+  ["/images/hireright.png", ["reader/images/hireright.png", "image/png"]],
   ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
   ["/diagrams/llm-context.png", ["reader/diagrams/llm-context.png", "image/png"]],
   ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],

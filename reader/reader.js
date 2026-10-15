@@ -56,38 +56,46 @@ async function getDocument(path, signal) {
   return response.text();
 }
 
+const outline = $("#course-outline");
+const outlineToggle = $(".menu-toggle");
 function setOutline(open) {
-  const wasOpen = document.body.classList.contains("outline-open");
-  document.body.classList.toggle("outline-open", open);
-  $(".menu-toggle").setAttribute("aria-expanded", String(open));
-  $(".menu-toggle").setAttribute(
+  if (open && !outline.open) {
+    outline.showModal();
+    revealItems([...$("#sidebar").querySelectorAll(
+      ":scope > :not(#lessons), .chapter-label, .lesson-link, .nested-headings a",
+    )].filter((item) => item.getClientRects().length));
+  }
+  if (!open && outline.open) {
+    outline.close();
+    outlineToggle.focus({ preventScroll: true });
+  }
+  outlineToggle.setAttribute("aria-expanded", String(open));
+  outlineToggle.setAttribute(
     "aria-label",
     open ? "Close course outline" : "Open course outline",
   );
-  syncOutlineAccess();
-  if (!open && wasOpen && $("#sidebar").inert) $(".menu-toggle").focus();
 }
-function syncOutlineAccess() {
-  const mobile = matchMedia("(max-width: 850px)").matches;
-  const open = document.body.classList.contains("outline-open");
-  $("#sidebar").inert = mobile && !open;
-  $("#main").inert = mobile && open;
-  $(".backdrop").hidden = !mobile || !open;
-}
-$(".menu-toggle").addEventListener("click", () =>
-  setOutline(!document.body.classList.contains("outline-open")),
-);
-$(".backdrop").addEventListener("click", () => setOutline(false));
-window.addEventListener("keydown", (event) => {
-  if (
-    event.key === "Escape" &&
-    document.body.classList.contains("outline-open")
-  ) {
-    setOutline(false);
-  }
+outlineToggle.addEventListener("click", () => setOutline(!outline.open));
+$(".outline-close").addEventListener("click", () => setOutline(false));
+outline.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  setOutline(false);
 });
-window.addEventListener("resize", syncOutlineAccess);
-syncOutlineAccess();
+outline.addEventListener("click", (event) => {
+  if (event.target !== outline) return;
+  const box = outline.getBoundingClientRect();
+  if (
+    event.clientX < box.left || event.clientX > box.right ||
+    event.clientY < box.top || event.clientY > box.bottom
+  ) setOutline(false);
+});
+const narrowLayout = matchMedia("(max-width: 900px)");
+const lessonIndex = $(".lesson-index");
+lessonIndex.open = !narrowLayout.matches;
+narrowLayout.addEventListener("change", () => {
+  lessonIndex.open = !narrowLayout.matches;
+});
+lessonIndex.addEventListener("toggle", updateProgress);
 $("#type-size").addEventListener("click", () => {
   const large = document.body.classList.toggle("large-text");
   $("#type-size").setAttribute(
@@ -179,7 +187,6 @@ function parseCourseOutline(document) {
         : [],
       parent: null,
       number: "",
-      sectionNumber: null,
       isIntroduction: false,
     };
   };
@@ -188,7 +195,6 @@ function parseCourseOutline(document) {
   const flatLessons = [];
   const visit = (lesson, parent, sectionNumber, number) => {
     lesson.parent = parent;
-    lesson.sectionNumber = sectionNumber;
     lesson.number = number;
     lesson.isIntroduction = !parent && !sectionNumber;
     flatLessons.push(lesson);
@@ -441,7 +447,25 @@ function pagination(index) {
   }
 }
 
+function revealLesson() {
+  revealItems(document.querySelectorAll(
+    ".lesson-header > *, .page-index, #article > *, #pagination > *",
+  ));
+}
 
+function revealItems(items) {
+  items.forEach((item) => item.getAnimations().forEach((animation) => animation.cancel()));
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  items.forEach((item, index) => {
+    item.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: 360,
+      // ponytail: cap the stagger so long pages and menus are readable within a second.
+      delay: Math.min(index * 65, 600),
+      easing: "ease-out",
+      fill: "backwards",
+    });
+  });
+}
 async function loadDocument({ focus = false, view } = {}) {
   controller?.abort();
   controller = new AbortController();
@@ -467,11 +491,6 @@ async function loadDocument({ focus = false, view } = {}) {
     const lesson = index >= 0 ? lessons[index] : null;
     $("#title").textContent = title;
     document.title = `${title} — Agentic engineering`;
-    $("#chapter").textContent = lesson
-      ? lesson.isIntroduction
-        ? "INTRODUCTION"
-        : `SECTION ${lesson.sectionNumber.padStart(2, "0")}`
-      : "COURSE RESOURCES";
     $("#crumb").textContent = lesson
       ? lesson.isIntroduction
         ? "INTRODUCTION"
@@ -479,13 +498,6 @@ async function loadDocument({ focus = false, view } = {}) {
       : path === "OUTLINE.md"
         ? "OUTLINE"
         : "RESOURCE";
-    $("#lesson-position").textContent = lesson
-      ? lesson.isIntroduction
-        ? "Introduction"
-        : `Section ${lesson.number}`
-      : path === "OUTLINE.md"
-        ? `${course.sections.length}-section course outline`
-        : "Reference document";
     $("#read-time").textContent =
       `~${Math.max(1, Math.ceil(source.split(/\s+/).length / 220))} min read`;
     $("#read-time").title =
@@ -496,12 +508,12 @@ async function loadDocument({ focus = false, view } = {}) {
     $("#announcement").textContent = `Loaded ${title}`;
     if (focus) article.focus({ preventScroll: true });
     restoreView(view);
+    revealLesson();
   } catch (error) {
     if (error.name === "AbortError") return;
     $("#title").textContent = "This page isn’t available";
     document.title = "Document unavailable — Agentic engineering";
-    $("#chapter").textContent = "DOCUMENT UNAVAILABLE";
-    $("#lesson-position").textContent = "Read error";
+    $("#crumb").textContent = "DOCUMENT UNAVAILABLE";
     $("#read-time").textContent = "";
     headings = [];
     $("#page-headings").replaceChildren();
@@ -646,8 +658,10 @@ document.addEventListener("click", (event) => {
   currentEntry = crypto.randomUUID();
   history.pushState({ readerEntry: currentEntry }, "", url);
   setOutline(false);
-  if (same) restoreView();
-  else loadDocument({ focus: true });
+  if (same) {
+    restoreView();
+    if (!url.hash) revealLesson();
+  } else loadDocument({ focus: true });
 });
 
 try {

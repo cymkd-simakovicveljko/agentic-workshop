@@ -21,6 +21,27 @@ Our returns example needs four things:
 3. **A grader:** something that decides whether the answer follows that rule.
 4. **Results:** which cases passed, which failed, and what those failures have in common.
 
+### Build a golden set
+
+A **golden set** is a curated collection of cases with human-reviewed expected answers or behaviors. It gives us a reference for checking whether a change helped or broke something. “Golden” means reviewed and trusted—not permanently correct.
+
+For our 14-day returns policy:
+
+| Customer situation | Expected behavior |
+| --- | --- |
+| Bought the headphones 10 days ago | Confirm that the return is within the window. |
+| Bought them exactly 14 days ago | Accept the return: day 14 is included in our example policy. |
+| Bought them 15 days ago | Explain that the return is outside the window. |
+| Hasn't supplied a purchase date | Ask for the date rather than guessing eligibility. |
+
+Record the input, relevant policy or context, and expected behavior. We need the right decision, not one exact sentence. Include normal requests, boundary cases, missing information, and known failures.
+
+**Use the same cases to compare versions.** Keep separate held-out cases that you haven't used while tuning the prompt or skill; otherwise, you risk improving for the examples rather than the task.
+
+To evaluate a judge, also include candidate answers with human-assigned verdicts—including incorrect answers. That checks whether the judge recognizes success and failure, not whether the assistant can produce a good answer.
+
+Version the set and its policy. Add reviewed examples from real failures, remove sensitive information, and revisit expected outcomes when requirements change.
+
 Now we have something we can work with. The next question is how to grade the answer.
 
 ## Start with the cheapest check that works
@@ -193,6 +214,3 @@ The [research note](../../research/2026-10-14-evaluation-claims.md) checks the t
 Watch the walkthrough behind this lesson, keeping our qualifications in mind: judge agreement is not task success, and a useful threshold depends on your task.
 </details>
 </div>
-
-
-[Back to foundations](index.md) · [Previous: Skills](skills.md) · [Next: MCP, plugins, and extensions](mcp-and-plugins.md)

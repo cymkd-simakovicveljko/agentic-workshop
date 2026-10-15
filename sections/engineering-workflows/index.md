@@ -1,4 +1,22 @@
-# 3. Rules for working with agents
+# 3. Working with agents in a real codebase
+
+The agent has produced a plausible change. Now you need to decide whether it belongs in this codebase, solves the original problem, and is ready for someone else to review. More generated code doesn't answer those questions.
+
+**We'll use the agent to investigate and implement, while keeping the decisions and acceptance with us.** These five lessons connect the mechanics from Foundations to the work of maintaining software with other people.
+
+## The five lessons
+
+1. [Codebase investigation](codebase-investigation.md) — Trace one feature slice, check its running call stack, and turn verified findings into a source-linked wiki.
+2. [Agent failure modes](agent-failure-modes.md) — Recognize an unproductive approach and choose a recovery move.
+3. [Verification strategy](verification-strategy.md) — Review for unnecessary complexity and weak tests, then choose evidence that supports the changed behavior.
+4. [Security and data boundaries](security-and-data-boundaries.md) — Inspect data flow and tool access, then distinguish approval from enforced limits.
+5. [Team integration](team-integration.md) — Coordinate bounded agent work and give teammates evidence, ownership, and explicit merge decisions.
+
+Each page starts with a recognizable situation and asks you to make one small decision or check. Prepared examples are labelled; they need no setup. You can apply the approach to your own repo afterward, but there is no shared project or extra installation.
+
+Start with [Codebase investigation](codebase-investigation.md). Keep the rules below as a reference while you work.
+
+## Rules for working with agents
 
 The agent can do the work. You still set the boundaries and decide whether to accept it.
 
@@ -85,5 +103,3 @@ The full interview also covers HashiCorp and Ghostty. For this lesson, start wit
 
 </details>
 </div>
-
-[Previous: MCP, plugins, and extensions](../foundations/mcp-and-plugins.md) · [Next: Spec-driven development](../spec-driven-development/index.md) · [Back to the outline](../../OUTLINE.md)

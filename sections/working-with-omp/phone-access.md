@@ -47,5 +47,3 @@ Start read-only. Upgrade to a full-control link only for a bounded action you ar
 - [CLI reference](https://github.com/can1357/oh-my-pi/blob/main/docs/cli-reference.md) — OMP project documentation. Compare browser access with `omp join` and the launch/session flags that keep the host working directory and authentication on the host.
 </details>
 </div>
-
-[Back to Key productivity tips](index.md) · [Previous: Keyboard and steering](keyboard-and-steering.md) · [Next: Managing agents](managing-agents.md)

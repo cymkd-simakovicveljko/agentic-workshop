@@ -55,5 +55,3 @@ Add a remap only when a terminal or accessibility constraint makes one of these 
 - [Tool approval mode](https://github.com/can1357/oh-my-pi/blob/main/docs/approval-mode.md) — OMP project documentation. See how approval prompts, `Escape`, `Ctrl+Q`, and tool tiers interact when a turn is waiting for permission.
 </details>
 </div>
-
-[Back to Key productivity tips](index.md) · [Previous: Voice input](voice-input.md) · [Next: Phone access](phone-access.md)

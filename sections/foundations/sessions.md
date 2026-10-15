@@ -159,5 +159,3 @@ Session-operation links follow OMP's current `main`; memory details are pinned t
 - [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — Anthropic Engineering. Learn why compaction alone is not continuity, and how incremental work, progress records, and clean-state checks help the next session continue safely.
 </details>
 </div>
-
-[Back to foundations](index.md) · [Previous: Tools and permissions](tools-and-permissions.md) · [Next: Artifacts](artifacts.md)

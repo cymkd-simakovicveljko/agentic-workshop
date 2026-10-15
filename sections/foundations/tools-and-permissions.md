@@ -89,5 +89,3 @@ These links follow OMP's current `main` documentation rather than a pinned relea
 - [LLM06:2025 Excessive Agency](https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/blob/main/2_0_vulns/LLM06_ExcessiveAgency.md) — OWASP GenAI Security Project. Apply least privilege, narrow tool functionality, downstream authorization, and human approval instead of trusting the model to enforce its own boundary.
 </details>
 </div>
-
-[Back to foundations](index.md) · [Previous: Prompting](prompting.md) · [Next: Sessions](sessions.md)

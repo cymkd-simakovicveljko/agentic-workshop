@@ -191,5 +191,3 @@ Prefer talking to typing? [Voice input](working-with-omp/voice-input.md) shows h
 
 </details>
 </div>
-
-[Back to the outline](../OUTLINE.md) · [Next: Agentic engineering foundations](foundations/index.md)

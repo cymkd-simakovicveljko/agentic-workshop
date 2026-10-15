@@ -46,7 +46,7 @@ The [full outline](OUTLINE.md) includes the individual lessons and their sequenc
 | --- | --- |
 | [1. Getting started with OMP](sections/01-getting-started-with-omp.md) | Choose a terminal, install OMP, connect a model, and learn how to interrupt it. |
 | [2. Agentic engineering foundations](sections/foundations/index.md) | Models and roles, context, prompting, tools and permissions, sessions and memory, artifacts, skills, evals, and MCP/extensions. |
-| [3. Rules for working with agents](sections/engineering-workflows/index.md) | Set expectations for assumptions, small changes, verification, debugging, context, and permissions. |
+| [3. Working with agents in a real codebase](sections/engineering-workflows/index.md) | Investigate code, recognize agent failure modes, choose verification, protect security and data boundaries, and prepare reviewable changes for teammates. |
 | [4. Spec-driven development](sections/spec-driven-development/index.md) | Specify, plan, implement, and verify a change; keep the spec aligned as decisions change. |
 | [5. Key productivity tips](sections/working-with-omp/index.md) | Voice input, keyboard controls, remote access from your phone, and managing several agents. |
 
@@ -60,7 +60,7 @@ Keep credentials out of prompts and repository files. The setup lesson starts in
 
 ## Working on the material
 
-- `OUTLINE.md` defines the route and drives the reader's sidebar.
+- `OUTLINE.md` defines the route and populates the **Lessons** drawer and previous/next cards. Keep navigation there rather than adding manual footer links to lessons.
 - `sections/` contains the published lessons and their source links.
 - `research/` contains supporting notes linked from the lessons and the [reading and video selection record](research/2026-10-14-lesson-reading-and-video-picks.md).
 - `reader/` contains the local server, static build, shared publishing allowlist, browser reader, styles, and diagrams.
@@ -73,7 +73,7 @@ Run the reader's file-serving and static-publishing security checks with:
 node --test reader/server.test.mjs reader/build.test.mjs
 ```
 
-For browser regressions, open the local or published reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 850px or less. It navigates between lessons and checks Back/Forward positions, disclosure progress, heading navigation, keyboard focus, and recovery from a simulated failed document load. It also opens and closes a temporary tab to check scroll position and disclosures across refresh; allow popups for this check. A failure throws an error; success logs `Reader checks passed`.
+For browser regressions, open the local or published reader in a foreground tab and paste the contents of `reader/browser-check.js` into the browser's developer console. Run it once at desktop width and once at a mobile width of 900px or less. It navigates between lessons and checks staggered lesson and drawer fades, Back/Forward positions, disclosure progress, heading navigation, drawer keyboard focus, and recovery from a simulated failed document load. Repeat with `prefers-reduced-motion: reduce` enabled in the browser's rendering tools to check that content appears immediately instead of fading. It also opens and closes a temporary tab to check scroll position and disclosures across refresh; allow popups for this check. A failure throws an error; success logs `Reader checks passed`.
 
 These checks cover the reader and publication boundary, not GitHub account settings, provider access, fresh-machine installation, or the results of a learner's agent session. Prepared traces in the lessons are labelled examples, not recordings of live runs.
 

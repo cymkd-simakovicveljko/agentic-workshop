@@ -15,13 +15,36 @@
     new URL(location.href).searchParams.get("doc") === path &&
     document.querySelector("#article").getAttribute("aria-busy") === "false";
   const visit = async (path) => {
+    if (!document.querySelector("#course-outline").open) {
+      document.querySelector(".menu-toggle").click();
+    }
     document.querySelector(`.lesson-item[data-path="${path}"] > a`).click();
     await waitFor(() => loaded(path));
     await settle();
+    assert(!document.querySelector("#course-outline").open,
+      "Selecting a lesson did not close the course outline");
   };
   const context = "sections/foundations/context.md";
   const models = "sections/foundations/models.md";
   await visit(context);
+  await visit(context);
+  const revealItems = [...document.querySelector("#article").children].slice(0, 2);
+  const reveals = document.querySelector("#article").getAnimations({ subtree: true });
+  const opacity = (item) => Number(getComputedStyle(item).opacity);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    assert(reveals.length === 0 && revealItems.every((item) => opacity(item) === 1),
+      "Reduced motion must show lesson content immediately");
+  } else {
+    assert(reveals.length >= 2, "Opening a lesson did not animate its content");
+    const timing = reveals[0].effect.getTiming();
+    reveals.forEach((animation) => {
+      animation.pause();
+      animation.currentTime = timing.delay + timing.duration / 2;
+    });
+    assert(opacity(revealItems[0]) > opacity(revealItems[1]),
+      "Lesson content did not fade in from top to bottom");
+    reveals.forEach((animation) => animation.finish());
+  }
   scrollTo({ top: 2200, behavior: "instant" });
   await settle();
   const previousY = scrollY;
@@ -56,13 +79,31 @@
     "Heading navigation highlighted the previous section");
   document.querySelector(".skip").click();
   assert(document.activeElement === article, "Skip to lesson did not move keyboard focus");
-  if (matchMedia("(max-width: 850px)").matches) {
-    const menu = document.querySelector(".menu-toggle");
-    menu.click();
-    document.querySelector("#lesson-search").focus();
-    document.querySelector(".backdrop").click();
-    assert(document.activeElement === menu, "Closing the outline lost keyboard focus");
+  const menu = document.querySelector(".menu-toggle");
+  menu.click();
+  assert(document.querySelector("#course-outline").open,
+    "The course outline did not open");
+  const drawerLinks = [...document.querySelectorAll("#lessons .lesson-link")].slice(0, 2);
+  const drawerReveals = document.querySelector("#sidebar").getAnimations({ subtree: true });
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    assert(drawerReveals.length === 0 && drawerLinks.every((item) => opacity(item) === 1),
+      "Reduced motion must show drawer links immediately");
+  } else {
+    const firstReveal = drawerLinks[0].getAnimations()[0];
+    assert(firstReveal, "Opening the drawer did not animate its links");
+    const timing = firstReveal.effect.getTiming();
+    drawerReveals.forEach((animation) => {
+      animation.pause();
+      animation.currentTime = timing.delay + timing.duration / 2;
+    });
+    assert(opacity(drawerLinks[0]) > opacity(drawerLinks[1]),
+      "Drawer links did not fade in from top to bottom");
+    drawerReveals.forEach((animation) => animation.finish());
   }
+  document.querySelector("#lesson-search").focus();
+  document.querySelector(".outline-close").click();
+  assert(!document.querySelector("#course-outline").open &&
+    document.activeElement === menu, "Closing the outline lost keyboard focus");
   const sdd = "sections/spec-driven-development/index.md";
   await visit(sdd);
   const initialPanels = [...article.querySelectorAll("details")].map((part) => part.open);
@@ -114,5 +155,5 @@
   } finally {
     reloadTab.close();
   }
-  console.log("Reader checks passed: history, refresh, progress, headings, keyboard focus, and error recovery.");
+  console.log("Reader checks passed: lesson motion, history, refresh, progress, headings, keyboard focus, and error recovery.");
 })();

@@ -348,6 +348,8 @@ As you work this way, you will recognize requests you make repeatedly. Keep the 
 
 OMP supports reusable Markdown commands with arguments. The [command reference](https://github.com/can1357/oh-my-pi/blob/main/docs/slash-command-internals.md) explains how to package a repeated prompt when you need that shortcut.
 
+If an instruction should apply across tasks, [choose where it belongs](context.md#where-instructions-come-from) rather than repeating it in every request.
+
 ## Prompting is an entry point to workflows
 
 So far, we have given one agent a sequence of jobs. We can go a step further: ask it to coordinate other agents, or put code in charge of the sequence.
@@ -381,7 +383,7 @@ The control rules can be deterministic even though the agents' answers are not. 
 
 **Start with prompts to learn the useful sequence. Use code when a consequential rule needs enforcement.** The same patterns can appear in either approach: chains, conditional routes, independent workers, and review loops.
 
-The [Rules for working with agents](../engineering-workflows/index.md) chapter sets practical expectations: bounded tasks, checked results, and clear approval boundaries.
+The [Working with agents in a real codebase](../engineering-workflows/index.md) section puts these expectations into practice: investigate before editing, recover from failures, check results, and preserve security and review boundaries.
 
 ## What the courses and research add
 
@@ -432,5 +434,3 @@ Next, we will look at what happens when the agent turns those instructions into 
 The talk’s description outlines a system-prompt learning loop that uses reviews, feedback, and evaluations to update instructions. Watch it as an example of improving reusable prompts from evidence, not as proof that a particular wording always works.
 </details>
 </div>
-
-[Back to foundations](index.md) · [Previous: Context](context.md) · [Next: Tools and permissions](tools-and-permissions.md)

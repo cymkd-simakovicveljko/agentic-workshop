@@ -230,7 +230,7 @@ You should have a sourced answer and have seen the server handle the lookup.
 
 Can you explain **what OMP connected to, what data you sent, and how you checked the result**? Those are the useful habits—not collecting more servers.
 
-Next, [Rules for working with agents](../engineering-workflows/index.md) sets expectations for assumptions, scope, verification, and permission to act.
+Next, [Working with agents in a real codebase](../engineering-workflows/index.md) connects these capabilities to investigation, failure recovery, verification, security, and team review.
 
 ## Sources and verification scope
 
@@ -256,6 +256,3 @@ An earlier workshop check exercised the Microsoft Learn endpoint directly: conne
 <a data-youtube-embed href="https://www.youtube.com/watch?v=kQmXtrmQ5Zg"><strong>Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic</strong></a> — AI Engineer, with Mahesh Murag of Anthropic. 1 hour 44 minutes 11 seconds. The verified description covers what MCP is, building with it, and agent use cases, with chapters for each part.
 </details>
 </div>
-
-
-[Back to foundations](index.md) · [Previous: Evals](evals.md) · [Next: Rules for working with agents](../engineering-workflows/index.md)

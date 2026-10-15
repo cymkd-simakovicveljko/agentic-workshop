@@ -137,7 +137,7 @@ Our example uses `disable-model-invocation: true` so we choose when to apply it.
 
 Once a procedure helps, it is natural to ask what other engineers have packaged. We will look at four: **Matt Pocock's skills, Addy Osmani's Agent Skills, Lauren Tan's pstack, and Jesse Vincent's Superpowers.** This is our shortlist, not an industry ranking.
 
-These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. The [Rules for working with agents](../engineering-workflows/index.md) chapter turns selected ideas into expectations for everyday work. Here, we are looking at how people package those ideas as instructions for agents.
+These packs connect to the **software development lifecycle (SDLC)**: understanding a need, designing a solution, building it, checking it, delivering it, and looking after it. [Working with agents in a real codebase](../engineering-workflows/index.md) puts selected ideas into practice through investigation, failure recovery, verification, security, and team review. Here, we are looking at how people package those ideas as instructions for agents.
 
 **Start with the failure you want to prevent.** Are you building the wrong thing, skipping checks, or losing track of a long change? Read the relevant procedure before adopting the author's whole workflow.
 
@@ -459,6 +459,3 @@ In this workflow, “learning” means updating the saved instructions or script
 Follow a README-writing skill through test cases, baseline comparisons, feedback, and trigger tuning. The demo uses VS Code; watch for the improvement loop rather than copying its setup into OMP.
 </details>
 </div>
-
-
-[Back to foundations](index.md) · [Previous: Artifacts](artifacts.md) · [Next: Evals](evals.md)

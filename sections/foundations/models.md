@@ -237,5 +237,3 @@ The model names and prices are historical; focus on how to measure the tradeoffs
 
 </details>
 </div>
-
-[Back to foundations](index.md) · [Previous: Foundations overview](index.md) · [Next: Context](context.md)

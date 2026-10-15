@@ -48,7 +48,7 @@ The engineer sets the goal and authority. The model proposes a response or actio
 
 The exact order can differ. A model may inspect first, write first, be denied a tool, or stop at a limit. Describe only the visible request, tool activity, returned result, and files; never claim to have inspected private reasoning.
 
-After the foundations lessons, move to [Rules for working with agents](../engineering-workflows/index.md) for clear expectations about how agents should work. [Key productivity tips](../working-with-omp/index.md) closes the course with voice input, keyboard controls, phone access, and managing agents.
+After the foundations lessons, move to [Working with agents in a real codebase](../engineering-workflows/index.md) to practise investigation, failure recovery, verification, security, and team review. [Key productivity tips](../working-with-omp/index.md) closes the course with voice input, keyboard controls, phone access, and managing agents.
 
 ## Sources and adaptation
 
@@ -73,5 +73,3 @@ These sources describe documented behavior for that pinned source. They do not c
 
 </details>
 </div>
-
-[Back to Getting started with OMP](../01-getting-started-with-omp.md) · [Next: Models and roles](models.md) · [Back to the outline](../../OUTLINE.md)

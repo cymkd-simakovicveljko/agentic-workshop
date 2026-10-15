@@ -36,5 +36,3 @@ Start with [Voice input](voice-input.md), then continue through the keyboard con
 - [OMP (Oh My Pi): AI Coding Agent with LSP, DAP Debugger, and Hashline Edits](https://betterstack.com/community/guides/ai/oh-my-pi-ai-coding-agent/) — Better Stack. Get a readable overview of OMP's integrated tools and how they fit the plan–implement–verify loop before you use the narrower controls in this section.
 </details>
 </div>
-
-[Back to the outline](../../OUTLINE.md) · [Previous: Spec-driven development](../spec-driven-development/index.md) · [Next: Voice input](voice-input.md)

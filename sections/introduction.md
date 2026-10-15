@@ -82,7 +82,7 @@ You do not need to understand transformer mathematics before starting. The optio
 
 Each practical lesson starts with a short explanation, then shows how to use the idea in OMP. You’ll try a focused task, inspect what happened, and decide whether the result is good enough. Deeper reading and videos are there when you want more background.
 
-[Rules for working with agents](engineering-workflows/index.md) sets expectations for assumptions, scope, evidence, and permissions. [Spec-driven development](spec-driven-development/index.md) takes a change from agreed requirements through planning, implementation, and verification, with supporting tools as optional depth.
+[Working with agents in a real codebase](engineering-workflows/index.md) connects investigation, failure recovery, verification, security, and team review through small actions and prepared examples. [Spec-driven development](spec-driven-development/index.md) takes a change from agreed requirements through planning, implementation, and verification, with supporting tools as optional depth.
 
 ## Why this matters in 2026
 
@@ -181,5 +181,3 @@ How attention updates token representations using surrounding context. [Read the
 
 </details>
 </div>
-
-[Next: Getting started with OMP](01-getting-started-with-omp.md)

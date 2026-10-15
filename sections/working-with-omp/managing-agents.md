@@ -61,5 +61,3 @@ Use `--add-dir` only when the task needs another workspace directory. `/resume` 
 - [The Code Agent Orchestra - what makes multi-agent coding work](https://addyosmani.com/blog/code-agent-orchestra/) — Addy Osmani. Read the subagent sections for independent file ownership, dependency handoffs, and the review and coordination cost that makes “more agents” a decision rather than a default.
 </details>
 </div>
-
-[Back to Key productivity tips](index.md) · [Previous: Phone access](phone-access.md) · [Back to the outline](../../OUTLINE.md)

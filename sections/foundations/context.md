@@ -12,7 +12,7 @@ The **context window** limits how much the model can process at once. A saved co
 
 Context can include:
 - the current message and earlier turns, 
-- applicable instructions (Agent.md, Claude.md), 
+- applicable project instructions, such as `AGENTS.md` and `CLAUDE.md`,
 - Harness (OMP or other) tool descriptions and working directory (System instructions), 
 - supported context files,
 - files or command results returned by explicit reads and runs. 
@@ -20,6 +20,42 @@ Context can include:
 **Remember:** A path mentioned in a prompt is not proof that the model read it. A file on disk is not automatically current context. Retrieved text is evidence to inspect. It does not become authority just because it was pasted into the conversation.
 
 Ask: **what information could change the next decision?** If you're investigating a bug, start with the exact failing command and its output, the relevant code, and what you expected to happen. Add more when the investigation needs it—not the whole repository just in case.
+
+## Where instructions come from
+
+OMP assembles instructions from several places. Choose where an instruction belongs by how broadly it should apply:
+
+| Source | What belongs here |
+| --- | --- |
+| **System prompt** | OMP’s baseline behavior, tool-use guidance, and working rules. |
+| **Project instructions** | Repository conventions: commands, architecture constraints, and how to check changes. These can come from files such as `AGENTS.md`. |
+| **Your request** | The outcome, boundaries, and acceptance criteria for the current task. |
+
+These are different sources, not necessarily separate message types: OMP can include project instructions in the system prompt it builds. Keep repository conventions in the project's existing guidance rather than maintaining a second, competing copy.
+
+<div class="setup-platforms">
+<details>
+<summary><strong>Customize OMP’s system prompt</strong></summary>
+
+**Start by appending instructions, not replacing OMP’s defaults.**
+
+| Scope | File |
+| --- | --- |
+| This project | `.omp/APPEND_SYSTEM.md` |
+| Across projects, using the default profile | `~/.omp/agent/APPEND_SYSTEM.md` |
+
+Named profiles have their own user-level configuration directory.
+
+You can ask OMP to edit the appropriate file. Have it preserve existing instructions, review the diff, then restart OMP so the new launch loads the changes. Editing a file does not itself change the prompt already loaded into a running session.
+
+If you launch with `--append-system-prompt`, that explicit value takes precedence over `APPEND_SYSTEM.md`.
+
+**Be careful with `SYSTEM.md`.** It replaces OMP’s default instruction block, including built-in tool and workflow guidance. It is not just another place to add preferences. Use the append file unless you deliberately want to maintain a replacement.
+
+Instructions guide the model; they do not replace tool permissions or access controls.
+
+</details>
+</div>
 
 ## Context changes the quality of the work
 
@@ -81,6 +117,7 @@ For resuming work, clearing context, and the full command reference, see [Sessio
 ## Sources
 
 - [OMP context files and discovery, pinned 18.2.9 source](https://github.com/can1357/oh-my-pi/blob/8cd6f8c619e89e935b6c6c5c91f6a4d20f6d7a75/docs/context-files.md)
+- [OMP system-prompt customization (current documentation)](https://github.com/can1357/oh-my-pi/blob/main/docs/system-prompt-customization.md) — append and replacement routes, file locations, precedence, and restart behavior.
 - [OMP session operations: new, resume, fork, fresh, and clear (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/session-operations-export-share-fork-resume.md)
 - [OMP compaction and branch summaries (current source)](https://raw.githubusercontent.com/can1357/oh-my-pi/main/docs/compaction.md)
 - [OMP branch, tree, and fork command definitions (current source)](https://github.com/can1357/oh-my-pi/blob/main/packages/coding-agent/src/slash-commands/builtin-session.ts)
@@ -100,5 +137,3 @@ For resuming work, clearing context, and the full command reference, see [Sessio
 - [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://www.trychroma.com/research/context-rot) — Chroma Technical Report. See measured degradation across longer inputs and why adding more tokens is not automatically adding useful context.
 </details>
 </div>
-
-[Back to foundations](index.md) · [Previous: Models and roles](models.md) · [Next: Prompting](prompting.md)

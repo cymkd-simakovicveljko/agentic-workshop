@@ -45,6 +45,37 @@
       "Lesson content did not fade in from top to bottom");
     reveals.forEach((animation) => animation.finish());
   }
+
+  const header = document.querySelector(".lesson-header");
+  const filament = header.querySelector(".filament-blue");
+  const thickness = () => Number.parseFloat(getComputedStyle(filament).strokeWidth);
+  const pointer = (type, pointerType = "mouse", height = 0.85) => {
+    const box = header.getBoundingClientRect();
+    header.dispatchEvent(new PointerEvent(type, {
+      pointerType,
+      clientX: box.left + box.width * 0.75,
+      clientY: box.top + box.height * height,
+    }));
+  };
+  pointer("pointerleave");
+  await waitFor(() => thickness() < 0.1);
+  pointer("pointermove", "touch");
+  await settle();
+  assert(thickness() < 0.1, "Touch input changed filament thickness");
+  pointer("pointermove");
+  if (matchMedia("(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)").matches) {
+    await waitFor(() => thickness() > 20);
+    pointer("pointermove", "mouse", 0.1);
+    await waitFor(() => thickness() < 5);
+    pointer("pointermove");
+    await waitFor(() => thickness() > 20);
+    pointer("pointerleave");
+    await waitFor(() => thickness() < 0.1);
+  } else {
+    await settle();
+    assert(thickness() < 0.1, "Filaments reacted while pointer motion was disabled");
+  }
+
   scrollTo({ top: 2200, behavior: "instant" });
   await settle();
   const previousY = scrollY;

@@ -104,12 +104,6 @@ These selected firsthand accounts show different ways engineers use agents—not
 <blockquote>“the python visualizer tool has been basically written by vibe-coding.”</blockquote>
 <p class="voice-source"><a href="https://github.com/torvalds/AudioNoise/blob/71b256a7fcb0aa1250625f79838ab71b2b77b9ff/README.md">January 2026</a> · A personal audio project—not the Linux kernel.</p>
 </figure>
-</div>
-
-<details>
-<summary>Six more firsthand accounts</summary>
-
-<div class="community-voices">
 <figure class="voice-card">
 <figcaption><img src="https://www.andrewng.org/images/andrew-ng-about-page.jpg" alt="" width="48" height="48" referrerpolicy="no-referrer"><div><strong>Andrew Ng</strong><span>Stanford adjunct professor · Founder of DeepLearning.AI · Google Brain founding lead</span></div></figcaption>
 <blockquote>“This allows us to make higher-level product decisions, such as what key features to offer, where the UI needs improvement, and so on.”</blockquote>
@@ -141,8 +135,6 @@ These selected firsthand accounts show different ways engineers use agents—not
 <p class="voice-source"><a href="https://mitchellh.com/writing/my-ai-adoption-journey">February 2026</a> · His experience, not a guarantee for every task.</p>
 </figure>
 </div>
-
-</details>
 
 [Sources, context, and photo credits](../research/2026-09-27-community-voices.md).
 

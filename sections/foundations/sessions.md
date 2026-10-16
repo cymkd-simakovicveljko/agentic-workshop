@@ -25,6 +25,11 @@ When `/tree` offers a summary of the branch you're leaving, choose it if those f
 
 The **transcript** is the durable session record: messages, tool calls, results, metadata, and compaction entries. **Context** is the subset OMP rebuilds and sends to the model for the current turn. A resumed session can therefore contain more history on disk than the model sees in one request. A file on disk is not current model context until OMP or a tool reads it; a transcript claim is not proof that the current workspace still matches it.
 
+<figure class="course-diagram course-diagram-wide">
+<a href="/diagrams/session-context-workspace.webp"><img src="/diagrams/session-context-workspace.webp" width="1568" height="882" alt="Saved transcript, active model context, and workspace state are separate. Resume rebuilds context; clear and new retain applicable instructions; compaction reduces older context. Conversation changes do not undo edits or guarantee process cleanup." /></a>
+<figcaption>Conversation changes are not a workspace rollback. <a href="/diagrams/session-context-workspace.webp">Open the full-size diagram.</a></figcaption>
+</figure>
+
 When the context grows, `/compact` or automatic maintenance reduces older history. Depending on your configuration, this can use a summary or another supported compaction method. The reduced context is not a guarantee that every detail survives. Preserve decisions that must survive compaction in source files, project guidance, or a short handoff artifact. After resuming or compacting, inspect the current files and rerun the check that matters instead of trusting an old “passed” message.
 
 The same boundary applies to the world outside the transcript. `/branch`, `/tree`, `/new`, `/resume`, `/fork`, `/clear`, and compaction do not revert files. Ending OMP does not imply that a fixture, server, child process, or browser closed. If the next decision depends on either state, inspect the filesystem and process separately.

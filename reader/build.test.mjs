@@ -25,7 +25,7 @@ test("publishes Markdown without hidden files, source code, symlinks, or stale o
   assert.deepEqual(await readdir(new URL(`content/sections/${basename(fixture)}/`, output)), ["lesson.md"]);
   assert.equal(await readFile(new URL(`content/sections/${basename(fixture)}/lesson.md`, output), "utf8"), "# Published lesson\n");
   assert.deepEqual((await readdir(output)).sort(), [
-    ".nojekyll", "content", "diagrams", "fonts", "images", "index.html", "reader.css", "reader.js", "vendor",
+    ".nojekyll", "content", "diagrams", "fonts", "index.html", "reader.css", "reader.js", "vendor",
   ]);
   assert.equal(await readFile(new URL("content/OUTLINE.md", output), "utf8"),
     await readFile(new URL("OUTLINE.md", root), "utf8"));

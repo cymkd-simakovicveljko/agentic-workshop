@@ -12,8 +12,7 @@
   <body>
     <a class="skip" href="#article">Skip to lesson</a>
     <header class="topbar">
-      <a class="brand" href="./?doc=OUTLINE.md" aria-label="HireRight agentic engineering course overview">
-        <img class="company-logo" src="./images/hireright.png" alt="HireRight" width="504" height="472" />
+      <a class="brand" href="./?doc=OUTLINE.md" aria-label="Agentic engineering course overview">
         <span><strong>agentic</strong> engineering <small class="course-version">v0.1</small></span>
       </a>
       <span class="local-label">A practical workshop with OMP</span>
@@ -30,7 +29,6 @@
       <button class="outline-close" aria-label="Close course outline">Close <span aria-hidden="true">×</span></button>
       <aside class="sidebar" id="sidebar" aria-label="Course outline">
         <div class="course-card">
-          <img class="company-logo" src="./images/hireright.png" alt="HireRight" width="504" height="472" />
           <div class="eyebrow">THE COURSE <span>OMP</span></div>
           <h2>Agentic engineering</h2>
           <p><span id="lesson-count">Loading lessons…</span></p>
@@ -57,6 +55,25 @@
       <div class="reading-progress" aria-hidden="true"><div id="progress-bar"></div></div>
       <div id="document-shell">
         <section class="lesson-header">
+          <svg class="lesson-filaments" viewBox="0 0 1600 320" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <filter id="filament-blur" x="-100" y="0" width="1800" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feGaussianBlur stdDeviation="9 5" result="soft" />
+                <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="8" stitchTiles="stitch" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.333 0.333 0.333 0 0" />
+                <feComponentTransfer result="grain">
+                  <feFuncA type="linear" slope="5" intercept="-2" />
+                </feComponentTransfer>
+                <feComposite in="soft" in2="grain" operator="in" />
+              </filter>
+            </defs>
+            <g filter="url(#filament-blur)">
+              <path class="filament filament-violet" d="M -80 184 C 230 212 430 86 800 108 C 1150 130 1330 194 1680 142 L 1680 174 C 1330 202 1150 138 800 118 C 430 150 230 280 -80 208 Z" />
+              <path class="filament filament-blue" d="M -80 216 C 240 164 500 136 800 182 C 1120 228 1370 116 1680 182 L 1680 212 C 1370 200 1120 290 800 188 C 500 142 240 170 -80 242 Z" />
+              <path class="filament filament-mint" d="M -80 246 C 260 196 480 250 800 230 C 1140 208 1340 166 1680 230 L 1680 256 C 1340 216 1140 256 800 238 C 480 258 260 201 -80 270 Z" />
+              <path class="filament filament-thread" d="M -80 150 C 300 190 520 52 840 62 C 1170 72 1360 182 1680 132 L 1680 138 C 1360 186 1170 89 840 74 C 520 70 300 193 -80 154 Z" />
+            </g>
+          </svg>
           <div class="lesson-kicker"><span class="format-pill">TEXT LESSON</span></div>
           <h1 id="title">Loading your lesson…</h1>
           <div class="lesson-meta"><span id="read-time"></span></div>
@@ -72,7 +89,13 @@
           <article id="article" class="prose" tabindex="-1" aria-busy="true"></article>
         </div>
         <nav class="lesson-pagination" id="pagination" aria-label="Previous and next lessons"></nav>
-        <footer class="page-footer"><span>© 2026 HIRERIGHT Agentic Engineering</span><a href="#main">Back to top ↑</a></footer>
+        <footer class="page-footer">
+          <div>
+            <span>© 2026 Agentic Engineering</span>
+            <p class="footer-contact">For feedback, ideas, tools, or just to say hi, <a href="mailto:veljko.simakovic@hireright.com">send an email</a>.</p>
+          </div>
+          <a href="#main">Back to top ↑</a>
+        </footer>
       </div>
       <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
     </main>

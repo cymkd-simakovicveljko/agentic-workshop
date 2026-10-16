@@ -3,14 +3,15 @@ export const assets = new Map([
   ["/", ["reader/index.html", "text/html"]],
   ["/reader.css", ["reader/reader.css", "text/css"]],
   ["/reader.js", ["reader/reader.js", "text/javascript"]],
-  ["/images/hireright.png", ["reader/images/hireright.png", "image/png"]],
   ["/diagrams/agent-loop.svg", ["reader/diagrams/agent-loop.svg", "image/svg+xml"]],
   ["/diagrams/llm-context.png", ["reader/diagrams/llm-context.png", "image/png"]],
+  ["/diagrams/session-context-workspace.webp", ["reader/diagrams/session-context-workspace.webp", "image/webp"]],
   ["/diagrams/model-tradeoffs.webp", ["reader/diagrams/model-tradeoffs.webp", "image/webp"]],
   ["/diagrams/omp-model-picker.webp", ["reader/diagrams/omp-model-picker.webp", "image/webp"]],
   ["/diagrams/prompting-strategies.webp", ["reader/diagrams/prompting-strategies.webp", "image/webp"]],
   ["/diagrams/sdd-approaches.svg", ["reader/diagrams/sdd-approaches.svg", "image/svg+xml"]],
   ["/diagrams/software-development-lifecycle.webp", ["reader/diagrams/software-development-lifecycle.webp", "image/webp"]],
+  ["/diagrams/spec-driven-development.webp", ["reader/diagrams/spec-driven-development.webp", "image/webp"]],
   [
     "/fonts/inter.woff2",
     [

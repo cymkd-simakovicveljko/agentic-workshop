@@ -96,6 +96,27 @@ narrowLayout.addEventListener("change", () => {
   lessonIndex.open = !narrowLayout.matches;
 });
 lessonIndex.addEventListener("toggle", updateProgress);
+
+const lessonHeader = $(".lesson-header");
+const filamentInteraction = matchMedia(
+  "(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)",
+);
+const resetFilaments = () => {
+  lessonHeader.style.removeProperty("--filament-shift");
+  lessonHeader.style.removeProperty("--filament-spread");
+};
+lessonHeader.addEventListener("pointermove", (event) => {
+  if (event.pointerType !== "mouse" || !filamentInteraction.matches) return;
+  const box = lessonHeader.getBoundingClientRect();
+  const x = Math.max(0, Math.min(1, (event.clientX - box.left) / box.width));
+  const y = Math.max(0, Math.min(1, (event.clientY - box.top) / box.height));
+  lessonHeader.style.setProperty("--filament-shift", `${(x - 0.5) * 120}px`);
+  lessonHeader.style.setProperty("--filament-spread", `${y * 32}px`);
+});
+lessonHeader.addEventListener("pointerleave", resetFilaments);
+lessonHeader.addEventListener("pointercancel", resetFilaments);
+filamentInteraction.addEventListener("change", resetFilaments);
+
 $("#type-size").addEventListener("click", () => {
   const large = document.body.classList.toggle("large-text");
   $("#type-size").setAttribute(

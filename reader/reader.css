@@ -402,7 +402,7 @@ svg {
   flex-direction: column;
   align-items: flex-start;
   gap: 3px;
-  font-size: 19px;
+  font-size: 1.5rem;
   line-height: 1.2;
   letter-spacing: -0.6px;
   white-space: nowrap;
@@ -410,15 +410,6 @@ svg {
 
 .brand strong {
   font-weight: 600;
-}
-
-.company-logo {
-  display: block;
-  width: 144px;
-  height: 30px;
-  margin-left: -6px;
-  object-fit: cover;
-  object-position: center;
 }
 
 .course-version {
@@ -563,12 +554,6 @@ svg {
   border-radius: 6px;
   background: #f2f5ed;
   color: #273421;
-}
-
-.course-card .company-logo {
-  width: 120px;
-  height: 25px;
-  margin-bottom: 16px;
 }
 
 .eyebrow {
@@ -830,7 +815,7 @@ main {
   gap: 8px 16px;
   min-height: 88px;
   padding: 14px max(24px, calc((100vw - var(--reader-width)) / 2));
-  background: #f5f5f1;
+  background: var(--bg);
 }
 
 .reader-toolbar > * {
@@ -905,11 +890,79 @@ main {
 
 .lesson-header {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   margin: 0 0 60px;
   padding: 10px max(24px, calc((100vw - var(--reader-width)) / 2)) 56px;
   border: 0;
-  background: #f5f5f1;
+  background: var(--bg);
+}
+
+.lesson-filaments {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  stroke: none;
+}
+
+.filament {
+  opacity: 0.7;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: calc(var(--filament-spread, 0px) * 0.65);
+  stroke-linejoin: round;
+  transform: translateX(var(--filament-shift, 0px));
+  transition: transform 600ms ease-out, stroke-width 600ms ease-out;
+  animation: filament-violet 12s ease-in-out infinite alternate;
+}
+
+.filament-violet {
+  color: #6877c9;
+}
+
+.filament-blue {
+  color: #237ab8;
+  stroke-width: var(--filament-spread, 0px);
+  transform: translateX(calc(var(--filament-shift, 0px) * -0.75));
+  animation-name: filament-blue;
+  animation-duration: 15s;
+  animation-delay: -4s;
+}
+
+.filament-mint {
+  color: #138e83;
+  stroke-width: calc(var(--filament-spread, 0px) * 0.45);
+  transform: translateX(calc(var(--filament-shift, 0px) * 0.5));
+  animation-name: filament-mint;
+  animation-duration: 18s;
+  animation-delay: -9s;
+}
+
+.filament-thread {
+  color: #8bb7cf;
+  stroke-width: calc(var(--filament-spread, 0px) * 0.12);
+  transform: translateX(calc(var(--filament-shift, 0px) * -0.35));
+  opacity: 0.4;
+  animation-name: filament-thread;
+  animation-duration: 21s;
+  animation-delay: -6s;
+}
+
+@keyframes filament-violet {
+  to { d: path("M -80 184 C 240 126 470 220 800 168 C 1100 116 1380 90 1680 142 L 1680 174 C 1380 152 1100 168 800 180 C 470 228 240 134 -80 208 Z"); }
+}
+
+@keyframes filament-blue {
+  to { d: path("M -80 216 C 260 250 500 102 800 134 C 1100 166 1360 240 1680 182 L 1680 212 C 1360 280 1100 248 800 196 C 500 186 260 262 -80 242 Z"); }
+}
+
+@keyframes filament-mint {
+  to { d: path("M -80 246 C 240 272 500 180 800 204 C 1130 230 1360 270 1680 230 L 1680 256 C 1360 280 1130 240 800 220 C 500 240 240 292 -80 270 Z"); }
+}
+
+@keyframes filament-thread {
+  to { d: path("M -80 150 C 280 100 540 170 840 94 C 1160 18 1370 78 1680 132 L 1680 138 C 1370 80 1160 21 840 98 C 540 184 280 104 -80 154 Z"); }
 }
 
 .lesson-kicker {
@@ -941,7 +994,7 @@ main {
   max-width: 820px;
   margin: 22px 0 25px;
   color: #20261e;
-  font-size: 6rem;
+  font-size: 3rem;
   font-weight: 450;
   line-height: 1.12;
   letter-spacing: -1.8px;
@@ -951,7 +1004,7 @@ main {
 .lesson-meta {
   position: relative;
   z-index: 1;
-  color: var(--muted);
+  color: var(--text);
   font-size: 13px;
 }
 
@@ -1423,6 +1476,16 @@ main {
   font-weight: 600;
 }
 
+.footer-contact {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .error-panel {
   padding: 25px;
   border: 1px solid #c99ba5;
@@ -1458,6 +1521,16 @@ main {
   :root {
     --header: 68px;
   }
+
+
+  .menu-toggle {
+    margin-left: auto;
+  }
+
+  .local-label {
+    display: none;
+  }
+
 
   .reading-layout {
     display: flex;
@@ -1525,15 +1598,6 @@ main {
     font-size: 16px;
   }
 
-  .brand .company-logo {
-    width: 120px;
-    height: 25px;
-  }
-
-  .local-label {
-    display: none;
-  }
-
   .menu-toggle {
     margin-left: auto;
     gap: 8px;
@@ -1564,7 +1628,6 @@ main {
   }
 
   .lesson-header h1 {
-    font-size: 39px;
     letter-spacing: -1.3px;
   }
 
@@ -1635,6 +1698,10 @@ main {
   *::before,
   *::after {
     transition: none !important;
+  }
+
+  .filament {
+    animation: none;
   }
 
   .menu-toggle,

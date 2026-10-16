@@ -12,6 +12,11 @@ Engineering workflow readiti girll i spec da b ismo imali bolji pristup
 
 **Write down the behavior you agree on, then use it to direct and check the work.** That's the practice. Frameworks can give it commands and review steps, but you don't need one to start.
 
+<figure class="course-diagram course-diagram-wide">
+<a href="/diagrams/spec-driven-development.webp"><img src="/diagrams/spec-driven-development.webp" width="1568" height="784" alt="Six steps: define the spec, plan the solution, implement, test, review, and deliver and iterate. A feedback loop returns new insights to the specification." /></a>
+<figcaption>From specification to delivery, with feedback updating the spec. <a href="/diagrams/spec-driven-development.webp">Open the full-size diagram.</a></figcaption>
+</figure>
+
 Pick a small change you actually want to make. In OMP, opened in that repo, ask:
 
 ```text
